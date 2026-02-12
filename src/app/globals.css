@@ -1,0 +1,371 @@
+@import "tailwindcss";
+
+@theme {
+  /* Primary Colors (Slate) */
+  --color-primary-900: #0F172A;
+  --color-primary-800: #1E293B;
+  --color-primary-700: #334155;
+  --color-primary-600: #475569;
+  --color-primary-500: #64748B;
+  --color-primary-400: #94A3B8;
+  --color-primary-300: #CBD5E1;
+  --color-primary-200: #E2E8F0;
+  --color-primary-100: #F1F5F9;
+  --color-primary-50: #F8FAFC;
+
+  /* Accent Colors (Gold) */
+  --color-accent-900: #7A5C0A;
+  --color-accent-800: #9A7B1A;
+  --color-accent-700: #BA9A2A;
+  --color-accent-600: #D4AF37;
+  --color-accent-500: #E4C04A;
+  --color-accent-400: #F0D060;
+  --color-accent-300: #F8E080;
+  --color-accent-200: #FCF0A0;
+  --color-accent-100: #FFFACC;
+
+  /* Semantic Colors */
+  --color-success-600: #059669;
+  --color-success-100: #D1FAE5;
+  --color-warning-600: #D97706;
+  --color-warning-100: #FEF3C7;
+  --color-error-600: #DC2626;
+  --color-error-100: #FEE2E2;
+  --color-info-600: #0284C7;
+  --color-info-100: #E0F2FE;
+
+  /* Font Family */
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Border Radius */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --shadow-xl: 0 16px 40px rgba(0, 0, 0, 0.1);
+  --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.08);
+  --shadow-illustration: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+:root {
+  --transition-fast: 150ms ease;
+  --transition-base: 200ms ease;
+  --transition-slow: 300ms ease;
+}
+
+* {
+  font-family: var(--font-sans);
+}
+
+body {
+  background: #FFFFFF;
+  color: #0F172A;
+}
+
+/* ========================================
+   GLASS EFFECTS
+   ======================================== */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+/* ========================================
+   BUTTON STYLES
+   ======================================== */
+.btn-primary {
+  background: #0F172A;
+  color: #FFFFFF;
+  transition: all 200ms ease;
+}
+.btn-primary:hover {
+  background: #1E293B;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3);
+}
+.btn-primary:active {
+  background: #334155;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.5);
+  transform: scale(0.98);
+}
+.btn-primary:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.4);
+}
+
+.btn-secondary {
+  background: #FFFFFF;
+  color: #0F172A;
+  border: 1px solid #E2E8F0;
+  transition: all 200ms ease;
+}
+.btn-secondary:hover {
+  background: #FFFACC;
+  border-color: #D4AF37;
+  color: #BA9A2A;
+}
+.btn-secondary:active {
+  background: #FFF5B3;
+  transform: scale(0.98);
+}
+.btn-secondary:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.4);
+}
+
+.btn-accent {
+  background: #D4AF37;
+  color: #0F172A;
+  transition: all 200ms ease;
+}
+.btn-accent:hover {
+  background: #BA9A2A;
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+}
+.btn-accent:active {
+  background: #A38825;
+  transform: scale(0.98);
+}
+
+/* ========================================
+   CARD STYLES
+   ======================================== */
+.card {
+  background: #FFFFFF;
+  border-radius: 16px;
+  border: 1px solid #E2E8F0;
+  transition: all 200ms ease;
+}
+.card:hover {
+  border-color: #D4AF37;
+  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.15);
+}
+.card:active {
+  transform: scale(0.99);
+  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.2);
+}
+
+/* ========================================
+   FEATURE TAB STYLES
+   ======================================== */
+.feature-tab {
+  transition: all 200ms ease;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+}
+.feature-tab:not(.active):hover {
+  background: #FFFACC;
+  border-color: #D4AF37;
+  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.15);
+}
+.feature-tab:not(.active):hover .tab-icon {
+  background: #FFFACC;
+  color: #BA9A2A;
+}
+.feature-tab:not(.active):hover span:not(.tab-icon) {
+  color: #BA9A2A;
+}
+.feature-tab:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.2);
+}
+.feature-tab.active {
+  background: #0F172A;
+  color: #FFFFFF;
+  border-color: #0F172A;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.2);
+}
+.feature-tab.active .tab-icon {
+  background: rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+}
+.feature-tab:not(.active) .tab-icon {
+  background: #F1F5F9;
+  color: #64748B;
+}
+
+/* ========================================
+   HOW IT WORKS TAB STYLES
+   ======================================== */
+.hiw-tab {
+  transition: all 200ms ease;
+  border: 1px solid transparent;
+}
+.hiw-tab:not(.active):hover {
+  background: #FFFACC;
+  border-color: #D4AF37;
+  color: #BA9A2A;
+}
+.hiw-tab:not(.active):active {
+  background: #FFF5B3;
+  transform: scale(0.98);
+}
+.hiw-tab.active {
+  background: #0F172A;
+  border-color: #0F172A;
+  color: #FFFFFF;
+}
+
+/* ========================================
+   INTEGRATION CARD STYLES
+   ======================================== */
+.integration-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 16px;
+  padding: 32px;
+  transition: all 200ms ease;
+}
+.integration-card:hover {
+  border-color: #D4AF37;
+  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.15);
+}
+.integration-card:active {
+  transform: scale(0.99);
+  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.2);
+}
+
+/* ========================================
+   STEP CARD STYLES
+   ======================================== */
+.step-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 16px;
+  padding: 24px;
+  transition: all 200ms ease;
+}
+.step-card:hover {
+  border-color: #D4AF37;
+  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.15);
+}
+.step-card:active {
+  transform: scale(0.99);
+  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.2);
+}
+
+/* ========================================
+   NAVIGATION & LINK STYLES
+   ======================================== */
+.nav-link {
+  transition: color 150ms ease;
+}
+.nav-link:hover {
+  color: #BA9A2A;
+}
+.nav-link:active {
+  color: #A38825;
+}
+
+/* ========================================
+   FOOTER STYLES
+   ======================================== */
+.footer-social-icon {
+  transition: all 200ms ease;
+}
+.footer-social-icon:hover {
+  background: #D4AF37 !important;
+  color: #0F172A;
+}
+.footer-social-icon:hover svg {
+  color: #0F172A;
+}
+.footer-social-icon:active {
+  background: #BA9A2A !important;
+  transform: scale(0.95);
+}
+
+.footer-link {
+  transition: color 150ms ease;
+}
+.footer-link:hover {
+  color: #D4AF37;
+}
+.footer-link:active {
+  color: #BA9A2A;
+}
+
+/* ========================================
+   FORM INPUTS
+   ======================================== */
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #D4AF37;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+  outline: none;
+}
+
+/* ========================================
+   OVERLINE TEXT
+   ======================================== */
+.overline {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease forwards;
+}
+
+/* ========================================
+   SCROLLBAR
+   ======================================== */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #F8FAFC; }
+::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+
+/* ========================================
+   SKIP TO CONTENT (A11Y)
+   ======================================== */
+.skip-to-content {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.skip-to-content:focus {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  width: auto;
+  height: auto;
+  padding: 12px 24px;
+  background: #0F172A;
+  color: #FFFFFF;
+  z-index: 9999;
+  border-radius: 8px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}

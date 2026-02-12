@@ -7,24 +7,24 @@ export default function Hero() {
       <div className="absolute top-[20%] left-[10%] w-[400px] h-[400px] bg-gradient-to-br from-accent-100/50 to-transparent rounded-full blur-3xl" />
       <div className="absolute bottom-[10%] right-[15%] w-[300px] h-[300px] bg-gradient-to-br from-primary-100/50 to-transparent rounded-full blur-3xl" />
 
-      <div className="relative max-w-[1400px] mx-auto px-6 lg:px-12 py-20 lg:py-28">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+      <div className="relative max-w-[1400px] mx-auto px-6 lg:px-12 py-12 lg:py-16">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
           <div>
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-success-100 rounded-full mb-8">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-success-100 rounded-full mb-6">
               <span className="w-2 h-2 bg-success-600 rounded-full animate-pulse" />
               <span className="text-sm font-medium text-success-600">
                 Türkiye&apos;nin #1 Affiliate Platformu
               </span>
             </div>
 
-            <h1 className="text-5xl lg:text-6xl font-extrabold leading-[1.1] tracking-[-2px] mb-6">
+            <h1 className="text-5xl lg:text-6xl font-extrabold leading-[1.1] tracking-[-2px] mb-4">
               Affiliate Pazarlamanın
               <br />
               <span className="text-primary-400">Yeni Nesil Platformu</span>
             </h1>
 
-            <p className="text-lg text-primary-500 mb-10 max-w-lg leading-relaxed font-medium">
+            <p className="text-lg text-primary-500 mb-8 max-w-lg leading-relaxed font-medium">
               Markalar, influencer&apos;lar ve yayıncıları tek platformda
               buluşturun. Gerçek zamanlı raporlama, güvenli ödemeler, sıfır
               manuel iş.
@@ -42,7 +42,7 @@ export default function Hero() {
             </div>
 
             {/* Trust indicators */}
-            <div className="flex items-center gap-6 mt-12">
+            <div className="flex items-center gap-6 mt-8">
               <div className="flex items-center gap-3">
                 <div className="flex -space-x-2">
                   <div className="w-8 h-8 rounded-full bg-gradient-to-br from-accent-400 to-accent-600 border-2 border-white" />

@@ -66,14 +66,14 @@ export default function Header() {
                   Markalar İçin
                 </a>
                 <a
-                  href="#"
+                  href="/influencerlar-icin"
                   className="block px-4 py-2.5 text-sm text-primary-600 hover:text-accent-700 hover:bg-accent-100 active:bg-accent-200 transition-colors duration-150"
                   role="menuitem"
                 >
                   Influencer&apos;lar İçin
                 </a>
                 <a
-                  href="#"
+                  href="/ajanslar-icin"
                   className="block px-4 py-2.5 text-sm text-primary-600 hover:text-accent-700 hover:bg-accent-100 active:bg-accent-200 transition-colors duration-150"
                   role="menuitem"
                 >
@@ -88,7 +88,7 @@ export default function Header() {
               İş Ortaklarımız
             </a>
             <a
-              href="#"
+              href="/influencerlar-icin"
               className="text-sm font-medium text-primary-600 hover:text-accent-700 active:text-accent-800 transition-colors duration-150"
             >
               Influencer Başvurusu
@@ -131,13 +131,13 @@ export default function Header() {
               Markalar İçin
             </a>
             <a
-              href="#"
+              href="/influencerlar-icin"
               className="block py-2 text-sm font-medium text-primary-600"
             >
               Influencer&apos;lar İçin
             </a>
             <a
-              href="#"
+              href="/ajanslar-icin"
               className="block py-2 text-sm font-medium text-primary-600"
             >
               Ajanslar İçin
@@ -149,7 +149,7 @@ export default function Header() {
               İş Ortaklarımız
             </a>
             <a
-              href="#"
+              href="/influencerlar-icin"
               className="block py-2 text-sm font-medium text-primary-600"
             >
               Influencer Başvurusu

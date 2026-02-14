@@ -360,6 +360,28 @@ select:focus {
 }
 
 /* ========================================
+   STAT CARD STYLES (About page)
+   ======================================== */
+.stat-card {
+  transition: all 200ms ease;
+}
+.stat-card:hover {
+  border-color: rgba(212, 175, 55, 0.4);
+  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.15);
+}
+
+/* ========================================
+   FAMILY CARD STYLES (About page)
+   ======================================== */
+.family-card {
+  transition: all 200ms ease;
+}
+.family-card:hover {
+  border-color: #D4AF37;
+  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.15);
+}
+
+/* ========================================
    BRAND CARD STYLES
    ======================================== */
 .brand-card {

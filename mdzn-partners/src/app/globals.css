@@ -336,6 +336,29 @@ select:focus {
   animation: fadeIn 0.6s ease forwards;
 }
 
+@keyframes gentleFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.animate-float-badge {
+  opacity: 0;
+  animation:
+    fadeIn 0.6s ease forwards,
+    gentleFloat 3s ease-in-out 0.6s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float-badge {
+    opacity: 1;
+    animation: none;
+  }
+}
+
 /* ========================================
    SCROLLBAR
    ======================================== */

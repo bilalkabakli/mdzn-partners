@@ -1,71 +1,76 @@
-import { ArrowRight } from "lucide-react";
+import { TrendingUp, Users, Clock, ShoppingBag } from "lucide-react";
+
+const stats = [
+  {
+    icon: TrendingUp,
+    value: "₺45K+",
+    label: "Portföy Geliri",
+  },
+  {
+    icon: Users,
+    value: "15+",
+    label: "Aktif Influencer",
+  },
+  {
+    icon: Clock,
+    value: "%85",
+    label: "Zaman Tasarrufu",
+  },
+  {
+    icon: ShoppingBag,
+    value: "234",
+    label: "Aylık Sipariş",
+  },
+];
 
 export default function AgenciesHero() {
   return (
-    <section className="relative bg-primary-900 overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute top-[20%] left-[5%] w-[300px] h-[300px] bg-accent-600/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-[10%] right-[10%] w-[400px] h-[400px] bg-primary-700/30 rounded-full blur-3xl" />
-
-      <div className="relative max-w-[1400px] mx-auto px-6 lg:px-12 py-12 lg:py-16">
+    <section className="bg-primary-900 text-white py-12 lg:py-16">
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left Content */}
+          {/* Left: Content */}
           <div>
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur rounded-full mb-8">
-              <span className="overline text-accent-400">Ajanslar İçin</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full mb-8">
+              <span className="w-2 h-2 bg-accent-500 rounded-full animate-pulse" />
+              <span className="text-sm font-medium text-white/90">
+                Ajanslar İçin
+              </span>
             </div>
 
-            <h1 className="text-4xl lg:text-[48px] font-extrabold leading-[1.2] tracking-[-1px] mb-6 text-white">
+            <h1
+              className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight mb-6"
+              style={{ letterSpacing: "-2px" }}
+            >
               Influencer Portföyünüzü
               <br />
-              <span className="text-primary-400">Tek Panelden Yönetin</span>
+              Tek Panelden Yönetin
             </h1>
 
-            <p className="text-lg text-primary-300 mb-10 max-w-lg leading-relaxed">
+            <p className="text-xl text-primary-300 mb-10 leading-relaxed max-w-lg">
               Tüm influencer&apos;larınızın performansını merkezi
               dashboard&apos;da takip edin.
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <button className="btn-accent h-14 px-8 rounded-lg text-base font-semibold flex items-center gap-2 group">
+              <button className="bg-white text-primary-900 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-primary-50 hover:shadow-[0_0_0_3px_rgba(212,175,55,0.3)] transition-all duration-200 shadow-lg">
                 Demo Talep Et
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </button>
+              <button className="border border-white/30 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white/10 hover:border-accent-600 transition-all duration-200">
+                Nasıl Çalışır?
               </button>
             </div>
           </div>
 
-          {/* Right: Influencer Portfolio Mockup */}
-          <div className="relative">
-            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6">
-              <div className="space-y-3">
-                <div className="bg-white/10 p-4 rounded-xl flex justify-between items-center">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-info-600 rounded-full flex items-center justify-center font-bold text-white">
-                      A
-                    </div>
-                    <span className="text-white">Ayşe K.</span>
-                  </div>
-                  <span className="text-success-600 font-bold">₺3,240</span>
+          {/* Right: Stats Preview */}
+          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
+            <div className="grid grid-cols-2 gap-6">
+              {stats.map((stat) => (
+                <div key={stat.label} className="bg-white/15 p-6 rounded-xl">
+                  <stat.icon className="w-8 h-8 mb-3 text-accent-400" />
+                  <p className="text-3xl font-bold">{stat.value}</p>
+                  <p className="text-sm text-primary-300 mt-1">{stat.label}</p>
                 </div>
-                <div className="bg-white/10 p-4 rounded-xl flex justify-between items-center">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center font-bold text-white">
-                      M
-                    </div>
-                    <span className="text-white">Mehmet Y.</span>
-                  </div>
-                  <span className="text-success-600 font-bold">₺2,890</span>
-                </div>
-                <div className="bg-white/10 p-4 rounded-xl flex justify-between items-center">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-pink-500 rounded-full flex items-center justify-center font-bold text-white">
-                      Z
-                    </div>
-                    <span className="text-white">Zeynep A.</span>
-                  </div>
-                  <span className="text-success-600 font-bold">₺4,120</span>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>

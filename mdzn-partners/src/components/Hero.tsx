@@ -7,8 +7,8 @@ export default function Hero() {
       <div className="absolute top-[20%] left-[10%] w-[400px] h-[400px] bg-gradient-to-br from-accent-100/50 to-transparent rounded-full blur-3xl" />
       <div className="absolute bottom-[10%] right-[15%] w-[300px] h-[300px] bg-gradient-to-br from-primary-100/50 to-transparent rounded-full blur-3xl" />
 
-      <div className="relative max-w-[1400px] mx-auto px-6 lg:px-12 py-20 lg:py-28">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+      <div className="relative max-w-[1400px] mx-auto px-6 lg:px-12 py-12 lg:py-16">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left Content */}
           <div>
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-success-100 rounded-full mb-8">

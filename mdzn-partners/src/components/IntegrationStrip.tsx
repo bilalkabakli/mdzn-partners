@@ -10,7 +10,7 @@ export default function IntegrationStrip() {
   ];
 
   return (
-    <div className="max-w-[1400px] mx-auto px-6 lg:px-12 pb-20">
+    <div className="max-w-[1400px] mx-auto px-6 lg:px-12 pb-8">
       <div className="space-y-8">
         {/* Ready integrations */}
         <div className="flex flex-wrap justify-center items-center gap-6">

@@ -9,7 +9,7 @@ const partners = [
 
 export default function Mediazone() {
   return (
-    <section className="py-16 border-t border-primary-200">
+    <section className="py-12 border-t border-primary-200">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12 text-center">
         <p className="text-primary-400 mb-8 font-medium">
           Türkiye&apos;nin en büyük dijital medya ağı Mediazone güvencesiyle

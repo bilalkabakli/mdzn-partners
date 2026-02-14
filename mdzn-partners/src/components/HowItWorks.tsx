@@ -136,7 +136,7 @@ export default function HowItWorks() {
   );
 
   return (
-    <section className="py-24 bg-primary-50">
+    <section className="py-16 bg-primary-50">
       <div className="max-w-[1000px] mx-auto px-6 lg:px-12">
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-extrabold tracking-[-1px] mb-4">

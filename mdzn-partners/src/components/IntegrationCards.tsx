@@ -10,7 +10,7 @@ const integrations = [
 
 export default function IntegrationCards() {
   return (
-    <section className="py-24">
+    <section className="py-16">
       <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
         <div className="text-center mb-20">
           <h2 className="text-4xl lg:text-5xl font-extrabold tracking-[-1px] mb-4">

@@ -9,7 +9,7 @@ const solutionLinks = [
 const companyLinks = [
   { href: "/hakkimizda", label: "Hakkımızda" },
   { href: "/is-ortaklari", label: "İş Ortaklarımız" },
-  { href: "#", label: "İletişim" },
+  { href: "/iletisim", label: "İletişim" },
 ];
 
 const legalLinks = [

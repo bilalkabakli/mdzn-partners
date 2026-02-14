@@ -59,7 +59,7 @@ export default function Header() {
                 role="menu"
               >
                 <a
-                  href="#"
+                  href="/markalar-icin"
                   className="block px-4 py-2.5 text-sm text-primary-600 hover:text-accent-700 hover:bg-accent-100 active:bg-accent-200 transition-colors duration-150"
                   role="menuitem"
                 >
@@ -125,7 +125,7 @@ export default function Header() {
               Ana Sayfa
             </a>
             <a
-              href="#"
+              href="/markalar-icin"
               className="block py-2 text-sm font-medium text-primary-600"
             >
               Markalar İçin

@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import {
   Users,
   BarChart3,
@@ -13,6 +16,7 @@ const features = [
   {
     icon: Users,
     title: "Merkezi Influencer Yönetimi",
+    tabLabel: "Merkezi Influencer Yönetimi",
     subtitle: "Tüm influencer\u2019larınız tek panelde",
     description:
       "Ajansınızdaki tüm influencer\u2019ları tek bir dashboard üzerinden yönetin. Performanslarını karşılaştırın, kazançlarını takip edin.",
@@ -26,6 +30,7 @@ const features = [
   {
     icon: BarChart3,
     title: "Gelişmiş Raporlama",
+    tabLabel: "Gelişmiş Raporlama",
     subtitle: "Müşterilerinize profesyonel raporlar sunun",
     description:
       "Tarih, influencer, kampanya ve kategori bazında detaylı raporlar oluşturun. Excel export ve otomatik rapor gönderimi.",
@@ -39,6 +44,7 @@ const features = [
   {
     icon: CreditCard,
     title: "Otomatik Hakediş ve Ödemeler",
+    tabLabel: "Otomatik Hakediş ve Ödemeler",
     subtitle: "Manuel hesaplama yok, otomatik ödeme takibi",
     description:
       "Her influencer\u2019ın hakedişi otomatik hesaplanır. Ödeme dönemleri, kesintiler ve net tutarlar şeffaf şekilde görünür.",
@@ -52,6 +58,7 @@ const features = [
   {
     icon: RotateCcw,
     title: "Otomatik İptal İade Süreçleri",
+    tabLabel: "Otomatik İptal İade Süreçleri",
     subtitle: "İptal ve iadeler otomatik olarak hakedişlere yansır",
     description:
       "Sistem iptal edilen siparişleri otomatik algılar. İadeler takip edilir ve hakedişlerden düşülür. Hiçbir manuel müdahale gerekmez.",
@@ -65,6 +72,7 @@ const features = [
   {
     icon: Smartphone,
     title: "Web ve Mobil Kampanyalar Aynı Yerde",
+    tabLabel: "Web ve Mobil Kampanyalar",
     subtitle: "E-ticaret ve mobil uygulama kampanyaları tek panelde",
     description:
       "Web satışları ve mobil uygulama yüklemeleri aynı dashboard\u2019da. Adjust & Appsflyer entegrasyonu ile mobil kampanyalarınızı da yönetin.",
@@ -77,7 +85,7 @@ const features = [
   },
 ];
 
-/* ─── Mini Mockup components (server-safe) ─── */
+/* ─── Mini Mockup components ─── */
 
 function InfluencerListMockup() {
   const influencers = [
@@ -259,6 +267,12 @@ const mockupComponents: Record<string, () => React.JSX.Element> = {
 /* ─── Main Component ─── */
 
 export default function AgenciesFeatures() {
+  const [activeTab, setActiveTab] = useState(0);
+
+  const activeFeature = features[activeTab];
+  const ActiveIcon = activeFeature.icon;
+  const ActiveMockup = mockupComponents[activeFeature.mockup];
+
   return (
     <section className="py-16 bg-white">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
@@ -272,62 +286,81 @@ export default function AgenciesFeatures() {
           </h2>
         </div>
 
-        {/* Feature Cards */}
-        <div className="space-y-12">
-          {features.map((feature, index) => {
-            const Icon = feature.icon;
-            const Mockup = mockupComponents[feature.mockup];
-            const isReversed = index % 2 === 1;
+        {/* Vertical Tabs Layout */}
+        <div className="grid lg:grid-cols-12 gap-8">
+          {/* Left: Vertical Tabs */}
+          <div className="lg:col-span-4 space-y-3">
+            {features.map((feature, index) => {
+              const Icon = feature.icon;
+              const isActive = index === activeTab;
 
-            return (
-              <div
-                key={feature.title}
-                className={`grid lg:grid-cols-2 gap-8 lg:gap-12 items-start ${
-                  isReversed ? "lg:direction-rtl" : ""
-                }`}
-              >
-                {/* Content Side */}
-                <div className={isReversed ? "lg:order-2" : "lg:order-1"}>
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="p-3 bg-accent-100 rounded-xl">
-                      <Icon className="w-6 h-6 text-accent-700" />
-                    </div>
-                    <div>
-                      <h3 className="text-xl lg:text-2xl font-bold tracking-[-0.3px] text-primary-900">
-                        {feature.title}
-                      </h3>
-                      <p className="text-accent-700 font-medium">
-                        {feature.subtitle}
-                      </p>
-                    </div>
+              return (
+                <button
+                  key={feature.title}
+                  onClick={() => setActiveTab(index)}
+                  className={`w-full text-left p-5 rounded-xl flex items-center gap-4 transition-all duration-200 ${
+                    isActive
+                      ? "bg-primary-900 text-white border border-primary-900 shadow-lg"
+                      : "bg-white border border-primary-200 hover:bg-accent-100 hover:border-accent-600 hover:text-accent-700"
+                  }`}
+                >
+                  <div
+                    className={`p-3 rounded-lg ${
+                      isActive
+                        ? "bg-white/15 text-white"
+                        : "bg-primary-100 text-primary-500"
+                    }`}
+                  >
+                    <Icon className="w-5 h-5" />
                   </div>
+                  <span className="font-semibold">{feature.tabLabel}</span>
+                </button>
+              );
+            })}
+          </div>
 
-                  <p className="text-primary-600 mb-6 leading-relaxed">
-                    {feature.description}
-                  </p>
-
-                  <ul className="space-y-3">
-                    {feature.bullets.map((bullet) => (
-                      <li
-                        key={bullet}
-                        className="flex items-center gap-3 text-primary-700"
-                      >
-                        <div className="w-5 h-5 bg-success-100 rounded-full flex items-center justify-center flex-shrink-0">
-                          <Check className="w-3 h-3 text-success-600" />
-                        </div>
-                        {bullet}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Mockup Side */}
-                <div className={isReversed ? "lg:order-1" : "lg:order-2"}>
-                  {Mockup && <Mockup />}
-                </div>
+          {/* Right: Content Area */}
+          <div className="lg:col-span-8 bg-primary-50 rounded-2xl p-8 lg:p-10 min-h-[640px]">
+            {/* Header: Icon + Title + Subtitle */}
+            <div className="flex items-center gap-4 mb-4">
+              <div className="p-3 bg-accent-100 rounded-xl">
+                <ActiveIcon className="w-6 h-6 text-accent-700" />
               </div>
-            );
-          })}
+              <div>
+                <h3 className="text-[28px] font-bold tracking-[-0.3px] text-primary-900">
+                  {activeFeature.title}
+                </h3>
+                <p className="text-accent-700 font-medium">
+                  {activeFeature.subtitle}
+                </p>
+              </div>
+            </div>
+
+            {/* Description */}
+            <p className="text-primary-600 mb-8 leading-relaxed">
+              {activeFeature.description}
+            </p>
+
+            {/* Mockup Widget */}
+            <div className="mb-8">
+              {ActiveMockup && <ActiveMockup />}
+            </div>
+
+            {/* Bullet List */}
+            <ul className="space-y-3">
+              {activeFeature.bullets.map((bullet) => (
+                <li
+                  key={bullet}
+                  className="flex items-center gap-3 text-primary-700"
+                >
+                  <div className="w-5 h-5 bg-success-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <Check className="w-3 h-3 text-success-600" />
+                  </div>
+                  {bullet}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </section>

@@ -12,7 +12,7 @@ export default function Header() {
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
         <div className="flex justify-between items-center h-[72px]">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-3 group">
+          <a href="/" className="flex items-center gap-3 group">
             <div className="w-9 h-9 border border-primary-900 rounded-md flex flex-col items-center justify-center group-hover:bg-primary-900 transition-colors">
               <span className="text-[9px] font-extrabold leading-none group-hover:text-white transition-colors">
                 MD
@@ -31,7 +31,7 @@ export default function Header() {
             aria-label="Ana navigasyon"
           >
             <a
-              href="#"
+              href="/"
               className="text-sm font-medium text-primary-900 hover:text-accent-700 active:text-accent-800 transition-colors duration-150"
             >
               Ana Sayfa
@@ -82,7 +82,7 @@ export default function Header() {
               </div>
             </div>
             <a
-              href="#"
+              href="/is-ortaklari"
               className="text-sm font-medium text-primary-600 hover:text-accent-700 active:text-accent-800 transition-colors duration-150"
             >
               İş Ortaklarımız
@@ -119,7 +119,7 @@ export default function Header() {
         {mobileMenuOpen && (
           <div className="lg:hidden border-t border-primary-200 py-4 space-y-3">
             <a
-              href="#"
+              href="/"
               className="block py-2 text-sm font-medium text-primary-900"
             >
               Ana Sayfa
@@ -143,7 +143,7 @@ export default function Header() {
               Ajanslar İçin
             </a>
             <a
-              href="#"
+              href="/is-ortaklari"
               className="block py-2 text-sm font-medium text-primary-600"
             >
               İş Ortaklarımız

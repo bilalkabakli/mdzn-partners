@@ -8,7 +8,7 @@ const solutionLinks = [
 
 const companyLinks = [
   { href: "#", label: "Hakkımızda" },
-  { href: "#", label: "İş Ortaklarımız" },
+  { href: "/is-ortaklari", label: "İş Ortaklarımız" },
   { href: "#", label: "İletişim" },
 ];
 

@@ -360,6 +360,18 @@ select:focus {
 }
 
 /* ========================================
+   BRAND CARD STYLES
+   ======================================== */
+.brand-card {
+  border: 1px solid #E2E8F0;
+  transition: all 200ms ease;
+}
+.brand-card:hover {
+  border-color: #D4AF37;
+  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.15);
+}
+
+/* ========================================
    SCROLLBAR
    ======================================== */
 ::-webkit-scrollbar { width: 8px; }

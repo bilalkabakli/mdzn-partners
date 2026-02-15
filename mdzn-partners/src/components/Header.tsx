@@ -24,76 +24,72 @@ export default function Header() {
             <span className="text-sm font-bold tracking-[1px]">PARTNERS</span>
           </a>
 
-          {/* Desktop Navigation */}
-          <nav
-            className="hidden lg:flex items-center gap-8"
-            role="navigation"
-            aria-label="Ana navigasyon"
-          >
-            <a
-              href="/"
-              className="text-sm font-medium text-primary-900 hover:text-accent-700 active:text-accent-800 transition-colors duration-150"
+          {/* Desktop Navigation — centered */}
+          <div className="hidden lg:flex flex-1 justify-center">
+            <nav
+              className="flex items-center gap-8"
+              role="navigation"
+              aria-label="Ana navigasyon"
             >
-              Ana Sayfa
-            </a>
-            <div className="relative group">
-              <button
-                className="flex items-center gap-1 text-sm font-medium text-primary-600 hover:text-accent-700 active:text-accent-800 transition-colors duration-150"
-                aria-expanded={dropdownOpen}
-                aria-haspopup="true"
-                onMouseEnter={() => setDropdownOpen(true)}
-                onMouseLeave={() => setDropdownOpen(false)}
-                onClick={() => setDropdownOpen(!dropdownOpen)}
+              <a
+                href="/"
+                className="text-sm font-medium text-primary-900 hover:text-accent-700 active:text-accent-800 transition-colors duration-150"
               >
-                Çözümler
-                <ChevronDown className="w-4 h-4" />
-              </button>
-              <div
-                className={`absolute top-full left-0 mt-2 w-52 bg-white border border-primary-200 rounded-xl py-2 shadow-lg transition-all duration-200 ${
-                  dropdownOpen
-                    ? "visible opacity-100 translate-y-0"
-                    : "invisible opacity-0 translate-y-2"
-                }`}
-                onMouseEnter={() => setDropdownOpen(true)}
-                onMouseLeave={() => setDropdownOpen(false)}
-                role="menu"
-              >
-                <a
-                  href="/markalar-icin"
-                  className="block px-4 py-2.5 text-sm text-primary-600 hover:text-accent-700 hover:bg-accent-100 active:bg-accent-200 transition-colors duration-150"
-                  role="menuitem"
+                Ana Sayfa
+              </a>
+              <div className="relative group">
+                <button
+                  className="flex items-center gap-1 text-sm font-medium text-primary-600 hover:text-accent-700 active:text-accent-800 transition-colors duration-150"
+                  aria-expanded={dropdownOpen}
+                  aria-haspopup="true"
+                  onMouseEnter={() => setDropdownOpen(true)}
+                  onMouseLeave={() => setDropdownOpen(false)}
+                  onClick={() => setDropdownOpen(!dropdownOpen)}
                 >
-                  Markalar İçin
-                </a>
-                <a
-                  href="/influencerlar-icin"
-                  className="block px-4 py-2.5 text-sm text-primary-600 hover:text-accent-700 hover:bg-accent-100 active:bg-accent-200 transition-colors duration-150"
-                  role="menuitem"
+                  Çözümler
+                  <ChevronDown className="w-4 h-4" />
+                </button>
+                <div
+                  className={`absolute top-full left-0 mt-2 w-52 bg-white border border-primary-200 rounded-xl py-2 shadow-lg transition-all duration-200 ${
+                    dropdownOpen
+                      ? "visible opacity-100 translate-y-0"
+                      : "invisible opacity-0 translate-y-2"
+                  }`}
+                  onMouseEnter={() => setDropdownOpen(true)}
+                  onMouseLeave={() => setDropdownOpen(false)}
+                  role="menu"
                 >
-                  Influencer&apos;lar İçin
-                </a>
-                <a
-                  href="/ajanslar-icin"
-                  className="block px-4 py-2.5 text-sm text-primary-600 hover:text-accent-700 hover:bg-accent-100 active:bg-accent-200 transition-colors duration-150"
-                  role="menuitem"
-                >
-                  Ajanslar İçin
-                </a>
+                  <a
+                    href="/markalar-icin"
+                    className="block px-4 py-2.5 text-sm text-primary-600 hover:text-accent-700 hover:bg-accent-100 active:bg-accent-200 transition-colors duration-150"
+                    role="menuitem"
+                  >
+                    Markalar İçin
+                  </a>
+                  <a
+                    href="/influencerlar-icin"
+                    className="block px-4 py-2.5 text-sm text-primary-600 hover:text-accent-700 hover:bg-accent-100 active:bg-accent-200 transition-colors duration-150"
+                    role="menuitem"
+                  >
+                    Influencer&apos;lar İçin
+                  </a>
+                  <a
+                    href="/ajanslar-icin"
+                    className="block px-4 py-2.5 text-sm text-primary-600 hover:text-accent-700 hover:bg-accent-100 active:bg-accent-200 transition-colors duration-150"
+                    role="menuitem"
+                  >
+                    Ajanslar İçin
+                  </a>
+                </div>
               </div>
-            </div>
-            <a
-              href="/is-ortaklari"
-              className="text-sm font-medium text-primary-600 hover:text-accent-700 active:text-accent-800 transition-colors duration-150"
-            >
-              İş Ortaklarımız
-            </a>
-            <a
-              href="/influencerlar-icin"
-              className="text-sm font-medium text-primary-600 hover:text-accent-700 active:text-accent-800 transition-colors duration-150"
-            >
-              Influencer Başvurusu
-            </a>
-          </nav>
+              <a
+                href="/is-ortaklari"
+                className="text-sm font-medium text-primary-600 hover:text-accent-700 active:text-accent-800 transition-colors duration-150"
+              >
+                İş Ortaklarımız
+              </a>
+            </nav>
+          </div>
 
           {/* CTA */}
           <button className="hidden lg:flex btn-primary h-11 px-6 rounded-lg text-sm font-semibold items-center gap-2">
@@ -147,12 +143,6 @@ export default function Header() {
               className="block py-2 text-sm font-medium text-primary-600"
             >
               İş Ortaklarımız
-            </a>
-            <a
-              href="/influencerlar-icin"
-              className="block py-2 text-sm font-medium text-primary-600"
-            >
-              Influencer Başvurusu
             </a>
             <button className="btn-primary w-full h-11 rounded-lg text-sm font-semibold mt-4">
               Demo Talep Et

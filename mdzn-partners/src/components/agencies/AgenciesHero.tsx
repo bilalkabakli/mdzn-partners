@@ -1,28 +1,25 @@
 "use client";
 
-import { TrendingUp, Users, Clock, ShoppingBag } from "lucide-react";
 import { useModal } from "../ModalContext";
 
-const stats = [
+const influencers = [
   {
-    icon: TrendingUp,
-    value: "₺45K+",
-    label: "Portföy Geliri",
+    initial: "A",
+    name: "Ayşe K.",
+    revenue: "₺3,240",
+    bgColor: "bg-info-600",
   },
   {
-    icon: Users,
-    value: "15+",
-    label: "Aktif Influencer",
+    initial: "M",
+    name: "Mehmet Y.",
+    revenue: "₺2,890",
+    bgColor: "bg-purple-500",
   },
   {
-    icon: Clock,
-    value: "%85",
-    label: "Zaman Tasarrufu",
-  },
-  {
-    icon: ShoppingBag,
-    value: "234",
-    label: "Aylık Sipariş",
+    initial: "Z",
+    name: "Zeynep A.",
+    revenue: "₺4,120",
+    bgColor: "bg-pink-500",
   },
 ];
 
@@ -30,8 +27,12 @@ export default function AgenciesHero() {
   const { openModal } = useModal();
 
   return (
-    <section className="bg-primary-900 text-white py-12 lg:py-16">
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+    <section className="bg-primary-900 text-white py-12 lg:py-16 relative overflow-hidden">
+      {/* Decorative blur circles */}
+      <div className="absolute top-16 right-16 w-72 h-72 bg-accent-600/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-8 left-8 w-56 h-56 bg-info-600/10 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-12 relative z-10">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left: Content */}
           <div>
@@ -58,27 +59,50 @@ export default function AgenciesHero() {
 
             <div className="flex flex-wrap gap-4">
               <button
-                className="bg-white text-primary-900 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-primary-50 hover:shadow-[0_0_0_3px_rgba(212,175,55,0.3)] transition-all duration-200 shadow-lg"
+                className="bg-accent-600 text-primary-900 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-accent-700 hover:shadow-[0_0_0_3px_rgba(212,175,55,0.3)] transition-all duration-200 shadow-lg flex items-center gap-2 group"
                 onClick={() => openModal("brand")}
               >
                 Aramıza Katıl
-              </button>
-              <button className="border border-white/30 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white/10 hover:border-accent-600 transition-all duration-200">
-                Nasıl Çalışır?
+                <svg
+                  className="w-5 h-5 group-hover:translate-x-1 transition-transform"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M13 7l5 5m0 0l-5 5m5-5H6"
+                  />
+                </svg>
               </button>
             </div>
           </div>
 
-          {/* Right: Stats Preview */}
-          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
-            <div className="grid grid-cols-2 gap-6">
-              {stats.map((stat) => (
-                <div key={stat.label} className="bg-white/15 p-6 rounded-xl">
-                  <stat.icon className="w-8 h-8 mb-3 text-accent-400" />
-                  <p className="text-3xl font-bold">{stat.value}</p>
-                  <p className="text-sm text-primary-300 mt-1">{stat.label}</p>
-                </div>
-              ))}
+          {/* Right: Influencer Portfolio List (per design) */}
+          <div className="relative">
+            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6">
+              <div className="space-y-3">
+                {influencers.map((inf) => (
+                  <div
+                    key={inf.name}
+                    className="bg-white/10 p-4 rounded-xl flex justify-between items-center"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div
+                        className={`w-10 h-10 ${inf.bgColor} rounded-full flex items-center justify-center font-bold text-white`}
+                      >
+                        {inf.initial}
+                      </div>
+                      <span className="text-white">{inf.name}</span>
+                    </div>
+                    <span className="text-success-600 font-bold">
+                      {inf.revenue}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>

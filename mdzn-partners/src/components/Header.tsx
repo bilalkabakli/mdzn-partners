@@ -2,10 +2,12 @@
 
 import { useState } from "react";
 import { ChevronDown, Menu, X } from "lucide-react";
+import { useModal } from "./ModalContext";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const { openModal } = useModal();
 
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-primary-200">
@@ -92,8 +94,11 @@ export default function Header() {
           </div>
 
           {/* CTA */}
-          <button className="hidden lg:flex btn-primary h-11 px-6 rounded-lg text-sm font-semibold items-center gap-2">
-            Demo Talep Et
+          <button
+            className="hidden lg:flex btn-primary h-11 px-6 rounded-lg text-sm font-semibold items-center gap-2"
+            onClick={() => openModal()}
+          >
+            Aramıza Katıl
           </button>
 
           {/* Mobile menu button */}
@@ -144,8 +149,11 @@ export default function Header() {
             >
               İş Ortaklarımız
             </a>
-            <button className="btn-primary w-full h-11 rounded-lg text-sm font-semibold mt-4">
-              Demo Talep Et
+            <button
+              className="btn-primary w-full h-11 rounded-lg text-sm font-semibold mt-4"
+              onClick={() => { openModal(); setMobileMenuOpen(false); }}
+            >
+              Aramıza Katıl
             </button>
           </div>
         )}

@@ -1,4 +1,7 @@
+"use client";
+
 import { Check, ArrowRight } from "lucide-react";
+import { useModal } from "../ModalContext";
 
 const benefits = [
   "Tüm influencer\u2019ları tek panelde yönetin",
@@ -8,6 +11,8 @@ const benefits = [
 ];
 
 export default function AgenciesCTA() {
+  const { openModal } = useModal();
+
   return (
     <section className="py-16 bg-primary-900">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
@@ -37,8 +42,11 @@ export default function AgenciesCTA() {
               ))}
             </ul>
 
-            <button className="btn-accent h-14 px-8 rounded-lg text-base font-semibold flex items-center gap-2 group">
-              Demo Talep Et
+            <button
+              className="btn-accent h-14 px-8 rounded-lg text-base font-semibold flex items-center gap-2 group"
+              onClick={() => openModal("brand")}
+            >
+              Aramıza Katıl
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
           </div>

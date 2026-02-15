@@ -1,6 +1,11 @@
+"use client";
+
 import { ArrowRight, PlayCircle, TrendingUp, CheckCircle } from "lucide-react";
+import { useModal } from "./ModalContext";
 
 export default function Hero() {
+  const { openModal } = useModal();
+
   return (
     <section className="relative overflow-hidden">
       {/* Background decorations */}
@@ -31,8 +36,11 @@ export default function Hero() {
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <button className="btn-primary h-14 px-8 rounded-lg text-base font-semibold flex items-center gap-2 group">
-                Demo Talep Et
+              <button
+                className="btn-primary h-14 px-8 rounded-lg text-base font-semibold flex items-center gap-2 group"
+                onClick={() => openModal()}
+              >
+                Aramıza Katıl
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
               <button className="btn-secondary h-14 px-8 rounded-lg text-base font-semibold flex items-center gap-2">

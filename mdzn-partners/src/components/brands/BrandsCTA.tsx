@@ -1,4 +1,7 @@
+"use client";
+
 import { TrendingUp, Clock, Check } from "lucide-react";
+import { useModal } from "../ModalContext";
 
 const benefits = [
   {
@@ -22,6 +25,8 @@ const benefits = [
 ];
 
 export default function BrandsCTA() {
+  const { openModal } = useModal();
+
   return (
     <section className="py-16 bg-primary-900">
       <div className="max-w-5xl mx-auto px-6 lg:px-8">
@@ -66,8 +71,11 @@ export default function BrandsCTA() {
         </div>
 
         <div className="text-center">
-          <button className="bg-white text-primary-900 px-12 py-5 rounded-xl font-semibold text-lg hover:bg-primary-50 hover:shadow-[0_0_0_3px_rgba(212,175,55,0.3)] transition-all duration-200 shadow-xl">
-            Demo Talep Edin
+          <button
+            className="bg-white text-primary-900 px-12 py-5 rounded-xl font-semibold text-lg hover:bg-primary-50 hover:shadow-[0_0_0_3px_rgba(212,175,55,0.3)] transition-all duration-200 shadow-xl"
+            onClick={() => openModal("brand")}
+          >
+            Aramıza Katıl
           </button>
           <p className="text-primary-400 text-sm mt-4">
             15 dakikalık demo ile tüm özellikleri keşfedin

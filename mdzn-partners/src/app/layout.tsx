@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { ModalProvider } from "@/components/ModalContext";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta-sans",
@@ -32,10 +33,12 @@ export default function RootLayout({
       <body
         className={`${plusJakartaSans.variable} ${jetbrainsMono.variable} antialiased`}
       >
-        <a href="#main-content" className="skip-to-content">
-          İçeriğe geç
-        </a>
-        {children}
+        <ModalProvider>
+          <a href="#main-content" className="skip-to-content">
+            İçeriğe geç
+          </a>
+          {children}
+        </ModalProvider>
       </body>
     </html>
   );

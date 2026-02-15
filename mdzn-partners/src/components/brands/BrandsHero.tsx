@@ -1,4 +1,7 @@
+"use client";
+
 import { TrendingUp, Users, ShoppingBag, Percent } from "lucide-react";
+import { useModal } from "../ModalContext";
 
 const stats = [
   {
@@ -24,6 +27,8 @@ const stats = [
 ];
 
 export default function BrandsHero() {
+  const { openModal } = useModal();
+
   return (
     <section className="bg-primary-900 text-white py-12 lg:py-16">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
@@ -54,8 +59,11 @@ export default function BrandsHero() {
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <button className="bg-white text-primary-900 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-primary-50 hover:shadow-[0_0_0_3px_rgba(212,175,55,0.3)] transition-all duration-200 shadow-lg">
-                Demo Talep Et
+              <button
+                className="bg-white text-primary-900 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-primary-50 hover:shadow-[0_0_0_3px_rgba(212,175,55,0.3)] transition-all duration-200 shadow-lg"
+                onClick={() => openModal("brand")}
+              >
+                Aramıza Katıl
               </button>
               <button className="border border-white/30 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white/10 hover:border-accent-600 transition-all duration-200">
                 Nasıl Çalışır?

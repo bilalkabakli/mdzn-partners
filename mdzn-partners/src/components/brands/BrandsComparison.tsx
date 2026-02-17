@@ -1,7 +1,4 @@
-"use client";
-
 import { X, Minus, Check } from "lucide-react";
-import { useScrollReveal } from "../../hooks/useScrollReveal";
 
 const oldWayItems = [
   "Ay sonunda Excel tabloları",
@@ -18,15 +15,8 @@ const mdznItems = [
 ];
 
 export default function BrandsComparison() {
-  const { ref, isVisible } = useScrollReveal();
-
   return (
-    <section
-      ref={ref}
-      className={`py-16 bg-primary-50 transition-all duration-700 ease-out ${
-        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-      }`}
-    >
+    <section className="py-10 lg:py-16 bg-primary-50">
       <div className="max-w-5xl mx-auto px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -39,7 +29,7 @@ export default function BrandsComparison() {
           </h2>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
           {/* Old Way */}
           <div className="bg-white rounded-2xl p-8 border-2 border-primary-200">
             <h3 className="font-bold text-primary-400 mb-6 flex items-center gap-3 text-lg">

@@ -1,8 +1,4 @@
-"use client";
-
 import { Check, ArrowRight } from "lucide-react";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { useModal } from "../ModalContext";
 
 const benefits = [
   "Türkiye\u2019nin en büyük influencer ağına erişim",
@@ -12,18 +8,10 @@ const benefits = [
 ];
 
 export default function PartnersCTA() {
-  const { ref, isVisible } = useScrollReveal();
-  const { openModal } = useModal();
-
   return (
-    <section className="py-20 bg-primary-900">
-      <div
-        ref={ref}
-        className={`max-w-[1400px] mx-auto px-6 lg:px-12 transition-all duration-700 ${
-          isVisible ? "animate-fade-in-up" : "opacity-0 translate-y-6"
-        }`}
-      >
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+    <section className="py-10 lg:py-16 bg-primary-900">
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           {/* Left Content */}
           <div>
             <span className="overline text-accent-400 mb-4 inline-block">
@@ -35,7 +23,7 @@ export default function PartnersCTA() {
 
             <ul className="space-y-4 mb-10">
               {benefits.map((benefit, index) => (
-                <li key={benefit} className="flex items-center gap-4 text-white/80">
+                <li key={index} className="flex items-center gap-4 text-white/80">
                   <div className="w-6 h-6 bg-accent-600/20 rounded-full flex items-center justify-center flex-shrink-0">
                     <Check className="w-4 h-4 text-accent-400" />
                   </div>
@@ -44,14 +32,14 @@ export default function PartnersCTA() {
               ))}
             </ul>
 
-            <button onClick={() => openModal("brand")} className="btn-accent h-14 px-8 rounded-lg text-base font-semibold flex items-center gap-2 group">
+            <button className="btn-accent h-14 px-8 rounded-lg text-base font-semibold flex items-center justify-center gap-2 group w-full lg:w-auto">
               Marka Başvurusu
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
 
-          {/* Right: Stats Card */}
-          <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8">
+          {/* Right: Stats Card — hidden on mobile (PM decision) */}
+          <div className="hidden lg:block bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8">
             <div className="text-center mb-8">
               <p className="text-5xl font-bold text-white mb-2">35+</p>
               <p className="text-primary-400">Aktif marka ortağı</p>

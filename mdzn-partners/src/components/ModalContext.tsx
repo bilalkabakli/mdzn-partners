@@ -1,52 +1,44 @@
 "use client";
 
-import {
-  createContext,
-  useContext,
-  useState,
-  useCallback,
-  type ReactNode,
-} from "react";
-import ApplicationModal, { type TabType } from "./ApplicationModal";
+import { createContext, useContext, useState, ReactNode } from "react";
 
-/* ===== CONTEXT SHAPE ===== */
-interface ModalContextValue {
-  openModal: (tab?: TabType) => void;
+type ModalType = "brand" | "influencer" | "agency" | null;
+
+interface ModalContextType {
+  modalType: ModalType;
+  isOpen: boolean;
+  openModal: (type: ModalType) => void;
+  closeModal: () => void;
 }
 
-const ModalContext = createContext<ModalContextValue | null>(null);
+const ModalContext = createContext<ModalContextType>({
+  modalType: null,
+  isOpen: false,
+  openModal: () => {},
+  closeModal: () => {},
+});
 
-/* ===== PROVIDER ===== */
 export function ModalProvider({ children }: { children: ReactNode }) {
+  const [modalType, setModalType] = useState<ModalType>(null);
   const [isOpen, setIsOpen] = useState(false);
-  const [defaultTab, setDefaultTab] = useState<TabType>("influencer");
 
-  const openModal = useCallback((tab?: TabType) => {
-    setDefaultTab(tab ?? "influencer");
+  const openModal = (type: ModalType) => {
+    setModalType(type);
     setIsOpen(true);
-  }, []);
+  };
 
-  const closeModal = useCallback(() => {
+  const closeModal = () => {
+    setModalType(null);
     setIsOpen(false);
-  }, []);
+  };
 
   return (
-    <ModalContext.Provider value={{ openModal }}>
+    <ModalContext.Provider value={{ modalType, isOpen, openModal, closeModal }}>
       {children}
-      <ApplicationModal
-        isOpen={isOpen}
-        onClose={closeModal}
-        defaultTab={defaultTab}
-      />
     </ModalContext.Provider>
   );
 }
 
-/* ===== HOOK ===== */
-export function useModal(): ModalContextValue {
-  const context = useContext(ModalContext);
-  if (!context) {
-    throw new Error("useModal must be used within a ModalProvider");
-  }
-  return context;
+export function useModal() {
+  return useContext(ModalContext);
 }

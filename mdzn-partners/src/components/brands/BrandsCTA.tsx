@@ -1,8 +1,4 @@
-"use client";
-
 import { TrendingUp, Clock, Check } from "lucide-react";
-import { useModal } from "../ModalContext";
-import { useScrollReveal } from "../../hooks/useScrollReveal";
 
 const benefits = [
   {
@@ -26,18 +22,10 @@ const benefits = [
 ];
 
 export default function BrandsCTA() {
-  const { openModal } = useModal();
-  const { ref, isVisible } = useScrollReveal();
-
   return (
-    <section
-      ref={ref}
-      className={`py-16 bg-primary-900 transition-all duration-700 ease-out ${
-        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-      }`}
-    >
+    <section className="py-10 lg:py-16 bg-primary-900">
       <div className="max-w-5xl mx-auto px-6 lg:px-8">
-        <div className="text-center mb-12">
+        <div className="text-center mb-8 lg:mb-12">
           <h2
             className="text-3xl md:text-4xl font-bold text-white mb-4"
             style={{ letterSpacing: "-0.5px" }}
@@ -49,7 +37,7 @@ export default function BrandsCTA() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 mb-12">
+        <div className="grid md:grid-cols-2 gap-8 mb-8 lg:mb-12">
           {benefits.map((benefit) => {
             const Icon = benefit.icon;
 
@@ -78,11 +66,8 @@ export default function BrandsCTA() {
         </div>
 
         <div className="text-center">
-          <button
-            className="bg-white text-primary-900 px-12 py-5 rounded-xl font-semibold text-lg hover:bg-primary-50 hover:shadow-[0_0_0_3px_rgba(212,175,55,0.3)] transition-all duration-200 shadow-xl"
-            onClick={() => openModal("brand")}
-          >
-            Aramıza Katıl
+          <button className="w-full lg:w-auto bg-white text-primary-900 px-12 py-5 rounded-xl font-semibold text-lg hover:bg-primary-50 hover:shadow-[0_0_0_3px_rgba(212,175,55,0.3)] transition-all duration-200 shadow-xl">
+            Demo Talep Edin
           </button>
           <p className="text-primary-400 text-sm mt-4">
             15 dakikalık demo ile tüm özellikleri keşfedin

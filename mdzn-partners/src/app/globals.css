@@ -544,6 +544,17 @@ select:focus {
 ::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
 
 /* ========================================
+   SCROLLBAR HIDE (for horizontal pill scrollers)
+   ======================================== */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ========================================
    SKIP TO CONTENT (A11Y)
    ======================================== */
 .skip-to-content {

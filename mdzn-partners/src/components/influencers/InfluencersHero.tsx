@@ -1,6 +1,6 @@
 "use client";
 
-import { Wallet, ShoppingBag, Megaphone, ArrowRight } from "lucide-react";
+import { Wallet, ShoppingBag, Megaphone } from "lucide-react";
 import { useModal } from "../ModalContext";
 
 const stats = [
@@ -37,7 +37,7 @@ export default function InfluencersHero() {
       <div className="absolute bottom-10 left-10 w-56 h-56 bg-info-600/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           {/* Left: Content */}
           <div>
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full mb-8">
@@ -48,7 +48,7 @@ export default function InfluencersHero() {
             </div>
 
             <h1
-              className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight mb-6"
+              className="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight mb-6"
               style={{ letterSpacing: "-2px" }}
             >
               İçeriklerinizi
@@ -61,22 +61,27 @@ export default function InfluencersHero() {
               adil komisyon, güvenli ödeme.
             </p>
 
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-col lg:flex-row gap-3 lg:gap-4">
               <button
-                className="bg-accent-600 text-primary-900 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-accent-700 hover:shadow-[0_0_0_3px_rgba(212,175,55,0.3)] transition-all duration-200 shadow-lg flex items-center gap-2 group"
+                className="w-full lg:w-auto bg-accent-600 text-primary-900 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-accent-700 hover:shadow-[0_0_0_3px_rgba(212,175,55,0.3)] transition-all duration-200 shadow-lg flex items-center justify-center gap-2 group"
                 onClick={() => openModal("influencer")}
               >
                 Hemen Başvur
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <svg
+                  className="w-5 h-5 group-hover:translate-x-1 transition-transform"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M13 7l5 5m0 0l-5 5m5-5H6"
+                  />
+                </svg>
               </button>
-              <button
-                className="border border-white/30 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white/10 hover:border-accent-600 transition-all duration-200 flex items-center gap-2"
-                onClick={() => {
-                  document
-                    .getElementById("features")
-                    ?.scrollIntoView({ behavior: "smooth" });
-                }}
-              >
+              <button className="w-full lg:w-auto border border-white/30 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white/10 hover:border-accent-600 transition-all duration-200 flex items-center justify-center gap-2">
                 <svg
                   className="w-5 h-5"
                   fill="none"

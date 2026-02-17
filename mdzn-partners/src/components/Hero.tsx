@@ -1,18 +1,13 @@
-"use client";
-
 import { ArrowRight, PlayCircle, TrendingUp, CheckCircle } from "lucide-react";
-import { useModal } from "./ModalContext";
 
 export default function Hero() {
-  const { openModal } = useModal();
-
   return (
     <section className="relative overflow-hidden">
       {/* Background decorations */}
       <div className="absolute top-[20%] left-[10%] w-[400px] h-[400px] bg-gradient-to-br from-accent-100/50 to-transparent rounded-full blur-3xl" />
       <div className="absolute bottom-[10%] right-[15%] w-[300px] h-[300px] bg-gradient-to-br from-primary-100/50 to-transparent rounded-full blur-3xl" />
 
-      <div className="relative max-w-[1400px] mx-auto px-6 lg:px-12 py-12 lg:py-16">
+      <div className="relative max-w-[1400px] mx-auto px-6 lg:px-12 py-10 lg:py-16">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left Content */}
           <div>
@@ -23,7 +18,7 @@ export default function Hero() {
               </span>
             </div>
 
-            <h1 className="text-5xl lg:text-6xl font-extrabold leading-[1.1] tracking-[-2px] mb-6">
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold leading-[1.1] tracking-[-2px] mb-6">
               Affiliate Pazarlamanın
               <br />
               <span className="text-primary-400">Yeni Nesil Platformu</span>
@@ -36,11 +31,8 @@ export default function Hero() {
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <button
-                className="btn-primary h-14 px-8 rounded-lg text-base font-semibold flex items-center gap-2 group"
-                onClick={() => openModal()}
-              >
-                Aramıza Katıl
+              <button className="btn-primary h-14 px-8 rounded-lg text-base font-semibold flex items-center gap-2 group">
+                Demo Talep Et
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
               <button className="btn-secondary h-14 px-8 rounded-lg text-base font-semibold flex items-center gap-2">
@@ -133,8 +125,8 @@ export default function Hero() {
                     </span>
                   </div>
                 </div>
-                {/* Chart bars */}
-                <div className="flex items-end gap-1.5 h-24">
+              {/* Chart bars — hidden on mobile */}
+              <div className="hidden md:flex items-end gap-1.5 h-24">
                   {[40, 55, 45, 70, 85, 60, 75, 90, 80, 100, 70, 85].map(
                     (height, i) => {
                       const colors = [
@@ -164,8 +156,8 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* Floating notification */}
-            <div className="absolute -right-4 bottom-8 bg-white border border-primary-200 rounded-xl p-4 shadow-lg animate-float-badge">
+            {/* Floating notification — hidden on mobile */}
+            <div className="hidden md:block absolute -right-4 bottom-8 bg-white border border-primary-200 rounded-xl p-4 shadow-lg animate-float-badge">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-success-100 rounded-lg flex items-center justify-center">
                   <CheckCircle className="w-5 h-5 text-success-600" />

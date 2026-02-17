@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { BarChart3, Building2, CreditCard, Link2, Check, Copy } from "lucide-react";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
+import ScrollablePills from "../ScrollablePills";
 
 const features = [
   {
@@ -147,14 +147,10 @@ export default function InfluencersFeatures() {
   const [activeTab, setActiveTab] = useState(0);
   const activeFeature = features[activeTab];
   const MockupComponent = mockupComponents[activeFeature.mockup];
-  const { ref, isVisible } = useScrollReveal();
 
   return (
-    <section id="features" className="py-16 bg-white">
-      <div
-        ref={ref}
-        className={`max-w-[1400px] mx-auto px-6 lg:px-12 transition-all duration-700 ${isVisible ? "animate-fade-in-up" : "opacity-0 translate-y-6"}`}
-      >
+    <section className="py-10 lg:py-16 bg-white">
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
         <div className="text-center mb-16">
           <span className="overline text-accent-600 mb-4 inline-block">
             Avantajlar
@@ -164,18 +160,24 @@ export default function InfluencersFeatures() {
           </h2>
         </div>
 
+        {/* Mobile: Horizontal Scrollable Pills */}
+        <ScrollablePills
+          tabs={features.map((feature) => ({
+            icon: <feature.icon className="w-4 h-4" />,
+            label: feature.title,
+          }))}
+          activeTab={activeTab}
+          onTabChange={setActiveTab}
+        />
+
         <div className="grid lg:grid-cols-12 gap-8">
-          {/* Left: Vertical Tabs */}
-          <div className="lg:col-span-4 space-y-3" role="tablist" aria-label="Avantajlar">
+          {/* Left: Vertical Tabs (hidden on mobile) */}
+          <div className="hidden lg:block lg:col-span-4 space-y-3">
             {features.map((feature, index) => {
               const isActive = index === activeTab;
               return (
                 <button
                   key={feature.title}
-                  role="tab"
-                  aria-selected={isActive}
-                  aria-controls={`influencers-tabpanel-${index}`}
-                  id={`influencers-tab-${index}`}
                   onClick={() => setActiveTab(index)}
                   className={`w-full text-left p-5 rounded-xl flex items-center gap-4 transition-all ${
                     isActive
@@ -199,12 +201,7 @@ export default function InfluencersFeatures() {
           </div>
 
           {/* Right: Content Area */}
-          <div
-            className="lg:col-span-8 bg-primary-50 rounded-2xl p-8 lg:p-10 min-h-[640px]"
-            role="tabpanel"
-            id={`influencers-tabpanel-${activeTab}`}
-            aria-labelledby={`influencers-tab-${activeTab}`}
-          >
+          <div className="lg:col-span-8 bg-primary-50 rounded-2xl p-8 lg:p-10 lg:min-h-[640px]">
             <div className="flex items-center gap-4 mb-4">
               <div className="p-3 bg-accent-100 rounded-xl">
                 <activeFeature.icon className="w-6 h-6 text-accent-700" />

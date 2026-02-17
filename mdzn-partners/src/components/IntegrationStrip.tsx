@@ -1,11 +1,6 @@
-"use client";
-
 import { Code, Plug, Table, Shield, Globe } from "lucide-react";
-import { useScrollReveal } from "../hooks/useScrollReveal";
 
 export default function IntegrationStrip() {
-  const { ref, isVisible } = useScrollReveal();
-
   const readyIntegrations = ["İkas", "Shopify", "Ticimax", "Adjust", "Appsflyer"];
 
   const customIntegrations = [
@@ -15,12 +10,7 @@ export default function IntegrationStrip() {
   ];
 
   return (
-    <div
-      ref={ref}
-      className={`max-w-[1400px] mx-auto px-6 lg:px-12 pb-8 transition-all duration-700 ease-out ${
-        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-      }`}
-    >
+    <div className="max-w-[1400px] mx-auto px-6 lg:px-12 py-10 lg:py-16">
       <div className="space-y-8">
         {/* Ready integrations */}
         <div className="flex flex-wrap justify-center items-center gap-6">

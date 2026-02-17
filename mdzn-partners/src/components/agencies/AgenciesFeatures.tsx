@@ -10,7 +10,7 @@ import {
   Check,
   Globe,
 } from "lucide-react";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
+import ScrollablePills from "../ScrollablePills";
 
 /* ─── Feature data ─── */
 const features = [
@@ -269,20 +269,14 @@ const mockupComponents: Record<string, () => React.JSX.Element> = {
 
 export default function AgenciesFeatures() {
   const [activeTab, setActiveTab] = useState(0);
-  const { ref, isVisible } = useScrollReveal();
 
   const activeFeature = features[activeTab];
   const ActiveIcon = activeFeature.icon;
   const ActiveMockup = mockupComponents[activeFeature.mockup];
 
   return (
-    <section id="agencies-features" className="py-16 bg-white">
-      <div
-        ref={ref}
-        className={`max-w-[1400px] mx-auto px-6 lg:px-12 transition-all duration-700 ${
-          isVisible ? "animate-fade-in-up" : "opacity-0 translate-y-6"
-        }`}
-      >
+    <section className="py-10 lg:py-16 bg-white">
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
         {/* Section Header */}
         <div className="text-center mb-16">
           <span className="overline text-accent-600 mb-4 inline-block">
@@ -293,10 +287,20 @@ export default function AgenciesFeatures() {
           </h2>
         </div>
 
+        {/* Mobile: Horizontal Scrollable Pills */}
+        <ScrollablePills
+          tabs={features.map((feature) => ({
+            icon: <feature.icon className="w-4 h-4" />,
+            label: feature.tabLabel,
+          }))}
+          activeTab={activeTab}
+          onTabChange={setActiveTab}
+        />
+
         {/* Vertical Tabs Layout */}
         <div className="grid lg:grid-cols-12 gap-8">
-          {/* Left: Vertical Tabs */}
-          <div className="lg:col-span-4 space-y-3" role="tablist" aria-label="Avantajlar">
+          {/* Left: Vertical Tabs (hidden on mobile) */}
+          <div className="hidden lg:block lg:col-span-4 space-y-3">
             {features.map((feature, index) => {
               const Icon = feature.icon;
               const isActive = index === activeTab;
@@ -304,10 +308,6 @@ export default function AgenciesFeatures() {
               return (
                 <button
                   key={feature.title}
-                  role="tab"
-                  aria-selected={isActive}
-                  aria-controls={`agencies-tabpanel-${index}`}
-                  id={`agencies-tab-${index}`}
                   onClick={() => setActiveTab(index)}
                   className={`w-full text-left p-5 rounded-xl flex items-center gap-4 transition-all duration-200 ${
                     isActive
@@ -331,12 +331,7 @@ export default function AgenciesFeatures() {
           </div>
 
           {/* Right: Content Area */}
-          <div
-            className="lg:col-span-8 bg-primary-50 rounded-2xl p-8 lg:p-10 min-h-[640px]"
-            role="tabpanel"
-            id={`agencies-tabpanel-${activeTab}`}
-            aria-labelledby={`agencies-tab-${activeTab}`}
-          >
+          <div className="lg:col-span-8 bg-primary-50 rounded-2xl p-8 lg:p-10 lg:min-h-[640px]">
             {/* Header: Icon + Title + Subtitle */}
             <div className="flex items-center gap-4 mb-4">
               <div className="p-3 bg-accent-100 rounded-xl">

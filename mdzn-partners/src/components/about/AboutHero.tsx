@@ -2,7 +2,7 @@ import { Info } from "lucide-react";
 
 export default function AboutHero() {
   return (
-    <section className="relative overflow-hidden py-12 lg:py-16 bg-gradient-to-b from-primary-50 to-white">
+    <section className="relative overflow-hidden py-10 lg:py-16 bg-gradient-to-b from-primary-50 to-white">
       {/* Subtle Dot Pattern */}
       <div
         className="absolute inset-0 opacity-30"
@@ -24,7 +24,7 @@ export default function AboutHero() {
           <span>Bizi Tanıyın</span>
         </div>
 
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-1px] leading-[1.2] mb-6 text-primary-900">
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-[-1px] leading-[1.2] mb-4 lg:mb-6 text-primary-900">
           Hakkımızda
         </h1>
         <p className="text-xl text-primary-600 max-w-3xl mx-auto leading-relaxed">

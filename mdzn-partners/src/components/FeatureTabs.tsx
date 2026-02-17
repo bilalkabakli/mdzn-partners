@@ -17,7 +17,7 @@ import {
   Sparkles,
   CheckCircle,
 } from "lucide-react";
-import { useScrollReveal } from "../hooks/useScrollReveal";
+import ScrollablePills from "./ScrollablePills";
 
 const tabs = [
   { icon: Clock, label: "Gerçek Zamanlı Takip" },
@@ -46,7 +46,7 @@ function TabContent0() {
         beklemeden, anlık verilerle karar alın.
       </p>
       <div className="bg-primary-50 rounded-xl p-6 border border-primary-100 mb-8">
-        <div className="grid grid-cols-3 gap-4 mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
           <div className="bg-white border border-primary-200 p-4 rounded-xl text-center">
             <p className="text-3xl font-extrabold text-primary-900">191K</p>
             <p className="text-xs text-primary-400 mt-1">Tıklama</p>
@@ -298,18 +298,12 @@ const tabContents = [TabContent0, TabContent1, TabContent2, TabContent3, TabCont
 export default function FeatureTabs() {
   const [activeTab, setActiveTab] = useState(0);
   const ActiveContent = tabContents[activeTab];
-  const { ref, isVisible } = useScrollReveal();
 
   return (
-    <section
-      ref={ref}
-      className={`py-16 bg-primary-50 transition-all duration-700 ease-out ${
-        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-      }`}
-    >
+    <section className="py-10 lg:py-16 bg-primary-50">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-extrabold tracking-[-1px] mb-4">
+        <div className="text-center mb-10 lg:mb-16">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-[-1px] mb-4">
             Neden MDZN Partners?
           </h2>
           <p className="text-primary-500 text-lg font-medium max-w-2xl mx-auto">
@@ -317,9 +311,19 @@ export default function FeatureTabs() {
           </p>
         </div>
 
+        {/* Mobile: Horizontal scrollable pills */}
+        <ScrollablePills
+          tabs={tabs.map(({ icon: Icon, label }) => ({
+            icon: <Icon className="w-4 h-4" />,
+            label,
+          }))}
+          activeTab={activeTab}
+          onTabChange={setActiveTab}
+        />
+
         <div className="grid lg:grid-cols-12 gap-8">
-          {/* Vertical Tabs */}
-          <div className="lg:col-span-4 space-y-2" role="tablist" aria-label="Özellikler">
+          {/* Vertical Tabs — desktop only */}
+          <div className="hidden lg:block lg:col-span-4 space-y-2" role="tablist" aria-label="Özellikler">
             {tabs.map(({ icon: Icon, label }, index) => (
               <button
                 key={index}
@@ -343,7 +347,7 @@ export default function FeatureTabs() {
           {/* Content Area */}
           <div className="lg:col-span-8">
             <div
-              className="bg-white border border-primary-200 rounded-2xl p-8 shadow-lg min-h-[640px]"
+              className="bg-white border border-primary-200 rounded-2xl p-8 shadow-lg lg:min-h-[640px]"
               role="tabpanel"
               id={`feature-panel-${activeTab}`}
               aria-labelledby={`feature-tab-${activeTab}`}

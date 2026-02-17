@@ -1,7 +1,4 @@
-"use client";
-
 import { ExternalLink } from "lucide-react";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const brands = [
   { initials: "PO", featured: false },
@@ -15,14 +12,9 @@ const brands = [
 ];
 
 export default function InfluencersBrands() {
-  const { ref, isVisible } = useScrollReveal();
-
   return (
-    <section className="py-16 bg-primary-50">
-      <div
-        ref={ref}
-        className={`max-w-[1400px] mx-auto px-6 lg:px-12 transition-all duration-700 ${isVisible ? "animate-fade-in-up" : "opacity-0 translate-y-6"}`}
-      >
+    <section className="py-10 lg:py-16 bg-primary-50">
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
         <div className="text-center mb-16">
           <span className="overline text-accent-600 mb-4 inline-block">
             Marka Ağı
@@ -39,7 +31,7 @@ export default function InfluencersBrands() {
           {brands.map((brand) => (
             <div
               key={brand.initials}
-              className="bg-white rounded-xl p-8 flex items-center justify-center border border-primary-200 hover:border-accent-600 hover:shadow-[0_4px_16px_rgba(212,175,55,0.15)] transition-all duration-200"
+              className="bg-white rounded-xl p-5 md:p-8 flex items-center justify-center border border-primary-200 hover:border-accent-600 hover:shadow-[0_4px_16px_rgba(212,175,55,0.15)] transition-all duration-200"
             >
               <div
                 className={`w-14 h-14 rounded-lg flex items-center justify-center ${

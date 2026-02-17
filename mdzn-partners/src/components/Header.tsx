@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { ChevronDown, Menu, X } from "lucide-react";
@@ -11,6 +11,7 @@ export default function Header() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { openModal } = useModal();
   const pathname = usePathname();
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
 
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
@@ -45,9 +46,28 @@ export default function Header() {
     []
   );
 
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      const el = mobileMenuRef.current;
+      if (el) {
+        el.style.maxHeight = el.scrollHeight + "px";
+      }
+    }
+  }, [mobileMenuOpen]);
+
+  const mobileNavLinkClass = (href: string) =>
+    `flex items-center min-h-[44px] px-1 text-sm font-semibold border-b border-primary-100 transition-colors duration-150 ${
+      isActive(href) ? "text-accent-700" : "text-primary-600"
+    }`;
+
+  const mobileSubLinkClass = (href: string) =>
+    `flex items-center min-h-[44px] text-sm font-medium transition-colors duration-150 ${
+      isActive(href) ? "text-accent-700" : "text-primary-500"
+    }`;
+
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-primary-200">
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+      <div className="max-w-[1400px] mx-auto px-4 lg:px-12">
         <div className="flex justify-between items-center h-[72px]">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
@@ -156,14 +176,14 @@ export default function Header() {
           {/* CTA */}
           <button
             className="hidden lg:flex btn-primary h-11 px-6 rounded-lg text-sm font-semibold items-center gap-2"
-            onClick={() => openModal()}
+            onClick={() => openModal("brand")}
           >
             Aramıza Katıl
           </button>
 
           {/* Mobile menu button */}
           <button
-            className="lg:hidden p-2 text-primary-600 hover:text-accent-700 active:text-accent-800 transition-colors duration-150"
+            className="lg:hidden w-11 h-11 flex items-center justify-center rounded-lg text-primary-600 hover:bg-primary-50 hover:text-accent-700 active:text-accent-800 transition-colors duration-150"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-expanded={mobileMenuOpen}
             aria-label="Menü"
@@ -176,73 +196,61 @@ export default function Header() {
           </button>
         </div>
 
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden border-t border-primary-200 py-4 space-y-3">
-            <Link
-              href="/"
-              className={`block py-2 text-sm font-medium ${
-                isActive("/") ? "text-accent-700" : "text-primary-600"
-              }`}
-            >
+        {/* Mobile Menu — smooth slide-down animation */}
+        <div
+          ref={mobileMenuRef}
+          className="lg:hidden overflow-hidden transition-all duration-300 ease-in-out"
+          style={{
+            maxHeight: mobileMenuOpen ? mobileMenuRef.current?.scrollHeight ?? 500 : 0,
+            opacity: mobileMenuOpen ? 1 : 0,
+          }}
+          aria-hidden={!mobileMenuOpen}
+        >
+          <nav className="border-t border-primary-200 py-4">
+            {/* Ana Sayfa */}
+            <Link href="/" className={mobileNavLinkClass("/")}>
               Ana Sayfa
             </Link>
-            <Link
-              href="/markalar-icin"
-              className={`block py-2 text-sm font-medium ${
-                isActive("/markalar-icin") ? "text-accent-700" : "text-primary-600"
-              }`}
-            >
-              Markalar İçin
-            </Link>
-            <Link
-              href="/influencerlar-icin"
-              className={`block py-2 text-sm font-medium ${
-                isActive("/influencerlar-icin") ? "text-accent-700" : "text-primary-600"
-              }`}
-            >
-              Influencer&apos;lar İçin
-            </Link>
-            <Link
-              href="/ajanslar-icin"
-              className={`block py-2 text-sm font-medium ${
-                isActive("/ajanslar-icin") ? "text-accent-700" : "text-primary-600"
-              }`}
-            >
-              Ajanslar İçin
-            </Link>
-            <Link
-              href="/is-ortaklari"
-              className={`block py-2 text-sm font-medium ${
-                isActive("/is-ortaklari") ? "text-accent-700" : "text-primary-600"
-              }`}
-            >
+
+            {/* Çözümler — grouped with left border + indent */}
+            <div className="border-b border-primary-100">
+              <div className="flex items-center justify-between min-h-[44px] px-1 text-sm font-semibold text-primary-600">
+                Çözümler
+                <ChevronDown className="w-4 h-4 text-primary-400" />
+              </div>
+              <div className="ml-2 pl-4 pb-1 border-l-2 border-primary-200 space-y-0">
+                <Link href="/markalar-icin" className={mobileSubLinkClass("/markalar-icin")}>
+                  Markalar İçin
+                </Link>
+                <Link href="/influencerlar-icin" className={mobileSubLinkClass("/influencerlar-icin")}>
+                  Influencer&apos;lar İçin
+                </Link>
+                <Link href="/ajanslar-icin" className={mobileSubLinkClass("/ajanslar-icin")}>
+                  Ajanslar İçin
+                </Link>
+              </div>
+            </div>
+
+            {/* Other nav links */}
+            <Link href="/is-ortaklari" className={mobileNavLinkClass("/is-ortaklari")}>
               İş Ortaklarımız
             </Link>
-            <Link
-              href="/hakkimizda"
-              className={`block py-2 text-sm font-medium ${
-                isActive("/hakkimizda") ? "text-accent-700" : "text-primary-600"
-              }`}
-            >
+            <Link href="/hakkimizda" className={mobileNavLinkClass("/hakkimizda")}>
               Hakkımızda
             </Link>
-            <Link
-              href="/iletisim"
-              className={`block py-2 text-sm font-medium ${
-                isActive("/iletisim") ? "text-accent-700" : "text-primary-600"
-              }`}
-            >
+            <Link href="/iletisim" className={mobileNavLinkClass("/iletisim")}>
               İletişim
             </Link>
+
+            {/* CTA in mobile menu */}
             <button
-              className="btn-primary w-full h-11 rounded-lg text-sm font-semibold mt-4"
-              onClick={() => { openModal(); setMobileMenuOpen(false); }}
+              className="btn-primary w-full h-12 rounded-lg text-sm font-semibold mt-6"
+              onClick={() => { openModal("brand"); setMobileMenuOpen(false); }}
             >
               Aramıza Katıl
             </button>
-          </div>
-        )}
+          </nav>
+        </div>
       </div>
     </header>
   );

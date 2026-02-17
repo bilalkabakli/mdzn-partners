@@ -1,10 +1,9 @@
-import Link from "next/link";
 import { Instagram, Linkedin, Twitter } from "lucide-react";
 
 const solutionLinks = [
-  { href: "/markalar-icin", label: "Markalar İçin" },
-  { href: "/influencerlar-icin", label: "Influencer'lar İçin" },
-  { href: "/ajanslar-icin", label: "Ajanslar İçin" },
+  { href: "#", label: "Markalar İçin" },
+  { href: "#", label: "Influencer'lar İçin" },
+  { href: "#", label: "Ajanslar İçin" },
 ];
 
 const companyLinks = [
@@ -32,7 +31,7 @@ export default function Footer() {
   return (
     <footer className="bg-primary-900 text-white">
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="py-16">
+        <div className="py-10 lg:py-16">
           <div className="grid lg:grid-cols-12 gap-12">
             {/* Logo & Description */}
             <div className="lg:col-span-4">
@@ -117,12 +116,12 @@ export default function Footer() {
                   <ul className="space-y-3">
                     {solutionLinks.map(({ href, label }) => (
                       <li key={label}>
-                        <Link
+                        <a
                           href={href}
                           className="footer-link text-primary-400 hover:text-accent-500 active:text-accent-600 transition-colors duration-150"
                         >
                           {label}
-                        </Link>
+                        </a>
                       </li>
                     ))}
                   </ul>
@@ -136,12 +135,12 @@ export default function Footer() {
                   <ul className="space-y-3">
                     {companyLinks.map(({ href, label }) => (
                       <li key={label}>
-                        <Link
+                        <a
                           href={href}
                           className="footer-link text-primary-400 hover:text-accent-500 active:text-accent-600 transition-colors duration-150"
                         >
                           {label}
-                        </Link>
+                        </a>
                       </li>
                     ))}
                   </ul>
@@ -193,14 +192,26 @@ export default function Footer() {
         <div className="border-t border-white/10 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-primary-400">
-              © 2026 MDZN Partners. Bir Mediazone girişimidir.
+              © 2025 MDZN Partners. Bir Mediazone girişimidir.
             </p>
 
-            <div className="flex items-center gap-4">
-              <span className="text-xs text-white/40 uppercase tracking-wider">
+            <div className="w-full md:w-auto">
+              <span className="block text-center md:inline text-xs text-white/40 uppercase tracking-wider mb-3 md:mb-0 md:mr-4">
                 Mediazone Ailesi
               </span>
-              <div className="flex items-center gap-3 text-sm text-primary-400">
+              {/* Grid on mobile, inline flex on desktop */}
+              <div className="grid grid-cols-3 gap-2 md:hidden text-sm text-primary-400">
+                {mediazoneFamily.map((name) => (
+                  <a
+                    key={name}
+                    href="#"
+                    className="footer-link hover:text-accent-500 active:text-accent-600 transition-colors duration-150 cursor-pointer text-center py-1.5"
+                  >
+                    {name}
+                  </a>
+                ))}
+              </div>
+              <div className="hidden md:flex items-center gap-3 text-sm text-primary-400 md:inline-flex">
                 {mediazoneFamily.map((name) => (
                   <a
                     key={name}

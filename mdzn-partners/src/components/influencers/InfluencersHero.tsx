@@ -81,7 +81,14 @@ export default function InfluencersHero() {
                   />
                 </svg>
               </button>
-              <button className="border border-white/30 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white/10 hover:border-accent-600 transition-all duration-200 flex items-center gap-2">
+              <button
+                className="border border-white/30 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white/10 hover:border-accent-600 transition-all duration-200 flex items-center gap-2"
+                onClick={() => {
+                  document
+                    .getElementById("features")
+                    ?.scrollIntoView({ behavior: "smooth" });
+                }}
+              >
                 <svg
                   className="w-5 h-5"
                   fill="none"

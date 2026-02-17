@@ -10,6 +10,7 @@ import {
   Check,
   Globe,
 } from "lucide-react";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 /* ─── Feature data ─── */
 const features = [
@@ -268,14 +269,20 @@ const mockupComponents: Record<string, () => React.JSX.Element> = {
 
 export default function AgenciesFeatures() {
   const [activeTab, setActiveTab] = useState(0);
+  const { ref, isVisible } = useScrollReveal();
 
   const activeFeature = features[activeTab];
   const ActiveIcon = activeFeature.icon;
   const ActiveMockup = mockupComponents[activeFeature.mockup];
 
   return (
-    <section className="py-16 bg-white">
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+    <section id="agencies-features" className="py-16 bg-white">
+      <div
+        ref={ref}
+        className={`max-w-[1400px] mx-auto px-6 lg:px-12 transition-all duration-700 ${
+          isVisible ? "animate-fade-in-up" : "opacity-0 translate-y-6"
+        }`}
+      >
         {/* Section Header */}
         <div className="text-center mb-16">
           <span className="overline text-accent-600 mb-4 inline-block">

@@ -1,9 +1,9 @@
 import { Instagram, Linkedin, Twitter } from "lucide-react";
 
 const solutionLinks = [
-  { href: "#", label: "Markalar İçin" },
-  { href: "#", label: "Influencer'lar İçin" },
-  { href: "#", label: "Ajanslar İçin" },
+  { href: "/markalar-icin", label: "Markalar İçin" },
+  { href: "/influencerlar-icin", label: "Influencer'lar İçin" },
+  { href: "/ajanslar-icin", label: "Ajanslar İçin" },
 ];
 
 const companyLinks = [
@@ -192,7 +192,7 @@ export default function Footer() {
         <div className="border-t border-white/10 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-primary-400">
-              © 2025 MDZN Partners. Bir Mediazone girişimidir.
+              © 2026 MDZN Partners. Bir Mediazone girişimidir.
             </p>
 
             <div className="flex items-center gap-4">

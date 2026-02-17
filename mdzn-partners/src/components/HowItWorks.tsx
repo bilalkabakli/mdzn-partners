@@ -12,6 +12,7 @@ import {
   Search,
   Wallet,
 } from "lucide-react";
+import { useScrollReveal } from "../hooks/useScrollReveal";
 
 const brandsSteps = [
   {
@@ -134,9 +135,15 @@ export default function HowItWorks() {
   const [activeTab, setActiveTab] = useState<"brands" | "influencers">(
     "brands"
   );
+  const { ref, isVisible } = useScrollReveal();
 
   return (
-    <section className="py-16 bg-primary-50">
+    <section
+      ref={ref}
+      className={`py-16 bg-primary-50 transition-all duration-700 ease-out ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+      }`}
+    >
       <div className="max-w-[1000px] mx-auto px-6 lg:px-12">
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-extrabold tracking-[-1px] mb-4">

@@ -26,6 +26,13 @@ const influencers = [
 export default function AgenciesHero() {
   const { openModal } = useModal();
 
+  const scrollToFeatures = () => {
+    const el = document.getElementById("agencies-features");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <section className="bg-primary-900 text-white py-12 lg:py-16 relative overflow-hidden">
       {/* Decorative blur circles */}
@@ -74,6 +81,25 @@ export default function AgenciesHero() {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     d="M13 7l5 5m0 0l-5 5m5-5H6"
+                  />
+                </svg>
+              </button>
+              <button
+                onClick={scrollToFeatures}
+                className="bg-white/10 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white/20 transition-all duration-200 border border-white/20 flex items-center gap-2"
+              >
+                Nasıl Çalışır?
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M19 9l-7 7-7-7"
                   />
                 </svg>
               </button>

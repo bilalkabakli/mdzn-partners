@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { BarChart3, Building2, CreditCard, Link2, Check, Copy } from "lucide-react";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const features = [
   {
@@ -146,10 +147,14 @@ export default function InfluencersFeatures() {
   const [activeTab, setActiveTab] = useState(0);
   const activeFeature = features[activeTab];
   const MockupComponent = mockupComponents[activeFeature.mockup];
+  const { ref, isVisible } = useScrollReveal();
 
   return (
-    <section className="py-16 bg-white">
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+    <section id="features" className="py-16 bg-white">
+      <div
+        ref={ref}
+        className={`max-w-[1400px] mx-auto px-6 lg:px-12 transition-all duration-700 ${isVisible ? "animate-fade-in-up" : "opacity-0 translate-y-6"}`}
+      >
         <div className="text-center mb-16">
           <span className="overline text-accent-600 mb-4 inline-block">
             Avantajlar

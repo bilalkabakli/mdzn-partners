@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SCRUM-28 — Homepage CTR Friendly Height Usage — Design Spec (v3)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* =====================================================
+       MDZN Partners — Homepage Spacing Design Spec (v3)
+       SCRUM-28: CTR Friendly Height Usage
+       
+       v3: ONLY section paddings + hero grid gap changed.
+       All internal UI element margins stay exactly as-is.
+       
+       Open in a browser at 1440px width to validate
+       that the hero fits above the fold.
+       ===================================================== */
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    :root {
+      --primary-900: #0F172A;
+      --primary-800: #1E293B;
+      --primary-700: #334155;
+      --primary-600: #475569;
+      --primary-500: #64748B;
+      --primary-400: #94A3B8;
+      --primary-300: #CBD5E1;
+      --primary-200: #E2E8F0;
+      --primary-100: #F1F5F9;
+      --primary-50:  #F8FAFC;
+      --accent-600: #D4AF37;
+      --accent-100: #FFFACC;
+      --success-600: #059669;
+      --success-100: #D1FAE5;
+      --info-600: #0284C7;
+      --info-100: #E0F2FE;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--primary-900);
+      background: #fff;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── FOLD INDICATOR ─── */
+    .fold-indicator {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 900px;
+      border-bottom: 3px dashed #EF4444;
+      pointer-events: none;
+      z-index: 9999;
+    }
+    .fold-indicator::after {
+      content: '← FOLD LINE (900px) — Content above this line is visible without scrolling on 1440×900';
+      position: absolute;
+      bottom: -28px;
+      right: 16px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #EF4444;
+      background: white;
+      padding: 4px 12px;
+      border-radius: 4px;
+    }
+
+    /* ─── HEADER (unchanged) ─── */
+    .header {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 48px;
+      position: sticky;
+      top: 0;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+      border-bottom: 1px solid var(--primary-200);
+    }
+    .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 16px;
+    }
+    .header-logo-mark {
+      width: 36px;
+      height: 36px;
+      background: var(--primary-900);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 11px;
+      font-weight: 800;
+    }
+    .header-nav {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+    .header-nav a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--primary-600);
+      text-decoration: none;
+    }
+    .header-cta {
+      height: 40px;
+      padding: 0 20px;
+      background: var(--primary-900);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    /* ─── HERO ─── */
+    .hero { position: relative; overflow: hidden; }
+    .hero-inner {
+      position: relative;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 48px 48px;              /* CHANGED: was py-20 (80px) → py-12 (48px) */
+    }
+    @media (min-width: 1024px) {
+      .hero-inner {
+        padding: 64px 48px;            /* CHANGED: was py-28 (112px) → py-16 (64px) */
+      }
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;                       /* CHANGED: was gap-16 (64px) → gap-8 (32px) */
+      align-items: center;
+    }
+    @media (min-width: 1024px) {
+      .hero-grid {
+        gap: 48px;                     /* CHANGED: was gap-16 (64px) → lg:gap-12 (48px) */
+      }
+    }
+    
+    /* Hero internal elements — ALL UNCHANGED from current code */
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: var(--success-100);
+      border-radius: 9999px;
+      margin-bottom: 32px;             /* UNCHANGED: mb-8 (32px) */
+    }
+    .hero-badge-dot { width: 8px; height: 8px; background: var(--success-600); border-radius: 50%; }
+    .hero-badge-text { font-size: 14px; font-weight: 500; color: var(--success-600); }
+    
+    .hero-heading {
+      font-size: 60px;
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -2px;
+      margin-bottom: 24px;             /* UNCHANGED: mb-6 (24px) */
+    }
+    .hero-heading span { color: var(--primary-400); }
+    
+    .hero-description {
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--primary-500);
+      line-height: 1.6;
+      max-width: 520px;
+      margin-bottom: 40px;             /* UNCHANGED: mb-10 (40px) */
+    }
+    
+    .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn-primary-hero {
+      height: 56px; padding: 0 32px; background: var(--primary-900); color: white;
+      border: none; border-radius: 12px; font-size: 16px; font-weight: 600;
+      cursor: pointer; font-family: inherit; display: flex; align-items: center; gap: 8px;
+    }
+    .btn-secondary-hero {
+      height: 56px; padding: 0 32px; background: white; color: var(--primary-900);
+      border: 1px solid var(--primary-200); border-radius: 12px; font-size: 16px; font-weight: 600;
+      cursor: pointer; font-family: inherit; display: flex; align-items: center; gap: 8px;
+    }
+    
+    .hero-trust {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 48px;                /* UNCHANGED: mt-12 (48px) */
+    }
+    .trust-avatars { display: flex; }
+    .trust-avatar { width: 32px; height: 32px; border-radius: 50%; border: 2px solid white; margin-left: -8px; }
+    .trust-avatar:first-child { margin-left: 0; }
+    .trust-text { font-size: 14px; color: var(--primary-400); }
+
+    /* Dashboard preview — unchanged */
+    .hero-dashboard {
+      background: white; border: 1px solid var(--primary-200);
+      border-radius: 16px; padding: 24px;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+    }
+    .dashboard-chrome { display: flex; align-items: center; gap: 8px; margin-bottom: 24px; }
+    .chrome-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .dashboard-label { margin-left: 16px; font-size: 12px; font-weight: 500; color: var(--primary-400); }
+    .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
+    .stat-card { padding: 16px; border-radius: 12px; border: 1px solid; }
+    .stat-label { font-size: 12px; color: var(--primary-400); margin-bottom: 4px; }
+    .stat-value { font-size: 20px; font-weight: 800; }
+    .stat-trend { font-size: 12px; font-weight: 500; color: var(--success-600); margin-top: 4px; }
+    .revenue-card { background: var(--primary-50); border: 1px solid var(--primary-100); border-radius: 12px; padding: 20px; }
+    .revenue-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+    .revenue-label { font-size: 12px; color: var(--primary-400); margin-bottom: 4px; }
+    .revenue-value { font-size: 24px; font-weight: 800; }
+    .revenue-badge { display: flex; align-items: center; gap: 8px; padding: 6px 12px; background: var(--success-100); border-radius: 8px; font-size: 14px; font-weight: 600; color: var(--success-600); }
+    .chart-bars { display: flex; align-items: flex-end; gap: 6px; height: 96px; }
+    .chart-bar { flex: 1; border-radius: 3px 3px 0 0; }
+    .floating-notification {
+      position: absolute; right: -16px; bottom: 32px; background: white;
+      border: 1px solid var(--primary-200); border-radius: 12px; padding: 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08); display: flex; align-items: center; gap: 12px;
+    }
+    .notif-icon { width: 40px; height: 40px; background: var(--success-100); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--success-600); font-size: 18px; }
+    .notif-title { font-size: 14px; font-weight: 600; }
+    .notif-sub { font-size: 12px; color: var(--primary-400); }
+
+    /* ─── INTEGRATION STRIP ─── */
+    .integration-strip {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 48px 32px;             /* CHANGED: was pb-12 (48px) → pb-8 (32px) */
+    }
+    .integration-content {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;                         /* UNCHANGED: space-y-8 (32px) */
+    }
+    .integration-row { display: flex; justify-content: center; align-items: center; gap: 24px; flex-wrap: wrap; }
+    .overline-label { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--primary-400); }
+    .integration-chip { padding: 10px 20px; background: var(--primary-50); border: 1px solid var(--primary-200); border-radius: 8px; font-size: 14px; font-weight: 500; color: var(--primary-600); }
+    .custom-chip { padding: 8px 16px; background: white; border: 1px solid var(--primary-200); border-radius: 8px; font-size: 14px; color: var(--primary-600); display: flex; align-items: center; gap: 8px; }
+    .custom-chip-icon { color: var(--accent-600); }
+    .compliance-row { display: flex; justify-content: center; gap: 16px; }
+    .compliance-badge { padding: 8px 16px; border-radius: 9999px; font-size: 12px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+
+    /* ─── FEATURE TABS ─── */
+    .feature-tabs {
+      background: var(--primary-50);
+      padding: 64px 0;                  /* CHANGED: was py-24 (96px) → py-16 (64px) */
+    }
+    .feature-tabs-inner { max-width: 1400px; margin: 0 auto; padding: 0 48px; }
+    .section-heading {
+      text-align: center;
+      margin-bottom: 64px;              /* UNCHANGED: mb-16 (64px) */
+    }
+    .section-overline { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--primary-400); margin-bottom: 16px; }
+    .section-title { font-size: 36px; font-weight: 700; letter-spacing: -0.5px; line-height: 1.25; }
+    .feature-grid-placeholder {
+      display: grid; grid-template-columns: 280px 1fr; gap: 32px;
+      min-height: 640px;               /* UNCHANGED: min-h-[640px] */
+      background: white; border: 1px solid var(--primary-200); border-radius: 16px; overflow: hidden;
+    }
+    .feature-sidebar { padding: 24px; display: flex; flex-direction: column; gap: 8px; }
+    .feature-tab { padding: 20px; border-radius: 12px; cursor: pointer; font-weight: 600; font-size: 14px; color: var(--primary-600); border: 1px solid transparent; }
+    .feature-tab.active { background: var(--primary-900); color: white; }
+    .feature-content { padding: 32px; display: flex; align-items: center; justify-content: center; background: var(--primary-50); font-size: 14px; color: var(--primary-400); }
+
+    /* ─── INTEGRATION CARDS ─── */
+    .integration-cards {
+      padding: 64px 0;                  /* CHANGED: was py-24 (96px) → py-16 (64px) */
+    }
+    .integration-cards-inner { max-width: 1400px; margin: 0 auto; padding: 0 48px; }
+    .ic-heading {
+      text-align: center;
+      margin-bottom: 80px;              /* UNCHANGED: mb-20 (80px) */
+    }
+    .ic-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .ic-card { background: white; border: 1px solid var(--primary-200); border-radius: 16px; padding: 32px; }
+    .ic-card-icon { width: 48px; height: 48px; background: var(--primary-100); border: 1px solid var(--primary-200); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; font-size: 20px; }
+    .ic-card h4 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+    .ic-card p { font-size: 14px; color: var(--primary-500); line-height: 1.6; }
+    .ic-bottom {
+      text-align: center;
+      margin-top: 48px;                 /* UNCHANGED: mt-12 (48px) */
+      font-size: 14px; color: var(--primary-400);
+    }
+
+    /* ─── HOW IT WORKS ─── */
+    .how-it-works {
+      background: var(--primary-50);
+      padding: 64px 0;                  /* CHANGED: was py-24 (96px) → py-16 (64px) */
+    }
+    .hiw-inner { max-width: 1400px; margin: 0 auto; padding: 0 48px; }
+    .hiw-tabs {
+      display: flex; justify-content: center; gap: 12px;
+      margin-bottom: 64px;              /* UNCHANGED: mb-16 (64px) */
+    }
+    .hiw-tab { padding: 12px 40px; border-radius: 8px; font-weight: 600; font-size: 14px; border: 1px solid var(--primary-200); background: white; color: var(--primary-600); cursor: pointer; }
+    .hiw-tab.active { background: var(--primary-900); color: white; border-color: var(--primary-900); }
+    .hiw-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .hiw-step { background: white; border: 1px solid var(--primary-200); border-radius: 16px; padding: 32px; }
+    .hiw-step-num { width: 32px; height: 32px; background: var(--primary-900); color: white; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; margin-bottom: 16px; }
+    .hiw-step h4 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+    .hiw-step p { font-size: 14px; color: var(--primary-500); line-height: 1.6; }
+
+    /* ─── BRAND LOGOS ─── */
+    .brand-logos {
+      padding: 64px 0;                  /* CHANGED: was py-24 (96px) → py-16 (64px) */
+    }
+    .bl-inner { max-width: 1400px; margin: 0 auto; padding: 0 48px; }
+    .bl-grid {
+      display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px;
+      margin-bottom: 48px;              /* UNCHANGED: mb-12 (48px) */
+    }
+    .bl-logo { height: 80px; background: var(--primary-50); border: 1px solid var(--primary-200); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 600; color: var(--primary-400); }
+    .bl-cta { text-align: center; }
+    .bl-cta button { padding: 12px 24px; background: var(--primary-50); border: 1px solid var(--primary-200); border-radius: 8px; font-size: 14px; font-weight: 600; color: var(--primary-600); cursor: pointer; font-family: inherit; }
+
+    /* ─── MEDIAZONE ─── */
+    .mediazone {
+      padding: 48px 0;                  /* CHANGED: was py-16 (64px) → py-12 (48px) */
+      border-top: 1px solid var(--primary-200);
+    }
+    .mz-inner { max-width: 1400px; margin: 0 auto; padding: 0 48px; text-align: center; }
+    .mz-text {
+      margin-bottom: 32px;              /* UNCHANGED: mb-8 (32px) */
+    }
+    .mz-chips { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+    .mz-chip { padding: 10px 20px; background: var(--primary-50); border: 1px solid var(--primary-200); border-radius: 8px; font-size: 14px; font-weight: 500; color: var(--primary-600); }
+
+    /* ─── CHANGE LOG ─── */
+    .change-log {
+      max-width: 1000px; margin: 64px auto; padding: 32px 48px;
+      background: #FFFBEB; border: 2px solid #F59E0B; border-radius: 16px;
+    }
+    .change-log h2 { font-size: 24px; font-weight: 800; margin-bottom: 24px; color: #92400E; }
+    .change-log table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .change-log th { text-align: left; padding: 8px 12px; border-bottom: 2px solid #F59E0B; color: #92400E; font-weight: 700; }
+    .change-log td { padding: 8px 12px; border-bottom: 1px solid #FDE68A; }
+    .change-log .old { color: #DC2626; text-decoration: line-through; }
+    .change-log .new { color: #059669; font-weight: 600; }
+  </style>
+</head>
+<body>
+
+  <div class="fold-indicator"></div>
+
+  <!-- CHANGE LOG -->
+  <div class="change-log">
+    <h2>Spacing Change Log — SCRUM-28 (v3 — Section Padding Only)</h2>
+    <p style="margin-bottom: 16px; font-size: 13px; color: #92400E;">
+      <strong>Scope:</strong> Only section outer paddings and hero grid gap are changed. All internal UI element margins remain exactly as they are today.
+    </p>
+    <table>
+      <thead>
+        <tr><th>Section</th><th>Property</th><th>Before</th><th>After</th><th>Savings</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td rowspan="2"><strong>Hero</strong></td>
+          <td>Section padding (desktop)</td>
+          <td class="old">py-28 (112px)</td>
+          <td class="new">py-16 (64px)</td>
+          <td>-48px × 2 = <strong>-96px</strong></td>
+        </tr>
+        <tr>
+          <td>Grid gap (desktop)</td>
+          <td class="old">gap-16 (64px)</td>
+          <td class="new">gap-12 (48px)</td>
+          <td><strong>-16px</strong></td>
+        </tr>
+        <tr>
+          <td><strong>IntegrationStrip</strong></td>
+          <td>Bottom padding</td>
+          <td class="old">pb-12 (48px)</td>
+          <td class="new">pb-8 (32px)</td>
+          <td><strong>-16px</strong></td>
+        </tr>
+        <tr>
+          <td><strong>FeatureTabs</strong></td>
+          <td>Section padding</td>
+          <td class="old">py-24 (96px)</td>
+          <td class="new">py-16 (64px)</td>
+          <td>-32px × 2 = <strong>-64px</strong></td>
+        </tr>
+        <tr>
+          <td><strong>IntegrationCards</strong></td>
+          <td>Section padding</td>
+          <td class="old">py-24 (96px)</td>
+          <td class="new">py-16 (64px)</td>
+          <td>-32px × 2 = <strong>-64px</strong></td>
+        </tr>
+        <tr>
+          <td><strong>HowItWorks</strong></td>
+          <td>Section padding</td>
+          <td class="old">py-24 (96px)</td>
+          <td class="new">py-16 (64px)</td>
+          <td>-32px × 2 = <strong>-64px</strong></td>
+        </tr>
+        <tr>
+          <td><strong>BrandLogos</strong></td>
+          <td>Section padding</td>
+          <td class="old">py-24 (96px)</td>
+          <td class="new">py-16 (64px)</td>
+          <td>-32px × 2 = <strong>-64px</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Mediazone</strong></td>
+          <td>Section padding</td>
+          <td class="old">py-16 (64px)</td>
+          <td class="new">py-12 (48px)</td>
+          <td>-16px × 2 = <strong>-32px</strong></td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="margin-top: 16px; font-size: 13px; color: #92400E;">
+      <strong>Total height savings:</strong> ~400px across the full homepage. All savings come from section padding reductions. No internal UI elements were touched.
+    </p>
+  </div>
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-logo">
+      <div class="header-logo-mark">MZ</div>
+      <span>PARTNERS</span>
+    </div>
+    <div class="header-nav">
+      <a href="#">Ana Sayfa</a>
+      <a href="#">Çözümler ▾</a>
+      <a href="#">İş Ortaklarımız</a>
+      <a href="#">Influencer Başvurusu</a>
+      <button class="header-cta">Demo Talep Et</button>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-grid">
+        <div>
+          <div class="hero-badge">
+            <div class="hero-badge-dot"></div>
+            <span class="hero-badge-text">Türkiye'nin #1 Affiliate Platformu</span>
+          </div>
+          <h1 class="hero-heading">
+            Affiliate Pazarlamanın<br>
+            <span>Yeni Nesil Platformu</span>
+          </h1>
+          <p class="hero-description">
+            Markalar, influencer'lar ve yayıncıları tek platformda buluşturun. 
+            Gerçek zamanlı raporlama, güvenli ödemeler, sıfır manuel iş.
+          </p>
+          <div class="hero-buttons">
+            <button class="btn-primary-hero">Demo Talep Et →</button>
+            <button class="btn-secondary-hero">⊙ Platform Turu</button>
+          </div>
+          <div class="hero-trust">
+            <div class="trust-avatars">
+              <div class="trust-avatar" style="background: linear-gradient(135deg, #F0D060, #D4AF37); margin-left: 0;"></div>
+              <div class="trust-avatar" style="background: linear-gradient(135deg, #94A3B8, #475569);"></div>
+              <div class="trust-avatar" style="background: linear-gradient(135deg, #059669, #059669);"></div>
+            </div>
+            <span class="trust-text">Her gün büyüyen marka ağı</span>
+          </div>
+        </div>
+        <div style="position: relative;">
+          <div class="hero-dashboard">
+            <div class="dashboard-chrome">
+              <div class="chrome-dot" style="background: #EF4444;"></div>
+              <div class="chrome-dot" style="background: #FBBF24;"></div>
+              <div class="chrome-dot" style="background: #22C55E;"></div>
+              <span class="dashboard-label">MDZN Dashboard</span>
+            </div>
+            <div class="stats-row">
+              <div class="stat-card" style="background: var(--primary-50); border-color: var(--primary-100);">
+                <div class="stat-label">E-Commerce</div>
+                <div class="stat-value">₺12,450</div>
+                <div class="stat-trend">↗ +12%</div>
+              </div>
+              <div class="stat-card" style="background: rgba(255,250,204,0.5); border-color: rgba(212,175,55,0.2);">
+                <div class="stat-label">Bounty</div>
+                <div class="stat-value">₺3,280</div>
+                <div class="stat-trend">↗ +8%</div>
+              </div>
+              <div class="stat-card" style="background: rgba(209,250,229,0.5); border-color: var(--success-100);">
+                <div class="stat-label">Mobile</div>
+                <div class="stat-value">₺890</div>
+                <div class="stat-trend">↗ +24%</div>
+              </div>
+            </div>
+            <div class="revenue-card">
+              <div class="revenue-header">
+                <div>
+                  <div class="revenue-label">Affiliate Driven Revenue</div>
+                  <div class="revenue-value">₺128,450</div>
+                </div>
+                <div class="revenue-badge">↗ +18.2%</div>
+              </div>
+              <div class="chart-bars">
+                <div class="chart-bar" style="height: 40%; background: var(--primary-200);"></div>
+                <div class="chart-bar" style="height: 55%; background: var(--primary-200);"></div>
+                <div class="chart-bar" style="height: 45%; background: var(--primary-200);"></div>
+                <div class="chart-bar" style="height: 70%; background: var(--primary-300);"></div>
+                <div class="chart-bar" style="height: 85%; background: var(--primary-300);"></div>
+                <div class="chart-bar" style="height: 60%; background: var(--primary-300);"></div>
+                <div class="chart-bar" style="height: 75%; background: var(--primary-400);"></div>
+                <div class="chart-bar" style="height: 90%; background: var(--primary-400);"></div>
+                <div class="chart-bar" style="height: 80%; background: var(--primary-500);"></div>
+                <div class="chart-bar" style="height: 100%; background: var(--primary-900);"></div>
+                <div class="chart-bar" style="height: 70%; background: var(--primary-400);"></div>
+                <div class="chart-bar" style="height: 85%; background: var(--primary-300);"></div>
+              </div>
+            </div>
+          </div>
+          <div class="floating-notification">
+            <div class="notif-icon">✓</div>
+            <div>
+              <div class="notif-title">Yeni Satış!</div>
+              <div class="notif-sub">₺245 komisyon kazanıldı</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTEGRATION STRIP -->
+  <div class="integration-strip">
+    <div class="integration-content">
+      <div class="integration-row">
+        <span class="overline-label">Hazır Entegrasyonlar</span>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;">
+          <div class="integration-chip">İkas</div>
+          <div class="integration-chip">Shopify</div>
+          <div class="integration-chip">Ticimax</div>
+          <div class="integration-chip">Adjust</div>
+          <div class="integration-chip">Appsflyer</div>
+        </div>
+      </div>
+      <div class="integration-row">
+        <span class="overline-label">Özel Entegrasyonlar</span>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;">
+          <div class="custom-chip"><span class="custom-chip-icon">⟨/⟩</span> Hızlı SDK</div>
+          <div class="custom-chip"><span class="custom-chip-icon">⚡</span> API</div>
+          <div class="custom-chip"><span class="custom-chip-icon">📊</span> Excel</div>
+        </div>
+      </div>
+      <div class="compliance-row">
+        <span class="compliance-badge" style="background: var(--success-100); color: var(--success-600);">🛡 KVKK Uyumlu</span>
+        <span class="compliance-badge" style="background: var(--info-100); color: var(--info-600);">🌐 GDPR Compliant</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURE TABS -->
+  <section class="feature-tabs">
+    <div class="feature-tabs-inner">
+      <div class="section-heading">
+        <div class="section-overline">Çözümler</div>
+        <h2 class="section-title">Tüm İhtiyaçlarınız İçin<br>Tek Platform</h2>
+      </div>
+      <div class="feature-grid-placeholder">
+        <div class="feature-sidebar">
+          <div class="feature-tab active">E-Commerce</div>
+          <div class="feature-tab">Influencer</div>
+          <div class="feature-tab">Bounty</div>
+          <div class="feature-tab">Mobile</div>
+        </div>
+        <div class="feature-content">Feature content area (min-height: 640px — unchanged)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTEGRATION CARDS -->
+  <section class="integration-cards">
+    <div class="integration-cards-inner">
+      <div class="ic-heading">
+        <div class="section-overline">Entegrasyonlar</div>
+        <h2 class="section-title">Hızlı Kurulum,<br>Güçlü Entegrasyon</h2>
+      </div>
+      <div class="ic-grid">
+        <div class="ic-card"><div class="ic-card-icon">⟨/⟩</div><h4>Hızlı SDK</h4><p>Birkaç satır kod ile entegrasyonunuzu tamamlayın.</p></div>
+        <div class="ic-card"><div class="ic-card-icon">⚡</div><h4>REST API</h4><p>Tam kontrol için güçlü API endpoints.</p></div>
+        <div class="ic-card"><div class="ic-card-icon">📊</div><h4>Excel Import</h4><p>Toplu veri aktarımı için Excel desteği.</p></div>
+      </div>
+      <div class="ic-bottom">Ve 10+ daha fazla entegrasyon →</div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how-it-works">
+    <div class="hiw-inner">
+      <div class="section-heading">
+        <div class="section-overline">Nasıl Çalışır</div>
+        <h2 class="section-title">3 Adımda Başlayın</h2>
+      </div>
+      <div class="hiw-tabs">
+        <div class="hiw-tab active">Markalar</div>
+        <div class="hiw-tab">Influencerlar</div>
+      </div>
+      <div class="hiw-steps">
+        <div class="hiw-step"><div class="hiw-step-num">1</div><h4>Kaydolun</h4><p>Hızlı kayıt ile platformumuza katılın.</p></div>
+        <div class="hiw-step"><div class="hiw-step-num">2</div><h4>Entegre Edin</h4><p>Mağazanızı birkaç adımda bağlayın.</p></div>
+        <div class="hiw-step"><div class="hiw-step-num">3</div><h4>Kazanmaya Başlayın</h4><p>Gerçek zamanlı raporlarla büyümenizi izleyin.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BRAND LOGOS -->
+  <section class="brand-logos">
+    <div class="bl-inner">
+      <div class="section-heading">
+        <div class="section-overline">İş Ortakları</div>
+        <h2 class="section-title">Güvenilen Markalar</h2>
+      </div>
+      <div class="bl-grid">
+        <div class="bl-logo">Marka 1</div><div class="bl-logo">Marka 2</div><div class="bl-logo">Marka 3</div>
+        <div class="bl-logo">Marka 4</div><div class="bl-logo">Marka 5</div><div class="bl-logo">Marka 6</div>
+      </div>
+      <div class="bl-cta"><button>Tüm Markaları Gör →</button></div>
+    </div>
+  </section>
+
+  <!-- MEDIAZONE -->
+  <section class="mediazone">
+    <div class="mz-inner">
+      <div class="mz-text">
+        <div class="section-overline">Mediazone Ağı</div>
+        <p style="font-size: 16px; color: var(--primary-500);">Türkiye'nin en büyük dijital medya ağının gücünden faydalanın</p>
+      </div>
+      <div class="mz-chips">
+        <div class="mz-chip">Milliyet</div><div class="mz-chip">Hürriyet</div><div class="mz-chip">NTV</div>
+        <div class="mz-chip">Sabah</div><div class="mz-chip">Star</div>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

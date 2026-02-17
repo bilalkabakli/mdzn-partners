@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import AboutHero from "@/components/about/AboutHero";
 import MediazoneStats from "@/components/about/MediazoneStats";
+import TeamSection from "@/components/about/TeamSection";
 import MediazoneFamily from "@/components/about/MediazoneFamily";
 import OfficeLocations from "@/components/about/OfficeLocations";
 import AboutCTA from "@/components/about/AboutCTA";
@@ -20,6 +21,7 @@ export default function AboutPage() {
       <main id="main-content">
         <AboutHero />
         <MediazoneStats />
+        <TeamSection />
         <MediazoneFamily />
         <OfficeLocations />
         <AboutCTA />

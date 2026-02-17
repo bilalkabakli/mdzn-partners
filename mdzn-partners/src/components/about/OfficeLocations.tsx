@@ -1,4 +1,7 @@
+"use client";
+
 import { Building2, FlaskConical } from "lucide-react";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const offices = [
   {
@@ -22,9 +25,16 @@ const offices = [
 ];
 
 export default function OfficeLocations() {
+  const { ref, isVisible } = useScrollReveal();
+
   return (
     <section className="py-16">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div
+        ref={ref}
+        className={`max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-700 ${
+          isVisible ? "animate-fade-in-up" : "opacity-0 translate-y-6"
+        }`}
+      >
         <h2 className="text-3xl md:text-4xl font-bold tracking-[-0.5px] text-center text-primary-900 mb-12">
           Ofislerimiz
         </h2>

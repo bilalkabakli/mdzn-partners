@@ -1,0 +1,6 @@
+
+# Secrets
+.mcp.json
+scripts/
+.claude/agent-logs/
+.DS_Store

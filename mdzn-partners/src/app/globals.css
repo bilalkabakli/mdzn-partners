@@ -315,6 +315,123 @@ select:focus {
 }
 
 /* ========================================
+   FLOATING LABEL FORM
+   ======================================== */
+.input-wrapper {
+  position: relative;
+}
+
+.floating-label {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 15px;
+  font-weight: 400;
+  color: #94A3B8;
+  pointer-events: none;
+  transition: all 200ms ease;
+  transform-origin: left top;
+  background: transparent;
+  padding: 0;
+  z-index: 1;
+  line-height: 1;
+}
+
+.floating-label .required-star {
+  color: #DC2626;
+  margin-left: 2px;
+  font-weight: 500;
+}
+
+.input-wrapper.focused .floating-label,
+.input-wrapper.filled .floating-label {
+  top: 8px;
+  transform: translateY(0);
+  font-size: 11px;
+  font-weight: 500;
+  color: #64748B;
+}
+
+.input-wrapper.focused .floating-label {
+  color: #D4AF37;
+}
+
+.fl-input,
+.fl-select,
+.fl-textarea {
+  width: 100%;
+  padding: 24px 16px 8px;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: inherit;
+  color: #0F172A;
+  background: #FFFFFF;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 8px;
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.fl-input::placeholder,
+.fl-textarea::placeholder {
+  color: transparent;
+}
+
+.input-wrapper.focused .fl-input::placeholder,
+.input-wrapper.focused .fl-textarea::placeholder {
+  color: #94A3B8;
+}
+
+.fl-input:hover,
+.fl-select:hover,
+.fl-textarea:hover {
+  border-color: #CBD5E1;
+}
+
+.fl-input:focus,
+.fl-select:focus,
+.fl-textarea:focus {
+  outline: none;
+  border-color: #D4AF37;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+}
+
+.fl-select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 40px;
+}
+
+.select-wrapper .floating-label {
+  top: 8px;
+  transform: translateY(0);
+  font-size: 11px;
+  font-weight: 500;
+  color: #64748B;
+}
+
+.fl-textarea {
+  min-height: 120px;
+  resize: vertical;
+  padding-top: 32px;
+}
+
+.textarea-wrapper .floating-label {
+  top: 16px;
+  transform: translateY(0);
+}
+
+.textarea-wrapper.focused .floating-label,
+.textarea-wrapper.filled .floating-label {
+  top: 8px;
+  font-size: 11px;
+}
+
+/* ========================================
    OVERLINE TEXT
    ======================================== */
 .overline {
@@ -334,6 +451,29 @@ select:focus {
 
 .animate-fade-in {
   animation: fadeIn 0.6s ease forwards;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes gentleFloat {

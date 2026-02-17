@@ -1,4 +1,7 @@
+"use client";
+
 import { Settings } from "lucide-react";
+import { useScrollReveal } from "../hooks/useScrollReveal";
 
 const integrations = [
   { name: "İkas", letter: "İ", bgColor: "bg-indigo-100", textColor: "text-indigo-600", desc: "E-ticaret altyapınızı bağlayın, satışları anında takip edin.", ready: true },
@@ -9,8 +12,15 @@ const integrations = [
 ];
 
 export default function IntegrationCards() {
+  const { ref, isVisible } = useScrollReveal();
+
   return (
-    <section className="py-16">
+    <section
+      ref={ref}
+      className={`py-16 transition-all duration-700 ease-out ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+      }`}
+    >
       <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
         <div className="text-center mb-20">
           <h2 className="text-4xl lg:text-5xl font-extrabold tracking-[-1px] mb-4">

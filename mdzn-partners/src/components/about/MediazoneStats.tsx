@@ -1,3 +1,7 @@
+"use client";
+
+import { useScrollReveal } from "@/hooks/useScrollReveal";
+
 const stats = [
   { value: "60M", label: "Unique Visitors" },
   { value: "500+", label: "Direct Advertisers" },
@@ -6,10 +10,17 @@ const stats = [
 ];
 
 export default function MediazoneStats() {
+  const { ref, isVisible } = useScrollReveal();
+
   return (
     <section className="py-16">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-gradient-to-br from-primary-900 to-primary-800 rounded-3xl p-10 relative overflow-hidden">
+        <div
+          ref={ref}
+          className={`bg-gradient-to-br from-primary-900 to-primary-800 rounded-3xl p-10 relative overflow-hidden transition-all duration-700 ${
+            isVisible ? "animate-fade-in-up" : "opacity-0 translate-y-6"
+          }`}
+        >
           {/* Decorative elements */}
           <div
             className="absolute top-0 right-0 w-64 h-64 bg-accent-600/10 rounded-full blur-3xl"

@@ -11,6 +11,7 @@ import {
   Check,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { useScrollReveal } from "../../hooks/useScrollReveal";
 
 interface FeatureTab {
   icon: LucideIcon;
@@ -245,9 +246,16 @@ const tabs: FeatureTab[] = [
 
 export default function BrandsFeatures() {
   const [activeTab, setActiveTab] = useState(0);
+  const { ref, isVisible } = useScrollReveal();
 
   return (
-    <section className="py-16 bg-white">
+    <section
+      id="brands-features"
+      ref={ref}
+      className={`py-16 bg-white transition-all duration-700 ease-out ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+      }`}
+    >
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
         {/* Section Header */}
         <div className="text-center mb-16">

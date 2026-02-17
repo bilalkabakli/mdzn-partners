@@ -2,6 +2,7 @@
 
 import { Check, ArrowRight } from "lucide-react";
 import { useModal } from "../ModalContext";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const benefits = [
   "Tüm influencer\u2019ları tek panelde yönetin",
@@ -12,10 +13,16 @@ const benefits = [
 
 export default function AgenciesCTA() {
   const { openModal } = useModal();
+  const { ref, isVisible } = useScrollReveal();
 
   return (
     <section className="py-16 bg-primary-900">
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+      <div
+        ref={ref}
+        className={`max-w-[1400px] mx-auto px-6 lg:px-12 transition-all duration-700 ${
+          isVisible ? "animate-fade-in-up" : "opacity-0 translate-y-6"
+        }`}
+      >
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left Content */}
           <div>

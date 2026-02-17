@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import AgenciesHero from "@/components/agencies/AgenciesHero";
 import AgenciesFeatures from "@/components/agencies/AgenciesFeatures";
+import AgenciesBenefits from "@/components/agencies/AgenciesBenefits";
 import AgenciesCTA from "@/components/agencies/AgenciesCTA";
 
 export const metadata: Metadata = {
@@ -18,6 +19,7 @@ export default function AgenciesPage() {
       <main id="main-content">
         <AgenciesHero />
         <AgenciesFeatures />
+        <AgenciesBenefits />
         <AgenciesCTA />
       </main>
       <Footer />

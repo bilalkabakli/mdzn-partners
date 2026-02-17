@@ -2,13 +2,18 @@
 
 import { ArrowRight, Phone } from "lucide-react";
 import { useModal } from "../ModalContext";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 export default function ContactCTA() {
   const { openModal } = useModal();
+  const { ref, isVisible } = useScrollReveal();
 
   return (
     <section className="py-16">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div
+        ref={ref}
+        className={`max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-700 ${isVisible ? "animate-fade-in-up" : "opacity-0 translate-y-6"}`}
+      >
         <div className="bg-gradient-to-br from-primary-900 to-primary-800 rounded-[20px] p-12 text-center relative overflow-hidden">
           {/* Decorative gold blur orbs */}
           <div className="absolute top-0 right-0 w-64 h-64 bg-accent-600/10 rounded-full blur-3xl" />
@@ -31,10 +36,13 @@ export default function ContactCTA() {
                 Aramıza Katıl
                 <ArrowRight className="w-5 h-5" />
               </button>
-              <button className="bg-white/10 hover:bg-white/20 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-200 border border-white/20 flex items-center justify-center gap-2">
+              <a
+                href="tel:+902121234567"
+                className="bg-white/10 hover:bg-white/20 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-200 border border-white/20 flex items-center justify-center gap-2"
+              >
                 <Phone className="w-5 h-5" />
                 Bizi Arayın
-              </button>
+              </a>
             </div>
           </div>
         </div>

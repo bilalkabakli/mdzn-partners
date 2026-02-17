@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { useModal } from "./ModalContext";
 
@@ -8,6 +9,22 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { openModal } = useModal();
+  const pathname = usePathname();
+
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
+
+  const isSolutionsActive =
+    isActive("/markalar-icin") ||
+    isActive("/influencerlar-icin") ||
+    isActive("/ajanslar-icin");
+
+  const navLinkClass = (href: string) =>
+    `relative text-sm font-medium transition-colors duration-150 pb-[26px] mb-[-26px] ${
+      isActive(href)
+        ? "text-accent-700 after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-accent-600"
+        : "text-primary-600 hover:text-accent-700 active:text-accent-800"
+    }`;
 
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-primary-200">
@@ -35,13 +52,21 @@ export default function Header() {
             >
               <a
                 href="/"
-                className="text-sm font-medium text-primary-900 hover:text-accent-700 active:text-accent-800 transition-colors duration-150"
+                className={`relative text-sm font-medium transition-colors duration-150 pb-[26px] mb-[-26px] ${
+                  isActive("/")
+                    ? "text-accent-700 after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-accent-600"
+                    : "text-primary-900 hover:text-accent-700 active:text-accent-800"
+                }`}
               >
                 Ana Sayfa
               </a>
               <div className="relative group">
                 <button
-                  className="flex items-center gap-1 text-sm font-medium text-primary-600 hover:text-accent-700 active:text-accent-800 transition-colors duration-150"
+                  className={`relative flex items-center gap-1 text-sm font-medium transition-colors duration-150 pb-[26px] mb-[-26px] ${
+                    isSolutionsActive
+                      ? "text-accent-700 after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-accent-600"
+                      : "text-primary-600 hover:text-accent-700 active:text-accent-800"
+                  }`}
                   aria-expanded={dropdownOpen}
                   aria-haspopup="true"
                   onMouseEnter={() => setDropdownOpen(true)}
@@ -63,32 +88,47 @@ export default function Header() {
                 >
                   <a
                     href="/markalar-icin"
-                    className="block px-4 py-2.5 text-sm text-primary-600 hover:text-accent-700 hover:bg-accent-100 active:bg-accent-200 transition-colors duration-150"
+                    className={`block px-4 py-2.5 text-sm transition-colors duration-150 ${
+                      isActive("/markalar-icin")
+                        ? "text-accent-700 bg-accent-100"
+                        : "text-primary-600 hover:text-accent-700 hover:bg-accent-100 active:bg-accent-200"
+                    }`}
                     role="menuitem"
                   >
                     Markalar İçin
                   </a>
                   <a
                     href="/influencerlar-icin"
-                    className="block px-4 py-2.5 text-sm text-primary-600 hover:text-accent-700 hover:bg-accent-100 active:bg-accent-200 transition-colors duration-150"
+                    className={`block px-4 py-2.5 text-sm transition-colors duration-150 ${
+                      isActive("/influencerlar-icin")
+                        ? "text-accent-700 bg-accent-100"
+                        : "text-primary-600 hover:text-accent-700 hover:bg-accent-100 active:bg-accent-200"
+                    }`}
                     role="menuitem"
                   >
                     Influencer&apos;lar İçin
                   </a>
                   <a
                     href="/ajanslar-icin"
-                    className="block px-4 py-2.5 text-sm text-primary-600 hover:text-accent-700 hover:bg-accent-100 active:bg-accent-200 transition-colors duration-150"
+                    className={`block px-4 py-2.5 text-sm transition-colors duration-150 ${
+                      isActive("/ajanslar-icin")
+                        ? "text-accent-700 bg-accent-100"
+                        : "text-primary-600 hover:text-accent-700 hover:bg-accent-100 active:bg-accent-200"
+                    }`}
                     role="menuitem"
                   >
                     Ajanslar İçin
                   </a>
                 </div>
               </div>
-              <a
-                href="/is-ortaklari"
-                className="text-sm font-medium text-primary-600 hover:text-accent-700 active:text-accent-800 transition-colors duration-150"
-              >
+              <a href="/is-ortaklari" className={navLinkClass("/is-ortaklari")}>
                 İş Ortaklarımız
+              </a>
+              <a href="/hakkimizda" className={navLinkClass("/hakkimizda")}>
+                Hakkımızda
+              </a>
+              <a href="/iletisim" className={navLinkClass("/iletisim")}>
+                İletişim
               </a>
             </nav>
           </div>
@@ -121,33 +161,59 @@ export default function Header() {
           <div className="lg:hidden border-t border-primary-200 py-4 space-y-3">
             <a
               href="/"
-              className="block py-2 text-sm font-medium text-primary-900"
+              className={`block py-2 text-sm font-medium ${
+                isActive("/") ? "text-accent-700" : "text-primary-900"
+              }`}
             >
               Ana Sayfa
             </a>
             <a
               href="/markalar-icin"
-              className="block py-2 text-sm font-medium text-primary-600"
+              className={`block py-2 text-sm font-medium ${
+                isActive("/markalar-icin") ? "text-accent-700" : "text-primary-600"
+              }`}
             >
               Markalar İçin
             </a>
             <a
               href="/influencerlar-icin"
-              className="block py-2 text-sm font-medium text-primary-600"
+              className={`block py-2 text-sm font-medium ${
+                isActive("/influencerlar-icin") ? "text-accent-700" : "text-primary-600"
+              }`}
             >
               Influencer&apos;lar İçin
             </a>
             <a
               href="/ajanslar-icin"
-              className="block py-2 text-sm font-medium text-primary-600"
+              className={`block py-2 text-sm font-medium ${
+                isActive("/ajanslar-icin") ? "text-accent-700" : "text-primary-600"
+              }`}
             >
               Ajanslar İçin
             </a>
             <a
               href="/is-ortaklari"
-              className="block py-2 text-sm font-medium text-primary-600"
+              className={`block py-2 text-sm font-medium ${
+                isActive("/is-ortaklari") ? "text-accent-700" : "text-primary-600"
+              }`}
             >
               İş Ortaklarımız
+            </a>
+            <a
+              href="/hakkimizda"
+              className={`block py-2 text-sm font-medium ${
+                isActive("/hakkimizda") ? "text-accent-700" : "text-primary-600"
+              }`}
+            >
+              Hakkımızda
+            </a>
+            <a
+              href="/iletisim"
+              className={`block py-2 text-sm font-medium ${
+                isActive("/iletisim") ? "text-accent-700" : "text-primary-600"
+              }`}
+            >
+              İletişim
             </a>
             <button
               className="btn-primary w-full h-11 rounded-lg text-sm font-semibold mt-4"

@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SCRUM-58 Design — Influencer'lar İçin (Hero Differentiation Fix)</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              900: '#0F172A', 800: '#1E293B', 700: '#334155', 600: '#475569',
+              500: '#64748B', 400: '#94A3B8', 300: '#CBD5E1', 200: '#E2E8F0',
+              100: '#F1F5F9', 50: '#F8FAFC',
+            },
+            accent: {
+              900: '#7A5C0A', 800: '#9A7B1A', 700: '#BA9A2A', 600: '#D4AF37',
+              500: '#E4C04A', 400: '#F0D060', 300: '#F8E080', 200: '#FCF0A0', 100: '#FFFACC',
+            },
+            success: { 600: '#059669', 100: '#D1FAE5' },
+            warning: { 600: '#D97706', 100: '#FEF3C7' },
+            error: { 600: '#DC2626', 100: '#FEE2E2' },
+            info: { 600: '#0284C7', 100: '#E0F2FE' },
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    * { font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif; }
+    :root {
+      --transition-fast: 150ms ease;
+      --transition-base: 200ms ease;
+      --transition-slow: 300ms ease;
+    }
+
+    .btn-accent {
+      background: #D4AF37;
+      color: #0F172A;
+      transition: var(--transition-base);
+    }
+    .btn-accent:hover { background: #BA9A2A; }
+
+    .btn-primary {
+      background: #0F172A;
+      color: #FFFFFF;
+      transition: var(--transition-base);
+    }
+    .btn-primary:hover { background: #1E293B; }
+
+    /* Glass card */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+    }
+
+    /* Annotation labels */
+    .annotation {
+      position: absolute;
+      background: #DC2626;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      white-space: nowrap;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(220, 38, 38, 0.4);
+      letter-spacing: 0.3px;
+      line-height: 1.4;
+    }
+    .annotation::after {
+      content: '';
+      position: absolute;
+      width: 0; height: 0;
+    }
+    .annotation--bottom::after {
+      top: 100%; left: 16px;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 6px solid #DC2626;
+    }
+    .annotation--top::after {
+      bottom: 100%; left: 16px;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-bottom: 6px solid #DC2626;
+    }
+    .annotation--left::after {
+      top: 50%; right: 100%; transform: translateY(-50%);
+      border-top: 6px solid transparent;
+      border-bottom: 6px solid transparent;
+      border-right: 6px solid #DC2626;
+    }
+    .annotation--right::after {
+      top: 50%; left: 100%; transform: translateY(-50%);
+      border-top: 6px solid transparent;
+      border-bottom: 6px solid transparent;
+      border-left: 6px solid #DC2626;
+    }
+
+    .overline {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #F8FAFC; }
+    ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+  </style>
+</head>
+
+<body class="bg-white text-primary-900">
+
+  <!-- ============================================ -->
+  <!-- DESIGN SPEC BANNER -->
+  <!-- ============================================ -->
+  <div class="bg-red-600 text-white py-3 px-6 text-center text-sm font-semibold sticky top-0 z-[200]">
+    SCRUM-58 DESIGN SPEC — Influencer'lar İçin (/influencerlar-icin) — Hero Differentiation: 3 Vertical Stat Rows (CRITICAL FIX)
+  </div>
+
+  <!-- ============================================ -->
+  <!-- HEADER (unchanged — shown for context) -->
+  <!-- ============================================ -->
+  <header class="sticky top-[40px] z-50 bg-white border-b border-primary-200">
+    <div class="max-w-[1400px] mx-auto px-6 lg:px-12">
+      <div class="flex justify-between items-center h-[72px]">
+        <a href="#" class="flex items-center gap-3 group">
+          <div class="w-9 h-9 border border-primary-900 rounded-md flex flex-col items-center justify-center group-hover:bg-primary-900 transition-colors">
+            <span class="text-[9px] font-extrabold leading-none group-hover:text-white transition-colors">MD</span>
+            <span class="text-[9px] font-extrabold leading-none group-hover:text-white transition-colors">ZN</span>
+          </div>
+          <span class="text-sm font-bold tracking-[1px]">PARTNERS</span>
+        </a>
+        <nav class="hidden lg:flex items-center gap-8">
+          <a href="#" class="text-sm font-medium text-primary-600 hover:text-primary-900 transition-colors">Ana Sayfa</a>
+          <a href="#" class="text-sm font-medium text-primary-600 hover:text-primary-900 transition-colors">Markalar İçin</a>
+          <a href="#" class="text-sm font-medium text-primary-900 font-bold">Influencer'lar İçin</a>
+          <a href="#" class="text-sm font-medium text-primary-600 hover:text-primary-900 transition-colors">İş Ortaklarımız</a>
+        </nav>
+        <button class="hidden lg:flex btn-primary h-11 px-6 rounded-lg text-sm font-semibold items-center gap-2">
+          Demo Talep Et
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================ -->
+  <!-- HERO SECTION — CORRECTED INFLUENCER DESIGN -->
+  <!-- ============================================ -->
+  <section class="relative bg-primary-900 overflow-hidden">
+    <!-- Decorative blur circles -->
+    <div class="absolute top-[20%] left-[5%] w-[300px] h-[300px] bg-accent-600/10 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-[10%] right-[10%] w-[400px] h-[400px] bg-primary-700/30 rounded-full blur-3xl"></div>
+
+    <div class="relative max-w-[1400px] mx-auto px-6 lg:px-12 py-12 lg:py-16">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+        <!-- Left Content -->
+        <div>
+          <!-- Badge -->
+          <div class="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur rounded-full mb-8">
+            <span class="w-2 h-2 bg-accent-500 rounded-full animate-pulse"></span>
+            <span class="text-sm font-medium text-white/90">Influencer'lar İçin</span>
+          </div>
+
+          <!-- Heading -->
+          <h1 class="text-4xl lg:text-5xl font-extrabold leading-[1.1] mb-6 text-white" style="letter-spacing: -2px;">
+            İçeriklerinizi<br>
+            <span class="text-primary-300">Gelire Dönüştürün</span>
+          </h1>
+
+          <p class="text-lg text-primary-300 mb-10 max-w-lg leading-relaxed">
+            Türkiye'nin önde gelen markalarıyla çalışın. Şeffaf takip, adil komisyon, güvenli ödeme.
+          </p>
+
+          <!-- CTAs -->
+          <div class="relative flex flex-wrap gap-4">
+            <div class="relative">
+              <span class="annotation annotation--bottom" style="top: -32px; left: 0;">
+                CORRECT: Accent button (not white!)
+              </span>
+              <button class="btn-accent h-14 px-8 rounded-lg text-base font-semibold flex items-center gap-2 group">
+                Aramıza Katıl
+                <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+              </button>
+            </div>
+            <button class="h-14 px-8 rounded-lg text-base font-semibold flex items-center gap-2 bg-white/10 text-white border border-white/20 hover:bg-white/20 transition-colors">
+              <i data-lucide="play-circle" class="w-5 h-5"></i>
+              Nasıl Çalışır?
+            </button>
+          </div>
+        </div>
+
+        <!-- Right: 3 VERTICAL STAT ROWS (CRITICAL FIX) -->
+        <div class="relative">
+          <span class="annotation annotation--bottom" style="top: -36px; left: 8px;">
+            CRITICAL FIX: 3 stacked rows with space-y-4 (NOT 2x2 grid!)
+          </span>
+
+          <div class="glass-card p-6">
+            <div class="space-y-4">
+
+              <!-- Row 1: Bu Ay Kazanç -->
+              <div class="relative">
+                <span class="annotation annotation--right" style="right: -200px; top: 50%; transform: translateY(-50%);">
+                  Row 1: TrendingUp + success-600
+                </span>
+                <div class="bg-white/10 p-5 rounded-xl flex justify-between items-center">
+                  <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-success-600/20 rounded-lg flex items-center justify-center">
+                      <i data-lucide="trending-up" class="w-5 h-5 text-success-600"></i>
+                    </div>
+                    <span class="text-white/80 text-sm font-medium">Bu Ay Kazanç</span>
+                  </div>
+                  <span class="text-2xl font-bold text-white">₺8,450</span>
+                </div>
+              </div>
+
+              <!-- Row 2: Toplam Sipariş -->
+              <div class="relative">
+                <span class="annotation annotation--right" style="right: -200px; top: 50%; transform: translateY(-50%);">
+                  Row 2: ShoppingBag icon
+                </span>
+                <div class="bg-white/10 p-5 rounded-xl flex justify-between items-center">
+                  <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center">
+                      <i data-lucide="shopping-bag" class="w-5 h-5 text-white/70"></i>
+                    </div>
+                    <span class="text-white/80 text-sm font-medium">Toplam Sipariş</span>
+                  </div>
+                  <span class="text-2xl font-bold text-white">127</span>
+                </div>
+              </div>
+
+              <!-- Row 3: Aktif Kampanya -->
+              <div class="relative">
+                <span class="annotation annotation--right" style="right: -200px; top: 50%; transform: translateY(-50%);">
+                  Row 3: Megaphone + accent-600
+                </span>
+                <div class="bg-white/10 p-5 rounded-xl flex justify-between items-center">
+                  <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-accent-600/20 rounded-lg flex items-center justify-center">
+                      <i data-lucide="megaphone" class="w-5 h-5 text-accent-600"></i>
+                    </div>
+                    <span class="text-white/80 text-sm font-medium">Aktif Kampanya</span>
+                  </div>
+                  <span class="text-2xl font-bold text-white">8</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- SIDE-BY-SIDE COMPARISON: Wrong vs Correct -->
+  <!-- ============================================ -->
+  <section class="py-12 bg-white border-b border-primary-200">
+    <div class="max-w-[1200px] mx-auto px-6">
+      <div class="text-center mb-10">
+        <h2 class="text-2xl font-extrabold text-red-600 flex items-center justify-center gap-3">
+          <i data-lucide="alert-triangle" class="w-6 h-6"></i>
+          Implementation Bug Reference
+        </h2>
+        <p class="text-primary-500 text-sm mt-2">The current implementation incorrectly uses a 2x2 grid. Here is the comparison:</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <!-- WRONG: Current implementation -->
+        <div class="border-2 border-red-300 rounded-2xl p-6 bg-red-50/50">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-6 h-6 bg-red-600 rounded-full flex items-center justify-center">
+              <i data-lucide="x" class="w-4 h-4 text-white"></i>
+            </div>
+            <span class="text-red-700 font-bold text-sm">WRONG — Current Implementation (2x2 grid)</span>
+          </div>
+          <div class="bg-primary-900 rounded-xl p-4">
+            <div class="bg-white/5 border border-white/10 rounded-xl p-4">
+              <div class="grid grid-cols-2 gap-3">
+                <div class="bg-white/10 p-3 rounded-lg text-center">
+                  <p class="text-lg font-bold text-white">₺8,450</p>
+                  <p class="text-[10px] text-white/50">Bu Ay Kazanç</p>
+                </div>
+                <div class="bg-white/10 p-3 rounded-lg text-center">
+                  <p class="text-lg font-bold text-white">127</p>
+                  <p class="text-[10px] text-white/50">Toplam Sipariş</p>
+                </div>
+                <div class="bg-white/10 p-3 rounded-lg text-center">
+                  <p class="text-lg font-bold text-white">8</p>
+                  <p class="text-[10px] text-white/50">Aktif Kampanya</p>
+                </div>
+                <div class="bg-white/10 p-3 rounded-lg text-center">
+                  <p class="text-lg font-bold text-white">%2.4</p>
+                  <p class="text-[10px] text-white/50">Dönüşüm Oranı</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="text-red-600 text-xs mt-3 font-medium">grid-cols-2 gap-3 → identical to Brands/Ajanslar pages</p>
+        </div>
+
+        <!-- CORRECT: Design spec -->
+        <div class="border-2 border-success-600 rounded-2xl p-6 bg-green-50/50">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-6 h-6 bg-success-600 rounded-full flex items-center justify-center">
+              <i data-lucide="check" class="w-4 h-4 text-white"></i>
+            </div>
+            <span class="text-green-800 font-bold text-sm">CORRECT — Design Spec (3 vertical rows)</span>
+          </div>
+          <div class="bg-primary-900 rounded-xl p-4">
+            <div class="bg-white/5 border border-white/10 rounded-xl p-4">
+              <div class="space-y-3">
+                <div class="bg-white/10 p-3 rounded-lg flex justify-between items-center">
+                  <div class="flex items-center gap-2">
+                    <div class="w-7 h-7 bg-success-600/20 rounded-md flex items-center justify-center">
+                      <i data-lucide="trending-up" class="w-3.5 h-3.5 text-success-600"></i>
+                    </div>
+                    <span class="text-white/70 text-xs">Bu Ay Kazanç</span>
+                  </div>
+                  <span class="text-lg font-bold text-white">₺8,450</span>
+                </div>
+                <div class="bg-white/10 p-3 rounded-lg flex justify-between items-center">
+                  <div class="flex items-center gap-2">
+                    <div class="w-7 h-7 bg-white/10 rounded-md flex items-center justify-center">
+                      <i data-lucide="shopping-bag" class="w-3.5 h-3.5 text-white/60"></i>
+                    </div>
+                    <span class="text-white/70 text-xs">Toplam Sipariş</span>
+                  </div>
+                  <span class="text-lg font-bold text-white">127</span>
+                </div>
+                <div class="bg-white/10 p-3 rounded-lg flex justify-between items-center">
+                  <div class="flex items-center gap-2">
+                    <div class="w-7 h-7 bg-accent-600/20 rounded-md flex items-center justify-center">
+                      <i data-lucide="megaphone" class="w-3.5 h-3.5 text-accent-600"></i>
+                    </div>
+                    <span class="text-white/70 text-xs">Aktif Kampanya</span>
+                  </div>
+                  <span class="text-lg font-bold text-white">8</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="text-green-700 text-xs mt-3 font-medium">space-y-4, flex justify-between → unique Influencer layout</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- FEATURES SECTION (Brief) -->
+  <!-- ============================================ -->
+  <section class="relative py-16 bg-white">
+    <span class="annotation" style="position: absolute; top: 16px; right: 24px;">
+      scroll-reveal on viewport entry
+    </span>
+    <div class="max-w-[1400px] mx-auto px-6 lg:px-12">
+      <div class="text-center mb-12">
+        <span class="overline text-accent-600 mb-4 inline-block">Avantajlar</span>
+        <h2 class="text-3xl lg:text-4xl font-bold tracking-[-1px]">Neden MDZN Partners?</h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-primary-50 rounded-2xl p-6 border border-primary-100">
+          <div class="w-10 h-10 bg-accent-100 rounded-lg flex items-center justify-center mb-3">
+            <i data-lucide="bar-chart-3" class="w-5 h-5 text-accent-700"></i>
+          </div>
+          <h3 class="font-bold mb-1">Anlık Performans</h3>
+          <p class="text-primary-500 text-sm">Tıklama, satış, kazanç — gerçek zamanlı takip</p>
+        </div>
+        <div class="bg-primary-50 rounded-2xl p-6 border border-primary-100">
+          <div class="w-10 h-10 bg-accent-100 rounded-lg flex items-center justify-center mb-3">
+            <i data-lucide="building-2" class="w-5 h-5 text-accent-700"></i>
+          </div>
+          <h3 class="font-bold mb-1">Güvenilir Markalar</h3>
+          <p class="text-primary-500 text-sm">Onaylı marka havuzu, güvenli ödeme garantisi</p>
+        </div>
+        <div class="bg-primary-50 rounded-2xl p-6 border border-primary-100">
+          <div class="w-10 h-10 bg-accent-100 rounded-lg flex items-center justify-center mb-3">
+            <i data-lucide="credit-card" class="w-5 h-5 text-accent-700"></i>
+          </div>
+          <h3 class="font-bold mb-1">Şeffaf Komisyon</h3>
+          <p class="text-primary-500 text-sm">Önceden belli oranlar, zamanında ödeme</p>
+        </div>
+        <div class="bg-primary-50 rounded-2xl p-6 border border-primary-100">
+          <div class="w-10 h-10 bg-accent-100 rounded-lg flex items-center justify-center mb-3">
+            <i data-lucide="link-2" class="w-5 h-5 text-accent-700"></i>
+          </div>
+          <h3 class="font-bold mb-1">Kolay Link Oluşturma</h3>
+          <p class="text-primary-500 text-sm">Tek tıkla affiliate link, QR kod desteği</p>
+        </div>
+      </div>
+      <p class="text-center text-xs text-primary-400 mt-6 italic">
+        (Full vertical-tabs version from SCRUM-32 design is used in implementation — shown as cards here for brevity)
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CTA SECTION (Brief) -->
+  <!-- ============================================ -->
+  <section class="relative py-16 bg-primary-900">
+    <span class="annotation" style="position: absolute; top: 16px; right: 24px;">
+      scroll-reveal on viewport entry
+    </span>
+    <div class="max-w-[1400px] mx-auto px-6 lg:px-12">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <span class="overline text-accent-400 mb-4 inline-block">Başvuru</span>
+          <h2 class="text-3xl lg:text-4xl font-bold tracking-[-1px] mb-6 text-white">
+            Hemen başvurun,<br>kazanmaya başlayın
+          </h2>
+          <ul class="space-y-4 mb-10">
+            <li class="flex items-center gap-4 text-white/80">
+              <div class="w-6 h-6 bg-accent-600/20 rounded-full flex items-center justify-center flex-shrink-0">
+                <i data-lucide="check" class="w-4 h-4 text-accent-400"></i>
+              </div>
+              Ortalama %15 CTR artışı
+            </li>
+            <li class="flex items-center gap-4 text-white/80">
+              <div class="w-6 h-6 bg-accent-600/20 rounded-full flex items-center justify-center flex-shrink-0">
+                <i data-lucide="check" class="w-4 h-4 text-accent-400"></i>
+              </div>
+              Ücretsiz başvuru, hızlı onay
+            </li>
+            <li class="flex items-center gap-4 text-white/80">
+              <div class="w-6 h-6 bg-accent-600/20 rounded-full flex items-center justify-center flex-shrink-0">
+                <i data-lucide="check" class="w-4 h-4 text-accent-400"></i>
+              </div>
+              Zamanında ve güvenli ödeme
+            </li>
+          </ul>
+
+          <div class="relative inline-block">
+            <span class="annotation annotation--bottom" style="top: -32px; left: 0;">
+              Opens application modal (SCRUM-52)
+            </span>
+            <button class="btn-accent h-14 px-8 rounded-lg text-base font-semibold flex items-center gap-2 group">
+              Hemen Başvur
+              <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Right stats card -->
+        <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8">
+          <div class="text-center mb-8">
+            <p class="text-5xl font-bold text-white mb-2">₺8,450</p>
+            <p class="text-primary-400">Ortalama aylık kazanç</p>
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="bg-white/10 p-5 rounded-xl text-center">
+              <p class="text-2xl font-bold text-white">127</p>
+              <p class="text-sm text-primary-400 mt-1">Sipariş/ay</p>
+            </div>
+            <div class="bg-white/10 p-5 rounded-xl text-center">
+              <p class="text-2xl font-bold text-white">%2.4</p>
+              <p class="text-sm text-primary-400 mt-1">Dönüşüm oranı</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CHANGE SUMMARY -->
+  <!-- ============================================ -->
+  <section class="py-12 bg-white border-t-4 border-red-600">
+    <div class="max-w-3xl mx-auto px-6">
+      <h2 class="text-2xl font-extrabold text-red-600 mb-6 flex items-center gap-3">
+        <i data-lucide="alert-triangle" class="w-6 h-6"></i>
+        SCRUM-58 Change Summary — Influencer'lar İçin
+      </h2>
+      <div class="space-y-4 text-sm">
+        <div class="bg-red-50 border border-red-200 rounded-xl p-4">
+          <h3 class="font-bold text-red-700 mb-2">1. Hero Right Panel — 3 Vertical Stat Rows (CRITICAL FIX)</h3>
+          <p class="text-red-600">The implementation currently uses a <strong>2x2 grid (grid-cols-2)</strong> identical to Brands and Ajanslar pages. The design specifies <strong>3 stacked rows with space-y-4</strong>:</p>
+          <ul class="mt-2 ml-4 space-y-1 text-red-600 list-disc">
+            <li>Each row: <code class="bg-red-100 px-1 rounded">flex justify-between items-center</code></li>
+            <li>Row 1: <strong>Bu Ay Kazanç: ₺8,450</strong> — TrendingUp icon, success-600 green icon bg</li>
+            <li>Row 2: <strong>Toplam Sipariş: 127</strong> — ShoppingBag icon, neutral bg</li>
+            <li>Row 3: <strong>Aktif Kampanya: 8</strong> — Megaphone icon, accent-600 gold icon bg</li>
+            <li>Container: glass card (bg rgba(255,255,255,0.1), backdrop-blur 12px, border rgba(255,255,255,0.15))</li>
+          </ul>
+        </div>
+        <div class="bg-red-50 border border-red-200 rounded-xl p-4">
+          <h3 class="font-bold text-red-700 mb-2">2. Hero CTA — Accent Button (VERIFIED)</h3>
+          <p class="text-red-600">CTA must be <strong>accent-colored (gold #D4AF37)</strong>, NOT white. Text: "Aramıza Katıl" with arrow icon.</p>
+        </div>
+        <div class="bg-red-50 border border-red-200 rounded-xl p-4">
+          <h3 class="font-bold text-red-700 mb-2">3. Decorative Blur Circles (VERIFIED)</h3>
+          <p class="text-red-600">Background includes <strong>2 decorative blur circles</strong> (accent-600/10 + primary-700/30) for visual depth.</p>
+        </div>
+        <div class="bg-red-50 border border-red-200 rounded-xl p-4">
+          <h3 class="font-bold text-red-700 mb-2">4. "Hemen Başvur" CTA in Bottom Section</h3>
+          <p class="text-red-600">Annotated to <strong>open the application modal</strong> (SCRUM-52 component).</p>
+        </div>
+        <div class="bg-red-50 border border-red-200 rounded-xl p-4">
+          <h3 class="font-bold text-red-700 mb-2">5. Hero Padding (ALIGNED)</h3>
+          <p class="text-red-600">Using <strong>py-12 lg:py-16</strong> per design system spec.</p>
+        </div>
+      </div>
+
+      <!-- Implementation code reference -->
+      <div class="mt-8 bg-primary-50 border border-primary-200 rounded-xl p-4">
+        <h3 class="font-bold text-primary-700 mb-3 text-sm">Implementation Reference — Correct JSX Structure</h3>
+        <pre class="text-xs text-primary-600 leading-relaxed overflow-x-auto"><code>&lt;div className="glass-card p-6"&gt;
+  &lt;div className="space-y-4"&gt;
+    {/* Row 1 */}
+    &lt;div className="bg-white/10 p-5 rounded-xl flex justify-between items-center"&gt;
+      &lt;div className="flex items-center gap-3"&gt;
+        &lt;div className="w-10 h-10 bg-success-600/20 rounded-lg flex items-center justify-center"&gt;
+          &lt;TrendingUp className="w-5 h-5 text-success-600" /&gt;
+        &lt;/div&gt;
+        &lt;span className="text-white/80"&gt;Bu Ay Kazanç&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;span className="text-2xl font-bold text-white"&gt;₺8,450&lt;/span&gt;
+    &lt;/div&gt;
+    {/* Row 2 */}
+    &lt;div className="bg-white/10 p-5 rounded-xl flex justify-between items-center"&gt;
+      &lt;div className="flex items-center gap-3"&gt;
+        &lt;div className="w-10 h-10 bg-white/10 rounded-lg ..."&gt;
+          &lt;ShoppingBag className="w-5 h-5 text-white/70" /&gt;
+        &lt;/div&gt;
+        &lt;span className="text-white/80"&gt;Toplam Sipariş&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;span className="text-2xl font-bold text-white"&gt;127&lt;/span&gt;
+    &lt;/div&gt;
+    {/* Row 3 */}
+    &lt;div className="bg-white/10 p-5 rounded-xl flex justify-between items-center"&gt;
+      &lt;div className="flex items-center gap-3"&gt;
+        &lt;div className="w-10 h-10 bg-accent-600/20 rounded-lg ..."&gt;
+          &lt;Megaphone className="w-5 h-5 text-accent-600" /&gt;
+        &lt;/div&gt;
+        &lt;span className="text-white/80"&gt;Aktif Kampanya&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;span className="text-2xl font-bold text-white"&gt;8&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer placeholder -->
+  <footer class="bg-primary-900 text-white py-8 text-center text-sm text-primary-400">
+    <p>Footer unchanged — refer to SCRUM-32 design for full footer</p>
+    <p class="mt-1">© 2025 MDZN Partners. Bir Mediazone girişimidir.</p>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

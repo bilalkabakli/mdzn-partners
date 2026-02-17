@@ -1,9 +1,17 @@
+"use client";
+
 import { Mail, Building2, FlaskConical } from "lucide-react";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 export default function ContactCards() {
+  const { ref, isVisible } = useScrollReveal();
+
   return (
     <section className="py-16">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div
+        ref={ref}
+        className={`max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-700 ${isVisible ? "animate-fade-in-up" : "opacity-0 translate-y-6"}`}
+      >
         <div className="grid md:grid-cols-3 gap-8">
           {/* E-posta */}
           <div className="contact-card bg-white border border-primary-200 rounded-2xl p-8 text-center">

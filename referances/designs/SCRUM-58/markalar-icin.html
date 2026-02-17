@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SCRUM-58 Design — Markalar İçin (Hero Differentiation)</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              900: '#0F172A', 800: '#1E293B', 700: '#334155', 600: '#475569',
+              500: '#64748B', 400: '#94A3B8', 300: '#CBD5E1', 200: '#E2E8F0',
+              100: '#F1F5F9', 50: '#F8FAFC',
+            },
+            accent: {
+              900: '#7A5C0A', 800: '#9A7B1A', 700: '#BA9A2A', 600: '#D4AF37',
+              500: '#E4C04A', 400: '#F0D060', 300: '#F8E080', 200: '#FCF0A0', 100: '#FFFACC',
+            },
+            success: { 600: '#059669', 100: '#D1FAE5' },
+            warning: { 600: '#D97706', 100: '#FEF3C7' },
+            error: { 600: '#DC2626', 100: '#FEE2E2' },
+            info: { 600: '#0284C7', 100: '#E0F2FE' },
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    * { font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif; }
+    :root {
+      --transition-fast: 150ms ease;
+      --transition-base: 200ms ease;
+      --transition-slow: 300ms ease;
+    }
+
+    .btn-accent {
+      background: #D4AF37;
+      color: #0F172A;
+      transition: var(--transition-base);
+    }
+    .btn-accent:hover { background: #BA9A2A; }
+
+    .btn-primary {
+      background: #0F172A;
+      color: #FFFFFF;
+      transition: var(--transition-base);
+    }
+    .btn-primary:hover { background: #1E293B; }
+
+    .btn-secondary {
+      background: #FFFFFF;
+      color: #0F172A;
+      border: 1px solid #E2E8F0;
+      transition: var(--transition-base);
+    }
+    .btn-secondary:hover { background: #F8FAFC; border-color: #CBD5E1; }
+
+    /* Glass card */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+    }
+
+    /* Annotation labels */
+    .annotation {
+      position: absolute;
+      background: #DC2626;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      white-space: nowrap;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(220, 38, 38, 0.4);
+      letter-spacing: 0.3px;
+      line-height: 1.4;
+    }
+    .annotation::after {
+      content: '';
+      position: absolute;
+      width: 0; height: 0;
+    }
+    .annotation--bottom::after {
+      top: 100%; left: 16px;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 6px solid #DC2626;
+    }
+    .annotation--top::after {
+      bottom: 100%; left: 16px;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-bottom: 6px solid #DC2626;
+    }
+    .annotation--left::after {
+      top: 50%; right: 100%; transform: translateY(-50%);
+      border-top: 6px solid transparent;
+      border-bottom: 6px solid transparent;
+      border-right: 6px solid #DC2626;
+    }
+
+    .overline {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    /* Mini chart line for mockup */
+    .chart-line {
+      stroke-dasharray: 200;
+      stroke-dashoffset: 0;
+    }
+
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #F8FAFC; }
+    ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+  </style>
+</head>
+
+<body class="bg-white text-primary-900">
+
+  <!-- ============================================ -->
+  <!-- DESIGN SPEC BANNER -->
+  <!-- ============================================ -->
+  <div class="bg-red-600 text-white py-3 px-6 text-center text-sm font-semibold sticky top-0 z-[200]">
+    SCRUM-58 DESIGN SPEC — Markalar İçin (/markalar-icin) — Hero Differentiation: Dashboard Mockup
+  </div>
+
+  <!-- ============================================ -->
+  <!-- HEADER (unchanged — shown for context) -->
+  <!-- ============================================ -->
+  <header class="sticky top-[40px] z-50 bg-white border-b border-primary-200">
+    <div class="max-w-[1400px] mx-auto px-6 lg:px-12">
+      <div class="flex justify-between items-center h-[72px]">
+        <a href="#" class="flex items-center gap-3 group">
+          <div class="w-9 h-9 border border-primary-900 rounded-md flex flex-col items-center justify-center group-hover:bg-primary-900 transition-colors">
+            <span class="text-[9px] font-extrabold leading-none group-hover:text-white transition-colors">MD</span>
+            <span class="text-[9px] font-extrabold leading-none group-hover:text-white transition-colors">ZN</span>
+          </div>
+          <span class="text-sm font-bold tracking-[1px]">PARTNERS</span>
+        </a>
+        <nav class="hidden lg:flex items-center gap-8">
+          <a href="#" class="text-sm font-medium text-primary-600 hover:text-primary-900 transition-colors">Ana Sayfa</a>
+          <a href="#" class="text-sm font-medium text-primary-900 font-bold">Markalar İçin</a>
+          <a href="#" class="text-sm font-medium text-primary-600 hover:text-primary-900 transition-colors">Influencer'lar İçin</a>
+          <a href="#" class="text-sm font-medium text-primary-600 hover:text-primary-900 transition-colors">İş Ortaklarımız</a>
+        </nav>
+        <button class="hidden lg:flex btn-primary h-11 px-6 rounded-lg text-sm font-semibold items-center gap-2">
+          Demo Talep Et
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================ -->
+  <!-- HERO SECTION — DIFFERENTIATED FOR BRANDS -->
+  <!-- ============================================ -->
+  <section class="relative bg-primary-900 text-white py-12 lg:py-16 overflow-hidden">
+    <!-- Subtle background decoration -->
+    <div class="absolute top-[10%] right-[5%] w-[350px] h-[350px] bg-accent-600/5 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-[10%] left-[10%] w-[250px] h-[250px] bg-primary-700/20 rounded-full blur-3xl"></div>
+
+    <div class="relative max-w-[1400px] mx-auto px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+        <!-- Left: Content -->
+        <div class="relative">
+          <!-- Badge -->
+          <div class="relative inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full mb-8">
+            <span class="w-2 h-2 bg-accent-500 rounded-full animate-pulse"></span>
+            <span class="text-sm font-medium text-white/90">Markalar İçin</span>
+          </div>
+
+          <!-- Heading -->
+          <div class="relative">
+            <span class="annotation annotation--left" style="left: -12px; top: -28px;">
+              CHANGED: New heading copy
+            </span>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-6" style="letter-spacing: -2px;">
+              E-Ticaret Büyümenizi<br>
+              <span class="text-primary-300">Hızlandırın</span>
+            </h1>
+          </div>
+
+          <p class="text-xl text-primary-300 mb-10 leading-relaxed max-w-lg">
+            Kendi müşteri verinize sahip olun. Affiliate kanalınızı dakikalar içinde kurun.
+          </p>
+
+          <!-- CTAs -->
+          <div class="relative flex flex-wrap gap-4">
+            <span class="annotation annotation--bottom" style="top: -32px; left: 0;">
+              CHANGED: Accent button "Aramıza Katıl"
+            </span>
+            <button class="btn-accent px-8 py-4 rounded-xl font-semibold text-lg shadow-lg flex items-center gap-2 group">
+              Aramıza Katıl
+              <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+            </button>
+            <div class="relative">
+              <span class="annotation annotation--bottom" style="top: -32px; left: 0;">
+                FIX: Scrolls to Features section
+              </span>
+              <button class="border border-white/30 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white/10 transition-colors">
+                Nasıl Çalışır?
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: DASHBOARD MOCKUP (replaces 2x2 stats grid) -->
+        <div class="relative">
+          <span class="annotation annotation--bottom" style="top: -36px; left: 8px;">
+            NEW: Dashboard mockup replaces generic 2x2 stats grid
+          </span>
+
+          <div class="glass-card p-6">
+            <!-- Dashboard header -->
+            <div class="flex items-center justify-between mb-5">
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-accent-600/20 rounded-lg flex items-center justify-center">
+                  <i data-lucide="layout-dashboard" class="w-4 h-4 text-accent-400"></i>
+                </div>
+                <span class="text-sm font-semibold text-white/90">Performans Dashboard</span>
+              </div>
+              <div class="flex items-center gap-2 text-xs text-white/50">
+                <i data-lucide="calendar" class="w-3 h-3"></i>
+                Son 30 gün
+              </div>
+            </div>
+
+            <!-- Revenue Chart Area -->
+            <div class="relative bg-white/5 rounded-xl p-5 mb-4 border border-white/10">
+              <span class="annotation annotation--left" style="right: -12px; top: 4px; left: auto;">
+                NEW: Revenue chart line
+              </span>
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-xs text-white/50 uppercase tracking-wider font-semibold">Gelir Trendi</span>
+                <div class="flex items-center gap-1 text-success-600 text-xs font-semibold">
+                  <i data-lucide="trending-up" class="w-3 h-3"></i>
+                  +24%
+                </div>
+              </div>
+              <!-- SVG Chart Line -->
+              <svg viewBox="0 0 400 80" class="w-full h-16" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="chartGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style="stop-color:#D4AF37;stop-opacity:0.3" />
+                    <stop offset="100%" style="stop-color:#D4AF37;stop-opacity:0" />
+                  </linearGradient>
+                </defs>
+                <!-- Fill area -->
+                <path d="M0 65 Q40 55, 80 48 Q120 35, 160 40 Q200 30, 240 22 Q280 18, 320 12 Q360 8, 400 5 L400 80 L0 80 Z" fill="url(#chartGrad)"/>
+                <!-- Line -->
+                <path d="M0 65 Q40 55, 80 48 Q120 35, 160 40 Q200 30, 240 22 Q280 18, 320 12 Q360 8, 400 5" stroke="#D4AF37" stroke-width="2.5" fill="none" stroke-linecap="round" class="chart-line"/>
+                <!-- Dot at end -->
+                <circle cx="400" cy="5" r="4" fill="#D4AF37"/>
+                <circle cx="400" cy="5" r="7" fill="#D4AF37" opacity="0.3"/>
+              </svg>
+              <div class="flex justify-between mt-2 text-[10px] text-white/30">
+                <span>1 Oca</span><span>8 Oca</span><span>15 Oca</span><span>22 Oca</span><span>30 Oca</span>
+              </div>
+            </div>
+
+            <!-- KPI Row -->
+            <div class="relative grid grid-cols-3 gap-3">
+              <span class="annotation annotation--top" style="bottom: -28px; left: 4px;">
+                NEW: KPI cards (conversion, revenue, campaigns)
+              </span>
+
+              <!-- Conversion Rate -->
+              <div class="bg-white/5 rounded-xl p-4 border border-white/10">
+                <div class="flex items-center gap-2 mb-2">
+                  <div class="w-6 h-6 bg-success-600/20 rounded-md flex items-center justify-center">
+                    <i data-lucide="percent" class="w-3 h-3 text-success-600"></i>
+                  </div>
+                  <span class="text-[10px] text-white/50 uppercase tracking-wider">Dönüşüm</span>
+                </div>
+                <p class="text-xl font-bold text-white">%2.4</p>
+                <div class="flex items-center gap-1 mt-1">
+                  <i data-lucide="trending-up" class="w-3 h-3 text-success-600"></i>
+                  <span class="text-[10px] text-success-600 font-medium">+0.3%</span>
+                </div>
+              </div>
+
+              <!-- Total Revenue -->
+              <div class="bg-white/5 rounded-xl p-4 border border-white/10">
+                <div class="flex items-center gap-2 mb-2">
+                  <div class="w-6 h-6 bg-accent-600/20 rounded-md flex items-center justify-center">
+                    <i data-lucide="banknote" class="w-3 h-3 text-accent-400"></i>
+                  </div>
+                  <span class="text-[10px] text-white/50 uppercase tracking-wider">Gelir</span>
+                </div>
+                <p class="text-xl font-bold text-white">₺128K</p>
+                <div class="flex items-center gap-1 mt-1">
+                  <i data-lucide="trending-up" class="w-3 h-3 text-success-600"></i>
+                  <span class="text-[10px] text-success-600 font-medium">+18%</span>
+                </div>
+              </div>
+
+              <!-- Active Campaigns -->
+              <div class="bg-white/5 rounded-xl p-4 border border-white/10">
+                <div class="flex items-center gap-2 mb-2">
+                  <div class="w-6 h-6 bg-info-600/20 rounded-md flex items-center justify-center">
+                    <i data-lucide="megaphone" class="w-3 h-3 text-info-600"></i>
+                  </div>
+                  <span class="text-[10px] text-white/50 uppercase tracking-wider">Kampanya</span>
+                </div>
+                <p class="text-xl font-bold text-white">12</p>
+                <div class="flex items-center gap-1 mt-1">
+                  <span class="text-[10px] text-white/40">aktif</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bottom mini bar: Active Influencers -->
+            <div class="mt-4 bg-white/5 rounded-xl p-3 border border-white/10 flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <div class="flex -space-x-2">
+                  <div class="w-7 h-7 rounded-full bg-accent-600/30 border-2 border-primary-900 flex items-center justify-center text-[9px] font-bold text-accent-300">AS</div>
+                  <div class="w-7 h-7 rounded-full bg-info-600/30 border-2 border-primary-900 flex items-center justify-center text-[9px] font-bold text-info-600">BK</div>
+                  <div class="w-7 h-7 rounded-full bg-success-600/30 border-2 border-primary-900 flex items-center justify-center text-[9px] font-bold text-success-600">CD</div>
+                  <div class="w-7 h-7 rounded-full bg-white/10 border-2 border-primary-900 flex items-center justify-center text-[9px] font-bold text-white/60">+44</div>
+                </div>
+                <span class="text-xs text-white/60">47 Aktif Influencer</span>
+              </div>
+              <span class="text-xs text-success-600 font-medium flex items-center gap-1">
+                <span class="w-1.5 h-1.5 bg-success-600 rounded-full animate-pulse"></span>
+                Canlı
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- BRANDS FEATURES (Brief Section) -->
+  <!-- ============================================ -->
+  <section class="relative py-16 bg-white">
+    <span class="annotation" style="position: absolute; top: 16px; right: 24px;">
+      scroll-reveal on viewport entry
+    </span>
+    <div class="max-w-[1400px] mx-auto px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <span class="overline text-primary-400">Özellikler</span>
+        <h2 class="text-4xl font-extrabold mt-3 tracking-tight" style="letter-spacing: -1px;">Neden MDZN Partners?</h2>
+        <p class="text-primary-500 mt-4 max-w-2xl mx-auto">Affiliate kanalınızı profesyonelce yönetmek için ihtiyacınız olan her şey</p>
+      </div>
+
+      <!-- Feature cards preview -->
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-primary-50 rounded-2xl p-8 border border-primary-100">
+          <div class="w-12 h-12 bg-accent-100 rounded-xl flex items-center justify-center mb-4">
+            <i data-lucide="clock" class="w-6 h-6 text-accent-700"></i>
+          </div>
+          <h3 class="text-lg font-bold mb-2">Gerçek Zamanlı Takip</h3>
+          <p class="text-primary-500 text-sm leading-relaxed">Satışlarınız saniyeler içinde dashboard'da görünür. Tarih, kampanya, kategori bazlı filtreleme.</p>
+        </div>
+        <div class="bg-primary-50 rounded-2xl p-8 border border-primary-100">
+          <div class="w-12 h-12 bg-accent-100 rounded-xl flex items-center justify-center mb-4">
+            <i data-lucide="database" class="w-6 h-6 text-accent-700"></i>
+          </div>
+          <h3 class="text-lg font-bold mb-2">Backend Veri Toplama</h3>
+          <p class="text-primary-500 text-sm leading-relaxed">Server-side tracking ile %30'a varan takip kaybını önleyin. %95+ doğruluk.</p>
+        </div>
+        <div class="bg-primary-50 rounded-2xl p-8 border border-primary-100">
+          <div class="w-12 h-12 bg-accent-100 rounded-xl flex items-center justify-center mb-4">
+            <i data-lucide="zap" class="w-6 h-6 text-accent-700"></i>
+          </div>
+          <h3 class="text-lg font-bold mb-2">Anında Entegrasyon</h3>
+          <p class="text-primary-500 text-sm leading-relaxed">İkas, Shopify, Ticimax entegrasyonları ile sıfır kod, dakikalar içinde başlayın.</p>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6 mt-6">
+        <div class="bg-primary-50 rounded-2xl p-8 border border-primary-100">
+          <div class="w-12 h-12 bg-accent-100 rounded-xl flex items-center justify-center mb-4">
+            <i data-lucide="credit-card" class="w-6 h-6 text-accent-700"></i>
+          </div>
+          <h3 class="text-lg font-bold mb-2">Otomatik Ödeme</h3>
+          <p class="text-primary-500 text-sm leading-relaxed">Kategori bazlı komisyon oranları, otomatik hesaplama ve şeffaf dashboard.</p>
+        </div>
+        <div class="bg-primary-50 rounded-2xl p-8 border border-primary-100">
+          <div class="w-12 h-12 bg-accent-100 rounded-xl flex items-center justify-center mb-4">
+            <i data-lucide="rotate-ccw" class="w-6 h-6 text-accent-700"></i>
+          </div>
+          <h3 class="text-lg font-bold mb-2">İptal/İade Yönetimi</h3>
+          <p class="text-primary-500 text-sm leading-relaxed">Otomatik iptal algılama, iade takibi ve komisyonlardan düşüm.</p>
+        </div>
+        <div class="bg-primary-50 rounded-2xl p-8 border border-primary-100">
+          <div class="w-12 h-12 bg-accent-100 rounded-xl flex items-center justify-center mb-4">
+            <i data-lucide="smartphone" class="w-6 h-6 text-accent-700"></i>
+          </div>
+          <h3 class="text-lg font-bold mb-2">Mobil Uygulama Takibi</h3>
+          <p class="text-primary-500 text-sm leading-relaxed">Adjust & Appsflyer entegrasyonu ile uygulama yükleme takibi.</p>
+        </div>
+      </div>
+
+      <p class="text-center text-xs text-primary-400 mt-6 italic">
+        (Full vertical-tabs version from SCRUM-40 design is used in implementation — shown as card grid here for brevity)
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- BRANDS COMPARISON (Brief Section) -->
+  <!-- ============================================ -->
+  <section class="relative py-16 bg-primary-50">
+    <span class="annotation" style="position: absolute; top: 16px; right: 24px;">
+      scroll-reveal on viewport entry
+    </span>
+    <div class="max-w-5xl mx-auto px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <span class="overline text-primary-400">Karşılaştırma</span>
+        <h2 class="text-4xl font-extrabold mt-3 tracking-tight" style="letter-spacing: -1px;">Farkı Görün</h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <!-- Old Way -->
+        <div class="bg-white rounded-2xl p-8 border-2 border-primary-200">
+          <h3 class="font-bold text-primary-400 mb-6 flex items-center gap-3 text-lg">
+            <div class="p-2 bg-error-100 rounded-lg">
+              <i data-lucide="x" class="w-5 h-5 text-error-600"></i>
+            </div>
+            Eski Yöntem
+          </h3>
+          <ul class="space-y-4 text-primary-600">
+            <li class="flex items-start gap-3"><i data-lucide="minus" class="w-5 h-5 text-primary-400 mt-0.5"></i><span>Ay sonunda Excel tabloları</span></li>
+            <li class="flex items-start gap-3"><i data-lucide="minus" class="w-5 h-5 text-primary-400 mt-0.5"></i><span>Manuel veri girişi</span></li>
+            <li class="flex items-start gap-3"><i data-lucide="minus" class="w-5 h-5 text-primary-400 mt-0.5"></i><span>%30'a varan takip kaybı</span></li>
+            <li class="flex items-start gap-3"><i data-lucide="minus" class="w-5 h-5 text-primary-400 mt-0.5"></i><span>Haftalarca süren entegrasyon</span></li>
+          </ul>
+        </div>
+        <!-- MDZN Way -->
+        <div class="bg-primary-900 rounded-2xl p-8 text-white">
+          <h3 class="font-bold mb-6 flex items-center gap-3 text-lg">
+            <div class="p-2 bg-accent-600 rounded-lg">
+              <i data-lucide="check" class="w-5 h-5 text-primary-900"></i>
+            </div>
+            MDZN ile
+          </h3>
+          <ul class="space-y-4 text-primary-200">
+            <li class="flex items-start gap-3"><i data-lucide="check" class="w-5 h-5 text-accent-500 mt-0.5"></i><span>Gerçek zamanlı dashboard</span></li>
+            <li class="flex items-start gap-3"><i data-lucide="check" class="w-5 h-5 text-accent-500 mt-0.5"></i><span>Otomatik senkronizasyon</span></li>
+            <li class="flex items-start gap-3"><i data-lucide="check" class="w-5 h-5 text-accent-500 mt-0.5"></i><span>Backend tracking ile tam koruma</span></li>
+            <li class="flex items-start gap-3"><i data-lucide="check" class="w-5 h-5 text-accent-500 mt-0.5"></i><span>Dakikalar içinde başlangıç</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- BRANDS CTA (Brief Section) -->
+  <!-- ============================================ -->
+  <section class="relative py-16 bg-primary-900">
+    <span class="annotation" style="position: absolute; top: 16px; right: 24px;">
+      scroll-reveal on viewport entry
+    </span>
+    <div class="max-w-4xl mx-auto px-6 lg:px-8 text-center">
+      <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4" style="letter-spacing: -1px;">Affiliate Kanalınızı Güçlendirin</h2>
+      <p class="text-primary-300 text-lg mb-10">MDZN Partners ile performans pazarlamanızı bir üst seviyeye taşıyın</p>
+      <button class="btn-accent px-12 py-5 rounded-xl font-semibold text-lg shadow-xl">
+        Demo Talep Edin
+      </button>
+      <p class="text-primary-400 text-sm mt-4">15 dakikalık demo ile tüm özellikleri keşfedin</p>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CHANGE SUMMARY -->
+  <!-- ============================================ -->
+  <section class="py-12 bg-white border-t-4 border-red-600">
+    <div class="max-w-3xl mx-auto px-6">
+      <h2 class="text-2xl font-extrabold text-red-600 mb-6 flex items-center gap-3">
+        <i data-lucide="alert-triangle" class="w-6 h-6"></i>
+        SCRUM-58 Change Summary — Markalar İçin
+      </h2>
+      <div class="space-y-4 text-sm">
+        <div class="bg-red-50 border border-red-200 rounded-xl p-4">
+          <h3 class="font-bold text-red-700 mb-2">1. Hero Right Panel — Dashboard Mockup (NEW)</h3>
+          <p class="text-red-600">Replaced the generic 2x2 stats grid with a <strong>performance dashboard card</strong> featuring:</p>
+          <ul class="mt-2 ml-4 space-y-1 text-red-600 list-disc">
+            <li>Revenue chart line (SVG) with gradient fill</li>
+            <li>3 KPI cards: Conversion rate (%2.4), Revenue (₺128K), Active campaigns (12)</li>
+            <li>Active influencer avatars strip at bottom</li>
+            <li>Glass card effect (bg rgba(255,255,255,0.1), backdrop-blur 12px, border rgba(255,255,255,0.15))</li>
+          </ul>
+        </div>
+        <div class="bg-red-50 border border-red-200 rounded-xl p-4">
+          <h3 class="font-bold text-red-700 mb-2">2. Heading Copy (CHANGED)</h3>
+          <p class="text-red-600">Changed from "Pazaryeri Bağımlılığından Kurtulun" → <strong>"E-Ticaret Büyümenizi Hızlandırın"</strong></p>
+        </div>
+        <div class="bg-red-50 border border-red-200 rounded-xl p-4">
+          <h3 class="font-bold text-red-700 mb-2">3. Primary CTA (CHANGED)</h3>
+          <p class="text-red-600">Changed from white "Demo Talep Et" → <strong>accent-colored "Aramıza Katıl"</strong> button with arrow icon</p>
+        </div>
+        <div class="bg-red-50 border border-red-200 rounded-xl p-4">
+          <h3 class="font-bold text-red-700 mb-2">4. "Nasıl Çalışır?" Button (FIX)</h3>
+          <p class="text-red-600">Annotated to <strong>scroll to Features section</strong> on click (smooth scroll behavior)</p>
+        </div>
+        <div class="bg-red-50 border border-red-200 rounded-xl p-4">
+          <h3 class="font-bold text-red-700 mb-2">5. Hero Padding (ALIGNED)</h3>
+          <p class="text-red-600">Using <strong>py-12 lg:py-16</strong> instead of py-24 to match design system spec</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer placeholder -->
+  <footer class="bg-primary-900 text-white py-8 text-center text-sm text-primary-400">
+    <p>Footer unchanged — refer to SCRUM-40 design for full footer</p>
+    <p class="mt-1">© 2025 MDZN Partners. Bir Mediazone girişimidir.</p>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

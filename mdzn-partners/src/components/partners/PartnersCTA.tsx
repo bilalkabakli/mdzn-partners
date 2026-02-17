@@ -1,4 +1,7 @@
+"use client";
+
 import { Check, ArrowRight } from "lucide-react";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const benefits = [
   "Türkiye\u2019nin en büyük influencer ağına erişim",
@@ -8,9 +11,16 @@ const benefits = [
 ];
 
 export default function PartnersCTA() {
+  const { ref, isVisible } = useScrollReveal();
+
   return (
     <section className="py-20 bg-primary-900">
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+      <div
+        ref={ref}
+        className={`max-w-[1400px] mx-auto px-6 lg:px-12 transition-all duration-700 ${
+          isVisible ? "animate-fade-in-up" : "opacity-0 translate-y-6"
+        }`}
+      >
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left Content */}
           <div>

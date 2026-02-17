@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SCRUM-58 — Header &amp; Footer Shared Component Improvements</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              900: '#0F172A',
+              800: '#1E293B',
+              700: '#334155',
+              600: '#475569',
+              500: '#64748B',
+              400: '#94A3B8',
+              300: '#CBD5E1',
+              200: '#E2E8F0',
+              100: '#F1F5F9',
+              50: '#F8FAFC',
+            },
+            accent: {
+              900: '#7A5C0A',
+              800: '#9A7B1A',
+              700: '#BA9A2A',
+              600: '#D4AF37',
+              500: '#E4C04A',
+              400: '#F0D060',
+              300: '#F8E080',
+              200: '#FCF0A0',
+              100: '#FFFACC',
+            },
+            success: { 600: '#059669', 100: '#D1FAE5' },
+            warning: { 600: '#D97706', 100: '#FEF3C7' },
+            error: { 600: '#DC2626', 100: '#FEE2E2' },
+            info: { 600: '#0284C7', 100: '#E0F2FE' },
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    * { font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif; }
+
+    /* Button styles */
+    .btn-primary {
+      background: #0F172A;
+      color: #FFFFFF;
+      transition: all 200ms ease;
+    }
+    .btn-primary:hover {
+      background: #1E293B;
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3);
+    }
+
+    /* Nav link hover */
+    .nav-link { transition: color 150ms ease; }
+    .nav-link:hover { color: #BA9A2A; }
+    .nav-link:active { color: #A38825; }
+
+    /* Footer Social Icons */
+    .footer-social-icon { transition: all 200ms ease; }
+    .footer-social-icon:hover { background: #D4AF37 !important; color: #0F172A; }
+    .footer-social-icon:hover i,
+    .footer-social-icon:hover svg { color: #0F172A; }
+
+    /* Footer Links */
+    .footer-link { transition: color 150ms ease; }
+    .footer-link:hover { color: #D4AF37; }
+    .footer-link:active { color: #BA9A2A; }
+
+    /* ── Annotation labels ── */
+    .annotation {
+      position: absolute;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #DC2626;
+      color: #FFFFFF;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+      z-index: 60;
+      pointer-events: none;
+      box-shadow: 0 2px 8px rgba(220, 38, 38, 0.35);
+    }
+    .annotation::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 0;
+    }
+    .annotation.arrow-down::after {
+      bottom: -5px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 5px solid #DC2626;
+    }
+    .annotation.arrow-up::after {
+      top: -5px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-bottom: 5px solid #DC2626;
+    }
+    .annotation.arrow-left::after {
+      left: -5px;
+      top: 50%;
+      transform: translateY(-50%);
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+      border-right: 5px solid #DC2626;
+    }
+
+    /* Highlight ring for annotated elements */
+    .highlight-ring {
+      outline: 2px dashed #DC2626;
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    /* Active link bottom indicator */
+    .nav-active-link {
+      position: relative;
+      color: #0F172A !important;
+      font-weight: 600 !important;
+    }
+    .nav-active-link::after {
+      content: '';
+      position: absolute;
+      bottom: -22px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: #D4AF37;
+      border-radius: 1px;
+    }
+  </style>
+</head>
+<body class="bg-primary-100 text-primary-900">
+
+  <!-- ============================================ -->
+  <!-- PAGE TITLE / DESIGN SPEC BANNER -->
+  <!-- ============================================ -->
+  <div class="bg-white border-b border-primary-200">
+    <div class="max-w-[1400px] mx-auto px-6 lg:px-12 py-8">
+      <div class="flex items-center gap-3 mb-2">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-info-100 text-info-600 rounded-full text-xs font-bold uppercase tracking-wider">
+          SCRUM-58
+        </span>
+        <span class="text-xs text-primary-400">Design Spec</span>
+      </div>
+      <h1 class="text-2xl font-extrabold mb-1">Header &amp; Footer — Shared Component Improvements</h1>
+      <p class="text-sm text-primary-500 max-w-2xl">
+        This design file shows the improved Header and Footer as they appear on the homepage.
+        Red annotations highlight each change from the current implementation.
+      </p>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- IMPROVED HEADER (rendered as it would appear on the homepage) -->
+  <!-- ============================================ -->
+  <header class="sticky top-0 z-50 bg-white border-b border-primary-200 shadow-sm">
+    <div class="max-w-[1400px] mx-auto px-6 lg:px-12 relative">
+      <div class="flex justify-between items-center h-[72px]">
+
+        <!-- Logo -->
+        <a href="/" class="flex items-center gap-3 group">
+          <div class="w-9 h-9 border border-primary-900 rounded-md flex flex-col items-center justify-center group-hover:bg-primary-900 transition-colors">
+            <span class="text-[9px] font-extrabold leading-none group-hover:text-white transition-colors">MD</span>
+            <span class="text-[9px] font-extrabold leading-none group-hover:text-white transition-colors">ZN</span>
+          </div>
+          <span class="text-sm font-bold tracking-[1px]">PARTNERS</span>
+        </a>
+
+        <!-- Navigation -->
+        <nav class="hidden lg:flex items-center gap-8">
+          <!-- Ana Sayfa — shown as ACTIVE to demonstrate the indicator -->
+          <a href="/" class="nav-active-link text-sm font-medium transition-colors duration-150">Ana Sayfa</a>
+
+          <!-- Çözümler Dropdown (unchanged) -->
+          <div class="relative group">
+            <button class="flex items-center gap-1 text-sm font-medium text-primary-600 hover:text-accent-700 active:text-accent-800 transition-colors duration-150">
+              Çözümler
+              <i data-lucide="chevron-down" class="w-4 h-4"></i>
+            </button>
+            <div class="invisible group-hover:visible opacity-0 group-hover:opacity-100 absolute top-full left-0 mt-2 w-52 bg-white border border-primary-200 rounded-xl py-2 shadow-lg transition-all duration-200 transform translate-y-2 group-hover:translate-y-0">
+              <a href="/markalar-icin" class="block px-4 py-2.5 text-sm text-primary-600 hover:text-accent-700 hover:bg-accent-100 active:bg-accent-200 transition-colors duration-150">Markalar İçin</a>
+              <a href="/influencerlar-icin" class="block px-4 py-2.5 text-sm text-primary-600 hover:text-accent-700 hover:bg-accent-100 active:bg-accent-200 transition-colors duration-150">Influencer'lar İçin</a>
+              <a href="/ajanslar-icin" class="block px-4 py-2.5 text-sm text-primary-600 hover:text-accent-700 hover:bg-accent-100 active:bg-accent-200 transition-colors duration-150">Ajanslar İçin</a>
+            </div>
+          </div>
+
+          <!-- İş Ortaklarımız (existing) -->
+          <a href="/is-ortaklarimiz" class="text-sm font-medium text-primary-600 hover:text-accent-700 active:text-accent-800 transition-colors duration-150">İş Ortaklarımız</a>
+
+          <!-- NEW: Hakkımızda -->
+          <a href="/hakkimizda" class="text-sm font-medium text-primary-600 hover:text-accent-700 active:text-accent-800 transition-colors duration-150 highlight-ring" id="hakkimizda-link">Hakkımızda</a>
+
+          <!-- NEW: İletişim -->
+          <a href="/iletisim" class="text-sm font-medium text-primary-600 hover:text-accent-700 active:text-accent-800 transition-colors duration-150 highlight-ring" id="iletisim-link">İletişim</a>
+
+          <!-- Influencer Başvurusu (existing, moved after new links) -->
+          <a href="/influencer-basvurusu" class="text-sm font-medium text-primary-600 hover:text-accent-700 active:text-accent-800 transition-colors duration-150">Influencer Başvurusu</a>
+        </nav>
+
+        <!-- CTA -->
+        <button class="hidden lg:flex btn-primary h-11 px-6 rounded-lg text-sm font-semibold items-center gap-2">
+          Demo Talep Et
+        </button>
+
+        <!-- Mobile menu -->
+        <button class="lg:hidden p-2 text-primary-600 hover:text-accent-700 active:text-accent-800 transition-colors duration-150">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+
+      <!-- ── Header Annotations ── -->
+      <!-- Annotation: Active indicator -->
+      <div class="annotation arrow-down hidden lg:inline-flex" style="top: -8px; left: 290px;">
+        NEW: Active page indicator (2px accent border)
+      </div>
+
+      <!-- Annotation: Hakkımızda -->
+      <div class="annotation arrow-down hidden lg:inline-flex" style="top: -8px; left: 622px;">
+        NEW: Hakkımızda link
+      </div>
+
+      <!-- Annotation: İletişim -->
+      <div class="annotation arrow-down hidden lg:inline-flex" style="top: -8px; left: 748px;">
+        NEW: İletişim link
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================ -->
+  <!-- PLACEHOLDER PAGE CONTENT (simulates homepage body) -->
+  <!-- ============================================ -->
+  <main>
+    <!-- Mini hero to give context -->
+    <section class="bg-white">
+      <div class="max-w-[1400px] mx-auto px-6 lg:px-12 py-20 lg:py-28">
+        <div class="max-w-2xl">
+          <div class="inline-flex items-center gap-2 px-4 py-2 bg-success-100 rounded-full mb-8">
+            <span class="w-2 h-2 bg-success-600 rounded-full animate-pulse"></span>
+            <span class="text-sm font-medium text-success-600">Türkiye'nin #1 Affiliate Platformu</span>
+          </div>
+          <h1 class="text-5xl lg:text-6xl font-extrabold leading-[1.1] tracking-[-2px] mb-6">
+            Affiliate Pazarlamanın<br>
+            <span class="text-primary-400">Yeni Nesil Platformu</span>
+          </h1>
+          <p class="text-lg text-primary-500 mb-10 max-w-lg leading-relaxed font-medium">
+            Markalar, influencer'lar ve yayıncıları tek platformda buluşturun.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <button class="btn-primary h-14 px-8 rounded-lg text-base font-semibold flex items-center gap-2">
+              Demo Talep Et
+              <i data-lucide="arrow-right" class="w-5 h-5"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Spacer section representing rest of page -->
+    <section class="bg-primary-50 border-y border-primary-200">
+      <div class="max-w-[1400px] mx-auto px-6 lg:px-12 py-16 text-center">
+        <p class="text-primary-400 text-sm font-medium uppercase tracking-wider">— remaining homepage sections —</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================================ -->
+  <!-- IMPROVED FOOTER -->
+  <!-- ============================================ -->
+  <footer class="bg-primary-900 text-white relative">
+    <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="py-16">
+        <div class="grid lg:grid-cols-12 gap-12">
+
+          <!-- Logo & Description -->
+          <div class="lg:col-span-4">
+            <div class="flex items-center mb-6">
+              <svg width="48" height="48" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="2" y="2" width="96" height="96" stroke="white" stroke-width="3" fill="none"/>
+                <text x="15" y="45" font-family="Plus Jakarta Sans, sans-serif" font-size="28" font-weight="700" fill="white">MD</text>
+                <text x="15" y="80" font-family="Plus Jakarta Sans, sans-serif" font-size="28" font-weight="700" fill="white">ZN</text>
+              </svg>
+              <span class="ml-4 text-2xl font-bold">PARTNERS</span>
+            </div>
+            <p class="text-primary-400 leading-relaxed mb-6 max-w-xs">
+              Türkiye'nin yeni nesil affiliate pazarlama platformu. Markalar, influencer'lar ve yayıncılar için tek adres.
+            </p>
+            <div class="flex items-center gap-3">
+              <a href="#" class="footer-social-icon w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center transition-all duration-200">
+                <i data-lucide="instagram" class="w-5 h-5 text-white/70"></i>
+              </a>
+              <a href="#" class="footer-social-icon w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center transition-all duration-200">
+                <i data-lucide="linkedin" class="w-5 h-5 text-white/70"></i>
+              </a>
+              <a href="#" class="footer-social-icon w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center transition-all duration-200">
+                <i data-lucide="twitter" class="w-5 h-5 text-white/70"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Links -->
+          <div class="lg:col-span-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+
+              <!-- Çözümler — FIX: real routes instead of # -->
+              <div class="relative">
+                <h3 class="font-semibold text-sm uppercase tracking-wider text-white/80 mb-4">Çözümler</h3>
+                <ul class="space-y-3">
+                  <li class="relative">
+                    <a href="/markalar-icin" class="footer-link text-primary-400 hover:text-accent-500 active:text-accent-600 transition-colors duration-150 highlight-ring">Markalar İçin</a>
+                    <span class="annotation arrow-left" style="position: relative; display: inline-flex; margin-left: 8px; font-size: 9px; padding: 2px 6px;">FIX: /markalar-icin</span>
+                  </li>
+                  <li class="relative">
+                    <a href="/influencerlar-icin" class="footer-link text-primary-400 hover:text-accent-500 active:text-accent-600 transition-colors duration-150 highlight-ring">Influencer'lar İçin</a>
+                    <span class="annotation arrow-left" style="position: relative; display: inline-flex; margin-left: 8px; font-size: 9px; padding: 2px 6px;">FIX: /influencerlar-icin</span>
+                  </li>
+                  <li class="relative">
+                    <a href="/ajanslar-icin" class="footer-link text-primary-400 hover:text-accent-500 active:text-accent-600 transition-colors duration-150 highlight-ring">Ajanslar İçin</a>
+                    <span class="annotation arrow-left" style="position: relative; display: inline-flex; margin-left: 8px; font-size: 9px; padding: 2px 6px;">FIX: /ajanslar-icin</span>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Şirket -->
+              <div>
+                <h3 class="font-semibold text-sm uppercase tracking-wider text-white/80 mb-4">Şirket</h3>
+                <ul class="space-y-3">
+                  <li><a href="/hakkimizda" class="footer-link text-primary-400 hover:text-accent-500 active:text-accent-600 transition-colors duration-150">Hakkımızda</a></li>
+                  <li><a href="/is-ortaklarimiz" class="footer-link text-primary-400 hover:text-accent-500 active:text-accent-600 transition-colors duration-150">İş Ortaklarımız</a></li>
+                  <li><a href="/iletisim" class="footer-link text-primary-400 hover:text-accent-500 active:text-accent-600 transition-colors duration-150">İletişim</a></li>
+                </ul>
+              </div>
+
+              <!-- Yasal -->
+              <div>
+                <h3 class="font-semibold text-sm uppercase tracking-wider text-white/80 mb-4">Yasal</h3>
+                <ul class="space-y-3">
+                  <li><a href="#" class="footer-link text-primary-400 hover:text-accent-500 active:text-accent-600 transition-colors duration-150">Gizlilik Politikası</a></li>
+                  <li><a href="#" class="footer-link text-primary-400 hover:text-accent-500 active:text-accent-600 transition-colors duration-150">Kullanım Koşulları</a></li>
+                  <li><a href="#" class="footer-link text-primary-400 hover:text-accent-500 active:text-accent-600 transition-colors duration-150">KVKK</a></li>
+                </ul>
+              </div>
+
+              <!-- İletişim -->
+              <div>
+                <h3 class="font-semibold text-sm uppercase tracking-wider text-white/80 mb-4">İletişim</h3>
+                <ul class="space-y-4">
+                  <li class="text-primary-400 text-sm">
+                    <span class="block text-white/60 mb-1">E-posta</span>
+                    contact@mdznpartners.com
+                  </li>
+                  <li class="text-primary-400 text-sm">
+                    <span class="block text-white/60 mb-1">Merkez Ofis</span>
+                    Şişli/İstanbul
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Bar — FIX: 2026 copyright -->
+      <div class="border-t border-white/10 py-6">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4 relative">
+          <p class="text-sm text-primary-400 highlight-ring relative" id="copyright-text">
+            &copy; 2026 MDZN Partners. Bir Mediazone girişimidir.
+          </p>
+          <!-- Annotation: 2026 fix -->
+          <span class="annotation arrow-up" style="position: absolute; bottom: -26px; left: 16px;">FIX: 2026 (was 2025)</span>
+
+          <div class="flex items-center gap-4">
+            <span class="text-xs text-white/40 uppercase tracking-wider">Mediazone Ailesi</span>
+            <div class="flex items-center gap-3 text-sm text-primary-400">
+              <a href="#" class="footer-link hover:text-accent-500 active:text-accent-600 transition-colors duration-150 cursor-pointer">Mackolik</a>
+              <a href="#" class="footer-link hover:text-accent-500 active:text-accent-600 transition-colors duration-150 cursor-pointer">Onedio</a>
+              <a href="#" class="footer-link hover:text-accent-500 active:text-accent-600 transition-colors duration-150 cursor-pointer">Mynet</a>
+              <a href="#" class="footer-link hover:text-accent-500 active:text-accent-600 transition-colors duration-150 cursor-pointer">Yemek.com</a>
+              <a href="#" class="footer-link hover:text-accent-500 active:text-accent-600 transition-colors duration-150 cursor-pointer">Webtekno</a>
+              <a href="#" class="footer-link hover:text-accent-500 active:text-accent-600 transition-colors duration-150 cursor-pointer">Hisse.net</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================ -->
+  <!-- CHANGE SUMMARY TABLE -->
+  <!-- ============================================ -->
+  <section class="bg-white border-t border-primary-200">
+    <div class="max-w-[1400px] mx-auto px-6 lg:px-12 py-12">
+      <h2 class="text-lg font-bold mb-6">Change Summary</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm border border-primary-200 rounded-lg overflow-hidden">
+          <thead class="bg-primary-50">
+            <tr>
+              <th class="text-left px-4 py-3 font-semibold text-primary-700 border-b border-primary-200">Component</th>
+              <th class="text-left px-4 py-3 font-semibold text-primary-700 border-b border-primary-200">Type</th>
+              <th class="text-left px-4 py-3 font-semibold text-primary-700 border-b border-primary-200">Before</th>
+              <th class="text-left px-4 py-3 font-semibold text-primary-700 border-b border-primary-200">After</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-primary-200">
+            <tr>
+              <td class="px-4 py-3 font-medium">Header</td>
+              <td class="px-4 py-3"><span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-success-100 text-success-600">NEW</span></td>
+              <td class="px-4 py-3 text-primary-500">No "Hakkımızda" link</td>
+              <td class="px-4 py-3">Added <code class="bg-primary-100 px-1.5 py-0.5 rounded text-xs">&lt;a href="/hakkimizda"&gt;</code> between İş Ortaklarımız and CTA</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3 font-medium">Header</td>
+              <td class="px-4 py-3"><span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-success-100 text-success-600">NEW</span></td>
+              <td class="px-4 py-3 text-primary-500">No "İletişim" link</td>
+              <td class="px-4 py-3">Added <code class="bg-primary-100 px-1.5 py-0.5 rounded text-xs">&lt;a href="/iletisim"&gt;</code> between Hakkımızda and Influencer Başvurusu</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3 font-medium">Header</td>
+              <td class="px-4 py-3"><span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-success-100 text-success-600">NEW</span></td>
+              <td class="px-4 py-3 text-primary-500">No active page indicator</td>
+              <td class="px-4 py-3">2px bottom border in <code class="bg-primary-100 px-1.5 py-0.5 rounded text-xs">#D4AF37</code> (accent-600) under current page link; link text bold + primary-900</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3 font-medium">Footer</td>
+              <td class="px-4 py-3"><span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-warning-100 text-warning-600">FIX</span></td>
+              <td class="px-4 py-3 text-primary-500">Solution links: <code class="bg-primary-100 px-1.5 py-0.5 rounded text-xs">href="#"</code></td>
+              <td class="px-4 py-3">
+                <code class="bg-primary-100 px-1.5 py-0.5 rounded text-xs">/markalar-icin</code>,
+                <code class="bg-primary-100 px-1.5 py-0.5 rounded text-xs">/influencerlar-icin</code>,
+                <code class="bg-primary-100 px-1.5 py-0.5 rounded text-xs">/ajanslar-icin</code>
+              </td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3 font-medium">Footer</td>
+              <td class="px-4 py-3"><span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-warning-100 text-warning-600">FIX</span></td>
+              <td class="px-4 py-3 text-primary-500">&copy; 2025</td>
+              <td class="px-4 py-3">&copy; 2026</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Active indicator spec -->
+      <div class="mt-8 p-6 bg-primary-50 rounded-xl border border-primary-200">
+        <h3 class="text-sm font-bold mb-3">Active Page Indicator — CSS Spec</h3>
+        <pre class="text-xs text-primary-700 bg-white p-4 rounded-lg border border-primary-200 overflow-x-auto"><code>/* Apply .nav-active-link class to the &lt;a&gt; matching the current route */
+.nav-active-link {
+  position: relative;
+  color: #0F172A;          /* primary-900 */
+  font-weight: 600;
+}
+.nav-active-link::after {
+  content: '';
+  position: absolute;
+  bottom: -22px;           /* aligns to bottom edge of 72px header */
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #D4AF37;    /* accent-600 */
+  border-radius: 1px;
+}</code></pre>
+        <p class="mt-3 text-xs text-primary-500">
+          The <code class="bg-white px-1.5 py-0.5 rounded text-xs border border-primary-200">bottom: -22px</code> value
+          positions the accent bar flush with the header's bottom border. Adjust based on the nav link's vertical centering within the 72px header.
+        </p>
+      </div>
+
+      <!-- Nav order spec -->
+      <div class="mt-6 p-6 bg-primary-50 rounded-xl border border-primary-200">
+        <h3 class="text-sm font-bold mb-3">Updated Nav Link Order (Desktop)</h3>
+        <div class="flex items-center gap-3 flex-wrap text-xs">
+          <span class="px-3 py-1.5 bg-white border border-primary-200 rounded-lg font-medium">Ana Sayfa</span>
+          <i data-lucide="arrow-right" class="w-3 h-3 text-primary-400"></i>
+          <span class="px-3 py-1.5 bg-white border border-primary-200 rounded-lg font-medium">Çözümler ▾</span>
+          <i data-lucide="arrow-right" class="w-3 h-3 text-primary-400"></i>
+          <span class="px-3 py-1.5 bg-white border border-primary-200 rounded-lg font-medium">İş Ortaklarımız</span>
+          <i data-lucide="arrow-right" class="w-3 h-3 text-primary-400"></i>
+          <span class="px-3 py-1.5 bg-accent-100 border border-accent-600 rounded-lg font-bold text-accent-900">Hakkımızda ← NEW</span>
+          <i data-lucide="arrow-right" class="w-3 h-3 text-primary-400"></i>
+          <span class="px-3 py-1.5 bg-accent-100 border border-accent-600 rounded-lg font-bold text-accent-900">İletişim ← NEW</span>
+          <i data-lucide="arrow-right" class="w-3 h-3 text-primary-400"></i>
+          <span class="px-3 py-1.5 bg-white border border-primary-200 rounded-lg font-medium">Influencer Başvurusu</span>
+          <i data-lucide="arrow-right" class="w-3 h-3 text-primary-400"></i>
+          <span class="px-3 py-1.5 bg-primary-900 text-white rounded-lg font-semibold">Demo Talep Et (CTA)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- SCRIPTS -->
+  <!-- ============================================ -->
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

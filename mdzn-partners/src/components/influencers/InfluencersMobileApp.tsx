@@ -1,9 +1,17 @@
+"use client";
+
 import { Smartphone } from "lucide-react";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 export default function InfluencersMobileApp() {
+  const { ref, isVisible } = useScrollReveal();
+
   return (
     <section className="py-16 bg-white">
-      <div className="max-w-[900px] mx-auto px-6 lg:px-12 text-center">
+      <div
+        ref={ref}
+        className={`max-w-[900px] mx-auto px-6 lg:px-12 text-center transition-all duration-700 ${isVisible ? "animate-fade-in-up" : "opacity-0 translate-y-6"}`}
+      >
         <div className="w-20 h-20 bg-primary-100 rounded-2xl flex items-center justify-center mx-auto mb-8">
           <Smartphone className="w-10 h-10 text-primary-600" />
         </div>

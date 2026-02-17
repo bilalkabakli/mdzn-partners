@@ -2,13 +2,20 @@
 
 import { ArrowRight, Mail } from "lucide-react";
 import { useModal } from "../ModalContext";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 export default function AboutCTA() {
   const { openModal } = useModal();
+  const { ref, isVisible } = useScrollReveal();
 
   return (
     <section className="py-16 bg-primary-50">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div
+        ref={ref}
+        className={`max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-700 ${
+          isVisible ? "animate-fade-in-up" : "opacity-0 translate-y-6"
+        }`}
+      >
         <div className="bg-gradient-to-br from-primary-900 to-primary-800 rounded-3xl p-12 text-center relative overflow-hidden">
           {/* Decorative elements */}
           <div
@@ -38,7 +45,7 @@ export default function AboutCTA() {
                 <ArrowRight className="w-5 h-5" />
               </button>
               <a
-                href="#"
+                href="/iletisim"
                 className="bg-white/10 hover:bg-white/20 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-200 border border-white/20 flex items-center justify-center gap-2"
               >
                 <Mail className="w-5 h-5" />

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { useScrollReveal } from "../hooks/useScrollReveal";
 
@@ -42,7 +43,7 @@ export default function BrandLogos() {
           {brands.map((brand, index) => (
             <div
               key={brand.name}
-              className="brand-card bg-white rounded-xl p-4 flex flex-col items-center gap-3 cursor-default transition-all duration-200 hover:-translate-y-0.5"
+              className="brand-card bg-white rounded-xl p-4 flex flex-col items-center gap-3 cursor-default transition-all duration-200"
               style={{
                 transitionDelay: isVisible ? `${index * 80}ms` : "0ms",
                 opacity: isVisible ? 1 : 0,
@@ -64,13 +65,13 @@ export default function BrandLogos() {
         </div>
 
         <div className="text-center">
-          <a
+          <Link
             href="/is-ortaklari"
             className="inline-flex items-center gap-2 btn-secondary px-6 py-3 rounded-lg font-semibold"
           >
             Tüm markaları gör
             <ArrowRight className="w-4 h-4" />
-          </a>
+          </Link>
         </div>
       </div>
     </section>

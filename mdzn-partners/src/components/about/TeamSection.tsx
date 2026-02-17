@@ -78,7 +78,7 @@ export default function TeamSection() {
           {teamMembers.map((member, index) => (
             <div
               key={member.initials}
-              className="team-card bg-white border border-primary-200 rounded-2xl p-6 flex flex-col items-center text-center transition-all duration-200 hover:border-accent-600 hover:shadow-[0_4px_16px_rgba(212,175,55,0.15)] hover:-translate-y-0.5"
+              className="team-card bg-white border border-primary-200 rounded-2xl p-6 flex flex-col items-center text-center transition-all duration-200 hover:border-accent-600 hover:shadow-[0_4px_16px_rgba(212,175,55,0.15)]"
               style={{
                 animationDelay: sectionVisible
                   ? `${index * 100}ms`

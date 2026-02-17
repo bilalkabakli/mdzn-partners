@@ -3,10 +3,10 @@
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const stats = [
-  { value: "60M", label: "Unique Visitors" },
-  { value: "500+", label: "Direct Advertisers" },
-  { value: "14M", label: "Social Media Followers" },
-  { value: "6", label: "RTB Networks" },
+  { value: "60M", label: "Tekil Ziyaretci" },
+  { value: "500+", label: "Dogrudan Reklamveren" },
+  { value: "14M", label: "Sosyal Medya Takipcisi" },
+  { value: "6", label: "Yillik Gelir" },
 ];
 
 export default function MediazoneStats() {

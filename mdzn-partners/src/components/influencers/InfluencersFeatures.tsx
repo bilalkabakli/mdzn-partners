@@ -166,12 +166,16 @@ export default function InfluencersFeatures() {
 
         <div className="grid lg:grid-cols-12 gap-8">
           {/* Left: Vertical Tabs */}
-          <div className="lg:col-span-4 space-y-3">
+          <div className="lg:col-span-4 space-y-3" role="tablist" aria-label="Avantajlar">
             {features.map((feature, index) => {
               const isActive = index === activeTab;
               return (
                 <button
                   key={feature.title}
+                  role="tab"
+                  aria-selected={isActive}
+                  aria-controls={`influencers-tabpanel-${index}`}
+                  id={`influencers-tab-${index}`}
                   onClick={() => setActiveTab(index)}
                   className={`w-full text-left p-5 rounded-xl flex items-center gap-4 transition-all ${
                     isActive
@@ -195,7 +199,12 @@ export default function InfluencersFeatures() {
           </div>
 
           {/* Right: Content Area */}
-          <div className="lg:col-span-8 bg-primary-50 rounded-2xl p-8 lg:p-10 min-h-[640px]">
+          <div
+            className="lg:col-span-8 bg-primary-50 rounded-2xl p-8 lg:p-10 min-h-[640px]"
+            role="tabpanel"
+            id={`influencers-tabpanel-${activeTab}`}
+            aria-labelledby={`influencers-tab-${activeTab}`}
+          >
             <div className="flex items-center gap-4 mb-4">
               <div className="p-3 bg-accent-100 rounded-xl">
                 <activeFeature.icon className="w-6 h-6 text-accent-700" />

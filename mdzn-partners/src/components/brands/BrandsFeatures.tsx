@@ -274,7 +274,7 @@ export default function BrandsFeatures() {
 
         <div className="grid lg:grid-cols-12 gap-8">
           {/* Left: Vertical Tabs */}
-          <div className="lg:col-span-4 space-y-3">
+          <div className="lg:col-span-4 space-y-3" role="tablist" aria-label="Özellikler">
             {tabs.map((tab, index) => {
               const isActive = activeTab === index;
               const Icon = tab.icon;
@@ -282,11 +282,15 @@ export default function BrandsFeatures() {
               return (
                 <button
                   key={tab.label}
+                  role="tab"
+                  aria-selected={isActive}
+                  aria-controls={`brands-tabpanel-${index}`}
+                  id={`brands-tab-${index}`}
                   onClick={() => setActiveTab(index)}
                   className={`w-full text-left p-5 rounded-xl flex items-center gap-4 transition-all duration-200 border ${
                     isActive
                       ? "bg-primary-900 text-white border-primary-900 shadow-[0_8px_24px_rgba(15,23,42,0.2)]"
-                      : "bg-white border-primary-200 text-primary-900 hover:border-accent-600 hover:bg-accent-100 hover:text-accent-700 hover:shadow-[0_4px_16px_rgba(212,175,55,0.15)]"
+                      : "group bg-white border-primary-200 text-primary-900 hover:border-accent-600 hover:bg-accent-100 hover:text-accent-700 hover:shadow-[0_4px_16px_rgba(212,175,55,0.15)]"
                   }`}
                 >
                   <div
@@ -315,6 +319,9 @@ export default function BrandsFeatures() {
                   return (
                     <div
                       key={tab.label}
+                      role="tabpanel"
+                      id={`brands-tabpanel-${index}`}
+                      aria-labelledby={`brands-tab-${index}`}
                       className={`transition-all duration-200 ${
                         isActive
                           ? "relative opacity-100 visible"

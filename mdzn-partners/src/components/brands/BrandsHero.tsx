@@ -66,7 +66,7 @@ export default function BrandsHero() {
           </div>
 
           {/* Right: Dashboard Mockup */}
-          <div className="glass-card-hero p-6 rounded-2xl border border-white/15"
+          <div className="p-6 rounded-2xl border border-white/15"
             style={{
               background: "rgba(255, 255, 255, 0.1)",
               backdropFilter: "blur(12px)",

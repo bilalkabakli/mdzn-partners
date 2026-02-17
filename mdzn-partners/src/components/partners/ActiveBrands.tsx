@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { activeBrands } from "@/data/partnersData";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
@@ -21,7 +22,7 @@ export default function ActiveBrands() {
           {activeBrands.map((brand) => (
             <div
               key={brand.name}
-              className="group relative flex flex-col items-center rounded-2xl border border-primary-200 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] hover:scale-[1.02] hover:border-accent-600 hover:shadow-[0_4px_16px_rgba(212,175,55,0.15),0_8px_24px_rgba(0,0,0,0.06)]"
+              className="group relative flex flex-col items-center rounded-2xl border border-primary-200 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] hover:border-accent-600 hover:shadow-[0_4px_16px_rgba(212,175,55,0.15),0_8px_24px_rgba(0,0,0,0.06)]"
             >
               {/* Aktif micro-badge — appears on hover */}
               <div className="absolute -top-2 -left-2 z-10 opacity-0 scale-75 transition-all duration-200 group-hover:opacity-100 group-hover:scale-100">
@@ -33,11 +34,12 @@ export default function ActiveBrands() {
 
               <div className="bg-white rounded-xl w-full h-20 flex items-center justify-center mb-2 p-2">
                 {brand.logoUrl ? (
-                  <img
+                  <Image
                     src={brand.logoUrl}
                     alt={brand.name}
-                    className="h-12 object-contain"
-                    loading="lazy"
+                    width={48}
+                    height={48}
+                    className="object-contain"
                   />
                 ) : (
                   <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { ArrowRight, Mail } from "lucide-react";
 import { useModal } from "../ModalContext";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
@@ -44,13 +45,13 @@ export default function AboutCTA() {
                 Aramıza Katıl
                 <ArrowRight className="w-5 h-5" />
               </button>
-              <a
+              <Link
                 href="/iletisim"
                 className="bg-white/10 hover:bg-white/20 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-200 border border-white/20 flex items-center justify-center gap-2"
               >
                 <Mail className="w-5 h-5" />
                 İletişime Geç
-              </a>
+              </Link>
             </div>
           </div>
         </div>

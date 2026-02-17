@@ -1,5 +1,6 @@
 "use client";
 
+import { ArrowRight, ChevronDown } from "lucide-react";
 import { useModal } from "../ModalContext";
 
 const influencers = [
@@ -70,38 +71,14 @@ export default function AgenciesHero() {
                 onClick={() => openModal("brand")}
               >
                 Aramıza Katıl
-                <svg
-                  className="w-5 h-5 group-hover:translate-x-1 transition-transform"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M13 7l5 5m0 0l-5 5m5-5H6"
-                  />
-                </svg>
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
               <button
                 onClick={scrollToFeatures}
                 className="bg-white/10 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white/20 transition-all duration-200 border border-white/20 flex items-center gap-2"
               >
                 Nasıl Çalışır?
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
+                <ChevronDown className="w-5 h-5" />
               </button>
             </div>
           </div>

@@ -2,6 +2,7 @@
 
 import { Check, ArrowRight } from "lucide-react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { useModal } from "../ModalContext";
 
 const benefits = [
   "Türkiye\u2019nin en büyük influencer ağına erişim",
@@ -12,6 +13,7 @@ const benefits = [
 
 export default function PartnersCTA() {
   const { ref, isVisible } = useScrollReveal();
+  const { openModal } = useModal();
 
   return (
     <section className="py-20 bg-primary-900">
@@ -33,7 +35,7 @@ export default function PartnersCTA() {
 
             <ul className="space-y-4 mb-10">
               {benefits.map((benefit, index) => (
-                <li key={index} className="flex items-center gap-4 text-white/80">
+                <li key={benefit} className="flex items-center gap-4 text-white/80">
                   <div className="w-6 h-6 bg-accent-600/20 rounded-full flex items-center justify-center flex-shrink-0">
                     <Check className="w-4 h-4 text-accent-400" />
                   </div>
@@ -42,7 +44,7 @@ export default function PartnersCTA() {
               ))}
             </ul>
 
-            <button className="btn-accent h-14 px-8 rounded-lg text-base font-semibold flex items-center gap-2 group">
+            <button onClick={() => openModal("brand")} className="btn-accent h-14 px-8 rounded-lg text-base font-semibold flex items-center gap-2 group">
               Marka Başvurusu
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>

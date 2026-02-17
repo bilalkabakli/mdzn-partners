@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Instagram, Linkedin, Twitter } from "lucide-react";
 
 const solutionLinks = [
@@ -116,12 +117,12 @@ export default function Footer() {
                   <ul className="space-y-3">
                     {solutionLinks.map(({ href, label }) => (
                       <li key={label}>
-                        <a
+                        <Link
                           href={href}
                           className="footer-link text-primary-400 hover:text-accent-500 active:text-accent-600 transition-colors duration-150"
                         >
                           {label}
-                        </a>
+                        </Link>
                       </li>
                     ))}
                   </ul>
@@ -135,12 +136,12 @@ export default function Footer() {
                   <ul className="space-y-3">
                     {companyLinks.map(({ href, label }) => (
                       <li key={label}>
-                        <a
+                        <Link
                           href={href}
                           className="footer-link text-primary-400 hover:text-accent-500 active:text-accent-600 transition-colors duration-150"
                         >
                           {label}
-                        </a>
+                        </Link>
                       </li>
                     ))}
                   </ul>

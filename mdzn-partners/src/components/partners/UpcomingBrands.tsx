@@ -21,7 +21,7 @@ export default function UpcomingBrands() {
           {upcomingBrands.map((brand) => (
             <div
               key={brand.name}
-              className="group flex flex-col items-center rounded-2xl border-2 border-dashed border-primary-300 opacity-70 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] hover:opacity-90 hover:border-accent-600 hover:shadow-[0_0_20px_rgba(212,175,55,0.25),0_4px_16px_rgba(212,175,55,0.15)] hover:scale-[1.02]"
+              className="group flex flex-col items-center rounded-2xl border-2 border-dashed border-primary-300 opacity-70 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] hover:opacity-90 hover:border-accent-600 hover:shadow-[0_0_20px_rgba(212,175,55,0.25),0_4px_16px_rgba(212,175,55,0.15)]"
             >
               <div className="bg-white/80 rounded-xl w-full h-20 flex items-center justify-center mb-2 relative p-2">
                 <span className="absolute top-2 right-2 bg-warning-100 text-warning-600 text-xs px-2 py-0.5 rounded-full font-medium">

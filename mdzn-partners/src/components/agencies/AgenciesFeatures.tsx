@@ -296,7 +296,7 @@ export default function AgenciesFeatures() {
         {/* Vertical Tabs Layout */}
         <div className="grid lg:grid-cols-12 gap-8">
           {/* Left: Vertical Tabs */}
-          <div className="lg:col-span-4 space-y-3">
+          <div className="lg:col-span-4 space-y-3" role="tablist" aria-label="Avantajlar">
             {features.map((feature, index) => {
               const Icon = feature.icon;
               const isActive = index === activeTab;
@@ -304,6 +304,10 @@ export default function AgenciesFeatures() {
               return (
                 <button
                   key={feature.title}
+                  role="tab"
+                  aria-selected={isActive}
+                  aria-controls={`agencies-tabpanel-${index}`}
+                  id={`agencies-tab-${index}`}
                   onClick={() => setActiveTab(index)}
                   className={`w-full text-left p-5 rounded-xl flex items-center gap-4 transition-all duration-200 ${
                     isActive
@@ -327,7 +331,12 @@ export default function AgenciesFeatures() {
           </div>
 
           {/* Right: Content Area */}
-          <div className="lg:col-span-8 bg-primary-50 rounded-2xl p-8 lg:p-10 min-h-[640px]">
+          <div
+            className="lg:col-span-8 bg-primary-50 rounded-2xl p-8 lg:p-10 min-h-[640px]"
+            role="tabpanel"
+            id={`agencies-tabpanel-${activeTab}`}
+            aria-labelledby={`agencies-tab-${activeTab}`}
+          >
             {/* Header: Icon + Title + Subtitle */}
             <div className="flex items-center gap-4 mb-4">
               <div className="p-3 bg-accent-100 rounded-xl">

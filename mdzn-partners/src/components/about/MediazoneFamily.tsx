@@ -66,7 +66,7 @@ export default function MediazoneFamily() {
           {familyBrands.map(({ name, initials, gradient, shadow, description }) => (
             <div
               key={name}
-              className="family-card bg-white border border-primary-200 rounded-2xl p-6 flex flex-col items-center text-center transition-all duration-200 hover:border-accent-600 hover:shadow-[0_4px_16px_rgba(212,175,55,0.15)] hover:-translate-y-0.5"
+              className="family-card bg-white border border-primary-200 rounded-2xl p-6 flex flex-col items-center text-center transition-all duration-200 hover:border-accent-600 hover:shadow-[0_4px_16px_rgba(212,175,55,0.15)]"
             >
               <div
                 className={`w-16 h-16 rounded-full bg-gradient-to-br ${gradient} flex items-center justify-center mb-4 shadow-md ${shadow}`}

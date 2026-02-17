@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, type FocusEvent, type ChangeEvent } from "react";
+import { useState, type FocusEvent, type ChangeEvent } from "react";
 import { Send } from "lucide-react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
@@ -46,13 +46,12 @@ function useFloatingLabel(initial = "") {
 
 export default function ContactForm() {
   const { ref, isVisible } = useScrollReveal();
-  const formRef = useRef<HTMLFormElement>(null);
-
   const name = useFloatingLabel();
   const email = useFloatingLabel();
   const subject = useFloatingLabel();
   const message = useFloatingLabel();
 
+  // TODO: Integrate with backend API — submit form data via POST request, handle loading/success/error states
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
   };
@@ -73,7 +72,7 @@ export default function ContactForm() {
         </div>
 
         <div className="bg-white rounded-[20px] border border-primary-200 shadow-md p-8 lg:p-10">
-          <form ref={formRef} onSubmit={handleSubmit} noValidate>
+          <form onSubmit={handleSubmit} noValidate>
             {/* Row 1: Ad Soyad + E-posta */}
             <div className="grid md:grid-cols-2 gap-4 mb-4">
               {/* Ad Soyad */}

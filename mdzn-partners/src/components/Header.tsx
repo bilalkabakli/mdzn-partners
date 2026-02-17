@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { useModal } from "./ModalContext";
 
@@ -26,12 +27,30 @@ export default function Header() {
         : "text-primary-600 hover:text-accent-700 active:text-accent-800"
     }`;
 
+  const handleDropdownKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setDropdownOpen(false);
+        (e.currentTarget as HTMLElement).blur();
+      } else if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        setDropdownOpen((prev) => {
+          if (prev) {
+            (e.currentTarget as HTMLElement).blur();
+          }
+          return !prev;
+        });
+      }
+    },
+    []
+  );
+
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-primary-200">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
         <div className="flex justify-between items-center h-[72px]">
           {/* Logo */}
-          <a href="/" className="flex items-center gap-3 group">
+          <Link href="/" className="flex items-center gap-3 group">
             <div className="w-9 h-9 border border-primary-900 rounded-md flex flex-col items-center justify-center group-hover:bg-primary-900 transition-colors">
               <span className="text-[9px] font-extrabold leading-none group-hover:text-white transition-colors">
                 MD
@@ -41,7 +60,7 @@ export default function Header() {
               </span>
             </div>
             <span className="text-sm font-bold tracking-[1px]">PARTNERS</span>
-          </a>
+          </Link>
 
           {/* Desktop Navigation — centered */}
           <div className="hidden lg:flex flex-1 justify-center">
@@ -50,16 +69,16 @@ export default function Header() {
               role="navigation"
               aria-label="Ana navigasyon"
             >
-              <a
+              <Link
                 href="/"
                 className={`relative text-sm font-medium transition-colors duration-150 pb-[26px] mb-[-26px] ${
                   isActive("/")
                     ? "text-accent-700 after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-accent-600"
-                    : "text-primary-900 hover:text-accent-700 active:text-accent-800"
+                    : "text-primary-600 hover:text-accent-700 active:text-accent-800"
                 }`}
               >
                 Ana Sayfa
-              </a>
+              </Link>
               <div className="relative group">
                 <button
                   className={`relative flex items-center gap-1 text-sm font-medium transition-colors duration-150 pb-[26px] mb-[-26px] ${
@@ -72,6 +91,7 @@ export default function Header() {
                   onMouseEnter={() => setDropdownOpen(true)}
                   onMouseLeave={() => setDropdownOpen(false)}
                   onClick={() => setDropdownOpen(!dropdownOpen)}
+                  onKeyDown={handleDropdownKeyDown}
                 >
                   Çözümler
                   <ChevronDown className="w-4 h-4" />
@@ -86,7 +106,7 @@ export default function Header() {
                   onMouseLeave={() => setDropdownOpen(false)}
                   role="menu"
                 >
-                  <a
+                  <Link
                     href="/markalar-icin"
                     className={`block px-4 py-2.5 text-sm transition-colors duration-150 ${
                       isActive("/markalar-icin")
@@ -96,8 +116,8 @@ export default function Header() {
                     role="menuitem"
                   >
                     Markalar İçin
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href="/influencerlar-icin"
                     className={`block px-4 py-2.5 text-sm transition-colors duration-150 ${
                       isActive("/influencerlar-icin")
@@ -107,8 +127,8 @@ export default function Header() {
                     role="menuitem"
                   >
                     Influencer&apos;lar İçin
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href="/ajanslar-icin"
                     className={`block px-4 py-2.5 text-sm transition-colors duration-150 ${
                       isActive("/ajanslar-icin")
@@ -118,18 +138,18 @@ export default function Header() {
                     role="menuitem"
                   >
                     Ajanslar İçin
-                  </a>
+                  </Link>
                 </div>
               </div>
-              <a href="/is-ortaklari" className={navLinkClass("/is-ortaklari")}>
+              <Link href="/is-ortaklari" className={navLinkClass("/is-ortaklari")}>
                 İş Ortaklarımız
-              </a>
-              <a href="/hakkimizda" className={navLinkClass("/hakkimizda")}>
+              </Link>
+              <Link href="/hakkimizda" className={navLinkClass("/hakkimizda")}>
                 Hakkımızda
-              </a>
-              <a href="/iletisim" className={navLinkClass("/iletisim")}>
+              </Link>
+              <Link href="/iletisim" className={navLinkClass("/iletisim")}>
                 İletişim
-              </a>
+              </Link>
             </nav>
           </div>
 
@@ -159,62 +179,62 @@ export default function Header() {
         {/* Mobile Menu */}
         {mobileMenuOpen && (
           <div className="lg:hidden border-t border-primary-200 py-4 space-y-3">
-            <a
+            <Link
               href="/"
               className={`block py-2 text-sm font-medium ${
-                isActive("/") ? "text-accent-700" : "text-primary-900"
+                isActive("/") ? "text-accent-700" : "text-primary-600"
               }`}
             >
               Ana Sayfa
-            </a>
-            <a
+            </Link>
+            <Link
               href="/markalar-icin"
               className={`block py-2 text-sm font-medium ${
                 isActive("/markalar-icin") ? "text-accent-700" : "text-primary-600"
               }`}
             >
               Markalar İçin
-            </a>
-            <a
+            </Link>
+            <Link
               href="/influencerlar-icin"
               className={`block py-2 text-sm font-medium ${
                 isActive("/influencerlar-icin") ? "text-accent-700" : "text-primary-600"
               }`}
             >
               Influencer&apos;lar İçin
-            </a>
-            <a
+            </Link>
+            <Link
               href="/ajanslar-icin"
               className={`block py-2 text-sm font-medium ${
                 isActive("/ajanslar-icin") ? "text-accent-700" : "text-primary-600"
               }`}
             >
               Ajanslar İçin
-            </a>
-            <a
+            </Link>
+            <Link
               href="/is-ortaklari"
               className={`block py-2 text-sm font-medium ${
                 isActive("/is-ortaklari") ? "text-accent-700" : "text-primary-600"
               }`}
             >
               İş Ortaklarımız
-            </a>
-            <a
+            </Link>
+            <Link
               href="/hakkimizda"
               className={`block py-2 text-sm font-medium ${
                 isActive("/hakkimizda") ? "text-accent-700" : "text-primary-600"
               }`}
             >
               Hakkımızda
-            </a>
-            <a
+            </Link>
+            <Link
               href="/iletisim"
               className={`block py-2 text-sm font-medium ${
                 isActive("/iletisim") ? "text-accent-700" : "text-primary-600"
               }`}
             >
               İletişim
-            </a>
+            </Link>
             <button
               className="btn-primary w-full h-11 rounded-lg text-sm font-semibold mt-4"
               onClick={() => { openModal(); setMobileMenuOpen(false); }}

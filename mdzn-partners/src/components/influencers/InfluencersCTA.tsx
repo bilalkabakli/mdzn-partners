@@ -17,7 +17,7 @@ export default function InfluencersCTA() {
             <span className="overline text-accent-400 mb-4 inline-block">
               Başvuru
             </span>
-            <h2 className="text-3xl lg:text-4xl font-bold tracking-[-1px] mb-6 text-white">
+            <h2 className="text-3xl md:text-4xl font-bold tracking-[-1px] mb-6 text-white">
               Hemen başvurun,
               <br />
               kazanmaya başlayın

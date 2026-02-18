@@ -25,7 +25,7 @@ const stats = [
 
 export default function BrandsHero() {
   return (
-    <section className="bg-primary-900 text-white py-12 lg:py-16">
+    <section className="bg-primary-900 text-white py-10 lg:py-16">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           {/* Left: Content */}

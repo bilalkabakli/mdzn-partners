@@ -67,6 +67,7 @@
 body {
   background: #FFFFFF;
   color: #0F172A;
+  overflow-x: hidden;
 }
 
 /* ========================================
@@ -231,8 +232,13 @@ body {
   background: #FFFFFF;
   border: 1px solid #E2E8F0;
   border-radius: 16px;
-  padding: 32px;
+  padding: 20px;
   transition: all 200ms ease;
+}
+@media (min-width: 768px) {
+  .integration-card {
+    padding: 32px;
+  }
 }
 .integration-card:hover {
   border-color: #D4AF37;
@@ -250,8 +256,13 @@ body {
   background: #FFFFFF;
   border: 1px solid #E2E8F0;
   border-radius: 16px;
-  padding: 24px;
+  padding: 16px;
   transition: all 200ms ease;
+}
+@media (min-width: 768px) {
+  .step-card {
+    padding: 24px;
+  }
 }
 .step-card:hover {
   border-color: #D4AF37;

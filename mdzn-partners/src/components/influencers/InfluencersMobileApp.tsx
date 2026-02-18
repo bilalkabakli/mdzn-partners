@@ -8,7 +8,7 @@ export default function InfluencersMobileApp() {
           <Smartphone className="w-10 h-10 text-primary-600" />
         </div>
 
-        <h2 className="text-3xl lg:text-4xl font-bold tracking-[-1px] mb-4">
+        <h2 className="text-3xl md:text-4xl font-bold tracking-[-1px] mb-4">
           Mobil Takip Kolaylığı
         </h2>
         <p className="text-primary-500 mb-10 max-w-xl mx-auto leading-relaxed">

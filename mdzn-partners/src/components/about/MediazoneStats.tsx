@@ -25,7 +25,7 @@ export default function MediazoneStats() {
               <div className="w-12 h-12 lg:w-16 lg:h-16 bg-gradient-to-br from-accent-600 to-accent-500 rounded-2xl flex items-center justify-center shadow-lg shadow-accent-600/30">
                 <span className="font-bold text-white text-sm lg:text-xl">MZ</span>
               </div>
-              <h2 className="text-3xl font-bold tracking-[-0.5px] text-white">
+              <h2 className="text-3xl md:text-4xl font-bold tracking-[-0.5px] text-white">
                 Rakamlarla Mediazone
               </h2>
             </div>

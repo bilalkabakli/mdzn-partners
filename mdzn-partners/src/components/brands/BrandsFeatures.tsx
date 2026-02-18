@@ -251,10 +251,10 @@ export default function BrandsFeatures() {
     <section className="py-10 lg:py-16 bg-white">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-10 lg:mb-16">
           <span className="overline text-primary-400">Özellikler</span>
           <h2
-            className="text-4xl font-bold mt-3 tracking-tight"
+            className="text-3xl md:text-4xl font-bold mt-3 tracking-tight"
             style={{ letterSpacing: "-0.5px" }}
           >
             Neden MDZN Partners?

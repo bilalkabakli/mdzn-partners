@@ -19,10 +19,10 @@ export default function BrandsComparison() {
     <section className="py-10 lg:py-16 bg-primary-50">
       <div className="max-w-5xl mx-auto px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-10 lg:mb-16">
           <span className="overline text-primary-400">Karşılaştırma</span>
           <h2
-            className="text-4xl font-bold mt-3 tracking-tight"
+            className="text-3xl md:text-4xl font-bold mt-3 tracking-tight"
             style={{ letterSpacing: "-0.5px" }}
           >
             Farkı Görün

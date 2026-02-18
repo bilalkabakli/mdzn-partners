@@ -31,7 +31,7 @@ export default function InfluencersHero() {
   const { openModal } = useModal();
 
   return (
-    <section className="bg-primary-900 text-white py-12 lg:py-16 relative overflow-hidden">
+    <section className="bg-primary-900 text-white py-10 lg:py-16 relative overflow-hidden">
       {/* Decorative blur circles */}
       <div className="absolute top-20 right-20 w-72 h-72 bg-accent-600/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-10 left-10 w-56 h-56 bg-info-600/10 rounded-full blur-3xl pointer-events-none" />

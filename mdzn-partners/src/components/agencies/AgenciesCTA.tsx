@@ -9,7 +9,7 @@ const benefits = [
 
 export default function AgenciesCTA() {
   return (
-    <section className="py-12 lg:py-16 bg-primary-900">
+    <section className="py-10 lg:py-16 bg-primary-900">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           {/* Left Content */}
@@ -17,7 +17,7 @@ export default function AgenciesCTA() {
             <span className="overline text-accent-400 mb-4 inline-block">
               Ajans Programı
             </span>
-            <h2 className="text-3xl lg:text-[36px] font-bold tracking-[-0.5px] mb-6 text-white">
+            <h2 className="text-3xl md:text-4xl font-bold tracking-[-0.5px] mb-6 text-white">
               Ajansınız için
               <br />
               demo talep edin

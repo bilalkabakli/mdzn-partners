@@ -2,7 +2,7 @@ import { Map } from "lucide-react";
 
 export default function ContactMap() {
   return (
-    <section className="hidden md:block py-16 bg-primary-50">
+    <section className="hidden md:block py-10 lg:py-16 bg-primary-50">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl md:text-4xl font-bold text-center text-primary-900 mb-12">
           Konumlarımız

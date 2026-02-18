@@ -30,7 +30,7 @@ export default function RootLayout({
   return (
     <html lang="tr">
       <body
-        className={`${plusJakartaSans.variable} ${jetbrainsMono.variable} antialiased`}
+        className={`${plusJakartaSans.variable} ${jetbrainsMono.variable} antialiased overflow-x-hidden`}
       >
         <a href="#main-content" className="skip-to-content">
           İçeriğe geç

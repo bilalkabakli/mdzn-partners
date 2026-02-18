@@ -39,16 +39,19 @@ export default function ScrollablePills({
     };
   }, [tabs]);
 
+  if (tabs.length === 0) return null;
+
   return (
     <div className="relative lg:hidden">
       <div
         ref={scrollRef}
         className="flex overflow-x-auto gap-2 scrollbar-hide px-4 py-2"
         role="tablist"
+        aria-label="Section navigation"
       >
         {tabs.map((tab, index) => (
           <button
-            key={index}
+            key={tab.label}
             role="tab"
             aria-selected={activeTab === index}
             onClick={() => onTabChange(index)}

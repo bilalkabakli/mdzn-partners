@@ -64,10 +64,6 @@
   font-family: var(--font-sans);
 }
 
-html {
-  overflow-x: hidden;
-}
-
 body {
   background: #FFFFFF;
   color: #0F172A;

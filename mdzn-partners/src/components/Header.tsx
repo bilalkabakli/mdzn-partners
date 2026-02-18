@@ -48,11 +48,15 @@ export default function Header() {
 
   useEffect(() => {
     if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
       const el = mobileMenuRef.current;
       if (el) {
         el.style.maxHeight = el.scrollHeight + "px";
       }
+    } else {
+      document.body.style.overflow = '';
     }
+    return () => { document.body.style.overflow = ''; };
   }, [mobileMenuOpen]);
 
   const mobileNavLinkClass = (href: string) =>

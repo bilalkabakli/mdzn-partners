@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, useCallback, ReactNode } from "react";
 
 type ModalType = "brand" | "influencer" | "agency" | null;
 
@@ -22,15 +22,15 @@ export function ModalProvider({ children }: { children: ReactNode }) {
   const [modalType, setModalType] = useState<ModalType>(null);
   const [isOpen, setIsOpen] = useState(false);
 
-  const openModal = (type: ModalType) => {
+  const openModal = useCallback((type: ModalType) => {
     setModalType(type);
     setIsOpen(true);
-  };
+  }, []);
 
-  const closeModal = () => {
+  const closeModal = useCallback(() => {
     setModalType(null);
     setIsOpen(false);
-  };
+  }, []);
 
   return (
     <ModalContext.Provider value={{ modalType, isOpen, openModal, closeModal }}>

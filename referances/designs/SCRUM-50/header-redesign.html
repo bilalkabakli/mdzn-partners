@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SCRUM-50 — Header Redesign: Before / After</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      background: #F1F5F9;
+      color: #0F172A;
+      padding: 40px 24px 80px;
+    }
+
+    /* ── Page title ── */
+    .page-title {
+      text-align: center;
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .page-subtitle {
+      text-align: center;
+      font-size: 14px;
+      color: #64748B;
+      margin-bottom: 48px;
+    }
+
+    /* ── Section wrapper ── */
+    .section {
+      max-width: 1200px;
+      margin: 0 auto 56px;
+    }
+
+    /* ── Section labels ── */
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .section-label .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .section-label.before .dot { background: #EF4444; }
+    .section-label.before { color: #DC2626; }
+    .section-label.after .dot { background: #22C55E; }
+    .section-label.after { color: #16A34A; }
+
+    /* ── Card that contains each header mockup ── */
+    .card {
+      background: #FFFFFF;
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,.08), 0 4px 12px rgba(0,0,0,.04);
+      overflow: hidden;
+    }
+
+    /* ════════════════════════════════════════════
+       HEADER COMPONENT — shared styles
+       ════════════════════════════════════════════ */
+    .header {
+      display: flex;
+      align-items: center;
+      height: 72px;
+      padding: 0 32px;
+      background: #FFFFFF;
+      border-bottom: 1px solid #E2E8F0;
+    }
+
+    /* Logo */
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      border: 2px solid #0F172A;
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      font-weight: 700;
+      font-size: 11px;
+      color: #0F172A;
+      letter-spacing: 0.5px;
+    }
+    .logo-icon span:first-child { margin-bottom: -2px; }
+    .logo-text {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: #0F172A;
+    }
+
+    /* Nav links */
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .nav a {
+      font-size: 14px;
+      font-weight: 500;
+      color: #475569;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: color .15s;
+    }
+    .nav a:hover { color: #BA9A2A; }
+    .nav a.active { color: #0F172A; }
+
+    /* CTA button */
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 44px;
+      padding: 0 24px;
+      background: #0F172A;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background .15s;
+    }
+    .cta-btn:hover { background: #1E293B; }
+
+    /* ── BEFORE Desktop: nav NOT centered ── */
+    .header--before-desktop .nav {
+      margin-left: 48px;
+    }
+    .header--before-desktop .cta-btn {
+      margin-left: auto;
+    }
+
+    /* ── AFTER Desktop: three-column (logo | nav centered | cta) ── */
+    .header--after-desktop {
+      display: flex;
+      align-items: center;
+    }
+    .header--after-desktop .logo { flex: 0 0 auto; }
+    .header--after-desktop .nav-center {
+      flex: 1 1 0%;
+      display: flex;
+      justify-content: center;
+    }
+    .header--after-desktop .cta-btn { flex: 0 0 auto; }
+
+    /* ════════════════════════════════════════════
+       MOBILE HEADER + MENU
+       ════════════════════════════════════════════ */
+    .mobile-wrapper {
+      max-width: 390px;
+      margin: 0 auto;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #FFFFFF;
+    }
+
+    .header-mobile {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+      padding: 0 20px;
+      background: #FFFFFF;
+      border-bottom: 1px solid #E2E8F0;
+    }
+
+    /* Hamburger icon */
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: #0F172A;
+      border-radius: 2px;
+    }
+
+    /* Mobile menu */
+    .mobile-menu {
+      padding: 8px 0;
+      background: #FFFFFF;
+    }
+    .mobile-menu a {
+      display: block;
+      padding: 14px 24px;
+      font-size: 15px;
+      font-weight: 500;
+      color: #475569;
+      text-decoration: none;
+      transition: background .1s;
+    }
+    .mobile-menu a:hover { background: #F8FAFC; }
+    .mobile-menu a.active { color: #0F172A; }
+    .mobile-menu .cta-btn {
+      margin: 12px 24px 16px;
+      width: calc(100% - 48px);
+    }
+
+    /* ── Removed-item highlight (strikethrough overlay for clarity) ── */
+    .removed-marker {
+      position: relative;
+      color: #EF4444 !important;
+      text-decoration: line-through;
+      opacity: .55;
+    }
+
+    /* ── Annotation callout ── */
+    .annotation {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin-top: 12px;
+      padding: 12px 16px;
+      background: #F0FDF4;
+      border-left: 3px solid #22C55E;
+      border-radius: 0 8px 8px 0;
+      font-size: 13px;
+      color: #166534;
+      line-height: 1.5;
+    }
+    .annotation.red {
+      background: #FEF2F2;
+      border-left-color: #EF4444;
+      color: #991B1B;
+    }
+    .annotation strong { font-weight: 600; }
+
+    /* ── Divider between desktop & mobile groups ── */
+    .group-divider {
+      max-width: 1200px;
+      margin: 0 auto 56px;
+      border: none;
+      border-top: 2px dashed #CBD5E1;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 class="page-title">SCRUM-50 — Header Redesign</h1>
+  <p class="page-subtitle">Before / After comparison — Desktop &amp; Mobile states</p>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       SECTION 1 — BEFORE DESKTOP
+       ══════════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-label before">
+      <span class="dot"></span> Before — Desktop
+    </div>
+    <div class="card">
+      <header class="header header--before-desktop">
+        <!-- Logo -->
+        <div class="logo">
+          <div class="logo-icon">
+            <span>MD</span>
+            <span>ZN</span>
+          </div>
+          <span class="logo-text">PARTNERS</span>
+        </div>
+
+        <!-- Nav (not centered — just sits after logo with a gap) -->
+        <nav class="nav">
+          <a href="#" class="active">Ana Sayfa</a>
+          <a href="#">Çözümler ▼</a>
+          <a href="#">İş Ortaklarımız</a>
+          <a href="#">Influencer Başvurusu</a>
+        </nav>
+
+        <!-- CTA -->
+        <button class="cta-btn">Demo Talep Et</button>
+      </header>
+    </div>
+    <div class="annotation red">
+      <strong>Issue:</strong>&nbsp;Nav links are not centered in the viewport. "Influencer Başvurusu" is present.
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       SECTION 2 — AFTER DESKTOP
+       ══════════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-label after">
+      <span class="dot"></span> After — Desktop
+    </div>
+    <div class="card">
+      <header class="header header--after-desktop">
+        <!-- Logo -->
+        <div class="logo">
+          <div class="logo-icon">
+            <span>MD</span>
+            <span>ZN</span>
+          </div>
+          <span class="logo-text">PARTNERS</span>
+        </div>
+
+        <!-- Nav (centered via flex-1 + justify-center) -->
+        <div class="nav-center">
+          <nav class="nav">
+            <a href="#" class="active">Ana Sayfa</a>
+            <a href="#">Çözümler ▼</a>
+            <a href="#">İş Ortaklarımız</a>
+          </nav>
+        </div>
+
+        <!-- CTA -->
+        <button class="cta-btn">Demo Talep Et</button>
+      </header>
+    </div>
+    <div class="annotation">
+      <strong>Changes:</strong>&nbsp;Nav links are now <strong>centered</strong> in the header (three-column flex layout). "Influencer Başvurusu" link has been <strong>removed</strong>.
+    </div>
+  </div>
+
+  <hr class="group-divider">
+
+  <!-- ══════════════════════════════════════════════════════════════
+       SECTION 3 — BEFORE MOBILE (MENU OPEN)
+       ══════════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-label before">
+      <span class="dot"></span> Before — Mobile (Menu Open)
+    </div>
+    <div class="card" style="max-width:420px;">
+      <div class="mobile-wrapper">
+        <!-- Mobile header bar -->
+        <div class="header-mobile">
+          <div class="logo">
+            <div class="logo-icon">
+              <span>MD</span>
+              <span>ZN</span>
+            </div>
+            <span class="logo-text">PARTNERS</span>
+          </div>
+          <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+
+        <!-- Expanded mobile menu -->
+        <div class="mobile-menu">
+          <a href="#" class="active">Ana Sayfa</a>
+          <a href="#">Markalar İçin</a>
+          <a href="#">Influencer'lar İçin</a>
+          <a href="#">Ajanslar İçin</a>
+          <a href="#">İş Ortaklarımız</a>
+          <a href="#">Influencer Başvurusu</a>
+          <button class="cta-btn">Demo Talep Et</button>
+        </div>
+      </div>
+    </div>
+    <div class="annotation red">
+      <strong>Issue:</strong>&nbsp;"Influencer Başvurusu" link is present in the mobile menu.
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       SECTION 4 — AFTER MOBILE (MENU OPEN)
+       ══════════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-label after">
+      <span class="dot"></span> After — Mobile (Menu Open)
+    </div>
+    <div class="card" style="max-width:420px;">
+      <div class="mobile-wrapper">
+        <!-- Mobile header bar -->
+        <div class="header-mobile">
+          <div class="logo">
+            <div class="logo-icon">
+              <span>MD</span>
+              <span>ZN</span>
+            </div>
+            <span class="logo-text">PARTNERS</span>
+          </div>
+          <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+
+        <!-- Expanded mobile menu — without "Influencer Başvurusu" -->
+        <div class="mobile-menu">
+          <a href="#" class="active">Ana Sayfa</a>
+          <a href="#">Markalar İçin</a>
+          <a href="#">Influencer'lar İçin</a>
+          <a href="#">Ajanslar İçin</a>
+          <a href="#">İş Ortaklarımız</a>
+          <button class="cta-btn">Demo Talep Et</button>
+        </div>
+      </div>
+    </div>
+    <div class="annotation">
+      <strong>Change:</strong>&nbsp;"Influencer Başvurusu" link has been <strong>removed</strong> from the mobile menu.
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MDZN Partners - İş Ortaklarımız</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              900: '#0F172A',
+              800: '#1E293B',
+              700: '#334155',
+              600: '#475569',
+              500: '#64748B',
+              400: '#94A3B8',
+              300: '#CBD5E1',
+              200: '#E2E8F0',
+              100: '#F1F5F9',
+              50: '#F8FAFC',
+            },
+            accent: {
+              900: '#7A5C0A',
+              800: '#9A7B1A',
+              700: '#BA9A2A',
+              600: '#D4AF37',
+              500: '#E4C04A',
+              400: '#F0D060',
+              300: '#F8E080',
+              200: '#FCF0A0',
+              100: '#FFFACC',
+            },
+            success: { 600: '#059669', 100: '#D1FAE5' },
+            warning: { 600: '#D97706', 100: '#FEF3C7' },
+            error: { 600: '#DC2626', 100: '#FEE2E2' },
+            info: { 600: '#0284C7', 100: '#E0F2FE' },
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          borderRadius: {
+            'sm': '6px',
+            'md': '8px',
+            'lg': '12px',
+            'xl': '16px',
+            '2xl': '20px',
+          },
+          boxShadow: {
+            'sm': '0 1px 2px rgba(0, 0, 0, 0.04)',
+            'md': '0 4px 12px rgba(0, 0, 0, 0.06)',
+            'lg': '0 8px 24px rgba(0, 0, 0, 0.08)',
+            'xl': '0 16px 40px rgba(0, 0, 0, 0.1)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    * { font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif; }
+
+    :root {
+      --transition-fast: 150ms ease;
+      --transition-base: 200ms ease;
+      --transition-slow: 300ms ease;
+    }
+
+    /* Button styles */
+    .btn-primary {
+      background: #0F172A;
+      color: #FFFFFF;
+      transition: var(--transition-base);
+    }
+    .btn-primary:hover {
+      background: #1E293B;
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3);
+    }
+
+    .btn-accent {
+      background: #D4AF37;
+      color: #0F172A;
+      transition: var(--transition-base);
+    }
+    .btn-accent:hover {
+      background: #BA9A2A;
+    }
+
+    /* Overline text */
+    .overline {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      border: none !important;
+    }
+    .overline::before,
+    .overline::after {
+      display: none !important;
+    }
+
+    /* Brand card */
+    .brand-card {
+      border: 1px solid #E2E8F0;
+      transition: var(--transition-base);
+    }
+    .brand-card:hover {
+      border-color: #D4AF37;
+      box-shadow: 0 4px 16px rgba(212, 175, 55, 0.15);
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #F8FAFC; }
+    ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+  </style>
+</head>
+
+<body class="bg-white text-primary-900">
+
+  <!-- ============================================ -->
+  <!-- HEADER -->
+  <!-- ============================================ -->
+  <header class="sticky top-0 z-50 bg-white border-b border-primary-200">
+    <div class="max-w-[1400px] mx-auto px-6 lg:px-12">
+      <div class="flex justify-between items-center h-[72px]">
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-3 group">
+          <div class="w-9 h-9 border-2 border-primary-900 rounded-sm flex flex-col items-center justify-center group-hover:bg-primary-900 transition-colors">
+            <span class="text-[9px] font-extrabold leading-none group-hover:text-white transition-colors">MD</span>
+            <span class="text-[9px] font-extrabold leading-none group-hover:text-white transition-colors">ZN</span>
+          </div>
+          <span class="text-sm font-bold tracking-[1px]">PARTNERS</span>
+        </a>
+
+        <!-- Navigation -->
+        <nav class="hidden lg:flex items-center gap-8">
+          <a href="index.html" class="text-sm font-medium text-primary-600 hover:text-accent-700 transition-colors">Ana Sayfa</a>
+          <div class="relative group">
+            <button class="flex items-center gap-1 text-sm font-medium text-primary-600 hover:text-accent-700 transition-colors">
+              Çözümler
+              <i data-lucide="chevron-down" class="w-4 h-4"></i>
+            </button>
+            <div class="invisible group-hover:visible opacity-0 group-hover:opacity-100 absolute top-full left-0 mt-2 w-52 bg-white border border-primary-200 rounded-xl py-2 shadow-lg transition-all duration-200 transform translate-y-2 group-hover:translate-y-0">
+              <a href="brands.html" class="block px-4 py-2.5 text-sm text-primary-600 hover:text-accent-700 hover:bg-accent-100 transition-colors">Markalar İçin</a>
+              <a href="influencers.html" class="block px-4 py-2.5 text-sm text-primary-600 hover:text-accent-700 hover:bg-accent-100 transition-colors">Influencer'lar İçin</a>
+              <a href="agencies.html" class="block px-4 py-2.5 text-sm text-primary-600 hover:text-accent-700 hover:bg-accent-100 transition-colors">Ajanslar İçin</a>
+            </div>
+          </div>
+          <a href="partners.html" class="text-sm font-medium text-primary-600 hover:text-accent-700 transition-colors">İş Ortaklarımız</a>
+          <a href="influencers.html" class="text-sm font-medium text-primary-600 hover:text-accent-700 transition-colors">Influencer Başvurusu</a>
+        </nav>
+
+        <!-- CTA -->
+        <button class="hidden lg:flex btn-primary h-11 px-6 rounded-md text-sm font-semibold items-center gap-2">
+          Demo Talep Et
+        </button>
+
+        <!-- Mobile menu -->
+        <button class="lg:hidden p-2 text-primary-600 hover:text-accent-700">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================ -->
+  <!-- HERO SECTION -->
+  <!-- ============================================ -->
+  <section class="py-12 lg:py-16 bg-gradient-to-br from-accent-100/50 to-primary-50">
+    <div class="max-w-[1400px] mx-auto px-6 lg:px-12 text-center">
+      <span class="overline text-accent-600 mb-4 inline-block border-0">İş Ortaklarımız</span>
+      <h1 class="text-4xl lg:text-5xl font-extrabold leading-[1.1] tracking-[-1px] mb-4">İş Ortaklarımız</h1>
+      <p class="text-lg text-primary-500 font-medium">Türkiye'nin önde gelen markaları ile çalışıyoruz</p>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- ACTIVE BRANDS SECTION -->
+  <!-- ============================================ -->
+  <section class="py-16">
+    <div class="max-w-[1400px] mx-auto px-6 lg:px-12">
+      <h2 class="text-[28px] tracking-[-0.3px] font-bold mb-8">Aktif Markalar</h2>
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+        <!-- Proteinocean -->
+        <div class="brand-card flex flex-col items-center">
+          <div class="bg-white rounded-xl w-full h-20 border border-primary-200 flex items-center justify-center mb-2 p-2">
+            <img src="https://cdn.myikas.com/images/theme-images/7864530e-8b30-485e-9d6b-28c0cbb9e41a/image_180.webp" alt="Proteinocean" class="h-12 object-contain">
+          </div>
+          <span class="text-xs text-primary-600 text-center">Proteinocean</span>
+        </div>
+        <!-- The Ceel -->
+        <div class="brand-card flex flex-col items-center">
+          <div class="bg-white rounded-xl w-full h-20 border border-primary-200 flex items-center justify-center mb-2 p-2">
+            <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center"><span class="font-bold text-primary-400 text-sm">TC</span></div>
+          </div>
+          <span class="text-xs text-primary-600 text-center">The Ceel</span>
+        </div>
+        <!-- Fropie -->
+        <div class="brand-card flex flex-col items-center">
+          <div class="bg-white rounded-xl w-full h-20 border border-primary-200 flex items-center justify-center mb-2 p-2">
+            <img src="https://cdn.myikas.com/images/theme-images/cdfd5751-f1f0-43ad-8070-18ddf996c3f3/image_3840.webp" alt="Fropie" class="h-12 object-contain">
+          </div>
+          <span class="text-xs text-primary-600 text-center">Fropie</span>
+        </div>
+        <!-- Paen -->
+        <div class="brand-card flex flex-col items-center">
+          <div class="bg-white rounded-xl w-full h-20 border border-primary-200 flex items-center justify-center mb-2 p-2">
+            <img src="https://paen.com/images/theme-images/cc0fc79c-7354-4660-80ff-1babcbbf0d7b/image_1080.webp" alt="Paen" class="h-12 object-contain">
+          </div>
+          <span class="text-xs text-primary-600 text-center">Paen</span>
+        </div>
+        <!-- IAMNOTBASIC -->
+        <div class="brand-card flex flex-col items-center">
+          <div class="bg-white rounded-xl w-full h-20 border border-primary-200 flex items-center justify-center mb-2 p-2">
+            <img src="https://cdn.myikas.com/images/theme-images/9e45a8f6-d456-4093-9ba2-fcfedec2f624/image_3840.webp" alt="IAMNOTBASIC" class="h-12 object-contain">
+          </div>
+          <span class="text-xs text-primary-600 text-center">IAMNOTBASIC</span>
+        </div>
+        <!-- VOIDTR -->
+        <div class="brand-card flex flex-col items-center">
+          <div class="bg-white rounded-xl w-full h-20 border border-primary-200 flex items-center justify-center mb-2 p-2">
+            <img src="https://cdn.myikas.com/images/theme-images/7883e079-85e3-4c6f-b522-92fa684ac4ef/image_3840.webp" alt="VOIDTR" class="h-12 object-contain">
+          </div>
+          <span class="text-xs text-primary-600 text-center">VOIDTR</span>
+        </div>
+        <!-- Brandspure -->
+        <div class="brand-card flex flex-col items-center">
+          <div class="bg-white rounded-xl w-full h-20 border border-primary-200 flex items-center justify-center mb-2 p-2">
+            <img src="https://cdn.myikas.com/images/theme-images/9def1ae0-e4c2-45c9-8e0d-461481ae9753/image_3840.webp" alt="Brandspure" class="h-12 object-contain">
+          </div>
+          <span class="text-xs text-primary-600 text-center">Brandspure</span>
+        </div>
+        <!-- Samuraysport -->
+        <div class="brand-card flex flex-col items-center">
+          <div class="bg-white rounded-xl w-full h-20 border border-primary-200 flex items-center justify-center mb-2 p-2">
+            <img src="https://cdn.myikas.com/images/theme-images/93157ff4-e7ca-421a-a8ff-a7d11127c8cd/image_3840.webp" alt="Samuraysport" class="h-12 object-contain">
+          </div>
+          <span class="text-xs text-primary-600 text-center">Samuraysport</span>
+        </div>
+        <!-- MeggDecor -->
+        <div class="brand-card flex flex-col items-center">
+          <div class="bg-white rounded-xl w-full h-20 border border-primary-200 flex items-center justify-center mb-2 p-2">
+            <img src="https://cdn.myikas.com/images/theme-images/91805482-1ec0-4153-b1b1-51051934db6c/image_1080.webp" alt="MeggDecor" class="h-12 object-contain">
+          </div>
+          <span class="text-xs text-primary-600 text-center">MeggDecor</span>
+        </div>
+        <!-- La Fae Beaute -->
+        <div class="brand-card flex flex-col items-center">
+          <div class="bg-white rounded-xl w-full h-20 border border-primary-200 flex items-center justify-center mb-2 p-2">
+            <img src="https://cdn.myikas.com/images/theme-images/87f08d17-d811-4892-a146-7588a20b40ac/image_3840.webp" alt="La Fae Beaute" class="h-12 object-contain">
+          </div>
+          <span class="text-xs text-primary-600 text-center">La Fae Beaute</span>
+        </div>
+        <!-- Online Ciftci -->
+        <div class="brand-card flex flex-col items-center">
+          <div class="bg-white rounded-xl w-full h-20 border border-primary-200 flex items-center justify-center mb-2 p-2">
+            <img src="https://cdn.myikas.com/images/theme-images/dfea5666-72fb-427a-b39d-53a25398cdfd/image_540.webp" alt="Online Ciftci" class="h-12 object-contain">
+          </div>
+          <span class="text-xs text-primary-600 text-center">Online Ciftci</span>
+        </div>
+        <!-- Aysheguls -->
+        <div class="brand-card flex flex-col items-center">
+          <div class="bg-white rounded-xl w-full h-20 border border-primary-200 flex items-center justify-center mb-2 p-2">
+            <img src="https://cdn.myikas.com/images/theme-images/eab3f97d-d18d-4707-8ede-fdf9090238ac/image_3840.webp" alt="Aysheguls" class="h-12 object-contain">
+          </div>
+          <span class="text-xs text-primary-600 text-center">Aysheguls</span>
+        </div>
+        <!-- Cotton Cloth -->
+        <div class="brand-card flex flex-col items-center">
+          <div class="bg-white rounded-xl w-full h-20 border border-primary-200 flex items-center justify-center mb-2 p-2">
+            <img src="https://cdn.myikas.com/images/theme-images/78f405e7-c294-478c-88bd-7aeaa2cd65d9/image_3840.webp" alt="Cotton Cloth" class="h-12 object-contain">
+          </div>
+          <span class="text-xs text-primary-600 text-center">Cotton Cloth</span>
+        </div>
+        <!-- Yagmur Butik -->
+        <div class="brand-card flex flex-col items-center">
+          <div class="bg-white rounded-xl w-full h-20 border border-primary-200 flex items-center justify-center mb-2 p-2">
+            <img src="https://cdn.myikas.com/images/theme-images/b65f7b33-8989-4e65-9d3d-02b7d9bdfd06/image_3840.webp" alt="Yagmur Butik" class="h-12 object-contain">
+          </div>
+          <span class="text-xs text-primary-600 text-center">Yagmur Butik</span>
+        </div>
+        <!-- Gulcan Hanim -->
+        <div class="brand-card flex flex-col items-center">
+          <div class="bg-white rounded-xl w-full h-20 border border-primary-200 flex items-center justify-center mb-2 p-2">
+            <img src="https://cdn.myikas.com/images/theme-images/270726cd-abb1-4c3e-ae0a-84aa66ea6f1e/image_3840.webp" alt="Gulcan Hanim" class="h-12 object-contain">
+          </div>
+          <span class="text-xs text-primary-600 text-center">Gulcan Hanim</span>
+        </div>
+        <!-- Sakli Butik -->
+        <div class="brand-card flex flex-col items-center">
+          <div class="bg-white rounded-xl w-full h-20 border border-primary-200 flex items-center justify-center mb-2 p-2">
+            <img src="https://cdn.myikas.com/images/theme-images/59e37c57-74d6-4020-ad2a-b3fb66d60ade/image_3840.webp" alt="Sakli Butik" class="h-12 object-contain">
+          </div>
+          <span class="text-xs text-primary-600 text-center">Sakli Butik</span>
+        </div>
+        <!-- Ceylan Orhanli -->
+        <div class="brand-card flex flex-col items-center">
+          <div class="bg-white rounded-xl w-full h-20 border border-primary-200 flex items-center justify-center mb-2 p-2">
+            <img src="https://cdn.myikas.com/images/theme-images/704cda03-ed08-4d48-bd75-79b068d39fff/image_3840.webp" alt="Ceylan Orhanli" class="h-12 object-contain">
+          </div>
+          <span class="text-xs text-primary-600 text-center">Ceylan Orhanli</span>
+        </div>
+        <!-- Animal Joy -->
+        <div class="brand-card flex flex-col items-center">
+          <div class="bg-white rounded-xl w-full h-20 border border-primary-200 flex items-center justify-center mb-2 p-2">
+            <img src="https://cdn.myikas.com/images/theme-images/d985b24f-b578-42a6-a9b7-ac33722811e8/image_3840.webp" alt="Animal Joy" class="h-12 object-contain">
+          </div>
+          <span class="text-xs text-primary-600 text-center">Animal Joy</span>
+        </div>
+        <!-- Hugsgifts -->
+        <div class="brand-card flex flex-col items-center">
+          <div class="bg-white rounded-xl w-full h-20 border border-primary-200 flex items-center justify-center mb-2 p-2">
+            <img src="https://cdn.myikas.com/images/theme-images/c64f5d4e-c88f-4767-8f88-9b1b3edb406e/image_3840.webp" alt="Hugsgifts" class="h-12 object-contain">
+          </div>
+          <span class="text-xs text-primary-600 text-center">Hugsgifts</span>
+        </div>
+        <!-- BELLORE -->
+        <div class="brand-card flex flex-col items-center">
+          <div class="bg-white rounded-xl w-full h-20 border border-primary-200 flex items-center justify-center mb-2 p-2">
+            <img src="https://cdn.myikas.com/images/theme-images/9c862dd4-56a6-48f7-82fc-2f2fc095875d/image_3840.webp" alt="BELLORE" class="h-12 object-contain">
+          </div>
+          <span class="text-xs text-primary-600 text-center">BELLORE</span>
+        </div>
+        <!-- Petgross -->
+        <div class="brand-card flex flex-col items-center">
+          <div class="bg-white rounded-xl w-full h-20 border border-primary-200 flex items-center justify-center mb-2 p-2">
+            <img src="https://cdn.myikas.com/images/095577b2-7631-4970-aac8-f67dc0fdb305/cd5579a1-b1d7-456a-a888-ec8dda12945e/image_1080.webp" alt="Petgross" class="h-12 object-contain">
+          </div>
+          <span class="text-xs text-primary-600 text-center">Petgross</span>
+        </div>
+        <!-- Nermin Hanim -->
+        <div class="brand-card flex flex-col items-center">
+          <div class="bg-white rounded-xl w-full h-20 border border-primary-200 flex items-center justify-center mb-2 p-2">
+            <img src="https://cdn.myikas.com/images/theme-images/c8e2332a-5bd2-4944-a0c1-235fa9afe478/image_3840.webp" alt="Nermin Hanim" class="h-12 object-contain">
+          </div>
+          <span class="text-xs text-primary-600 text-center">Nermin Hanim</span>
+        </div>
+        <!-- MelikeTatar -->
+        <div class="brand-card flex flex-col items-center">
+          <div class="bg-white rounded-xl w-full h-20 border border-primary-200 flex items-center justify-center mb-2 p-2">
+            <img src="https://cdn.myikas.com/images/77ba0774-0110-4ac6-851e-14ae59fda8e1/4e0fec43-8b66-4864-a478-7ae02f31d056/image_1080.webp" alt="MelikeTatar" class="h-12 object-contain">
+          </div>
+          <span class="text-xs text-primary-600 text-center">MelikeTatar</span>
+        </div>
+        <!-- Tuba Butik -->
+        <div class="brand-card flex flex-col items-center">
+          <div class="bg-white rounded-xl w-full h-20 border border-primary-200 flex items-center justify-center mb-2 p-2">
+            <img src="https://cdn.myikas.com/images/7520439d-89d6-419d-b77e-b4ce9598e48d/877a7043-1849-4b11-8cd9-058f01c23c25/1080/12.webp" alt="Tuba Butik" class="h-12 object-contain">
+          </div>
+          <span class="text-xs text-primary-600 text-center">Tuba Butik</span>
+        </div>
+        <!-- Markapia -->
+        <div class="brand-card flex flex-col items-center">
+          <div class="bg-white rounded-xl w-full h-20 border border-primary-200 flex items-center justify-center mb-2 p-2">
+            <img src="https://cdn.myikas.com/images/theme-images/d69eb254-3a5b-4397-8bab-ad7def907ba8/image_3840.webp" alt="Markapia" class="h-12 object-contain">
+          </div>
+          <span class="text-xs text-primary-600 text-center">Markapia</span>
+        </div>
+        <!-- Powder Shop -->
+        <div class="brand-card flex flex-col items-center">
+          <div class="bg-white rounded-xl w-full h-20 border border-primary-200 flex items-center justify-center mb-2 p-2">
+            <img src="https://cdn.myikas.com/images/theme-images/eb7bacaa-fa22-4e66-bd04-feb4c6d9d106/image_3840.webp" alt="Powder Shop" class="h-12 object-contain">
+          </div>
+          <span class="text-xs text-primary-600 text-center">Powder Shop</span>
+        </div>
+        <!-- Armonika -->
+        <div class="brand-card flex flex-col items-center">
+          <div class="bg-white rounded-xl w-full h-20 border border-primary-200 flex items-center justify-center mb-2 p-2">
+            <img src="https://cdn.myikas.com/images/theme-images/5665b59f-0865-4b32-8555-6a615f4f9c69/image_3840.webp" alt="Armonika" class="h-12 object-contain">
+          </div>
+          <span class="text-xs text-primary-600 text-center">Armonika</span>
+        </div>
+        <!-- Casedoit -->
+        <div class="brand-card flex flex-col items-center">
+          <div class="bg-white rounded-xl w-full h-20 border border-primary-200 flex items-center justify-center mb-2 p-2">
+            <img src="https://cdn.myikas.com/images/theme-images/3bed1523-81a5-4fde-b035-e6da6d2267c6/image_1080.webp" alt="Casedoit" class="h-12 object-contain">
+          </div>
+          <span class="text-xs text-primary-600 text-center">Casedoit</span>
+        </div>
+        <!-- Green Black -->
+        <div class="brand-card flex flex-col items-center">
+          <div class="bg-white rounded-xl w-full h-20 border border-primary-200 flex items-center justify-center mb-2 p-2">
+            <img src="https://cdn.myikas.com/images/theme-images/d5e74226-4283-4207-8296-82d2b3817da8/image_3840.webp" alt="Green Black" class="h-12 object-contain">
+          </div>
+          <span class="text-xs text-primary-600 text-center">Green Black</span>
+        </div>
+        <!-- Ecocotton -->
+        <div class="brand-card flex flex-col items-center">
+          <div class="bg-white rounded-xl w-full h-20 border border-primary-200 flex items-center justify-center mb-2 p-2">
+            <img src="https://cdn.myikas.com/images/theme-images/aa9b855e-ae44-4082-bbf8-d3efde5782e2/image_3840.webp" alt="Ecocotton" class="h-12 object-contain">
+          </div>
+          <span class="text-xs text-primary-600 text-center">Ecocotton</span>
+        </div>
+        <!-- Rosece -->
+        <div class="brand-card flex flex-col items-center">
+          <div class="bg-white rounded-xl w-full h-20 border border-primary-200 flex items-center justify-center mb-2 p-2">
+            <img src="https://cdn.myikas.com/images/theme-images/19fbf618-b9ca-4228-839a-ebdf7179e215/image_3840.webp" alt="Rosece" class="h-12 object-contain">
+          </div>
+          <span class="text-xs text-primary-600 text-center">Rosece</span>
+        </div>
+        <!-- Limonian -->
+        <div class="brand-card flex flex-col items-center">
+          <div class="bg-white rounded-xl w-full h-20 border border-primary-200 flex items-center justify-center mb-2 p-2">
+            <img src="https://cdn.myikas.com/images/theme-images/fe4f161d-7ee1-48b2-af39-da8cf063a0c8/image_3840.webp" alt="Limonian" class="h-12 object-contain">
+          </div>
+          <span class="text-xs text-primary-600 text-center">Limonian</span>
+        </div>
+        <!-- Fidanistanbul -->
+        <div class="brand-card flex flex-col items-center">
+          <div class="bg-white rounded-xl w-full h-20 border border-primary-200 flex items-center justify-center mb-2 p-2">
+            <img src="https://cdn.myikas.com/images/c7d934c7-2d44-43c3-b023-de7aa93fe435/e8724f8c-8956-4d89-9415-53d63d831e15/image_1080.jpeg" alt="Fidanistanbul" class="h-12 object-contain">
+          </div>
+          <span class="text-xs text-primary-600 text-center">Fidanistanbul</span>
+        </div>
+        <!-- Petzzshop -->
+        <div class="brand-card flex flex-col items-center">
+          <div class="bg-white rounded-xl w-full h-20 border border-primary-200 flex items-center justify-center mb-2 p-2">
+            <img src="https://cdn.myikas.com/images/theme-images/6849cb5c-355e-4654-88bd-544e0d09cef2/image_3840.webp" alt="Petzzshop" class="h-12 object-contain">
+          </div>
+          <span class="text-xs text-primary-600 text-center">Petzzshop</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- UPCOMING BRANDS SECTION -->
+  <!-- ============================================ -->
+  <section class="py-16 bg-primary-50">
+    <div class="max-w-[1400px] mx-auto px-6 lg:px-12">
+      <h2 class="text-[28px] tracking-[-0.3px] font-bold mb-8">Yakında</h2>
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+        <!-- Biletinial -->
+        <div class="flex flex-col items-center">
+          <div class="bg-white rounded-xl w-full h-20 border border-primary-200 flex items-center justify-center mb-2 relative opacity-70">
+            <span class="absolute top-2 right-2 bg-warning-100 text-warning-600 text-xs px-2 py-0.5 rounded-full font-medium">Yakında</span>
+            <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center"><span class="font-bold text-purple-600 text-sm">BI</span></div>
+          </div>
+          <span class="text-xs text-primary-600 text-center">Biletinial</span>
+        </div>
+        <!-- Passo -->
+        <div class="flex flex-col items-center">
+          <div class="bg-white rounded-xl w-full h-20 border border-primary-200 flex items-center justify-center mb-2 relative opacity-70">
+            <span class="absolute top-2 right-2 bg-warning-100 text-warning-600 text-xs px-2 py-0.5 rounded-full font-medium">Yakında</span>
+            <div class="w-12 h-12 bg-error-100 rounded-lg flex items-center justify-center"><span class="font-bold text-error-600 text-sm">PA</span></div>
+          </div>
+          <span class="text-xs text-primary-600 text-center">Passo</span>
+        </div>
+        <!-- Kazara -->
+        <div class="flex flex-col items-center">
+          <div class="bg-white rounded-xl w-full h-20 border border-primary-200 flex items-center justify-center mb-2 relative opacity-70">
+            <span class="absolute top-2 right-2 bg-warning-100 text-warning-600 text-xs px-2 py-0.5 rounded-full font-medium">Yakında</span>
+            <div class="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center"><span class="font-bold text-accent-700 text-sm">KZ</span></div>
+          </div>
+          <span class="text-xs text-primary-600 text-center">Kazara</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CTA SECTION -->
+  <!-- ============================================ -->
+  <section class="py-20 bg-primary-900">
+    <div class="max-w-[1400px] mx-auto px-6 lg:px-12">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <!-- Left Content -->
+        <div>
+          <span class="overline text-accent-400 mb-4 inline-block border-0">Marka Ortağı Olun</span>
+          <h2 class="text-3xl lg:text-4xl font-bold tracking-[-1px] mb-6 text-white">
+            Siz de MDZN Partners<br>ailesine katılın
+          </h2>
+
+          <ul class="space-y-4 mb-10">
+            <li class="flex items-center gap-4 text-white/80">
+              <div class="w-6 h-6 bg-accent-600/20 rounded-full flex items-center justify-center flex-shrink-0">
+                <i data-lucide="check" class="w-4 h-4 text-accent-400"></i>
+              </div>
+              Türkiye'nin en büyük influencer ağına erişim
+            </li>
+            <li class="flex items-center gap-4 text-white/80">
+              <div class="w-6 h-6 bg-accent-600/20 rounded-full flex items-center justify-center flex-shrink-0">
+                <i data-lucide="check" class="w-4 h-4 text-accent-400"></i>
+              </div>
+              Gerçek zamanlı performans takibi
+            </li>
+            <li class="flex items-center gap-4 text-white/80">
+              <div class="w-6 h-6 bg-accent-600/20 rounded-full flex items-center justify-center flex-shrink-0">
+                <i data-lucide="check" class="w-4 h-4 text-accent-400"></i>
+              </div>
+              Otomatik entegrasyon ve raporlama
+            </li>
+            <li class="flex items-center gap-4 text-white/80">
+              <div class="w-6 h-6 bg-accent-600/20 rounded-full flex items-center justify-center flex-shrink-0">
+                <i data-lucide="check" class="w-4 h-4 text-accent-400"></i>
+              </div>
+              Dedicated hesap yöneticisi desteği
+            </li>
+          </ul>
+
+          <button class="btn-accent h-14 px-8 rounded-lg text-base font-semibold flex items-center gap-2 group">
+            Marka Başvurusu
+            <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+          </button>
+        </div>
+
+        <!-- Right: Stats Card -->
+        <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8">
+          <div class="text-center mb-8">
+            <p class="text-5xl font-bold text-white mb-2">35+</p>
+            <p class="text-primary-400">Aktif marka ortağı</p>
+          </div>
+
+          <div class="grid grid-cols-3 gap-4">
+            <div class="bg-white/10 p-4 rounded-xl text-center">
+              <p class="text-2xl font-bold text-white">500+</p>
+              <p class="text-xs text-primary-400 mt-1">Influencer</p>
+            </div>
+            <div class="bg-white/10 p-4 rounded-xl text-center">
+              <p class="text-2xl font-bold text-white">₺2M+</p>
+              <p class="text-xs text-primary-400 mt-1">Aylık GMV</p>
+            </div>
+            <div class="bg-white/10 p-4 rounded-xl text-center">
+              <p class="text-2xl font-bold text-white">%2.4</p>
+              <p class="text-xs text-primary-400 mt-1">Ort. CVR</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- FOOTER -->
+  <!-- ============================================ -->
+  <footer class="bg-primary-900 text-white">
+    <div class="max-w-[1400px] mx-auto px-6 lg:px-12">
+      <div class="py-16">
+        <div class="grid lg:grid-cols-12 gap-12">
+          <!-- Logo & Description -->
+          <div class="lg:col-span-4">
+            <div class="flex items-center mb-6">
+              <svg width="48" height="48" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="2" y="2" width="96" height="96" stroke="white" stroke-width="3" fill="none"/>
+                <text x="15" y="45" font-family="Plus Jakarta Sans, sans-serif" font-size="28" font-weight="700" fill="white">MD</text>
+                <text x="15" y="80" font-family="Plus Jakarta Sans, sans-serif" font-size="28" font-weight="700" fill="white">ZN</text>
+              </svg>
+              <span class="ml-4 text-2xl font-bold">PARTNERS</span>
+            </div>
+            <p class="text-primary-400 leading-relaxed mb-6 max-w-xs">
+              Türkiye'nin yeni nesil affiliate pazarlama platformu. Markalar, influencer'lar ve yayıncılar için tek adres.
+            </p>
+            <div class="flex items-center gap-3">
+              <a href="#" class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center hover:bg-white/20 transition-all duration-200">
+                <i data-lucide="instagram" class="w-5 h-5 text-white/70"></i>
+              </a>
+              <a href="#" class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center hover:bg-white/20 transition-all duration-200">
+                <i data-lucide="linkedin" class="w-5 h-5 text-white/70"></i>
+              </a>
+              <a href="#" class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center hover:bg-white/20 transition-all duration-200">
+                <i data-lucide="twitter" class="w-5 h-5 text-white/70"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Links -->
+          <div class="lg:col-span-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+              <!-- Çözümler -->
+              <div>
+                <h3 class="font-semibold text-sm uppercase tracking-wider text-white/80 mb-4">Çözümler</h3>
+                <ul class="space-y-3">
+                  <li><a href="brands.html" class="footer-link text-primary-400 hover:text-white transition-colors">Markalar İçin</a></li>
+                  <li><a href="influencers.html" class="footer-link text-primary-400 hover:text-white transition-colors">Influencer'lar İçin</a></li>
+                  <li><a href="agencies.html" class="footer-link text-primary-400 hover:text-white transition-colors">Ajanslar İçin</a></li>
+                </ul>
+              </div>
+
+              <!-- Şirket -->
+              <div>
+                <h3 class="font-semibold text-sm uppercase tracking-wider text-white/80 mb-4">Şirket</h3>
+                <ul class="space-y-3">
+                  <li><a href="about.html" class="footer-link text-primary-400 hover:text-white transition-colors">Hakkımızda</a></li>
+                  <li><a href="partners.html" class="footer-link text-primary-400 hover:text-white transition-colors">İş Ortaklarımız</a></li>
+                  <li><a href="contact.html" class="footer-link text-primary-400 hover:text-white transition-colors">İletişim</a></li>
+                </ul>
+              </div>
+
+              <!-- Yasal -->
+              <div>
+                <h3 class="font-semibold text-sm uppercase tracking-wider text-white/80 mb-4">Yasal</h3>
+                <ul class="space-y-3">
+                  <li><a href="#" class="footer-link text-primary-400 hover:text-white transition-colors">Gizlilik Politikası</a></li>
+                  <li><a href="#" class="footer-link text-primary-400 hover:text-white transition-colors">Kullanım Koşulları</a></li>
+                  <li><a href="#" class="footer-link text-primary-400 hover:text-white transition-colors">KVKK</a></li>
+                </ul>
+              </div>
+
+              <!-- İletişim -->
+              <div>
+                <h3 class="font-semibold text-sm uppercase tracking-wider text-white/80 mb-4">İletişim</h3>
+                <ul class="space-y-4">
+                  <li class="text-primary-400 text-sm">
+                    <span class="block text-white/60 mb-1">E-posta</span>
+                    contact@mdznpartners.com
+                  </li>
+                  <li class="text-primary-400 text-sm">
+                    <span class="block text-white/60 mb-1">Merkez Ofis</span>
+                    Şişli/İstanbul
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="border-t border-white/10 py-6">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+          <p class="text-sm text-primary-400">
+            © 2025 MDZN Partners. Bir Mediazone girişimidir.
+          </p>
+
+          <div class="flex items-center gap-4">
+            <span class="text-xs text-white/40 uppercase tracking-wider">Mediazone Ailesi</span>
+            <div class="flex items-center gap-3 text-sm text-primary-400">
+              <span class="hover:text-white transition-colors cursor-pointer">Mackolik</span>
+              <span class="hover:text-white transition-colors cursor-pointer">Onedio</span>
+              <span class="hover:text-white transition-colors cursor-pointer">Mynet</span>
+              <span class="hover:text-white transition-colors cursor-pointer">Yemek.com</span>
+              <span class="hover:text-white transition-colors cursor-pointer">Webtekno</span>
+              <span class="hover:text-white transition-colors cursor-pointer">Hisse.net</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================ -->
+  <!-- JAVASCRIPT -->
+  <!-- ============================================ -->
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+  </script>
+
+</body>
+</html>

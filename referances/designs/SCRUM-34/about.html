@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hakkımızda - MDZN Partners</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              900: '#0F172A',
+              800: '#1E293B',
+              700: '#334155',
+              600: '#475569',
+              500: '#64748B',
+              400: '#94A3B8',
+              300: '#CBD5E1',
+              200: '#E2E8F0',
+              100: '#F1F5F9',
+              50: '#F8FAFC',
+            },
+            accent: {
+              900: '#7A5C0A',
+              800: '#9A7B1A',
+              700: '#BA9A2A',
+              600: '#D4AF37',
+              500: '#E4C04A',
+              400: '#F0D060',
+              300: '#F8E080',
+              200: '#FCF0A0',
+              100: '#FFFACC',
+            },
+            success: { 600: '#059669', 100: '#D1FAE5' },
+            warning: { 600: '#D97706', 100: '#FEF3C7' },
+            error: { 600: '#DC2626', 100: '#FEE2E2' },
+            info: { 600: '#0284C7', 100: '#E0F2FE' },
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    * { font-family: 'Plus Jakarta Sans', sans-serif; }
+
+    :root {
+      --transition-fast: 150ms ease;
+      --transition-base: 200ms ease;
+      --transition-slow: 300ms ease;
+    }
+
+    .btn-primary {
+      background: #0F172A;
+      color: #FFFFFF;
+      transition: var(--transition-base);
+    }
+    .btn-primary:hover {
+      background: #1E293B;
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3);
+    }
+
+    .transition-smooth {
+      transition: all 200ms ease;
+    }
+
+    .footer-link {
+      position: relative;
+      transition: all 0.2s ease;
+    }
+
+    .footer-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: #D4AF37;
+      transition: width 0.3s ease;
+    }
+
+    .footer-link:hover::after {
+      width: 100%;
+    }
+
+    .family-card {
+      transition: all 200ms ease;
+    }
+
+    .family-card:hover {
+      border-color: #D4AF37;
+      box-shadow: 0 4px 16px rgba(212, 175, 55, 0.15);
+    }
+
+    .stat-card {
+      transition: all 200ms ease;
+    }
+
+    .stat-card:hover {
+      border-color: rgba(212, 175, 55, 0.4);
+      box-shadow: 0 4px 16px rgba(212, 175, 55, 0.15);
+    }
+  </style>
+</head>
+
+<body class="bg-white text-primary-900">
+
+  <!-- ============================================ -->
+  <!-- HEADER -->
+  <!-- ============================================ -->
+  <header class="sticky top-0 z-50 bg-white border-b border-primary-200">
+    <div class="max-w-[1400px] mx-auto px-6 lg:px-12">
+      <div class="flex justify-between items-center h-[72px]">
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-3 group">
+          <div class="w-9 h-9 border-2 border-primary-900 rounded-sm flex flex-col items-center justify-center group-hover:bg-primary-900 transition-colors">
+            <span class="text-[9px] font-extrabold leading-none group-hover:text-white transition-colors">MD</span>
+            <span class="text-[9px] font-extrabold leading-none group-hover:text-white transition-colors">ZN</span>
+          </div>
+          <span class="text-sm font-bold tracking-[1px]">PARTNERS</span>
+        </a>
+
+        <!-- Navigation -->
+        <nav class="hidden lg:flex items-center gap-8">
+          <a href="index.html" class="text-sm font-medium text-primary-600 hover:text-accent-700 transition-colors">Ana Sayfa</a>
+          <div class="relative group">
+            <button class="flex items-center gap-1 text-sm font-medium text-primary-600 hover:text-accent-700 transition-colors">
+              Çözümler
+              <i data-lucide="chevron-down" class="w-4 h-4"></i>
+            </button>
+            <div class="invisible group-hover:visible opacity-0 group-hover:opacity-100 absolute top-full left-0 mt-2 w-52 bg-white border border-primary-200 rounded-xl py-2 shadow-lg transition-all duration-200 transform translate-y-2 group-hover:translate-y-0">
+              <a href="brands.html" class="block px-4 py-2.5 text-sm text-primary-600 hover:text-accent-700 hover:bg-accent-100 transition-colors">Markalar İçin</a>
+              <a href="influencers.html" class="block px-4 py-2.5 text-sm text-primary-600 hover:text-accent-700 hover:bg-accent-100 transition-colors">Influencer'lar İçin</a>
+              <a href="agencies.html" class="block px-4 py-2.5 text-sm text-primary-600 hover:text-accent-700 hover:bg-accent-100 transition-colors">Ajanslar İçin</a>
+            </div>
+          </div>
+          <a href="partners.html" class="text-sm font-medium text-primary-600 hover:text-accent-700 transition-colors">İş Ortaklarımız</a>
+          <a href="influencers.html" class="text-sm font-medium text-primary-600 hover:text-accent-700 transition-colors">Influencer Başvurusu</a>
+        </nav>
+
+        <!-- CTA -->
+        <button class="hidden lg:flex btn-primary h-11 px-6 rounded-md text-sm font-semibold items-center gap-2">
+          Demo Talep Et
+        </button>
+
+        <!-- Mobile menu -->
+        <button class="lg:hidden p-2 text-primary-600 hover:text-accent-700">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================ -->
+  <!-- HERO SECTION -->
+  <!-- ============================================ -->
+  <section class="relative overflow-hidden py-12 lg:py-16 bg-gradient-to-b from-primary-50 to-white">
+    <!-- Subtle Pattern -->
+    <div class="absolute inset-0 opacity-30">
+      <div class="absolute inset-0" style="background-image: radial-gradient(circle at 1px 1px, #E2E8F0 1px, transparent 0); background-size: 40px 40px;"></div>
+    </div>
+
+    <div class="relative max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="inline-flex items-center gap-2 bg-accent-100 text-accent-800 px-4 py-2 rounded-full text-sm font-semibold mb-6">
+        <i data-lucide="info" class="w-4 h-4"></i>
+        <span>Bizi Tanıyın</span>
+      </div>
+
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-1px] leading-[1.2] mb-6 text-primary-900">
+        Hakkımızda
+      </h1>
+      <p class="text-xl text-primary-600 max-w-3xl mx-auto leading-relaxed">
+        MDZN Partners, Türkiye'nin en büyük dijital medya ağı Mediazone bünyesinde kurulan yeni nesil affiliate pazarlama platformudur.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- MEDIAZONE STATS -->
+  <!-- ============================================ -->
+  <section class="py-16">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-gradient-to-br from-primary-900 to-primary-800 rounded-3xl p-10 relative overflow-hidden">
+        <!-- Decorative elements -->
+        <div class="absolute top-0 right-0 w-64 h-64 bg-accent-600/10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 w-64 h-64 bg-accent-600/10 rounded-full blur-3xl"></div>
+
+        <div class="relative">
+          <div class="flex items-center justify-center gap-4 mb-10">
+            <div class="w-16 h-16 bg-gradient-to-br from-accent-600 to-accent-500 rounded-2xl flex items-center justify-center shadow-lg shadow-accent-600/30">
+              <span class="font-bold text-white text-xl">MZ</span>
+            </div>
+            <h2 class="text-3xl font-bold tracking-[-0.5px] text-white">Rakamlarla Mediazone</h2>
+          </div>
+
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div class="stat-card text-center p-4 bg-white/5 rounded-2xl border border-white/10">
+              <p class="text-5xl font-bold text-accent-500 mb-2">60M</p>
+              <p class="text-primary-300">Unique Visitors</p>
+            </div>
+            <div class="stat-card text-center p-4 bg-white/5 rounded-2xl border border-white/10">
+              <p class="text-5xl font-bold text-accent-500 mb-2">500+</p>
+              <p class="text-primary-300">Direct Advertisers</p>
+            </div>
+            <div class="stat-card text-center p-4 bg-white/5 rounded-2xl border border-white/10">
+              <p class="text-5xl font-bold text-accent-500 mb-2">14M</p>
+              <p class="text-primary-300">Social Media Followers</p>
+            </div>
+            <div class="stat-card text-center p-4 bg-white/5 rounded-2xl border border-white/10">
+              <p class="text-5xl font-bold text-accent-500 mb-2">6</p>
+              <p class="text-primary-300">RTB Networks</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- MEDIAZONE FAMILY -->
+  <!-- ============================================ -->
+  <section class="py-16 bg-primary-50">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl md:text-4xl font-bold tracking-[-0.5px] text-center text-primary-900 mb-12">Mediazone Ailesi</h2>
+
+      <div class="grid grid-cols-3 sm:grid-cols-6 gap-4">
+        <!-- Mackolik -->
+        <div class="family-card bg-white border border-primary-200 rounded-2xl p-6 flex flex-col items-center">
+          <div class="w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center mb-3">
+            <span class="font-bold text-green-600 text-lg">MK</span>
+          </div>
+          <span class="text-sm text-primary-600 font-medium">Mackolik</span>
+        </div>
+
+        <!-- Onedio -->
+        <div class="family-card bg-white border border-primary-200 rounded-2xl p-6 flex flex-col items-center">
+          <div class="w-14 h-14 bg-orange-100 rounded-xl flex items-center justify-center mb-3">
+            <span class="font-bold text-orange-600 text-lg">ON</span>
+          </div>
+          <span class="text-sm text-primary-600 font-medium">Onedio</span>
+        </div>
+
+        <!-- Mynet -->
+        <div class="family-card bg-white border border-primary-200 rounded-2xl p-6 flex flex-col items-center">
+          <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center mb-3">
+            <span class="font-bold text-blue-600 text-lg">MY</span>
+          </div>
+          <span class="text-sm text-primary-600 font-medium">Mynet</span>
+        </div>
+
+        <!-- Yemek.com -->
+        <div class="family-card bg-white border border-primary-200 rounded-2xl p-6 flex flex-col items-center">
+          <div class="w-14 h-14 bg-red-100 rounded-xl flex items-center justify-center mb-3">
+            <span class="font-bold text-red-600 text-lg">YC</span>
+          </div>
+          <span class="text-sm text-primary-600 font-medium">Yemek.com</span>
+        </div>
+
+        <!-- Webtekno -->
+        <div class="family-card bg-white border border-primary-200 rounded-2xl p-6 flex flex-col items-center">
+          <div class="w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center mb-3">
+            <span class="font-bold text-purple-600 text-lg">WT</span>
+          </div>
+          <span class="text-sm text-primary-600 font-medium">Webtekno</span>
+        </div>
+
+        <!-- Hisse.net -->
+        <div class="family-card bg-white border border-primary-200 rounded-2xl p-6 flex flex-col items-center">
+          <div class="w-14 h-14 bg-emerald-100 rounded-xl flex items-center justify-center mb-3">
+            <span class="font-bold text-emerald-600 text-lg">HN</span>
+          </div>
+          <span class="text-sm text-primary-600 font-medium">Hisse.net</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- OFFICE LOCATIONS -->
+  <!-- ============================================ -->
+  <section class="py-16">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl md:text-4xl font-bold tracking-[-0.5px] text-center text-primary-900 mb-12">Ofislerimiz</h2>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <!-- Merkez Ofis -->
+        <div class="bg-white border border-primary-200 rounded-2xl p-8 shadow-sm hover:shadow-md transition-smooth">
+          <div class="w-14 h-14 bg-accent-100 rounded-xl flex items-center justify-center mb-6">
+            <i data-lucide="building-2" class="w-7 h-7 text-accent-600"></i>
+          </div>
+          <h3 class="text-xl font-bold text-primary-900 mb-3">Merkez Ofis</h3>
+          <p class="text-primary-600 leading-relaxed">
+            Merkez Mah. Abide-i Hürriyet Cad.<br>
+            Divan Saray No: 136-4<br>
+            Şişli/İstanbul
+          </p>
+        </div>
+
+        <!-- R&D Merkezi -->
+        <div class="bg-white border border-primary-200 rounded-2xl p-8 shadow-sm hover:shadow-md transition-smooth">
+          <div class="w-14 h-14 bg-info-100 rounded-xl flex items-center justify-center mb-6">
+            <i data-lucide="flask-conical" class="w-7 h-7 text-info-600"></i>
+          </div>
+          <h3 class="text-xl font-bold text-primary-900 mb-3">R&D Merkezi</h3>
+          <p class="text-primary-600 leading-relaxed">
+            YTÜ İkitelli Teknopark<br>
+            Başakşehir/İstanbul
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CTA SECTION -->
+  <!-- ============================================ -->
+  <section class="py-16 bg-primary-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-gradient-to-br from-primary-900 to-primary-800 rounded-3xl p-12 text-center relative overflow-hidden">
+        <!-- Decorative elements -->
+        <div class="absolute top-0 right-0 w-64 h-64 bg-accent-600/10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 w-64 h-64 bg-accent-600/10 rounded-full blur-3xl"></div>
+
+        <div class="relative">
+          <h2 class="text-3xl md:text-4xl font-bold tracking-[-0.5px] text-white mb-4">
+            Birlikte Büyüyelim
+          </h2>
+          <p class="text-primary-300 text-lg mb-8 max-w-2xl mx-auto">
+            Türkiye'nin en kapsamlı affiliate pazarlama platformuna katılın ve dijital dönüşümünüze başlayın.
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <button class="bg-accent-600 hover:bg-accent-700 text-primary-900 px-8 py-4 rounded-xl font-semibold transition-smooth shadow-lg shadow-accent-600/30 flex items-center justify-center gap-2">
+              Demo Talep Et
+              <i data-lucide="arrow-right" class="w-5 h-5"></i>
+            </button>
+            <a href="contact.html" class="bg-white/10 hover:bg-white/20 text-white px-8 py-4 rounded-xl font-semibold transition-smooth border border-white/20 flex items-center justify-center gap-2">
+              <i data-lucide="mail" class="w-5 h-5"></i>
+              İletişime Geç
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- FOOTER -->
+  <!-- ============================================ -->
+  <footer class="bg-primary-900 text-white">
+    <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="py-16">
+        <div class="grid lg:grid-cols-12 gap-12">
+          <!-- Logo & Description -->
+          <div class="lg:col-span-4">
+            <div class="flex items-center mb-6">
+              <svg width="48" height="48" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="2" y="2" width="96" height="96" stroke="white" stroke-width="3" fill="none"/>
+                <text x="15" y="45" font-family="Plus Jakarta Sans, sans-serif" font-size="28" font-weight="700" fill="white">MD</text>
+                <text x="15" y="80" font-family="Plus Jakarta Sans, sans-serif" font-size="28" font-weight="700" fill="white">ZN</text>
+              </svg>
+              <span class="ml-4 text-2xl font-bold">PARTNERS</span>
+            </div>
+            <p class="text-primary-400 leading-relaxed mb-6 max-w-xs">
+              Türkiye'nin yeni nesil affiliate pazarlama platformu. Markalar, influencer'lar ve yayıncılar için tek adres.
+            </p>
+            <div class="flex items-center gap-3">
+              <a href="#" class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center hover:bg-white/20 transition-smooth">
+                <i data-lucide="instagram" class="w-5 h-5 text-white/70"></i>
+              </a>
+              <a href="#" class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center hover:bg-white/20 transition-smooth">
+                <i data-lucide="linkedin" class="w-5 h-5 text-white/70"></i>
+              </a>
+              <a href="#" class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center hover:bg-white/20 transition-smooth">
+                <i data-lucide="twitter" class="w-5 h-5 text-white/70"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Links -->
+          <div class="lg:col-span-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+              <!-- Çözümler -->
+              <div>
+                <h3 class="font-semibold text-sm uppercase tracking-wider text-white/80 mb-4">Çözümler</h3>
+                <ul class="space-y-3">
+                  <li><a href="brands.html" class="footer-link text-primary-400 hover:text-white transition-colors">Markalar İçin</a></li>
+                  <li><a href="influencers.html" class="footer-link text-primary-400 hover:text-white transition-colors">Influencer'lar İçin</a></li>
+                  <li><a href="agencies.html" class="footer-link text-primary-400 hover:text-white transition-colors">Ajanslar İçin</a></li>
+                </ul>
+              </div>
+
+              <!-- Şirket -->
+              <div>
+                <h3 class="font-semibold text-sm uppercase tracking-wider text-white/80 mb-4">Şirket</h3>
+                <ul class="space-y-3">
+                  <li><a href="about.html" class="footer-link text-primary-400 hover:text-white transition-colors">Hakkımızda</a></li>
+                  <li><a href="partners.html" class="footer-link text-primary-400 hover:text-white transition-colors">İş Ortaklarımız</a></li>
+                  <li><a href="contact.html" class="footer-link text-primary-400 hover:text-white transition-colors">İletişim</a></li>
+                </ul>
+              </div>
+
+              <!-- Yasal -->
+              <div>
+                <h3 class="font-semibold text-sm uppercase tracking-wider text-white/80 mb-4">Yasal</h3>
+                <ul class="space-y-3">
+                  <li><a href="#" class="footer-link text-primary-400 hover:text-white transition-colors">Gizlilik Politikası</a></li>
+                  <li><a href="#" class="footer-link text-primary-400 hover:text-white transition-colors">Kullanım Koşulları</a></li>
+                  <li><a href="#" class="footer-link text-primary-400 hover:text-white transition-colors">KVKK</a></li>
+                </ul>
+              </div>
+
+              <!-- İletişim -->
+              <div>
+                <h3 class="font-semibold text-sm uppercase tracking-wider text-white/80 mb-4">İletişim</h3>
+                <ul class="space-y-4">
+                  <li class="text-primary-400 text-sm">
+                    <span class="block text-white/60 mb-1">E-posta</span>
+                    contact@mdznpartners.com
+                  </li>
+                  <li class="text-primary-400 text-sm">
+                    <span class="block text-white/60 mb-1">Merkez Ofis</span>
+                    Şişli/İstanbul
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="border-t border-white/10 py-6">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+          <p class="text-sm text-primary-400">
+            © 2026 MDZN Partners. Bir Mediazone girişimidir.
+          </p>
+
+          <div class="flex items-center gap-4">
+            <span class="text-xs text-white/40 uppercase tracking-wider">Mediazone Ailesi</span>
+            <div class="flex items-center gap-3 text-sm text-primary-400">
+              <span class="hover:text-white transition-colors cursor-pointer">Mackolik</span>
+              <span class="hover:text-white transition-colors cursor-pointer">Onedio</span>
+              <span class="hover:text-white transition-colors cursor-pointer">Mynet</span>
+              <span class="hover:text-white transition-colors cursor-pointer">Yemek.com</span>
+              <span class="hover:text-white transition-colors cursor-pointer">Webtekno</span>
+              <span class="hover:text-white transition-colors cursor-pointer">Hisse.net</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

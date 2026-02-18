@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SCRUM-58 — Hakkımızda (About) Page UI Improvements — Design Spec</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              900: '#0F172A',
+              800: '#1E293B',
+              700: '#334155',
+              600: '#475569',
+              500: '#64748B',
+              400: '#94A3B8',
+              300: '#CBD5E1',
+              200: '#E2E8F0',
+              100: '#F1F5F9',
+              50: '#F8FAFC',
+            },
+            accent: {
+              900: '#7A5C0A',
+              800: '#9A7B1A',
+              700: '#BA9A2A',
+              600: '#D4AF37',
+              500: '#E4C04A',
+              400: '#F0D060',
+              300: '#F8E080',
+              200: '#FCF0A0',
+              100: '#FFFACC',
+            },
+            success: { 600: '#059669', 100: '#D1FAE5' },
+            warning: { 600: '#D97706', 100: '#FEF3C7' },
+            error: { 600: '#DC2626', 100: '#FEE2E2' },
+            info: { 600: '#0284C7', 100: '#E0F2FE' },
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    /* =====================================================
+       SCRUM-58 — Hakkımızda (About) Page UI Improvements
+       
+       Changes covered:
+       1. Team/Leadership Section (OPTIONAL — PM approval needed)
+       2. MediazoneFamily Card Upgrade (larger cards, brand accents)
+       3. "İletişime Geç" button href fix (# → /iletisim)
+       4. Scroll-reveal fade-in-up annotations on all sections below hero
+       
+       Open in browser at 1440px width for best viewing.
+       ===================================================== */
+
+    /* ── Resets ── */
+    *, *::before, *::after { box-sizing: border-box; }
+    * { font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif; }
+
+    /* ── Transition Utility ── */
+    :root {
+      --transition-fast: 150ms ease;
+      --transition-base: 200ms ease;
+      --transition-slow: 300ms ease;
+    }
+
+    .transition-smooth { transition: all 200ms ease; }
+
+    /* ── Button Styles ── */
+    .btn-primary {
+      background: #0F172A;
+      color: #FFFFFF;
+      transition: var(--transition-base);
+    }
+    .btn-primary:hover {
+      background: #1E293B;
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3);
+    }
+
+    /* ── Footer link underline ── */
+    .footer-link {
+      position: relative;
+      transition: all 0.2s ease;
+    }
+    .footer-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: #D4AF37;
+      transition: width 0.3s ease;
+    }
+    .footer-link:hover::after { width: 100%; }
+
+    /* ── Family Card Hover (Upgraded) ── */
+    .family-card-upgraded {
+      transition: all 200ms ease;
+    }
+    .family-card-upgraded:hover {
+      border-color: #D4AF37 !important;
+      box-shadow: 0 4px 16px rgba(212, 175, 55, 0.15);
+      transform: translateY(-2px);
+    }
+
+    /* ── Team Card Hover ── */
+    .team-card {
+      transition: all 200ms ease;
+    }
+    .team-card:hover {
+      border-color: #D4AF37 !important;
+      box-shadow: 0 4px 16px rgba(212, 175, 55, 0.15);
+      transform: translateY(-2px);
+    }
+
+    /* ── Stat Card Hover ── */
+    .stat-card { transition: all 200ms ease; }
+    .stat-card:hover {
+      border-color: rgba(212, 175, 55, 0.4);
+      box-shadow: 0 4px 16px rgba(212, 175, 55, 0.15);
+    }
+
+    /* ── Annotation Styles ── */
+    .annotation {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #FEE2E2;
+      color: #DC2626;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1.5px solid #FECACA;
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+      z-index: 50;
+    }
+    .annotation::before {
+      content: '●';
+      font-size: 8px;
+      color: #DC2626;
+    }
+
+    .annotation-optional {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #FEF3C7;
+      color: #92400E;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1.5px solid #FDE68A;
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+      z-index: 50;
+    }
+    .annotation-optional::before {
+      content: '⚑';
+      font-size: 10px;
+    }
+
+    .annotation-section {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #E0F2FE;
+      color: #0369A1;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1.5px solid #BAE6FD;
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+      z-index: 50;
+    }
+    .annotation-section::before {
+      content: '◆';
+      font-size: 8px;
+    }
+
+    /* ── Section Separator ── */
+    .design-separator {
+      border: 2px dashed #DC2626;
+      position: relative;
+      margin: 0;
+    }
+    .design-separator-label {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #DC2626;
+      color: white;
+      padding: 6px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── Scroll-Reveal Demo Animation ── */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .reveal-demo { animation: fadeInUp 0.6s ease-out forwards; }
+    .reveal-delay-1 { animation-delay: 0.1s; opacity: 0; }
+    .reveal-delay-2 { animation-delay: 0.2s; opacity: 0; }
+    .reveal-delay-3 { animation-delay: 0.3s; opacity: 0; }
+    .reveal-delay-4 { animation-delay: 0.4s; opacity: 0; }
+    .reveal-delay-5 { animation-delay: 0.5s; opacity: 0; }
+    .reveal-delay-6 { animation-delay: 0.6s; opacity: 0; }
+
+    /* ── Dashed Outline for annotated areas ── */
+    .annotated-outline {
+      outline: 2px dashed #DC2626;
+      outline-offset: 4px;
+      border-radius: 16px;
+    }
+    .annotated-outline-optional {
+      outline: 2px dashed #D97706;
+      outline-offset: 4px;
+      border-radius: 16px;
+    }
+  </style>
+</head>
+
+<body class="bg-white text-primary-900">
+
+  <!-- ============================================================ -->
+  <!-- DESIGN SPEC BANNER                                           -->
+  <!-- ============================================================ -->
+  <div class="bg-gradient-to-r from-red-600 to-red-500 text-white py-4 px-6 text-center sticky top-0 z-[100]">
+    <div class="max-w-[1400px] mx-auto flex items-center justify-center gap-3 flex-wrap">
+      <span class="text-lg font-extrabold tracking-wide">SCRUM-58</span>
+      <span class="text-sm opacity-90">—</span>
+      <span class="text-sm font-semibold">Hakkımızda (About) Page UI Improvements — Design Spec</span>
+      <span class="text-sm opacity-90">—</span>
+      <span class="text-xs bg-white/20 rounded-full px-3 py-1">Open at 1440px for best preview</span>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- CHANGE SUMMARY                                               -->
+  <!-- ============================================================ -->
+  <div class="bg-primary-50 border-b border-primary-200 py-6 px-6">
+    <div class="max-w-[1000px] mx-auto">
+      <h2 class="text-lg font-bold text-primary-900 mb-4 flex items-center gap-2">
+        <i data-lucide="list-checks" class="w-5 h-5 text-accent-600"></i>
+        Changes in This Design File
+      </h2>
+      <div class="grid md:grid-cols-2 gap-3">
+        <div class="flex items-start gap-3 bg-white rounded-xl p-4 border border-primary-200">
+          <span class="annotation-optional text-[11px] mt-0.5">OPTIONAL</span>
+          <div>
+            <p class="text-sm font-semibold text-primary-900">1. Team/Leadership Section</p>
+            <p class="text-xs text-primary-500 mt-1">New section between MediazoneStats &amp; MediazoneFamily. Needs PM approval.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3 bg-white rounded-xl p-4 border border-primary-200">
+          <span class="annotation text-[11px] mt-0.5">UPGRADE</span>
+          <div>
+            <p class="text-sm font-semibold text-primary-900">2. MediazoneFamily Card Upgrade</p>
+            <p class="text-xs text-primary-500 mt-1">Larger cards with brand accents, colored monograms, category labels.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3 bg-white rounded-xl p-4 border border-primary-200">
+          <span class="annotation text-[11px] mt-0.5">BUG FIX</span>
+          <div>
+            <p class="text-sm font-semibold text-primary-900">3. "İletişime Geç" Button Fix</p>
+            <p class="text-xs text-primary-500 mt-1">CTA button href changed from <code class="bg-primary-100 px-1 rounded text-xs">#</code> → <code class="bg-primary-100 px-1 rounded text-xs">/iletisim</code></p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3 bg-white rounded-xl p-4 border border-primary-200">
+          <span class="annotation-section text-[11px] mt-0.5">ANIMATION</span>
+          <div>
+            <p class="text-sm font-semibold text-primary-900">4. Scroll-Reveal Animations</p>
+            <p class="text-xs text-primary-500 mt-1">Fade-in-up on all sections below hero (IntersectionObserver).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ============================================================ -->
+  <!-- HEADER (Unchanged — shown for context)                       -->
+  <!-- ============================================================ -->
+  <header class="sticky top-[52px] z-50 bg-white border-b border-primary-200">
+    <div class="max-w-[1400px] mx-auto px-6 lg:px-12">
+      <div class="flex justify-between items-center h-[72px]">
+        <!-- Logo -->
+        <a href="/" class="flex items-center gap-3 group">
+          <div class="w-9 h-9 border-2 border-primary-900 rounded-sm flex flex-col items-center justify-center group-hover:bg-primary-900 transition-colors">
+            <span class="text-[9px] font-extrabold leading-none group-hover:text-white transition-colors">MD</span>
+            <span class="text-[9px] font-extrabold leading-none group-hover:text-white transition-colors">ZN</span>
+          </div>
+          <span class="text-sm font-bold tracking-[1px]">PARTNERS</span>
+        </a>
+
+        <!-- Nav -->
+        <nav class="hidden lg:flex items-center gap-8">
+          <a href="/" class="text-sm font-medium text-primary-600 hover:text-accent-700 transition-colors">Ana Sayfa</a>
+          <div class="relative group">
+            <button class="flex items-center gap-1 text-sm font-medium text-primary-600 hover:text-accent-700 transition-colors">
+              Çözümler
+              <i data-lucide="chevron-down" class="w-4 h-4"></i>
+            </button>
+            <div class="invisible group-hover:visible opacity-0 group-hover:opacity-100 absolute top-full left-0 mt-2 w-52 bg-white border border-primary-200 rounded-xl py-2 shadow-lg transition-all duration-200 transform translate-y-2 group-hover:translate-y-0">
+              <a href="/markalar-icin" class="block px-4 py-2.5 text-sm text-primary-600 hover:text-accent-700 hover:bg-accent-100 transition-colors">Markalar İçin</a>
+              <a href="/influencerlar-icin" class="block px-4 py-2.5 text-sm text-primary-600 hover:text-accent-700 hover:bg-accent-100 transition-colors">Influencer'lar İçin</a>
+              <a href="/ajanslar-icin" class="block px-4 py-2.5 text-sm text-primary-600 hover:text-accent-700 hover:bg-accent-100 transition-colors">Ajanslar İçin</a>
+            </div>
+          </div>
+          <a href="/is-ortaklarimiz" class="text-sm font-medium text-primary-600 hover:text-accent-700 transition-colors">İş Ortaklarımız</a>
+          <a href="/influencerlar-icin" class="text-sm font-medium text-primary-600 hover:text-accent-700 transition-colors">Influencer Başvurusu</a>
+        </nav>
+
+        <!-- CTA -->
+        <button class="hidden lg:flex btn-primary h-11 px-6 rounded-md text-sm font-semibold items-center gap-2">
+          Demo Talep Et
+        </button>
+
+        <!-- Mobile Menu Toggle -->
+        <button class="lg:hidden p-2 text-primary-600 hover:text-accent-700">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- ============================================================ -->
+  <!-- SECTION 1: ABOUT HERO (Unchanged)                            -->
+  <!-- ============================================================ -->
+  <section class="relative overflow-hidden py-12 lg:py-16 bg-gradient-to-b from-primary-50 to-white">
+    <!-- Subtle dot pattern -->
+    <div class="absolute inset-0 opacity-30">
+      <div class="absolute inset-0" style="background-image: radial-gradient(circle at 1px 1px, #E2E8F0 1px, transparent 0); background-size: 40px 40px;"></div>
+    </div>
+
+    <div class="relative max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="inline-flex items-center gap-2 bg-accent-100 text-accent-800 px-4 py-2 rounded-full text-sm font-semibold mb-6">
+        <i data-lucide="info" class="w-4 h-4"></i>
+        <span>Bizi Tanıyın</span>
+      </div>
+
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-1px] leading-[1.2] mb-6 text-primary-900">
+        Hakkımızda
+      </h1>
+      <p class="text-xl text-primary-600 max-w-3xl mx-auto leading-relaxed">
+        MDZN Partners, Türkiye'nin en büyük dijital medya ağı Mediazone bünyesinde kurulan yeni nesil affiliate pazarlama platformudur.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ============================================================ -->
+  <!-- SECTION 2: MEDIAZONE STATS (Unchanged — scroll-reveal added) -->
+  <!-- ============================================================ -->
+  <section class="py-16 relative">
+    <!-- Annotation: scroll-reveal -->
+    <div class="absolute -top-2 right-8 z-50">
+      <span class="annotation-section">CHANGE #4 — Scroll-reveal: fade-in-up 0.6s ease-out, triggered by IntersectionObserver (threshold: 0.15)</span>
+    </div>
+
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-gradient-to-br from-primary-900 to-primary-800 rounded-3xl p-10 relative overflow-hidden reveal-demo">
+        <!-- Decorative blurs -->
+        <div class="absolute top-0 right-0 w-64 h-64 bg-accent-600/10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 w-64 h-64 bg-accent-600/10 rounded-full blur-3xl"></div>
+
+        <div class="relative">
+          <div class="flex items-center justify-center gap-4 mb-10">
+            <div class="w-16 h-16 bg-gradient-to-br from-accent-600 to-accent-500 rounded-2xl flex items-center justify-center shadow-lg shadow-accent-600/30">
+              <span class="font-bold text-white text-xl">MZ</span>
+            </div>
+            <h2 class="text-3xl font-bold tracking-[-0.5px] text-white">Rakamlarla Mediazone</h2>
+          </div>
+
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div class="stat-card text-center p-4 bg-white/5 rounded-2xl border border-white/10 reveal-demo reveal-delay-1">
+              <p class="text-5xl font-bold text-accent-500 mb-2">60M</p>
+              <p class="text-primary-300">Unique Visitors</p>
+            </div>
+            <div class="stat-card text-center p-4 bg-white/5 rounded-2xl border border-white/10 reveal-demo reveal-delay-2">
+              <p class="text-5xl font-bold text-accent-500 mb-2">500+</p>
+              <p class="text-primary-300">Direct Advertisers</p>
+            </div>
+            <div class="stat-card text-center p-4 bg-white/5 rounded-2xl border border-white/10 reveal-demo reveal-delay-3">
+              <p class="text-5xl font-bold text-accent-500 mb-2">14M</p>
+              <p class="text-primary-300">Social Media Followers</p>
+            </div>
+            <div class="stat-card text-center p-4 bg-white/5 rounded-2xl border border-white/10 reveal-demo reveal-delay-4">
+              <p class="text-5xl font-bold text-accent-500 mb-2">6</p>
+              <p class="text-primary-300">RTB Networks</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================ -->
+  <!-- DESIGN SEPARATOR — NEW SECTION                               -->
+  <!-- ============================================================ -->
+  <div class="design-separator my-0 relative h-[2px]">
+    <span class="design-separator-label">▼ CHANGE #1 — NEW SECTION BELOW ▼</span>
+  </div>
+
+
+  <!-- ============================================================ -->
+  <!-- SECTION 2.5: TEAM / LEADERSHIP (NEW — OPTIONAL ENHANCEMENT)  -->
+  <!-- ============================================================ -->
+  <section class="py-16 bg-primary-50 relative">
+    <!-- Annotation Labels -->
+    <div class="absolute top-4 left-8 z-50 flex flex-col gap-2">
+      <span class="annotation-optional">OPTIONAL ENHANCEMENT — Human PM to approve</span>
+      <span class="annotation-section">New section: inserted between MediazoneStats &amp; MediazoneFamily</span>
+      <span class="annotation-section">Scroll-reveal: fade-in-up, staggered 0.1s per card</span>
+    </div>
+
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 annotated-outline-optional">
+      <div class="text-center mb-12 reveal-demo">
+        <div class="inline-flex items-center gap-2 bg-accent-100 text-accent-800 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+          <i data-lucide="users" class="w-4 h-4"></i>
+          <span>Ekibimiz</span>
+        </div>
+        <h2 class="text-3xl md:text-4xl font-bold tracking-[-0.5px] text-primary-900 mb-3">Liderlik Ekibi</h2>
+        <p class="text-primary-500 text-lg max-w-2xl mx-auto">Dijital medya ve teknoloji alanında deneyimli ekibimizle tanışın.</p>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+        <!-- H.K. — CEO & Founder -->
+        <div class="team-card bg-white border border-primary-200 rounded-2xl p-6 flex flex-col items-center text-center reveal-demo reveal-delay-1">
+          <div class="w-20 h-20 rounded-full bg-gradient-to-br from-accent-600 to-accent-500 flex items-center justify-center mb-4 shadow-lg shadow-accent-600/20">
+            <span class="text-xl font-bold text-white">HK</span>
+          </div>
+          <h3 class="text-sm font-bold text-primary-900 mb-1">H. Kaplan</h3>
+          <p class="text-xs text-accent-700 font-semibold">CEO & Founder</p>
+        </div>
+
+        <!-- A.Y. — CTO -->
+        <div class="team-card bg-white border border-primary-200 rounded-2xl p-6 flex flex-col items-center text-center reveal-demo reveal-delay-2">
+          <div class="w-20 h-20 rounded-full bg-gradient-to-br from-primary-800 to-primary-700 flex items-center justify-center mb-4 shadow-lg shadow-primary-800/20">
+            <span class="text-xl font-bold text-white">AY</span>
+          </div>
+          <h3 class="text-sm font-bold text-primary-900 mb-1">A. Yılmaz</h3>
+          <p class="text-xs text-accent-700 font-semibold">CTO</p>
+        </div>
+
+        <!-- B.S. — Head of Product -->
+        <div class="team-card bg-white border border-primary-200 rounded-2xl p-6 flex flex-col items-center text-center reveal-demo reveal-delay-3">
+          <div class="w-20 h-20 rounded-full bg-gradient-to-br from-blue-600 to-blue-500 flex items-center justify-center mb-4 shadow-lg shadow-blue-600/20">
+            <span class="text-xl font-bold text-white">BS</span>
+          </div>
+          <h3 class="text-sm font-bold text-primary-900 mb-1">B. Soydan</h3>
+          <p class="text-xs text-accent-700 font-semibold">Head of Product</p>
+        </div>
+
+        <!-- M.T. — Head of Marketing -->
+        <div class="team-card bg-white border border-primary-200 rounded-2xl p-6 flex flex-col items-center text-center reveal-demo reveal-delay-4">
+          <div class="w-20 h-20 rounded-full bg-gradient-to-br from-emerald-600 to-emerald-500 flex items-center justify-center mb-4 shadow-lg shadow-emerald-600/20">
+            <span class="text-xl font-bold text-white">MT</span>
+          </div>
+          <h3 class="text-sm font-bold text-primary-900 mb-1">M. Tuncer</h3>
+          <p class="text-xs text-accent-700 font-semibold">Head of Marketing</p>
+        </div>
+
+        <!-- E.D. — Lead Developer -->
+        <div class="team-card bg-white border border-primary-200 rounded-2xl p-6 flex flex-col items-center text-center reveal-demo reveal-delay-5">
+          <div class="w-20 h-20 rounded-full bg-gradient-to-br from-purple-600 to-purple-500 flex items-center justify-center mb-4 shadow-lg shadow-purple-600/20">
+            <span class="text-xl font-bold text-white">ED</span>
+          </div>
+          <h3 class="text-sm font-bold text-primary-900 mb-1">E. Demir</h3>
+          <p class="text-xs text-accent-700 font-semibold">Lead Developer</p>
+        </div>
+
+        <!-- S.A. — Design Lead -->
+        <div class="team-card bg-white border border-primary-200 rounded-2xl p-6 flex flex-col items-center text-center reveal-demo reveal-delay-6">
+          <div class="w-20 h-20 rounded-full bg-gradient-to-br from-rose-600 to-rose-500 flex items-center justify-center mb-4 shadow-lg shadow-rose-600/20">
+            <span class="text-xl font-bold text-white">SA</span>
+          </div>
+          <h3 class="text-sm font-bold text-primary-900 mb-1">S. Aksoy</h3>
+          <p class="text-xs text-accent-700 font-semibold">Design Lead</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================ -->
+  <!-- DESIGN SEPARATOR — UPGRADED SECTION                          -->
+  <!-- ============================================================ -->
+  <div class="design-separator my-0 relative h-[2px]">
+    <span class="design-separator-label">▼ CHANGE #2 — UPGRADED SECTION BELOW ▼</span>
+  </div>
+
+
+  <!-- ============================================================ -->
+  <!-- SECTION 3: MEDIAZONE FAMILY (UPGRADED)                       -->
+  <!-- ============================================================ -->
+  <section class="py-16 bg-primary-50 relative">
+    <!-- Annotation Labels -->
+    <div class="absolute top-4 left-8 z-50 flex flex-col gap-2">
+      <span class="annotation">CHANGE #2 — MediazoneFamily Card Upgrade</span>
+      <span class="annotation-section">Larger cards, brand-color monograms, category descriptions, gold hover border</span>
+      <span class="annotation-section">Scroll-reveal: fade-in-up, staggered 0.1s per card</span>
+    </div>
+
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 annotated-outline">
+      <h2 class="text-3xl md:text-4xl font-bold tracking-[-0.5px] text-center text-primary-900 mb-12 reveal-demo">Mediazone Ailesi</h2>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-5">
+        <!-- Mackolik -->
+        <div class="family-card-upgraded bg-white border border-primary-200 rounded-2xl p-6 flex flex-col items-center text-center reveal-demo reveal-delay-1">
+          <div class="w-16 h-16 rounded-full bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center mb-4 shadow-md shadow-green-600/20">
+            <span class="font-bold text-white text-xl">MK</span>
+          </div>
+          <span class="text-sm text-primary-900 font-semibold mb-1">Mackolik</span>
+          <span class="text-[11px] text-primary-400 font-medium">Spor</span>
+        </div>
+
+        <!-- Onedio -->
+        <div class="family-card-upgraded bg-white border border-primary-200 rounded-2xl p-6 flex flex-col items-center text-center reveal-demo reveal-delay-2">
+          <div class="w-16 h-16 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center mb-4 shadow-md shadow-orange-600/20">
+            <span class="font-bold text-white text-xl">ON</span>
+          </div>
+          <span class="text-sm text-primary-900 font-semibold mb-1">Onedio</span>
+          <span class="text-[11px] text-primary-400 font-medium">Dijital Medya</span>
+        </div>
+
+        <!-- Mynet -->
+        <div class="family-card-upgraded bg-white border border-primary-200 rounded-2xl p-6 flex flex-col items-center text-center reveal-demo reveal-delay-3">
+          <div class="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center mb-4 shadow-md shadow-blue-600/20">
+            <span class="font-bold text-white text-xl">MY</span>
+          </div>
+          <span class="text-sm text-primary-900 font-semibold mb-1">Mynet</span>
+          <span class="text-[11px] text-primary-400 font-medium">Haber</span>
+        </div>
+
+        <!-- Yemek.com -->
+        <div class="family-card-upgraded bg-white border border-primary-200 rounded-2xl p-6 flex flex-col items-center text-center reveal-demo reveal-delay-4">
+          <div class="w-16 h-16 rounded-full bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center mb-4 shadow-md shadow-red-600/20">
+            <span class="font-bold text-white text-xl">YC</span>
+          </div>
+          <span class="text-sm text-primary-900 font-semibold mb-1">Yemek.com</span>
+          <span class="text-[11px] text-primary-400 font-medium">Yemek & Yaşam</span>
+        </div>
+
+        <!-- Webtekno -->
+        <div class="family-card-upgraded bg-white border border-primary-200 rounded-2xl p-6 flex flex-col items-center text-center reveal-demo reveal-delay-5">
+          <div class="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center mb-4 shadow-md shadow-purple-600/20">
+            <span class="font-bold text-white text-xl">WT</span>
+          </div>
+          <span class="text-sm text-primary-900 font-semibold mb-1">Webtekno</span>
+          <span class="text-[11px] text-primary-400 font-medium">Teknoloji</span>
+        </div>
+
+        <!-- Hisse.net -->
+        <div class="family-card-upgraded bg-white border border-primary-200 rounded-2xl p-6 flex flex-col items-center text-center reveal-demo reveal-delay-6">
+          <div class="w-16 h-16 rounded-full bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center mb-4 shadow-md shadow-emerald-600/20">
+            <span class="font-bold text-white text-xl">HN</span>
+          </div>
+          <span class="text-sm text-primary-900 font-semibold mb-1">Hisse.net</span>
+          <span class="text-[11px] text-primary-400 font-medium">Finans</span>
+        </div>
+      </div>
+
+      <!-- Side-by-side comparison note -->
+      <div class="mt-8 bg-white border border-primary-200 rounded-xl p-4">
+        <p class="text-xs text-primary-500 leading-relaxed">
+          <strong class="text-primary-700">Upgrade summary:</strong>
+          Monogram circles changed from <code class="bg-primary-100 px-1.5 py-0.5 rounded text-[11px]">w-14 h-14 rounded-xl bg-{color}-100</code>
+          → <code class="bg-primary-100 px-1.5 py-0.5 rounded text-[11px]">w-16 h-16 rounded-full bg-gradient-to-br from-{color}-500 to-{color}-600</code> (white text on gradient).
+          Brand name weight: <code class="bg-primary-100 px-1.5 py-0.5 rounded text-[11px]">font-medium</code> → <code class="bg-primary-100 px-1.5 py-0.5 rounded text-[11px]">font-semibold</code>.
+          Added category label beneath each name. Gold hover border + translateY(-2px) lift.
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================ -->
+  <!-- SECTION 4: OFFICE LOCATIONS (Unchanged — scroll-reveal only) -->
+  <!-- ============================================================ -->
+  <section class="py-16 relative">
+    <div class="absolute -top-2 right-8 z-50">
+      <span class="annotation-section">CHANGE #4 — Scroll-reveal: fade-in-up 0.6s ease-out</span>
+    </div>
+
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl md:text-4xl font-bold tracking-[-0.5px] text-center text-primary-900 mb-12 reveal-demo">Ofislerimiz</h2>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <!-- Merkez Ofis -->
+        <div class="bg-white border border-primary-200 rounded-2xl p-8 shadow-sm hover:shadow-md transition-smooth reveal-demo reveal-delay-1">
+          <div class="w-14 h-14 bg-accent-100 rounded-xl flex items-center justify-center mb-6">
+            <i data-lucide="building-2" class="w-7 h-7 text-accent-600"></i>
+          </div>
+          <h3 class="text-xl font-bold text-primary-900 mb-3">Merkez Ofis</h3>
+          <p class="text-primary-600 leading-relaxed">
+            Merkez Mah. Abide-i Hürriyet Cad.<br>
+            Divan Saray No: 136-4<br>
+            Şişli/İstanbul
+          </p>
+        </div>
+
+        <!-- R&D Merkezi -->
+        <div class="bg-white border border-primary-200 rounded-2xl p-8 shadow-sm hover:shadow-md transition-smooth reveal-demo reveal-delay-2">
+          <div class="w-14 h-14 bg-info-100 rounded-xl flex items-center justify-center mb-6">
+            <i data-lucide="flask-conical" class="w-7 h-7 text-info-600"></i>
+          </div>
+          <h3 class="text-xl font-bold text-primary-900 mb-3">R&D Merkezi</h3>
+          <p class="text-primary-600 leading-relaxed">
+            YTÜ İkitelli Teknopark<br>
+            Başakşehir/İstanbul
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================ -->
+  <!-- DESIGN SEPARATOR — BUG FIX                                   -->
+  <!-- ============================================================ -->
+  <div class="design-separator my-0 relative h-[2px]">
+    <span class="design-separator-label">▼ CHANGE #3 — CTA BUTTON FIX BELOW ▼</span>
+  </div>
+
+
+  <!-- ============================================================ -->
+  <!-- SECTION 5: CTA SECTION (Button href fix)                     -->
+  <!-- ============================================================ -->
+  <section class="py-16 bg-primary-50 relative">
+    <!-- Annotation Labels -->
+    <div class="absolute top-4 left-8 z-50 flex flex-col gap-2">
+      <span class="annotation">CHANGE #3 — BUG FIX: "İletişime Geç" href changed from # → /iletisim</span>
+      <span class="annotation-section">Scroll-reveal: fade-in-up 0.6s ease-out</span>
+    </div>
+
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+      <div class="bg-gradient-to-br from-primary-900 to-primary-800 rounded-3xl p-12 text-center relative overflow-hidden reveal-demo annotated-outline">
+        <!-- Decorative blurs -->
+        <div class="absolute top-0 right-0 w-64 h-64 bg-accent-600/10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 w-64 h-64 bg-accent-600/10 rounded-full blur-3xl"></div>
+
+        <div class="relative">
+          <h2 class="text-3xl md:text-4xl font-bold tracking-[-0.5px] text-white mb-4">
+            Birlikte Büyüyelim
+          </h2>
+          <p class="text-primary-300 text-lg mb-8 max-w-2xl mx-auto">
+            Türkiye'nin en kapsamlı affiliate pazarlama platformuna katılın ve dijital dönüşümünüze başlayın.
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <button class="bg-accent-600 hover:bg-accent-700 text-primary-900 px-8 py-4 rounded-xl font-semibold transition-smooth shadow-lg shadow-accent-600/30 flex items-center justify-center gap-2">
+              Demo Talep Et
+              <i data-lucide="arrow-right" class="w-5 h-5"></i>
+            </button>
+
+            <!-- ★ FIX: href changed from "#" → "/iletisim" -->
+            <div class="relative">
+              <a href="/iletisim" class="bg-white/10 hover:bg-white/20 text-white px-8 py-4 rounded-xl font-semibold transition-smooth border border-white/20 flex items-center justify-center gap-2">
+                <i data-lucide="mail" class="w-5 h-5"></i>
+                İletişime Geç
+              </a>
+              <!-- Inline annotation arrow -->
+              <div class="absolute -bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center">
+                <div class="w-0.5 h-3 bg-red-500"></div>
+                <span class="annotation text-[10px]">href="#" → href="/iletisim"</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================ -->
+  <!-- FOOTER (Unchanged — shown for page context)                  -->
+  <!-- ============================================================ -->
+  <footer class="bg-primary-900 text-white mt-8">
+    <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="py-16">
+        <div class="grid lg:grid-cols-12 gap-12">
+          <!-- Logo & Description -->
+          <div class="lg:col-span-4">
+            <div class="flex items-center mb-6">
+              <svg width="48" height="48" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="2" y="2" width="96" height="96" stroke="white" stroke-width="3" fill="none"/>
+                <text x="15" y="45" font-family="Plus Jakarta Sans, sans-serif" font-size="28" font-weight="700" fill="white">MD</text>
+                <text x="15" y="80" font-family="Plus Jakarta Sans, sans-serif" font-size="28" font-weight="700" fill="white">ZN</text>
+              </svg>
+              <span class="ml-4 text-2xl font-bold">PARTNERS</span>
+            </div>
+            <p class="text-primary-400 leading-relaxed mb-6 max-w-xs">
+              Türkiye'nin yeni nesil affiliate pazarlama platformu. Markalar, influencer'lar ve yayıncılar için tek adres.
+            </p>
+            <div class="flex items-center gap-3">
+              <a href="#" class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center hover:bg-white/20 transition-smooth">
+                <i data-lucide="instagram" class="w-5 h-5 text-white/70"></i>
+              </a>
+              <a href="#" class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center hover:bg-white/20 transition-smooth">
+                <i data-lucide="linkedin" class="w-5 h-5 text-white/70"></i>
+              </a>
+              <a href="#" class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center hover:bg-white/20 transition-smooth">
+                <i data-lucide="twitter" class="w-5 h-5 text-white/70"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Links -->
+          <div class="lg:col-span-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+              <!-- Çözümler -->
+              <div>
+                <h3 class="font-semibold text-sm uppercase tracking-wider text-white/80 mb-4">Çözümler</h3>
+                <ul class="space-y-3">
+                  <li><a href="/markalar-icin" class="footer-link text-primary-400 hover:text-white transition-colors">Markalar İçin</a></li>
+                  <li><a href="/influencerlar-icin" class="footer-link text-primary-400 hover:text-white transition-colors">Influencer'lar İçin</a></li>
+                  <li><a href="/ajanslar-icin" class="footer-link text-primary-400 hover:text-white transition-colors">Ajanslar İçin</a></li>
+                </ul>
+              </div>
+
+              <!-- Şirket -->
+              <div>
+                <h3 class="font-semibold text-sm uppercase tracking-wider text-white/80 mb-4">Şirket</h3>
+                <ul class="space-y-3">
+                  <li><a href="/hakkimizda" class="footer-link text-primary-400 hover:text-white transition-colors">Hakkımızda</a></li>
+                  <li><a href="/is-ortaklarimiz" class="footer-link text-primary-400 hover:text-white transition-colors">İş Ortaklarımız</a></li>
+                  <li><a href="/iletisim" class="footer-link text-primary-400 hover:text-white transition-colors">İletişim</a></li>
+                </ul>
+              </div>
+
+              <!-- Yasal -->
+              <div>
+                <h3 class="font-semibold text-sm uppercase tracking-wider text-white/80 mb-4">Yasal</h3>
+                <ul class="space-y-3">
+                  <li><a href="#" class="footer-link text-primary-400 hover:text-white transition-colors">Gizlilik Politikası</a></li>
+                  <li><a href="#" class="footer-link text-primary-400 hover:text-white transition-colors">Kullanım Koşulları</a></li>
+                  <li><a href="#" class="footer-link text-primary-400 hover:text-white transition-colors">KVKK</a></li>
+                </ul>
+              </div>
+
+              <!-- İletişim -->
+              <div>
+                <h3 class="font-semibold text-sm uppercase tracking-wider text-white/80 mb-4">İletişim</h3>
+                <ul class="space-y-4">
+                  <li class="text-primary-400 text-sm">
+                    <span class="block text-white/60 mb-1">E-posta</span>
+                    contact@mdznpartners.com
+                  </li>
+                  <li class="text-primary-400 text-sm">
+                    <span class="block text-white/60 mb-1">Merkez Ofis</span>
+                    Şişli/İstanbul
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="border-t border-white/10 py-6">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+          <p class="text-sm text-primary-400">
+            © 2026 MDZN Partners. Bir Mediazone girişimidir.
+          </p>
+          <div class="flex items-center gap-4">
+            <span class="text-xs text-white/40 uppercase tracking-wider">Mediazone Ailesi</span>
+            <div class="flex items-center gap-3 text-sm text-primary-400">
+              <span class="hover:text-white transition-colors cursor-pointer">Mackolik</span>
+              <span class="hover:text-white transition-colors cursor-pointer">Onedio</span>
+              <span class="hover:text-white transition-colors cursor-pointer">Mynet</span>
+              <span class="hover:text-white transition-colors cursor-pointer">Yemek.com</span>
+              <span class="hover:text-white transition-colors cursor-pointer">Webtekno</span>
+              <span class="hover:text-white transition-colors cursor-pointer">Hisse.net</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ============================================================ -->
+  <!-- IMPLEMENTATION NOTES (bottom of page)                        -->
+  <!-- ============================================================ -->
+  <div class="bg-primary-900 border-t-2 border-accent-600 py-10 px-6">
+    <div class="max-w-[900px] mx-auto">
+      <h2 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+        <i data-lucide="file-code-2" class="w-5 h-5 text-accent-500"></i>
+        Implementation Notes for Developers
+      </h2>
+
+      <div class="space-y-6 text-sm">
+        <!-- Note 1: Team Section -->
+        <div class="bg-white/5 border border-white/10 rounded-xl p-5">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="annotation-optional text-[11px]">OPTIONAL</span>
+            <h3 class="text-white font-semibold">1. Team/Leadership Section</h3>
+          </div>
+          <ul class="text-primary-300 space-y-2 ml-4 list-disc">
+            <li>New component: <code class="bg-white/10 px-1.5 py-0.5 rounded text-accent-300">TeamSection.tsx</code> — inserted between <code class="bg-white/10 px-1.5 py-0.5 rounded text-accent-300">MediazoneStats</code> and <code class="bg-white/10 px-1.5 py-0.5 rounded text-accent-300">MediazoneFamily</code></li>
+            <li>Grid: <code class="bg-white/10 px-1.5 py-0.5 rounded text-accent-300">grid-cols-2 md:grid-cols-3 lg:grid-cols-6</code></li>
+            <li>Background: <code class="bg-white/10 px-1.5 py-0.5 rounded text-accent-300">bg-primary-50</code></li>
+            <li>Avatar: 80px circle with gradient, white initials. Each member gets a unique gradient color pair.</li>
+            <li>Card hover: gold border <code class="bg-white/10 px-1.5 py-0.5 rounded text-accent-300">#D4AF37</code> + subtle lift <code class="bg-white/10 px-1.5 py-0.5 rounded text-accent-300">translateY(-2px)</code></li>
+            <li><strong class="text-warning-600">Requires Human PM approval before implementation.</strong> Team member names/roles are placeholders.</li>
+          </ul>
+        </div>
+
+        <!-- Note 2: MediazoneFamily Upgrade -->
+        <div class="bg-white/5 border border-white/10 rounded-xl p-5">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="annotation text-[11px]">UPGRADE</span>
+            <h3 class="text-white font-semibold">2. MediazoneFamily Card Upgrade</h3>
+          </div>
+          <ul class="text-primary-300 space-y-2 ml-4 list-disc">
+            <li>Monogram container: <code class="bg-white/10 px-1.5 py-0.5 rounded text-accent-300">w-14 h-14 rounded-xl bg-{color}-100</code> → <code class="bg-white/10 px-1.5 py-0.5 rounded text-accent-300">w-16 h-16 rounded-full bg-gradient-to-br from-{color}-500 to-{color}-600</code></li>
+            <li>Text color: colored initials on light bg → white text on gradient bg</li>
+            <li>Brand name: <code class="bg-white/10 px-1.5 py-0.5 rounded text-accent-300">font-medium text-primary-600</code> → <code class="bg-white/10 px-1.5 py-0.5 rounded text-accent-300">font-semibold text-primary-900</code></li>
+            <li>Added category label: <code class="bg-white/10 px-1.5 py-0.5 rounded text-accent-300">text-[11px] text-primary-400</code> (e.g., "Dijital Medya", "Haber", "Spor")</li>
+            <li>Hover: gold border + lift animation (same as team cards)</li>
+            <li>Keep 6-column grid layout on desktop</li>
+          </ul>
+        </div>
+
+        <!-- Note 3: Button Fix -->
+        <div class="bg-white/5 border border-white/10 rounded-xl p-5">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="annotation text-[11px]">BUG FIX</span>
+            <h3 class="text-white font-semibold">3. "İletişime Geç" Button Fix</h3>
+          </div>
+          <ul class="text-primary-300 space-y-2 ml-4 list-disc">
+            <li>Location: <code class="bg-white/10 px-1.5 py-0.5 rounded text-accent-300">AboutCTA</code> section, secondary button</li>
+            <li>Change: <code class="bg-white/10 px-1.5 py-0.5 rounded text-accent-300">href="#"</code> → <code class="bg-white/10 px-1.5 py-0.5 rounded text-accent-300">href="/iletisim"</code></li>
+            <li>Element: The <code class="bg-white/10 px-1.5 py-0.5 rounded text-accent-300">&lt;a&gt;</code> tag wrapping "İletişime Geç" text</li>
+            <li>This was flagged by tester as only CTA text mismatch on the about page</li>
+          </ul>
+        </div>
+
+        <!-- Note 4: Scroll-Reveal -->
+        <div class="bg-white/5 border border-white/10 rounded-xl p-5">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="annotation-section text-[11px]">ANIMATION</span>
+            <h3 class="text-white font-semibold">4. Scroll-Reveal Animations</h3>
+          </div>
+          <ul class="text-primary-300 space-y-2 ml-4 list-disc">
+            <li>Apply to: All sections below hero (MediazoneStats, Team, MediazoneFamily, OfficeLocations, AboutCTA)</li>
+            <li>Animation: <code class="bg-white/10 px-1.5 py-0.5 rounded text-accent-300">fade-in-up</code> — opacity 0→1, translateY(24px→0), duration 0.6s, ease-out</li>
+            <li>Trigger: <code class="bg-white/10 px-1.5 py-0.5 rounded text-accent-300">IntersectionObserver</code> with threshold <code class="bg-white/10 px-1.5 py-0.5 rounded text-accent-300">0.15</code></li>
+            <li>Staggered children: grid items get +0.1s delay per item (e.g., stat cards, team cards, family cards)</li>
+            <li>Elements start with <code class="bg-white/10 px-1.5 py-0.5 rounded text-accent-300">opacity: 0; transform: translateY(24px)</code>, class <code class="bg-white/10 px-1.5 py-0.5 rounded text-accent-300">.revealed</code> applies the animation</li>
+            <li>Run once per element — remove observer after animation triggers</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ============================================================ -->
+  <!-- SCRIPTS                                                      -->
+  <!-- ============================================================ -->
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+  </script>
+
+</body>
+</html>

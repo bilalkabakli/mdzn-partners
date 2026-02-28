@@ -20,7 +20,7 @@ interface FeatureTab {
   goldSubtitle: string;
   description: string;
   bullets: string[];
-  widget: React.ReactNode;
+  widget: React.ReactNode | null;
 }
 
 function StatGridWidget() {
@@ -132,35 +132,6 @@ function RefundCardsWidget() {
   );
 }
 
-function MobileSdkWidget() {
-  const sdks = [
-    { abbr: "AD", name: "Adjust", bg: "bg-orange-100", text: "text-orange-600" },
-    {
-      abbr: "AF",
-      name: "Appsflyer",
-      bg: "bg-blue-100",
-      text: "text-blue-600",
-    },
-  ];
-
-  return (
-    <div className="bg-primary-50 rounded-xl p-6 mb-6">
-      <div className="flex items-center justify-center gap-8">
-        {sdks.map((s) => (
-          <div key={s.name} className="text-center">
-            <div
-              className={`w-16 h-16 ${s.bg} rounded-xl flex items-center justify-center mb-2 mx-auto`}
-            >
-              <span className={`font-bold ${s.text}`}>{s.abbr}</span>
-            </div>
-            <p className="text-sm text-primary-600">{s.name}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
 const tabs: FeatureTab[] = [
   {
     icon: Clock,
@@ -240,7 +211,7 @@ const tabs: FeatureTab[] = [
       "Adjust & Appsflyer entegrasyonu",
       "Bounty sistemi",
     ],
-    widget: <MobileSdkWidget />,
+    widget: null,
   },
 ];
 

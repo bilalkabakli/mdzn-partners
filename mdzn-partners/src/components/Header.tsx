@@ -168,12 +168,6 @@ export default function Header() {
               <Link href="/is-ortaklari" className={navLinkClass("/is-ortaklari")}>
                 İş Ortaklarımız
               </Link>
-              <Link href="/hakkimizda" className={navLinkClass("/hakkimizda")}>
-                Hakkımızda
-              </Link>
-              <Link href="/iletisim" className={navLinkClass("/iletisim")}>
-                İletişim
-              </Link>
             </nav>
           </div>
 
@@ -238,12 +232,6 @@ export default function Header() {
             {/* Other nav links */}
             <Link href="/is-ortaklari" className={mobileNavLinkClass("/is-ortaklari")}>
               İş Ortaklarımız
-            </Link>
-            <Link href="/hakkimizda" className={mobileNavLinkClass("/hakkimizda")}>
-              Hakkımızda
-            </Link>
-            <Link href="/iletisim" className={mobileNavLinkClass("/iletisim")}>
-              İletişim
             </Link>
 
             {/* CTA in mobile menu */}

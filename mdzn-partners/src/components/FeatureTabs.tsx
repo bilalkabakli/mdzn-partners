@@ -267,23 +267,6 @@ function TabContent5() {
       <p className="text-primary-500 mb-8 leading-relaxed">
         Affiliate linklerinden uygulama yüklemelerini takip edin. Adjust &amp; Appsflyer entegrasyonu. İlk kez alıcılar ve kayıtlar için bounty sistemi.
       </p>
-      <div className="bg-primary-50 rounded-xl p-6 border border-primary-100 mb-8">
-        <div className="flex items-center justify-center gap-12">
-          <div className="text-center">
-            <div className="w-20 h-20 bg-orange-100 border border-orange-200 rounded-2xl flex items-center justify-center mb-3 mx-auto">
-              <span className="font-extrabold text-orange-600 text-xl">AD</span>
-            </div>
-            <p className="text-primary-600 font-medium">Adjust</p>
-          </div>
-          <div className="w-px h-16 bg-primary-200" />
-          <div className="text-center">
-            <div className="w-20 h-20 bg-blue-100 border border-blue-200 rounded-2xl flex items-center justify-center mb-3 mx-auto">
-              <span className="font-extrabold text-blue-600 text-xl">AF</span>
-            </div>
-            <p className="text-primary-600 font-medium">Appsflyer</p>
-          </div>
-        </div>
-      </div>
       <ul className="space-y-3">
         <li className="flex items-center gap-3 text-primary-600"><Check className="w-5 h-5 text-success-600" />Uygulama yüklemesi takibi</li>
         <li className="flex items-center gap-3 text-primary-600"><Check className="w-5 h-5 text-success-600" />Adjust &amp; Appsflyer entegrasyonu</li>

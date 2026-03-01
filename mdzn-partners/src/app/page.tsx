@@ -3,7 +3,7 @@ import Hero from "@/components/Hero";
 import IntegrationStrip from "@/components/IntegrationStrip";
 import WhatWeDo from "@/components/WhatWeDo";
 import WhyMDZN from "@/components/WhyMDZN";
-import IntegrationCards from "@/components/IntegrationCards";
+import Integrations from "@/components/Integrations";
 import HowItWorks from "@/components/HowItWorks";
 import BrandLogos from "@/components/BrandLogos";
 import Mediazone from "@/components/Mediazone";
@@ -18,7 +18,7 @@ export default function HomePage() {
         <IntegrationStrip />
         <WhatWeDo />
         <WhyMDZN />
-        <IntegrationCards />
+        <Integrations />
         <HowItWorks />
         <BrandLogos />
         <Mediazone />

@@ -164,28 +164,6 @@ body {
 }
 
 /* ========================================
-   HOW IT WORKS TAB STYLES
-   ======================================== */
-.hiw-tab {
-  transition: all 200ms ease;
-  border: 1px solid transparent;
-}
-.hiw-tab:not(.active):hover {
-  background: #FFFACC;
-  border-color: #D4AF37;
-  color: #BA9A2A;
-}
-.hiw-tab:not(.active):active {
-  background: #FFF5B3;
-  transform: scale(0.98);
-}
-.hiw-tab.active {
-  background: #0F172A;
-  border-color: #0F172A;
-  color: #FFFFFF;
-}
-
-/* ========================================
    INTEGRATION CARD STYLES
    ======================================== */
 .integration-card {
@@ -306,6 +284,17 @@ select:focus {
 ::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
 .scrollbar-hide::-webkit-scrollbar { display: none; }
 .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ========================================
+   SCROLLBAR HIDE (for horizontal scroll containers)
+   ======================================== */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
 
 /* ========================================
    SKIP TO CONTENT (A11Y)

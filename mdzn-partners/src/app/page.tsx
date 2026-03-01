@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import IntegrationStrip from "@/components/IntegrationStrip";
+import WhatWeDo from "@/components/WhatWeDo";
 import FeatureTabs from "@/components/FeatureTabs";
 import IntegrationCards from "@/components/IntegrationCards";
 import HowItWorks from "@/components/HowItWorks";
@@ -15,6 +16,7 @@ export default function HomePage() {
       <main id="main-content">
         <Hero />
         <IntegrationStrip />
+        <WhatWeDo />
         <FeatureTabs />
         <IntegrationCards />
         <HowItWorks />

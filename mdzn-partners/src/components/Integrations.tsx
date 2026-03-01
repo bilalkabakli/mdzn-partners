@@ -29,7 +29,7 @@ const customIntegrations: CustomIntegration[] = [
   { name: "Google Tag Manager", mobileLabel: "GTM", icon: Monitor, color: "#1976D2" },
 ];
 
-export default function IntegrationCards() {
+export default function Integrations() {
   return (
     <section className="py-12 lg:py-20">
       <div className="max-w-[1400px] mx-auto px-4 lg:px-12">

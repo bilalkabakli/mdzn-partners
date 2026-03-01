@@ -9,9 +9,18 @@ import { useModal } from "./ModalContext";
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileSolutionsOpen, setMobileSolutionsOpen] = useState(true);
   const { openModal } = useModal();
   const pathname = usePathname();
   const mobileMenuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 50);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
@@ -83,7 +92,13 @@ export default function Header() {
                 ZN
               </span>
             </div>
-            <span className="text-sm font-bold tracking-[1px]">PARTNERS</span>
+            <span
+              className={`text-sm font-bold tracking-[1px] transition-all duration-300 overflow-hidden whitespace-nowrap ${
+                scrolled ? "w-0 opacity-0" : "w-[72px] opacity-100"
+              }`}
+            >
+              PARTNERS
+            </span>
           </Link>
 
           {/* Desktop Navigation — centered */}
@@ -118,7 +133,7 @@ export default function Header() {
                   onKeyDown={handleDropdownKeyDown}
                 >
                   Çözümler
-                  <ChevronDown className="w-4 h-4" />
+                  <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${dropdownOpen ? "rotate-180" : ""}`} />
                 </button>
                 <div
                   className={`absolute top-full left-0 mt-2 w-52 bg-white border border-primary-200 rounded-xl py-2 shadow-lg transition-all duration-200 ${
@@ -212,11 +227,14 @@ export default function Header() {
 
             {/* Çözümler — grouped with left border + indent */}
             <div className="border-b border-primary-100">
-              <div className="flex items-center justify-between min-h-[44px] px-1 text-sm font-semibold text-primary-600">
+              <button
+                className="flex items-center justify-between w-full min-h-[44px] px-1 text-sm font-semibold text-primary-600"
+                onClick={() => setMobileSolutionsOpen((prev) => !prev)}
+              >
                 Çözümler
-                <ChevronDown className="w-4 h-4 text-primary-400" />
-              </div>
-              <div className="ml-2 pl-4 pb-1 border-l-2 border-primary-200 space-y-0">
+                <ChevronDown className={`w-4 h-4 text-primary-400 transition-transform duration-300 ${mobileSolutionsOpen ? "rotate-180" : ""}`} />
+              </button>
+              <div className={`ml-2 pl-4 pb-1 border-l-2 border-primary-200 space-y-0 overflow-hidden transition-all duration-300 ${mobileSolutionsOpen ? "max-h-40 opacity-100" : "max-h-0 opacity-0 pb-0"}`}>
                 <Link href="/markalar-icin" className={mobileSubLinkClass("/markalar-icin")}>
                   Markalar İçin
                 </Link>

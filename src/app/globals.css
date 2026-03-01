@@ -164,45 +164,6 @@ body {
 }
 
 /* ========================================
-   FEATURE TAB STYLES
-   ======================================== */
-.feature-tab {
-  transition: all 200ms ease;
-  background: #FFFFFF;
-  border: 1px solid #E2E8F0;
-}
-.feature-tab:not(.active):hover {
-  background: #FFFACC;
-  border-color: #D4AF37;
-  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.15);
-}
-.feature-tab:not(.active):hover .tab-icon {
-  background: #FFFACC;
-  color: #BA9A2A;
-}
-.feature-tab:not(.active):hover span:not(.tab-icon) {
-  color: #BA9A2A;
-}
-.feature-tab:active {
-  transform: scale(0.98);
-  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.2);
-}
-.feature-tab.active {
-  background: #0F172A;
-  color: #FFFFFF;
-  border-color: #0F172A;
-  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.2);
-}
-.feature-tab.active .tab-icon {
-  background: rgba(255, 255, 255, 0.15);
-  color: #FFFFFF;
-}
-.feature-tab:not(.active) .tab-icon {
-  background: #F1F5F9;
-  color: #64748B;
-}
-
-/* ========================================
    HOW IT WORKS TAB STYLES
    ======================================== */
 .hiw-tab {
@@ -343,6 +304,8 @@ select:focus {
 ::-webkit-scrollbar-track { background: #F8FAFC; }
 ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 
 /* ========================================
    SKIP TO CONTENT (A11Y)

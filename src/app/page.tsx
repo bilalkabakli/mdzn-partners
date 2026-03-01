@@ -1,7 +1,7 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import IntegrationStrip from "@/components/IntegrationStrip";
-import FeatureTabs from "@/components/FeatureTabs";
+import WhyMDZN from "@/components/WhyMDZN";
 import IntegrationCards from "@/components/IntegrationCards";
 import HowItWorks from "@/components/HowItWorks";
 import BrandLogos from "@/components/BrandLogos";
@@ -15,7 +15,7 @@ export default function HomePage() {
       <main id="main-content">
         <Hero />
         <IntegrationStrip />
-        <FeatureTabs />
+        <WhyMDZN />
         <IntegrationCards />
         <HowItWorks />
         <BrandLogos />

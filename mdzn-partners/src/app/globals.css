@@ -453,6 +453,50 @@ select:focus {
 }
 
 /* ========================================
+   WHAT WE DO — CARD STYLES
+   ======================================== */
+.wwd-card {
+  transition: all 200ms ease;
+}
+.wwd-card:hover {
+  border-color: #D4AF37;
+  box-shadow: 0 8px 32px rgba(212, 175, 55, 0.12);
+}
+
+/* ========================================
+   WHAT WE DO — SLIDING LOGOS
+   ======================================== */
+@keyframes slideLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes slideRight {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.wwd-slide-left {
+  animation: slideLeft 25s linear infinite;
+}
+
+.wwd-slide-right {
+  animation: slideRight 25s linear infinite;
+}
+
+.wwd-logos-strip:hover .wwd-slide-left,
+.wwd-logos-strip:hover .wwd-slide-right {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wwd-slide-left,
+  .wwd-slide-right {
+    animation: none;
+  }
+}
+
+/* ========================================
    ANIMATIONS
    ======================================== */
 @keyframes fadeIn {

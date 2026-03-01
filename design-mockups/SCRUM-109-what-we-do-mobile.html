@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SCRUM-109 What We Do — Mobile View (v2)</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: #FFFFFF; max-width: 390px; margin: 0 auto; border-left: 1px solid #E2E8F0; border-right: 1px solid #E2E8F0; min-height: 100vh; }
+
+  .section { padding: 48px 16px; }
+  .section-header { text-align: center; margin-bottom: 32px; }
+  .section-label { font-size: 11px; font-weight: 600; color: #D4AF37; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; }
+  .section-title { font-size: 26px; font-weight: 800; color: #0F172A; letter-spacing: -1px; line-height: 1.2; margin-bottom: 8px; }
+  .section-subtitle { font-size: 14px; color: #64748B; font-weight: 500; line-height: 1.6; }
+
+  .cards-scroll {
+    display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch; padding-bottom: 16px; margin: 0 -16px; padding-left: 16px; padding-right: 16px;
+  }
+  .cards-scroll::-webkit-scrollbar { display: none; }
+
+  .card {
+    flex: 0 0 85%; scroll-snap-align: start;
+    border: 1px solid #E2E8F0; border-radius: 16px; padding: 24px;
+    display: flex; flex-direction: column;
+  }
+  .card-brand { background: linear-gradient(135deg, #FFFAEB 0%, #FFFFFF 60%); }
+  .card-publisher { background: linear-gradient(135deg, #F0F9FF 0%, #FFFFFF 60%); }
+
+  .card-badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; border-radius: 6px; font-size: 11px; font-weight: 600; margin-bottom: 20px; width: fit-content; }
+  .card-brand .card-badge { background: #FEF3C7; color: #92400E; }
+  .card-publisher .card-badge { background: #DBEAFE; color: #1E40AF; }
+
+  .card h3 { font-size: 22px; font-weight: 800; color: #0F172A; letter-spacing: -0.5px; margin-bottom: 10px; line-height: 1.2; }
+  .card-desc { font-size: 13px; color: #64748B; line-height: 1.6; margin-bottom: 24px; }
+
+  .features { display: grid; grid-template-columns: 1fr; gap: 14px; margin-bottom: 24px; }
+  .feature { display: flex; align-items: center; gap: 10px; }
+  .feature-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .card-brand .feature-icon { background: #FEF3C7; }
+  .card-publisher .feature-icon { background: #DBEAFE; }
+  .feature-icon svg { width: 18px; height: 18px; }
+  .card-brand .feature-icon svg { color: #D97706; }
+  .card-publisher .feature-icon svg { color: #2563EB; }
+  .feature-text { font-size: 13px; font-weight: 600; color: #0F172A; }
+
+  /* Platform logos (static, mobile) */
+  .platform-logos {
+    margin-top: auto; padding-top: 16px; border-top: 1px solid #E2E8F0;
+    display: flex; flex-wrap: wrap; gap: 6px;
+  }
+  .platform-chip {
+    display: flex; align-items: center; gap: 6px;
+    padding: 6px 10px; background: #FFFFFF; border: 1px solid #F1F5F9;
+    border-radius: 8px; font-size: 11px; font-weight: 700; color: #475569;
+  }
+  .platform-dot { width: 20px; height: 20px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 800; color: #FFF; }
+
+  .card-cta { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; text-decoration: none; margin-top: 16px; }
+  .card-brand .card-cta { color: #D97706; }
+  .card-publisher .card-cta { color: #2563EB; }
+  .card-cta svg { width: 14px; height: 14px; }
+
+  .scroll-hint { text-align: center; font-size: 11px; color: #94A3B8; margin-top: 8px; }
+
+  .annotation { position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); background: #0F172A; color: #FFF; padding: 10px 16px; border-radius: 10px; font-size: 11px; z-index: 100; max-width: 360px; text-align: center; line-height: 1.5; }
+  .annotation .label { color: #D4AF37; font-weight: 700; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; }
+</style>
+</head>
+<body>
+
+<section class="section">
+  <div class="section-header">
+    <div class="section-label">Ne Yapıyoruz</div>
+    <h2 class="section-title">Growth profesyonelleri için yapıldı</h2>
+    <p class="section-subtitle">Gücünü sadeliğinden alan yeni nesil affiliate platformu.</p>
+  </div>
+
+  <div class="cards-scroll">
+    <!-- Left: Brands + platform logos -->
+    <div class="card card-brand">
+      <div class="card-badge">Markalar & Satıcılar İçin</div>
+      <h3>İşinizi hemen büyütmeye başlayın</h3>
+      <p class="card-desc">Teknik bilgi gerektirmeden kampanyalarınızı kurun, performansınızı takip edin.</p>
+      <div class="features">
+        <div class="feature"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="feature-text">Kolay Entegrasyon</div></div>
+        <div class="feature"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="feature-text">Mükemmel Takip</div></div>
+        <div class="feature"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><div class="feature-text">No-Code Kampanya</div></div>
+        <div class="feature"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div class="feature-text">Hakediş Yönetimi</div></div>
+      </div>
+      <div class="platform-logos">
+        <div class="platform-chip"><div class="platform-dot" style="background:#6366F1">İK</div>İkas</div>
+        <div class="platform-chip"><div class="platform-dot" style="background:#7CB342">S</div>Shopify</div>
+        <div class="platform-chip"><div class="platform-dot" style="background:#0D47A1">T</div>Ticimax</div>
+        <div class="platform-chip"><div class="platform-dot" style="background:#E91E63">A</div>Adjust</div>
+        <div class="platform-chip"><div class="platform-dot" style="background:#00BCD4">AF</div>Appsflyer</div>
+      </div>
+      <a href="#" class="card-cta">Satıcı olarak başvur <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+
+    <!-- Right: Publishers — NO slider on mobile, just features -->
+    <div class="card card-publisher">
+      <div class="card-badge">Yayıncılar & Influencer'lar İçin</div>
+      <h3>Hemen kazanmaya başlayın</h3>
+      <p class="card-desc">Platformdaki markaları keşfedin, tek tıkla katılın.</p>
+      <div class="features">
+        <div class="feature"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div><div class="feature-text">Kampanya Keşfet</div></div>
+        <div class="feature"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div><div class="feature-text">Güvenli Ödeme</div></div>
+        <div class="feature"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div><div class="feature-text">Kolay Katılım</div></div>
+        <div class="feature"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><div class="feature-text">Performans Paneli</div></div>
+      </div>
+      <a href="#" class="card-cta">Yayıncı olarak başvur <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+  </div>
+  <p class="scroll-hint">← Kaydırarak diğer kartı görün →</p>
+</section>
+
+<div class="annotation">
+  <span class="label">Mobile (390px) — v2</span><br>
+  Logos slider REMOVED on mobile per PM feedback. Platform logos static in brand card. Publisher card: features only.
+</div>
+
+</body>
+</html>

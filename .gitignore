@@ -4,3 +4,4 @@
 scripts/
 .claude/agent-logs/
 .DS_Store
+.cursor/mcp.json

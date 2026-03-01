@@ -1,20 +1,25 @@
+"use client";
+
 import { ArrowRight, PlayCircle, TrendingUp, CheckCircle } from "lucide-react";
+import { useModal } from "./ModalContext";
 
 export default function Hero() {
+  const { openModal } = useModal();
+
   return (
     <section className="relative overflow-hidden">
       {/* Background decorations */}
       <div className="absolute top-[20%] left-[10%] w-[400px] h-[400px] bg-gradient-to-br from-accent-100/50 to-transparent rounded-full blur-3xl" />
       <div className="absolute bottom-[10%] right-[15%] w-[300px] h-[300px] bg-gradient-to-br from-primary-100/50 to-transparent rounded-full blur-3xl" />
 
-      <div className="relative max-w-[1400px] mx-auto px-6 lg:px-12 py-10 lg:py-16">
+      <div className="relative max-w-[1400px] mx-auto px-6 lg:px-12 py-8">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left Content */}
           <div>
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-success-100 rounded-full mb-8">
               <span className="w-2 h-2 bg-success-600 rounded-full animate-pulse" />
               <span className="text-sm font-medium text-success-600">
-                Türkiye&apos;nin #1 Affiliate Platformu
+                Türkiye&apos;nin Yeni Nesil Affiliate Platformu
               </span>
             </div>
 
@@ -30,29 +35,22 @@ export default function Hero() {
               manuel iş.
             </p>
 
-            <div className="flex flex-wrap gap-4">
-              <button className="btn-primary h-14 px-8 rounded-lg text-base font-semibold flex items-center gap-2 group">
-                Demo Talep Et
+            {/* Desktop: buttons after text */}
+            <div className="hidden lg:flex flex-wrap gap-4">
+              <button
+                className="btn-primary h-14 px-8 rounded-lg text-base font-semibold flex items-center gap-2 group"
+                onClick={() => openModal("brand")}
+              >
+                Satıcı Başvurusu
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
-              <button className="btn-secondary h-14 px-8 rounded-lg text-base font-semibold flex items-center gap-2">
+              <button
+                className="btn-secondary h-14 px-8 rounded-lg text-base font-semibold flex items-center gap-2"
+                onClick={() => openModal("influencer")}
+              >
                 <PlayCircle className="w-5 h-5" />
-                Platform Turu
+                Yayıncı Başvurusu
               </button>
-            </div>
-
-            {/* Trust indicators */}
-            <div className="flex items-center gap-6 mt-12">
-              <div className="flex items-center gap-3">
-                <div className="flex -space-x-2">
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-accent-400 to-accent-600 border-2 border-white" />
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 border-2 border-white" />
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-success-600 to-success-600 border-2 border-white" />
-                </div>
-                <span className="text-sm text-primary-400">
-                  Her gün büyüyen marka ağı
-                </span>
-              </div>
             </div>
           </div>
 
@@ -170,6 +168,24 @@ export default function Hero() {
                 </div>
               </div>
             </div>
+          </div>
+
+          {/* Mobile: buttons after dashboard illustration */}
+          <div className="flex lg:hidden flex-wrap gap-4 justify-center">
+            <button
+              className="btn-primary h-14 px-8 rounded-lg text-base font-semibold flex items-center gap-2 group"
+              onClick={() => openModal("brand")}
+            >
+              Satıcı Başvurusu
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </button>
+            <button
+              className="btn-secondary h-14 px-8 rounded-lg text-base font-semibold flex items-center gap-2"
+              onClick={() => openModal("influencer")}
+            >
+              <PlayCircle className="w-5 h-5" />
+              Yayıncı Başvurusu
+            </button>
           </div>
         </div>
       </div>

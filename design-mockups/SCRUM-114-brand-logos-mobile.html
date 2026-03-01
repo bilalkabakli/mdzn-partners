@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SCRUM-114 Brand Logos — Mobile</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: #FFFFFF; max-width: 390px; margin: 0 auto; border-left: 1px solid #E2E8F0; border-right: 1px solid #E2E8F0; }
+
+  .section { background: #F8FAFC; padding: 48px 0; overflow: hidden; }
+  .section-header { text-align: center; margin-bottom: 28px; padding: 0 16px; }
+  .section-label { font-size: 11px; font-weight: 600; color: #D4AF37; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 10px; }
+  .section-title { font-size: 24px; font-weight: 800; color: #0F172A; letter-spacing: -0.5px; margin-bottom: 8px; }
+  .section-subtitle { font-size: 13px; color: #64748B; }
+
+  .logo-row { display: flex; gap: 12px; margin-bottom: 12px; overflow: hidden; }
+  .logo-track { display: flex; gap: 12px; }
+  .row-left .logo-track { animation: slideLeft 20s linear infinite; }
+  .row-right .logo-track { animation: slideRight 20s linear infinite; }
+  @keyframes slideLeft { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+  @keyframes slideRight { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
+
+  .logo-chip {
+    flex-shrink: 0; display: flex; align-items: center; gap: 8px;
+    padding: 10px 16px; background: #FFFFFF; border: 1px solid #E2E8F0;
+    border-radius: 10px; pointer-events: none;
+  }
+  .logo-icon { width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; color: #FFF; }
+  .logo-name { font-size: 12px; font-weight: 600; color: #0F172A; white-space: nowrap; }
+
+  .annotation { position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); background: #0F172A; color: #FFF; padding: 10px 16px; border-radius: 10px; font-size: 11px; z-index: 100; max-width: 360px; text-align: center; }
+  .annotation .label { color: #D4AF37; font-weight: 700; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; }
+</style>
+</head>
+<body>
+
+<section class="section">
+  <div class="section-header">
+    <div class="section-label">Marka Ağı</div>
+    <h2 class="section-title">Her Gün Genişleyen Marka Ağı</h2>
+    <p class="section-subtitle">Güvenilir markalar ağımıza katılın</p>
+  </div>
+
+  <div class="logo-row row-left">
+    <div class="logo-track">
+      <div class="logo-chip"><div class="logo-icon" style="background:#059669">P</div><span class="logo-name">Proteinocean</span></div>
+      <div class="logo-chip"><div class="logo-icon" style="background:#D97706">F</div><span class="logo-name">Fropie</span></div>
+      <div class="logo-chip"><div class="logo-icon" style="background:#0F172A">I</div><span class="logo-name">IAMNOTBASIC</span></div>
+      <div class="logo-chip"><div class="logo-icon" style="background:#7C3AED">V</div><span class="logo-name">VOIDTR</span></div>
+      <div class="logo-chip"><div class="logo-icon" style="background:#E11D48">R</div><span class="logo-name">Rosece</span></div>
+      <div class="logo-chip"><div class="logo-icon" style="background:#2563EB">L</div><span class="logo-name">Limonian</span></div>
+      <div class="logo-chip"><div class="logo-icon" style="background:#059669">P</div><span class="logo-name">Proteinocean</span></div>
+      <div class="logo-chip"><div class="logo-icon" style="background:#D97706">F</div><span class="logo-name">Fropie</span></div>
+      <div class="logo-chip"><div class="logo-icon" style="background:#0F172A">I</div><span class="logo-name">IAMNOTBASIC</span></div>
+      <div class="logo-chip"><div class="logo-icon" style="background:#7C3AED">V</div><span class="logo-name">VOIDTR</span></div>
+      <div class="logo-chip"><div class="logo-icon" style="background:#E11D48">R</div><span class="logo-name">Rosece</span></div>
+      <div class="logo-chip"><div class="logo-icon" style="background:#2563EB">L</div><span class="logo-name">Limonian</span></div>
+    </div>
+  </div>
+
+  <div class="logo-row row-right">
+    <div class="logo-track">
+      <div class="logo-chip"><div class="logo-icon" style="background:#1565C0">A</div><span class="logo-name">Armonika</span></div>
+      <div class="logo-chip"><div class="logo-icon" style="background:#4CAF50">G</div><span class="logo-name">Green Black</span></div>
+      <div class="logo-chip"><div class="logo-icon" style="background:#FF9800">P</div><span class="logo-name">Petzzshop</span></div>
+      <div class="logo-chip"><div class="logo-icon" style="background:#F44336">A</div><span class="logo-name">Animal Joy</span></div>
+      <div class="logo-chip"><div class="logo-icon" style="background:#9C27B0">B</div><span class="logo-name">BELLORE</span></div>
+      <div class="logo-chip"><div class="logo-icon" style="background:#607D8B">P</div><span class="logo-name">Paen</span></div>
+      <div class="logo-chip"><div class="logo-icon" style="background:#1565C0">A</div><span class="logo-name">Armonika</span></div>
+      <div class="logo-chip"><div class="logo-icon" style="background:#4CAF50">G</div><span class="logo-name">Green Black</span></div>
+      <div class="logo-chip"><div class="logo-icon" style="background:#FF9800">P</div><span class="logo-name">Petzzshop</span></div>
+      <div class="logo-chip"><div class="logo-icon" style="background:#F44336">A</div><span class="logo-name">Animal Joy</span></div>
+      <div class="logo-chip"><div class="logo-icon" style="background:#9C27B0">B</div><span class="logo-name">BELLORE</span></div>
+      <div class="logo-chip"><div class="logo-icon" style="background:#607D8B">P</div><span class="logo-name">Paen</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="annotation"><span class="label">Mobile (390px)</span><br>Two rows, opposite scroll directions. Not clickable. No button.</div>
+
+</body>
+</html>

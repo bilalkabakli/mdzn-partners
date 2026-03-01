@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SCRUM-98 — Header After Removal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Plus Jakarta Sans', -apple-system, sans-serif; background: #F8FAFC; }
+
+    .header {
+      position: sticky; top: 0; z-index: 50;
+      background: #fff; border-bottom: 1px solid #E2E8F0;
+    }
+    .header-inner {
+      max-width: 1400px; margin: 0 auto; padding: 0 48px;
+      display: flex; justify-content: space-between; align-items: center; height: 72px;
+    }
+    .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; color: #0F172A; }
+    .logo-box {
+      width: 36px; height: 36px; border: 1px solid #0F172A; border-radius: 6px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+    }
+    .logo-box span { font-size: 9px; font-weight: 800; line-height: 1; }
+    .logo-text { font-size: 14px; font-weight: 700; letter-spacing: 1px; }
+
+    nav { display: flex; align-items: center; gap: 32px; }
+    nav a {
+      text-decoration: none; font-size: 14px; font-weight: 500;
+      color: #475569; transition: color 0.15s;
+    }
+    nav a:hover { color: #BA9A2A; }
+    nav a.active { color: #BA9A2A; }
+
+    .dropdown { position: relative; }
+    .dropdown-trigger {
+      display: flex; align-items: center; gap: 4px;
+      font-size: 14px; font-weight: 500; color: #475569;
+      background: none; border: none; cursor: pointer;
+    }
+
+    .cta-btn {
+      background: #0F172A; color: #fff; border: none; border-radius: 8px;
+      padding: 0 24px; height: 44px; font-size: 14px; font-weight: 600;
+      cursor: pointer; transition: background 0.15s;
+    }
+    .cta-btn:hover { background: #1E293B; }
+
+    .note {
+      max-width: 1400px; margin: 40px auto; padding: 24px 48px;
+      background: #D1FAE5; border-radius: 12px; font-size: 14px; color: #059669;
+    }
+    .note strong { display: block; margin-bottom: 8px; font-size: 16px; }
+
+    .removed {
+      max-width: 1400px; margin: 16px auto; padding: 16px 48px;
+      background: #FEE2E2; border-radius: 12px; font-size: 14px; color: #DC2626;
+    }
+
+    @media (max-width: 1023px) {
+      .header-inner { padding: 0 16px; }
+      nav { display: none; }
+      .cta-btn { display: none; }
+      .mobile-menu-btn { display: flex; }
+    }
+    @media (min-width: 1024px) {
+      .mobile-menu-btn { display: none; }
+    }
+
+    .mobile-section { max-width: 1400px; margin: 24px auto; padding: 0 48px; }
+    .mobile-section h3 { font-size: 18px; font-weight: 700; margin-bottom: 16px; }
+    .mobile-nav { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; overflow: hidden; }
+    .mobile-nav a {
+      display: flex; align-items: center; min-height: 44px; padding: 0 16px;
+      font-size: 14px; font-weight: 600; color: #475569; text-decoration: none;
+      border-bottom: 1px solid #F1F5F9;
+    }
+    .mobile-nav a:last-child { border-bottom: none; }
+  </style>
+</head>
+<body>
+
+  <!-- DESKTOP HEADER — AFTER REMOVAL -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <div class="logo-box">
+          <span>MD</span>
+          <span>ZN</span>
+        </div>
+        <span class="logo-text">PARTNERS</span>
+      </a>
+
+      <nav>
+        <a href="/" class="active">Ana Sayfa</a>
+        <div class="dropdown">
+          <button class="dropdown-trigger">Çözümler ▾</button>
+        </div>
+        <a href="/is-ortaklari">İş Ortaklarımız</a>
+        <!-- REMOVED: Hakkımızda -->
+        <!-- REMOVED: İletişim -->
+      </nav>
+
+      <button class="cta-btn">Aramıza Katıl</button>
+
+      <button class="mobile-menu-btn" style="background:none;border:none;cursor:pointer;width:44px;height:44px;display:flex;align-items:center;justify-content:center;">
+        <svg width="24" height="24" fill="none" stroke="#475569" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <div class="note">
+    <strong>SCRUM-98 — Design Mockup: Header After Removal</strong>
+    Desktop header now shows: Ana Sayfa | Çözümler ▾ | İş Ortaklarımız | [Aramıza Katıl CTA]<br>
+    "Hakkımızda" and "İletişim" have been removed from the navigation.
+  </div>
+
+  <div class="removed">
+    <strong>Removed items:</strong> "Hakkımızda" link and "İletişim" link — from both desktop nav and mobile hamburger menu.
+  </div>
+
+  <!-- MOBILE MENU — AFTER REMOVAL -->
+  <div class="mobile-section">
+    <h3>Mobile Menu (After)</h3>
+    <div class="mobile-nav">
+      <a href="/">Ana Sayfa</a>
+      <a href="#">Çözümler</a>
+      <a href="/is-ortaklari" style="padding-left:32px;font-weight:500;color:#64748B;">— Markalar İçin</a>
+      <a href="/is-ortaklari" style="padding-left:32px;font-weight:500;color:#64748B;">— Influencer'lar İçin</a>
+      <a href="/is-ortaklari" style="padding-left:32px;font-weight:500;color:#64748B;">— Ajanslar İçin</a>
+      <a href="/is-ortaklari">İş Ortaklarımız</a>
+      <!-- REMOVED: Hakkımızda -->
+      <!-- REMOVED: İletişim -->
+    </div>
+  </div>
+
+</body>
+</html>

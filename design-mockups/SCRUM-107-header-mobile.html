@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SCRUM-107 Header Redesign — Mobile View</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: #F8FAFC;
+    max-width: 390px;
+    margin: 0 auto;
+    border-left: 1px solid #E2E8F0;
+    border-right: 1px solid #E2E8F0;
+    min-height: 100vh;
+  }
+
+  /* Header */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: #FFFFFF;
+    border-bottom: 1px solid #E2E8F0;
+  }
+  .header-inner {
+    padding: 0 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 72px;
+  }
+
+  /* Logo */
+  .logo-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: #0F172A;
+  }
+  .logo-mark {
+    width: 36px;
+    height: 36px;
+    border: 2px solid #0F172A;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .logo-mark span {
+    font-size: 9px;
+    font-weight: 800;
+    line-height: 1;
+  }
+  .logo-text {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    transition: all 300ms ease;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  /* Scrolled state */
+  header.scrolled .logo-text {
+    width: 0;
+    opacity: 0;
+  }
+  header:not(.scrolled) .logo-text {
+    width: 72px;
+    opacity: 1;
+  }
+
+  /* Hamburger */
+  .menu-btn {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    border-radius: 8px;
+    color: #475569;
+    cursor: pointer;
+    transition: all 150ms ease;
+  }
+  .menu-btn:hover {
+    background: #F8FAFC;
+    color: #BA9A2A;
+  }
+  .menu-btn svg { width: 24px; height: 24px; }
+
+  /* Mobile Menu */
+  .mobile-menu {
+    border-top: 1px solid #E2E8F0;
+    padding: 16px;
+    display: none;
+  }
+  .mobile-menu.open { display: block; }
+
+  .mobile-link {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 4px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #475569;
+    text-decoration: none;
+    border-bottom: 1px solid #F1F5F9;
+    transition: color 150ms ease;
+  }
+  .mobile-link.active { color: #BA9A2A; }
+
+  .mobile-group {
+    border-bottom: 1px solid #F1F5F9;
+  }
+  .mobile-group-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 44px;
+    padding: 0 4px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #475569;
+  }
+  .mobile-group-header svg {
+    width: 16px;
+    height: 16px;
+    color: #94A3B8;
+    transition: transform 300ms ease;
+  }
+  .mobile-group.expanded .mobile-group-header svg {
+    transform: rotate(180deg);
+  }
+  .mobile-sub {
+    margin-left: 8px;
+    padding-left: 16px;
+    padding-bottom: 4px;
+    border-left: 2px solid #E2E8F0;
+  }
+  .mobile-sub a {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #64748B;
+    text-decoration: none;
+    transition: color 150ms ease;
+  }
+  .mobile-sub a:hover { color: #BA9A2A; }
+
+  .mobile-cta {
+    width: 100%;
+    height: 48px;
+    margin-top: 24px;
+    background: #0F172A;
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 200ms ease;
+  }
+
+  /* Content */
+  .content {
+    padding: 24px 16px;
+  }
+  .content h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #0F172A;
+    margin-bottom: 12px;
+    letter-spacing: -0.3px;
+  }
+  .content p {
+    color: #64748B;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+  .spacer { height: 300px; }
+
+  /* Annotation */
+  .annotation {
+    position: fixed;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #0F172A;
+    color: #FFFFFF;
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    z-index: 100;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    max-width: 350px;
+    line-height: 1.5;
+    text-align: center;
+  }
+  .annotation .label {
+    color: #D4AF37;
+    font-weight: 700;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+</style>
+</head>
+<body>
+
+<header id="header">
+  <div class="header-inner">
+    <a href="#" class="logo-link">
+      <div class="logo-mark">
+        <span>MD</span>
+        <span>ZN</span>
+      </div>
+      <span class="logo-text">PARTNERS</span>
+    </a>
+    <button class="menu-btn" id="menuBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#" class="mobile-link active">Ana Sayfa</a>
+    <div class="mobile-group expanded">
+      <div class="mobile-group-header">
+        Çözümler
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="mobile-sub">
+        <a href="#">Markalar İçin</a>
+        <a href="#">Influencer'lar İçin</a>
+        <a href="#">Ajanslar İçin</a>
+      </div>
+    </div>
+    <a href="#" class="mobile-link">İş Ortaklarımız</a>
+    <button class="mobile-cta">Aramıza Katıl</button>
+  </div>
+</header>
+
+<div class="content">
+  <h2>Mobile Header — 390px</h2>
+  <p>Same two behaviors apply on mobile:</p>
+  <p><strong>1. Logo animation on scroll:</strong> "PARTNERS" text collapses when scrolling down, leaving only the MDZN mark. This saves horizontal space on mobile.</p>
+  <p><strong>2. Chevron rotation in mobile menu:</strong> The Çözümler group shows a chevron that rotates 180° when the section is expanded (it starts expanded in this mockup). Tap the hamburger to toggle the menu.</p>
+  <div class="spacer"></div>
+  <h2>Keep Scrolling</h2>
+  <p>Logo is now minimal — just the MDZN mark.</p>
+  <div class="spacer"></div>
+</div>
+
+<div class="annotation" id="annotation">
+  <div class="label">Mobile View</div>
+  <span id="anno-text">Tap hamburger to see menu. Scroll to see logo animation.</span>
+</div>
+
+<script>
+const header = document.getElementById('header');
+const menuBtn = document.getElementById('menuBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+const annoText = document.getElementById('anno-text');
+
+menuBtn.addEventListener('click', () => {
+  mobileMenu.classList.toggle('open');
+});
+
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 50) {
+    header.classList.add('scrolled');
+    annoText.textContent = 'Scrolled: "PARTNERS" collapsed to MDZN mark only.';
+  } else {
+    header.classList.remove('scrolled');
+    annoText.textContent = 'Tap hamburger to see menu. Scroll to see logo animation.';
+  }
+});
+</script>
+
+</body>
+</html>

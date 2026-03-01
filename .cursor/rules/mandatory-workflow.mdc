@@ -1,0 +1,43 @@
+---
+description: Mandatory workflow enforcement -- all agents must follow workflow.md and their defined roles at all times
+alwaysApply: true
+---
+
+# Mandatory Workflow Enforcement
+
+This rule is non-negotiable. It applies to every task, every conversation, every agent.
+
+## Before Any Jira Task Work
+
+When working on any task from Jira, you MUST:
+
+1. **Read `workflow.md`** at the project root in full before doing anything
+2. **Read your agent role file** from `.cursor/rules/` to understand your responsibilities
+3. **Read the Team Leader role** (`.cursor/rules/agent-team-leader.mdc`) to understand the orchestration chain
+
+Do NOT skip these reads. Do NOT assume you know the workflow. Read the files every time.
+
+## Jira Rules (MUST follow)
+
+- **Subtasks go under the parent Jira task.** Product definitions, designs, and tech subtasks are created as Jira subtasks on the parent issue. NEVER use comments as a substitute for subtasks. NEVER keep deliverables only in the repo.
+- **Never modify or delete the parent task's original description or attachments.** The original description, screenshots, and attachments from the human PM are the historical record. They must remain untouched at all times. The ONLY exception is appending UAT preview links (see below).
+- **Add UAT branch links to the parent task description.** When a task reaches UAT, append a "UAT Preview" section at the end of the parent task's description with the Vercel preview URL and the Git branch link. This is the only allowed modification to the parent description. The original content above the UAT section must never be changed.
+- **After every operation, add a comment to the task.** Every phase completion, every status transition, every deliverable -- log it as a comment on the Jira task so there is a complete audit trail of what happened and when.
+- **Always verify the task's current Jira column before and after your work.** Before starting, check where the task is. After completing your work, check again and move it to the correct column per the workflow. Never assume the column is correct -- always verify.
+- **When replacing a deliverable, delete the old attachment.** If you create a new version of a design mockup or any attachment, remove the outdated version from the Jira subtask first. Only the current version should exist. No stale files.
+- **Do NOT wait for human confirmation if the task is already in the right column.** Jira is the source of truth. If a task is in a column, the decision has already been made. Proceed with the next phase immediately. Do not pause or ask "should I continue?" -- just continue.
+
+## Workflow Rules (MUST follow)
+
+- **Follow the workflow exactly as defined.** No skipping phases, no shortcutting steps, no improvising the process.
+- **Respect the role boundaries.** Each agent does only what their role defines. No agent does another agent's job.
+- **Follow the feedback loops.** When a Head rejects work, the team member reworks it. The loop continues until the Head approves. No exceptions.
+- **Only Team Leader moves tasks in Jira.** No other agent touches Jira task statuses.
+- **Every phase must complete before the next begins.** Heads Alignment before Product Definition. Product Definition before Design. Grooming before Development. No parallel shortcuts unless the workflow explicitly allows it.
+- **Never self-approve.** The agent doing the work is never the one approving it. Approval always comes from the designated reviewer in the workflow.
+- **Never skip testing.** Every implementation must be tested for design fidelity, functional correctness, and acceptance criteria before moving forward.
+- **Always include deliverables.** Subtasks moving to Product Review must contain: product definition, .html mockup, and research summary. No incomplete submissions. Deliverables are attached to Jira subtasks, not left only in the repo.
+
+## If You Are Unsure
+
+Stop and re-read `workflow.md`. If the workflow does not cover your situation, escalate to the Team Leader. Do not guess or improvise.

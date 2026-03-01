@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SCRUM-115 Mediazone — Mobile</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: #FFFFFF; max-width: 390px; margin: 0 auto; border-left: 1px solid #E2E8F0; border-right: 1px solid #E2E8F0; }
+
+  .section { padding: 48px 16px; border-top: 1px solid #E2E8F0; text-align: center; }
+  .section-subtitle { font-size: 13px; color: #94A3B8; font-weight: 500; margin-bottom: 24px; }
+
+  .logos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .mz-logo {
+    display: flex; align-items: center; gap: 8px;
+    padding: 12px 14px; background: #F8FAFC; border: 1px solid #E2E8F0;
+    border-radius: 10px; text-decoration: none; transition: all 200ms ease;
+  }
+  .mz-logo:active { border-color: #D4AF37; background: #FFFACC; }
+  .mz-icon { width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; color: #FFF; flex-shrink: 0; }
+  .mz-name { font-size: 12px; font-weight: 600; color: #0F172A; }
+
+  .annotation { position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); background: #0F172A; color: #FFF; padding: 10px 16px; border-radius: 10px; font-size: 11px; z-index: 100; max-width: 360px; text-align: center; }
+  .annotation .label { color: #D4AF37; font-weight: 700; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; }
+</style>
+</head>
+<body>
+
+<section class="section">
+  <p class="section-subtitle">Mediazone güvencesiyle</p>
+  <div class="logos-grid">
+    <a href="https://www.mackolik.com" target="_blank" class="mz-logo"><div class="mz-icon" style="background:#4CAF50">M</div><span class="mz-name">Mackolik</span></a>
+    <a href="https://onedio.com" target="_blank" class="mz-logo"><div class="mz-icon" style="background:#FF5722">O</div><span class="mz-name">Onedio</span></a>
+    <a href="https://www.mynet.com" target="_blank" class="mz-logo"><div class="mz-icon" style="background:#1565C0">M</div><span class="mz-name">Mynet</span></a>
+    <a href="https://yemek.com" target="_blank" class="mz-logo"><div class="mz-icon" style="background:#E91E63">Y</div><span class="mz-name">Yemek.com</span></a>
+    <a href="https://www.webtekno.com" target="_blank" class="mz-logo"><div class="mz-icon" style="background:#0F172A">W</div><span class="mz-name">Webtekno</span></a>
+    <a href="https://hisse.net" target="_blank" class="mz-logo"><div class="mz-icon" style="background:#059669">H</div><span class="mz-name">Hisse.net</span></a>
+  </div>
+</section>
+
+<div class="annotation"><span class="label">Mobile (390px)</span><br>2x3 grid. Clickable logos, open in new tab. Active state: gold border.</div>
+
+</body>
+</html>

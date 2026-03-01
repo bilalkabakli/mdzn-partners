@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SCRUM-112 & 113 How It Works — Mobile View</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: #F8FAFC; max-width: 390px; margin: 0 auto; border-left: 1px solid #E2E8F0; border-right: 1px solid #E2E8F0; }
+
+  .section { padding: 48px 16px; }
+  .section + .section { border-top: 1px solid #E2E8F0; }
+  .section-header { text-align: center; margin-bottom: 28px; }
+  .section-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 10px; }
+  .label-brand { color: #D4AF37; }
+  .label-pub { color: #2563EB; }
+  .section-title { font-size: 24px; font-weight: 800; color: #0F172A; letter-spacing: -0.5px; margin-bottom: 8px; }
+  .section-subtitle { font-size: 13px; color: #64748B; font-weight: 500; }
+
+  .steps-scroll {
+    display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch; margin: 0 -16px; padding: 0 16px 12px;
+  }
+  .steps-scroll::-webkit-scrollbar { display: none; }
+
+  .step-card {
+    flex: 0 0 75%; scroll-snap-align: start;
+    background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 14px; padding: 20px;
+  }
+  .step-num {
+    width: 40px; height: 40px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: 800; margin-bottom: 14px;
+  }
+  .brand-num { background: #0F172A; color: #FFFFFF; }
+  .pub-num { background: #2563EB; color: #FFFFFF; }
+  .step-title { font-size: 15px; font-weight: 700; color: #0F172A; margin-bottom: 6px; }
+  .step-desc { font-size: 12px; color: #64748B; line-height: 1.5; margin-bottom: 12px; }
+  .step-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+  .step-tag { padding: 3px 8px; border-radius: 4px; font-size: 10px; font-weight: 600; }
+  .tag-green { background: #D1FAE5; color: #059669; }
+  .tag-gray { background: #F1F5F9; color: #64748B; }
+  .tag-gold { background: #FEF3C7; color: #D97706; }
+  .tag-purple { background: #EDE9FE; color: #7C3AED; }
+
+  .scroll-hint { text-align: center; font-size: 11px; color: #94A3B8; margin-top: 8px; }
+  .indicator { display: flex; justify-content: center; gap: 4px; margin-top: 12px; }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: #CBD5E1; }
+  .dot.b-active { background: #D4AF37; width: 16px; border-radius: 3px; }
+  .dot.p-active { background: #2563EB; width: 16px; border-radius: 3px; }
+
+  .annotation { position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); background: #0F172A; color: #FFF; padding: 10px 16px; border-radius: 10px; font-size: 11px; z-index: 100; max-width: 360px; text-align: center; }
+  .annotation .label { color: #D4AF37; font-weight: 700; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; }
+</style>
+</head>
+<body>
+
+<!-- Markalar İçin -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-label label-brand">Markalar İçin</div>
+    <h2 class="section-title">Nasıl Çalışır?</h2>
+    <p class="section-subtitle">4 adımda büyümeye başlayın</p>
+  </div>
+  <div class="steps-scroll">
+    <div class="step-card"><div class="step-num brand-num">1</div><div class="step-title">Hesap Oluşturun</div><div class="step-desc">Ücretsiz, kredi kartı gerekmez.</div><div class="step-tags"><span class="step-tag tag-green">Ücretsiz</span><span class="step-tag tag-gray">2 dk</span></div></div>
+    <div class="step-card"><div class="step-num brand-num">2</div><div class="step-title">Mağazanızı Bağlayın</div><div class="step-desc">İkas, Shopify, Ticimax ile tek tık.</div><div class="step-tags"><span class="step-tag tag-gold">Otomatik</span><span class="step-tag tag-gray">5 dk</span></div></div>
+    <div class="step-card"><div class="step-num brand-num">3</div><div class="step-title">Kampanya Oluşturun</div><div class="step-desc">Komisyon oranlarını belirleyin.</div><div class="step-tags"><span class="step-tag tag-purple">Esnek</span></div></div>
+    <div class="step-card"><div class="step-num brand-num">4</div><div class="step-title">Büyümeye Başlayın</div><div class="step-desc">Gerçek zamanlı satış takibi.</div><div class="step-tags"><span class="step-tag tag-green">Anlık</span></div></div>
+  </div>
+  <p class="scroll-hint">← Kaydırarak adımları görün →</p>
+  <div class="indicator"><div class="dot b-active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+</section>
+
+<!-- Yayıncılar İçin -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-label label-pub">Yayıncılar İçin</div>
+    <h2 class="section-title">Nasıl Çalışır?</h2>
+    <p class="section-subtitle">4 adımda kazanmaya başlayın</p>
+  </div>
+  <div class="steps-scroll">
+    <div class="step-card"><div class="step-num pub-num">1</div><div class="step-title">Başvurun</div><div class="step-desc">Online form, 3 dakika.</div><div class="step-tags"><span class="step-tag tag-gold">Herkese açık</span><span class="step-tag tag-gray">3 dk</span></div></div>
+    <div class="step-card"><div class="step-num pub-num">2</div><div class="step-title">Onay Alın</div><div class="step-desc">24 saat içinde dönüş.</div><div class="step-tags"><span class="step-tag tag-green">Hızlı</span></div></div>
+    <div class="step-card"><div class="step-num pub-num">3</div><div class="step-title">Markaları Keşfedin</div><div class="step-desc">Kategori bazlı filtreleme.</div><div class="step-tags"><span class="step-tag tag-gold">Gelişmiş</span></div></div>
+    <div class="step-card"><div class="step-num pub-num">4</div><div class="step-title">Kazanmaya Başlayın</div><div class="step-desc">Link paylaş, komisyon kazan.</div><div class="step-tags"><span class="step-tag tag-green">Güvenli</span></div></div>
+  </div>
+  <p class="scroll-hint">← Kaydırarak adımları görün →</p>
+  <div class="indicator"><div class="dot p-active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+</section>
+
+<div class="annotation"><span class="label">Mobile (390px)</span><br>Both sections use same structure. Cards scroll horizontally (75% width).</div>
+
+</body>
+</html>

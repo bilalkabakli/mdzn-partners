@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SCRUM-107 Header Redesign — Desktop View</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: #F8FAFC; }
+
+  /* Header */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: #FFFFFF;
+    border-bottom: 1px solid #E2E8F0;
+    transition: all 200ms ease;
+  }
+  .header-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 72px;
+  }
+
+  /* Logo */
+  .logo-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: #0F172A;
+  }
+  .logo-mark {
+    width: 36px;
+    height: 36px;
+    border: 2px solid #0F172A;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 200ms ease;
+    flex-shrink: 0;
+  }
+  .logo-link:hover .logo-mark {
+    background: #0F172A;
+  }
+  .logo-mark span {
+    font-size: 9px;
+    font-weight: 800;
+    line-height: 1;
+    transition: color 200ms ease;
+  }
+  .logo-link:hover .logo-mark span {
+    color: #FFFFFF;
+  }
+  .logo-text {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    transition: all 300ms ease;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  /* Scrolled state: logo text collapses */
+  header.scrolled .logo-text {
+    width: 0;
+    opacity: 0;
+    margin: 0;
+    padding: 0;
+  }
+  header:not(.scrolled) .logo-text {
+    width: 72px;
+    opacity: 1;
+  }
+
+  /* Nav */
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    flex: 1;
+    justify-content: center;
+  }
+  .nav-link {
+    font-size: 14px;
+    font-weight: 500;
+    color: #475569;
+    text-decoration: none;
+    transition: color 150ms ease;
+    padding-bottom: 26px;
+    margin-bottom: -26px;
+    position: relative;
+  }
+  .nav-link:hover { color: #BA9A2A; }
+  .nav-link.active {
+    color: #BA9A2A;
+  }
+  .nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #D4AF37;
+  }
+
+  /* Dropdown */
+  .dropdown { position: relative; }
+  .dropdown-trigger {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #475569;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding-bottom: 26px;
+    margin-bottom: -26px;
+    transition: color 150ms ease;
+  }
+  .dropdown-trigger:hover { color: #BA9A2A; }
+  .dropdown-trigger svg {
+    width: 16px;
+    height: 16px;
+    transition: transform 300ms ease;
+  }
+  .dropdown:hover .dropdown-trigger svg {
+    transform: rotate(180deg);
+  }
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 8px;
+    width: 208px;
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    padding: 8px 0;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px);
+    transition: all 200ms ease;
+  }
+  .dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .dropdown-item {
+    display: block;
+    padding: 10px 16px;
+    font-size: 14px;
+    color: #475569;
+    text-decoration: none;
+    transition: all 150ms ease;
+  }
+  .dropdown-item:hover {
+    color: #BA9A2A;
+    background: #FFFACC;
+  }
+
+  /* CTA Button */
+  .btn-primary {
+    height: 44px;
+    padding: 0 24px;
+    background: #0F172A;
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 200ms ease;
+  }
+  .btn-primary:hover {
+    background: #1E293B;
+    box-shadow: 0 0 0 3px rgba(212,175,55,0.3);
+  }
+
+  /* Dummy content for scroll testing */
+  .content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 48px;
+  }
+  .content h2 {
+    font-size: 36px;
+    font-weight: 700;
+    color: #0F172A;
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
+  }
+  .content p {
+    color: #64748B;
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+  .spacer { height: 400px; }
+
+  /* Annotation */
+  .annotation {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: #0F172A;
+    color: #FFFFFF;
+    padding: 16px 24px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 500;
+    z-index: 100;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    max-width: 320px;
+    line-height: 1.5;
+  }
+  .annotation .label {
+    color: #D4AF37;
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+</style>
+</head>
+<body>
+
+<header id="header">
+  <div class="header-inner">
+    <a href="#" class="logo-link">
+      <div class="logo-mark">
+        <span>MD</span>
+        <span>ZN</span>
+      </div>
+      <span class="logo-text">PARTNERS</span>
+    </a>
+
+    <nav>
+      <a href="#" class="nav-link active">Ana Sayfa</a>
+      <div class="dropdown">
+        <button class="dropdown-trigger">
+          Çözümler
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item">Markalar İçin</a>
+          <a href="#" class="dropdown-item">Influencer'lar İçin</a>
+          <a href="#" class="dropdown-item">Ajanslar İçin</a>
+        </div>
+      </div>
+      <a href="#" class="nav-link">İş Ortaklarımız</a>
+    </nav>
+
+    <button class="btn-primary">Aramıza Katıl</button>
+  </div>
+</header>
+
+<div class="content">
+  <h2>Desktop Header — Scroll Down to See Animation</h2>
+  <p>The header has two behaviors inspired by Anthropic's website:</p>
+  <p><strong>1. Logo animation on scroll:</strong> At the top of the page, the full logo is visible (MDZN mark + "PARTNERS" text). When you scroll down, "PARTNERS" collapses with a smooth animation, leaving only the compact MDZN mark. Scroll back up and the full logo returns.</p>
+  <p><strong>2. Dropdown arrow rotation:</strong> Hover over "Çözümler" — the chevron arrow rotates 180° (points up) with a smooth 300ms transition. When hover exits, it rotates back down.</p>
+  <div class="spacer"></div>
+  <h2>Keep Scrolling...</h2>
+  <p>Notice the logo text has collapsed. The header remains clean and compact while scrolled.</p>
+  <div class="spacer"></div>
+  <h2>Scroll Back Up</h2>
+  <p>The "PARTNERS" text smoothly returns when you reach the top.</p>
+  <div class="spacer"></div>
+</div>
+
+<div class="annotation" id="annotation">
+  <div class="label">Design Note</div>
+  <span id="anno-text">At top: Full logo visible. Scroll down to see the minimal logo animation.</span>
+</div>
+
+<script>
+const header = document.getElementById('header');
+const annoText = document.getElementById('anno-text');
+let lastScroll = 0;
+
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  if (scrollY > 50) {
+    header.classList.add('scrolled');
+    annoText.textContent = 'Scrolled: "PARTNERS" text collapsed. Only MDZN mark remains. Hover "Çözümler" to see arrow flip.';
+  } else {
+    header.classList.remove('scrolled');
+    annoText.textContent = 'At top: Full logo visible. Scroll down to see the minimal logo animation.';
+  }
+  lastScroll = scrollY;
+});
+</script>
+
+</body>
+</html>

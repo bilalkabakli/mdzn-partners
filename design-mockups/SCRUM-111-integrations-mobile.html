@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SCRUM-111 Integrations — Mobile View</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: #FFFFFF; max-width: 390px; margin: 0 auto; border-left: 1px solid #E2E8F0; border-right: 1px solid #E2E8F0; }
+
+  .section { padding: 48px 16px; }
+  .section-header { text-align: center; margin-bottom: 32px; }
+  .section-label { font-size: 11px; font-weight: 600; color: #D4AF37; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 10px; }
+  .section-title { font-size: 28px; font-weight: 800; color: #0F172A; letter-spacing: -1px; margin-bottom: 8px; }
+  .section-subtitle { font-size: 14px; color: #64748B; font-weight: 500; }
+
+  .cards-scroll {
+    display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch; padding-bottom: 12px;
+    scroll-padding-left: 16px;
+  }
+  .cards-scroll::-webkit-scrollbar { display: none; }
+
+  .int-card {
+    flex: 0 0 calc(100% - 32px); scroll-snap-align: start;
+    border: 1px solid #E2E8F0; border-radius: 16px; padding: 24px;
+  }
+  .int-card h3 { font-size: 20px; font-weight: 800; color: #0F172A; margin-bottom: 6px; }
+  .int-card .desc { font-size: 13px; color: #64748B; line-height: 1.5; margin-bottom: 20px; }
+
+  .logos-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+  .logo-chip {
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 12px; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 10px;
+  }
+  .logo-icon {
+    width: 28px; height: 28px; border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 800; color: #FFFFFF;
+  }
+  .logo-name { font-size: 12px; font-weight: 600; color: #0F172A; }
+
+  .tag-line {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 12px; background: #F0FDF4; border: 1px solid #BBF7D0;
+    border-radius: 6px; font-size: 11px; font-weight: 600; color: #059669;
+  }
+  .tag-accent {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 12px; background: #FFFACC; border: 1px solid #FDE68A;
+    border-radius: 6px; font-size: 11px; font-weight: 600; color: #92400E;
+  }
+
+  .trust-banner {
+    display: flex; align-items: center; justify-content: center; gap: 16px;
+    padding: 14px; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 10px;
+    margin-top: 24px;
+  }
+  .trust-badge { font-size: 12px; font-weight: 600; color: #059669; display: flex; align-items: center; gap: 6px; }
+  .trust-badge svg { width: 16px; height: 16px; }
+  .scroll-hint { text-align: center; font-size: 11px; color: #94A3B8; margin-top: 8px; }
+
+  .annotation { position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); background: #0F172A; color: #FFF; padding: 10px 16px; border-radius: 10px; font-size: 11px; z-index: 100; max-width: 360px; text-align: center; }
+  .annotation .label { color: #D4AF37; font-weight: 700; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; }
+</style>
+</head>
+<body>
+
+<section class="section">
+  <div class="section-header">
+    <div class="section-label">Entegrasyonlar</div>
+    <h2 class="section-title">Sıfır Kod, Anında Başlangıç</h2>
+    <p class="section-subtitle">Popüler platformlarla dakikalar içinde entegre olun.</p>
+  </div>
+
+  <div class="cards-scroll">
+    <div class="int-card">
+      <h3>Hazır Entegrasyonlar</h3>
+      <p class="desc">Popüler e-ticaret ve mobil platformlar ile hazır entegrasyon</p>
+      <div class="logos-row">
+        <div class="logo-chip"><div class="logo-icon" style="background:#6366F1">İK</div><span class="logo-name">İkas</span></div>
+        <div class="logo-chip"><div class="logo-icon" style="background:#7CB342">S</div><span class="logo-name">Shopify</span></div>
+        <div class="logo-chip"><div class="logo-icon" style="background:#1565C0">T</div><span class="logo-name">Ticimax</span></div>
+        <div class="logo-chip"><div class="logo-icon" style="background:#E91E63">A</div><span class="logo-name">Adjust</span></div>
+        <div class="logo-chip"><div class="logo-icon" style="background:#00BCD4">AF</div><span class="logo-name">Appsflyer</span></div>
+      </div>
+      <div class="tag-line">Tek tıkla büyümeye başlayın</div>
+    </div>
+
+    <div class="int-card">
+      <h3>Özel Entegrasyonlar</h3>
+      <p class="desc">SDK, API veya Excel ile tüm süreci otomatik yönetin</p>
+      <div class="logos-row">
+        <div class="logo-chip"><div class="logo-icon" style="background:#0F172A"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div><span class="logo-name">SDK</span></div>
+        <div class="logo-chip"><div class="logo-icon" style="background:#7C3AED"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg></div><span class="logo-name">API</span></div>
+        <div class="logo-chip"><div class="logo-icon" style="background:#059669"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/></svg></div><span class="logo-name">Excel</span></div>
+        <div class="logo-chip"><div class="logo-icon" style="background:#1976D2"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/></svg></div><span class="logo-name">GTM</span></div>
+      </div>
+      <div class="tag-accent">Ekibimiz sizin için kuruyor</div>
+    </div>
+  </div>
+  <p class="scroll-hint">← Kaydırarak diğer kartı görün →</p>
+
+  <div class="trust-banner">
+    <div class="trust-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      GDPR Uyumlu
+    </div>
+    <div style="width:1px;height:24px;background:#E2E8F0"></div>
+    <div class="trust-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      KVKK Uyumlu
+    </div>
+  </div>
+</section>
+
+<div class="annotation"><span class="label">Mobile (390px) — FIXED</span><br>Left margin fixed. Cards full-width with proper padding. GDPR/KVKK trust banner.</div>
+
+</body>
+</html>

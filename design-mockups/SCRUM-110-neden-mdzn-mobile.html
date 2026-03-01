@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SCRUM-110 Neden MDZN Partners? — Mobile View</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: #F8FAFC;
+    max-width: 390px;
+    margin: 0 auto;
+    border-left: 1px solid #E2E8F0;
+    border-right: 1px solid #E2E8F0;
+    min-height: 100vh;
+  }
+
+  .section {
+    padding: 48px 16px;
+  }
+  .section-header {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #D4AF37;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 10px;
+  }
+  .section-title {
+    font-size: 28px;
+    font-weight: 800;
+    color: #0F172A;
+    letter-spacing: -1px;
+    margin-bottom: 8px;
+  }
+  .section-subtitle {
+    font-size: 14px;
+    color: #64748B;
+    font-weight: 500;
+  }
+
+  .cards-scroll {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 12px;
+    margin: 0 -16px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .cards-scroll::-webkit-scrollbar { display: none; }
+
+  .card {
+    flex: 0 0 80%;
+    scroll-snap-align: start;
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 14px;
+    padding: 24px;
+    position: relative;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    border-radius: 14px 14px 0 0;
+  }
+  .card:nth-child(1)::before { background: #D97706; }
+  .card:nth-child(2)::before { background: #059669; }
+  .card:nth-child(3)::before { background: #2563EB; }
+  .card:nth-child(4)::before { background: #7C3AED; }
+  .card:nth-child(5)::before { background: #E11D48; }
+  .card:nth-child(6)::before { background: #0891B2; }
+
+  .card-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+  .card-icon svg { width: 20px; height: 20px; }
+  .gold { background: #FEF3C7; } .gold svg { color: #D97706; }
+  .green { background: #D1FAE5; } .green svg { color: #059669; }
+  .blue { background: #DBEAFE; } .blue svg { color: #2563EB; }
+  .purple { background: #EDE9FE; } .purple svg { color: #7C3AED; }
+  .rose { background: #FFE4E6; } .rose svg { color: #E11D48; }
+  .cyan { background: #CFFAFE; } .cyan svg { color: #0891B2; }
+
+  .card h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #0F172A;
+    margin-bottom: 6px;
+  }
+  .card-tagline {
+    font-size: 12px;
+    font-weight: 600;
+    color: #D4AF37;
+    margin-bottom: 10px;
+  }
+  .card-desc {
+    font-size: 13px;
+    color: #64748B;
+    line-height: 1.5;
+    margin-bottom: 14px;
+  }
+  .card-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .card-bullets li {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: #475569;
+  }
+  .card-bullets li svg { width: 14px; height: 14px; color: #059669; flex-shrink: 0; }
+
+  .scroll-hint {
+    text-align: center;
+    font-size: 11px;
+    color: #94A3B8;
+    margin-top: 8px;
+  }
+
+  .indicator {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 16px;
+  }
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #CBD5E1;
+  }
+  .dot.active { background: #D4AF37; width: 20px; border-radius: 3px; }
+
+  .annotation {
+    position: fixed;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #0F172A;
+    color: #FFFFFF;
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-size: 11px;
+    z-index: 100;
+    max-width: 360px;
+    text-align: center;
+    line-height: 1.5;
+  }
+  .annotation .label { color: #D4AF37; font-weight: 700; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; }
+</style>
+</head>
+<body>
+
+<section class="section">
+  <div class="section-header">
+    <div class="section-label">Platform Özellikleri</div>
+    <h2 class="section-title">Neden MDZN Partners?</h2>
+    <p class="section-subtitle">Affiliate pazarlamanın geleceğini deneyimleyin</p>
+  </div>
+
+  <div class="cards-scroll">
+    <div class="card">
+      <div class="card-icon gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+      <h3>Gerçek Zamanlı Takip</h3>
+      <div class="card-tagline">Tüm satışlarınızı anlık görün</div>
+      <p class="card-desc">Satışlarınız saniyeler içinde dashboard'unuzda.</p>
+      <ul class="card-bullets">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Anlık dashboard</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Kampanya filtreleme</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Trend grafikleri</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-icon green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div>
+      <h3>Backend Veri Toplama</h3>
+      <div class="card-tagline">%30 takip kaybını önleyin</div>
+      <p class="card-desc">SDK tabanlı tracking, server-side veri toplama.</p>
+      <ul class="card-bullets">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>SDK tracking</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Server-side</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Audit desteği</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+      <h3>Anında Entegrasyon</h3>
+      <div class="card-tagline">Hazır ve özel entegrasyonlar</div>
+      <p class="card-desc">Popüler platformlar + özel altyapı desteği.</p>
+      <ul class="card-bullets">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>İkas, Shopify, Ticimax</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Özel altyapı</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Kurulum bizden</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-icon purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+      <h3>Otomatik Ödeme</h3>
+      <div class="card-tagline">Komisyonlar otomatik hesaplanır</div>
+      <p class="card-desc">Kategori bazlı oranlar, şeffaf takip.</p>
+      <ul class="card-bullets">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Kategori oranları</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Otomatik hesaplama</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Şeffaf panel</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-icon rose"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg></div>
+      <h3>İptal/İade Yönetimi</h3>
+      <div class="card-tagline">Otomatik komisyon düzeltme</div>
+      <p class="card-desc">İptal edilen siparişler otomatik algılanır.</p>
+      <ul class="card-bullets">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Otomatik iptal</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>İade takibi</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Durum görünürlüğü</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-icon cyan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
+      <h3>Mobil Uygulama Takibi</h3>
+      <div class="card-tagline">iOS ve Android kampanyaları</div>
+      <p class="card-desc">Uygulama yüklemeleri, Adjust & Appsflyer.</p>
+      <ul class="card-bullets">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Yükleme takibi</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Adjust & Appsflyer</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Bounty sistemi</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Scroll hint removed per PM feedback -->
+  <div class="indicator">
+    <div class="dot active"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+  </div>
+</section>
+
+<div class="annotation">
+  <span class="label">Mobile View (390px)</span><br>
+  6 cards in horizontal scroll (80% width, snap). Scroll indicators below.
+</div>
+
+</body>
+</html>

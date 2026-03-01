@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SCRUM-111 Integrations — Desktop View</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: #FFFFFF; }
+
+  .section { max-width: 1400px; margin: 0 auto; padding: 80px 48px; }
+
+  .section-header { text-align: center; margin-bottom: 56px; }
+  .section-label {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 13px; font-weight: 600; color: #D4AF37;
+    text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 16px;
+  }
+  .section-label::before, .section-label::after { content: ''; width: 24px; height: 1px; background: #D4AF37; }
+  .section-title { font-size: 44px; font-weight: 800; color: #0F172A; letter-spacing: -1.5px; margin-bottom: 12px; }
+  .section-subtitle { font-size: 18px; color: #64748B; font-weight: 500; max-width: 560px; margin: 0 auto; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 40px; }
+
+  .int-card {
+    border: 1px solid #E2E8F0; border-radius: 20px; padding: 40px;
+    transition: all 300ms ease;
+  }
+  .int-card:hover { border-color: #D4AF37; box-shadow: 0 8px 32px rgba(212,175,55,0.1); }
+  .int-card h3 { font-size: 24px; font-weight: 800; color: #0F172A; margin-bottom: 8px; }
+  .int-card .desc { font-size: 15px; color: #64748B; line-height: 1.6; margin-bottom: 28px; }
+
+  .logos-row {
+    display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 24px;
+  }
+  .logo-chip {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 20px; background: #F8FAFC; border: 1px solid #E2E8F0;
+    border-radius: 12px; transition: all 200ms ease;
+  }
+  .logo-chip:hover { border-color: #D4AF37; background: #FFFACC; }
+  .logo-icon {
+    width: 36px; height: 36px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 800; color: #FFFFFF;
+  }
+  .logo-name { font-size: 14px; font-weight: 600; color: #0F172A; }
+
+  .tag-line {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 16px; background: #F0FDF4; border: 1px solid #BBF7D0;
+    border-radius: 8px; font-size: 13px; font-weight: 600; color: #059669;
+  }
+  .tag-line svg { width: 16px; height: 16px; }
+
+  .tag-accent {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 16px; background: #FFFACC; border: 1px solid #FDE68A;
+    border-radius: 8px; font-size: 13px; font-weight: 600; color: #92400E;
+  }
+
+  .trust-banner {
+    display: flex; align-items: center; justify-content: center; gap: 24px;
+    padding: 20px 32px; background: #F8FAFC; border: 1px solid #E2E8F0;
+    border-radius: 12px;
+  }
+  .trust-badge {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 14px; font-weight: 600; color: #059669;
+  }
+  .trust-badge .icon {
+    width: 32px; height: 32px; background: #D1FAE5; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .trust-badge .icon svg { width: 18px; height: 18px; color: #059669; }
+
+  .anno { max-width: 1400px; margin: 0 auto; padding: 0 48px 40px; }
+  .anno-card { background: #0F172A; color: #FFF; padding: 20px 24px; border-radius: 12px; }
+  .anno-label { color: #D4AF37; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+  .anno-text { font-size: 14px; line-height: 1.7; }
+</style>
+</head>
+<body>
+
+<section class="section">
+  <div class="section-header">
+    <div class="section-label">Entegrasyonlar</div>
+    <h2 class="section-title">Sıfır Kod, Anında Başlangıç</h2>
+    <p class="section-subtitle">Popüler platformlarla dakikalar içinde entegre olun. Teknik ekibinize iş yükü yok.</p>
+  </div>
+
+  <div class="two-col">
+    <!-- Hazır Entegrasyonlar -->
+    <div class="int-card">
+      <h3>Hazır Entegrasyonlar</h3>
+      <p class="desc">Popüler e-ticaret platformları ve mobil platformlar ile hazır entegrasyon</p>
+      <div class="logos-row">
+        <div class="logo-chip">
+          <div class="logo-icon" style="background:#6366F1">İK</div>
+          <span class="logo-name">İkas</span>
+        </div>
+        <div class="logo-chip">
+          <div class="logo-icon" style="background:#7CB342">S</div>
+          <span class="logo-name">Shopify</span>
+        </div>
+        <div class="logo-chip">
+          <div class="logo-icon" style="background:#1565C0">T</div>
+          <span class="logo-name">Ticimax</span>
+        </div>
+        <div class="logo-chip">
+          <div class="logo-icon" style="background:#E91E63">A</div>
+          <span class="logo-name">Adjust</span>
+        </div>
+        <div class="logo-chip">
+          <div class="logo-icon" style="background:#00BCD4">AF</div>
+          <span class="logo-name">Appsflyer</span>
+        </div>
+      </div>
+      <div class="tag-line">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        Teknik entegrasyon gerektirmeden, tek tıkla büyümeye başlayın
+      </div>
+    </div>
+
+    <!-- Özel Entegrasyonlar -->
+    <div class="int-card">
+      <h3>Özel Entegrasyonlar</h3>
+      <p class="desc">Kendi altyapınız için SDK, API veya Excel ile tüm süreci otomatik olarak yönetin</p>
+      <div class="logos-row">
+        <div class="logo-chip">
+          <div class="logo-icon" style="background:#0F172A">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <span class="logo-name">SDK</span>
+        </div>
+        <div class="logo-chip">
+          <div class="logo-icon" style="background:#7C3AED">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+          </div>
+          <span class="logo-name">API</span>
+        </div>
+        <div class="logo-chip">
+          <div class="logo-icon" style="background:#059669">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/></svg>
+          </div>
+          <span class="logo-name">Excel</span>
+        </div>
+        <div class="logo-chip">
+          <div class="logo-icon" style="background:#1976D2">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <span class="logo-name">Google Tag Manager</span>
+        </div>
+      </div>
+      <div class="tag-accent">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Tüm entegrasyonları ekibimiz sizin için kuruyor
+      </div>
+    </div>
+  </div>
+
+  <!-- Trust Badge -->
+  <div class="trust-banner">
+    <div class="trust-badge">
+      <div class="icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      GDPR Uyumlu
+    </div>
+    <div style="width:1px;height:32px;background:#E2E8F0"></div>
+    <div class="trust-badge">
+      <div class="icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      KVKK Uyumlu
+    </div>
+  </div>
+</section>
+
+<div class="anno">
+  <div class="anno-card">
+    <div class="anno-label">Design Notes — SCRUM-111</div>
+    <div class="anno-text">
+      New dedicated Integrations section replacing old individual cards.<br>
+      • Two large cards: Hazır Entegrasyonlar (left) + Özel Entegrasyonlar (right)<br>
+      • Each card has logo chips with colored icons + tag-line element<br>
+      • GDPR + KVKK trust banner at the bottom<br>
+      • Logo chips have hover: gold border + warm background
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

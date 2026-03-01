@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SCRUM-109 What We Do — Desktop View (v2)</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: #FFFFFF; }
+
+  .section { max-width: 1400px; margin: 0 auto; padding: 80px 48px; }
+  .section-header { text-align: center; margin-bottom: 56px; }
+  .section-label {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 13px; font-weight: 600; color: #D4AF37;
+    text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 16px;
+  }
+  .section-label::before, .section-label::after { content: ''; width: 24px; height: 1px; background: #D4AF37; }
+  .section-title { font-size: 40px; font-weight: 800; color: #0F172A; letter-spacing: -1.5px; line-height: 1.2; margin-bottom: 12px; }
+  .section-subtitle { font-size: 18px; color: #64748B; font-weight: 500; max-width: 600px; margin: 0 auto; line-height: 1.6; }
+
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .card {
+    border: 1px solid #E2E8F0; border-radius: 20px; padding: 40px;
+    display: flex; flex-direction: column; min-height: 520px;
+    position: relative; overflow: hidden; transition: all 300ms ease;
+  }
+  .card:hover { border-color: #D4AF37; box-shadow: 0 8px 32px rgba(212,175,55,0.12); }
+  .card-brand { background: linear-gradient(135deg, #FFFAEB 0%, #FFFFFF 60%); }
+  .card-publisher { background: linear-gradient(135deg, #F0F9FF 0%, #FFFFFF 60%); }
+
+  .card-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 600;
+    margin-bottom: 24px; width: fit-content;
+  }
+  .card-brand .card-badge { background: #FEF3C7; color: #92400E; }
+  .card-publisher .card-badge { background: #DBEAFE; color: #1E40AF; }
+
+  .card h3 { font-size: 28px; font-weight: 800; color: #0F172A; letter-spacing: -0.5px; margin-bottom: 16px; line-height: 1.2; }
+  .card-desc { font-size: 15px; color: #64748B; line-height: 1.6; margin-bottom: 32px; }
+
+  .features { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px; }
+  .feature { display: flex; align-items: flex-start; gap: 12px; }
+  .feature-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .card-brand .feature-icon { background: #FEF3C7; }
+  .card-publisher .feature-icon { background: #DBEAFE; }
+  .feature-icon svg { width: 20px; height: 20px; }
+  .card-brand .feature-icon svg { color: #D97706; }
+  .card-publisher .feature-icon svg { color: #2563EB; }
+  .feature-text { font-size: 13px; font-weight: 600; color: #0F172A; line-height: 1.4; }
+  .feature-sub { font-size: 12px; color: #94A3B8; font-weight: 400; margin-top: 2px; }
+
+  /* Platform logos (static, in left card) */
+  .platform-logos {
+    margin-top: auto; padding-top: 24px; border-top: 1px solid #E2E8F0;
+    display: flex; flex-wrap: wrap; gap: 10px;
+  }
+  .platform-chip {
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 14px; background: #FFFFFF; border: 1px solid #F1F5F9;
+    border-radius: 10px; font-size: 13px; font-weight: 700; color: #475569;
+  }
+  .platform-dot {
+    width: 24px; height: 24px; border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 800; color: #FFFFFF;
+  }
+
+  /* Sliding merchant logos (right card) */
+  .logos-strip {
+    margin-top: auto; padding-top: 24px; border-top: 1px solid #E2E8F0;
+    overflow: hidden; position: relative;
+  }
+  .logos-strip::before, .logos-strip::after {
+    content: ''; position: absolute; top: 24px; bottom: 0; width: 48px; z-index: 2;
+  }
+  .logos-strip::before { left: 0; background: linear-gradient(to right, #F0F9FF, transparent); }
+  .logos-strip::after { right: 0; background: linear-gradient(to left, #F0F9FF, transparent); }
+
+  .logos-row { display: flex; gap: 16px; align-items: center; margin-bottom: 10px; }
+  .row-left { animation: slideLeft 25s linear infinite; }
+  .row-right { animation: slideRight 25s linear infinite; }
+  .logos-strip:hover .row-left,
+  .logos-strip:hover .row-right { animation-play-state: paused; }
+
+  @keyframes slideLeft { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+  @keyframes slideRight { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
+
+  .merchant-chip {
+    flex-shrink: 0; display: flex; align-items: center; gap: 8px;
+    padding: 8px 16px; background: #FFFFFF; border: 1px solid #F1F5F9;
+    border-radius: 10px; font-size: 13px; font-weight: 700; color: #475569; white-space: nowrap;
+  }
+  .merchant-dot {
+    width: 24px; height: 24px; border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 800; color: #FFFFFF;
+  }
+
+  .card-cta {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 14px; font-weight: 600; text-decoration: none; transition: all 200ms ease; margin-top: 24px;
+  }
+  .card-brand .card-cta { color: #D97706; }
+  .card-publisher .card-cta { color: #2563EB; }
+  .card-cta:hover { gap: 10px; }
+  .card-cta svg { width: 16px; height: 16px; transition: transform 200ms ease; }
+  .card-cta:hover svg { transform: translateX(4px); }
+
+  .anno { max-width: 1400px; margin: 0 auto 40px; padding: 0 48px; }
+  .anno-card { background: #0F172A; color: #FFF; padding: 20px 24px; border-radius: 12px; }
+  .anno-label { color: #D4AF37; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+  .anno-text { font-size: 14px; line-height: 1.7; }
+</style>
+</head>
+<body>
+
+<section class="section">
+  <div class="section-header">
+    <div class="section-label">Ne Yapıyoruz</div>
+    <h2 class="section-title">Growth profesyonelleri için yapıldı</h2>
+    <p class="section-subtitle">Gücünü sadeliğinden alan yeni nesil affiliate platformu. Markalar ve yayıncılar için tek çatı altında tüm araçlar.</p>
+  </div>
+
+  <div class="cards">
+    <!-- LEFT: Brands/Sellers + Platform Logos -->
+    <div class="card card-brand">
+      <div class="card-badge">Markalar & Satıcılar İçin</div>
+      <h3>İşinizi hemen büyütmeye başlayın</h3>
+      <p class="card-desc">Teknik bilgi gerektirmeden kampanyalarınızı kurun, performansınızı takip edin, ödemelerinizi yönetin.</p>
+      <div class="features">
+        <div class="feature">
+          <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div><div class="feature-text">Kolay Entegrasyon</div><div class="feature-sub">Tek tıkla e-ticaret bağlantısı</div></div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+          <div><div class="feature-text">Mükemmel Takip</div><div class="feature-sub">Gerçek zamanlı performans</div></div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+          <div><div class="feature-text">No-Code Kampanya</div><div class="feature-sub">Sürükle-bırak yönetim</div></div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+          <div><div class="feature-text">Hakediş Yönetimi</div><div class="feature-sub">Otomatik gelir hesaplama</div></div>
+        </div>
+      </div>
+
+      <!-- Platform logos in left card -->
+      <div class="platform-logos">
+        <div class="platform-chip"><div class="platform-dot" style="background:#6366F1">İK</div>İkas</div>
+        <div class="platform-chip"><div class="platform-dot" style="background:#7CB342">S</div>Shopify</div>
+        <div class="platform-chip"><div class="platform-dot" style="background:#0D47A1">T</div>Ticimax</div>
+        <div class="platform-chip"><div class="platform-dot" style="background:#E91E63">A</div>Adjust</div>
+        <div class="platform-chip"><div class="platform-dot" style="background:#00BCD4">AF</div>Appsflyer</div>
+      </div>
+      <a href="#" class="card-cta">Satıcı olarak başvur <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+
+    <!-- RIGHT: Publishers/Influencers + Sliding Merchant Logos -->
+    <div class="card card-publisher">
+      <div class="card-badge">Yayıncılar & Influencer'lar İçin</div>
+      <h3>Hemen kazanmaya başlayın</h3>
+      <p class="card-desc">Platformdaki markaları ve kampanyaları keşfedin. Tek tıkla katılın, performansınızı izleyin, komisyonlarınızı kazanın.</p>
+      <div class="features">
+        <div class="feature">
+          <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+          <div><div class="feature-text">Kampanya Keşfet</div><div class="feature-sub">Yüzlerce marka kampanyası</div></div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+          <div><div class="feature-text">Güvenli Ödeme</div><div class="feature-sub">Zamanında komisyon ödemeleri</div></div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
+          <div><div class="feature-text">Kolay Katılım</div><div class="feature-sub">Tek tıkla kampanyaya katıl</div></div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+          <div><div class="feature-text">Performans Paneli</div><div class="feature-sub">Detaylı raporlama</div></div>
+        </div>
+      </div>
+
+      <!-- Sliding merchant logos — two rows, opposite directions, pause on hover -->
+      <div class="logos-strip">
+        <div class="logos-row row-left">
+          <div class="merchant-chip"><div class="merchant-dot" style="background:#0F172A">I</div>IAMNOTBASIC</div>
+          <div class="merchant-chip"><div class="merchant-dot" style="background:#059669">P</div>Proteinocean</div>
+          <div class="merchant-chip"><div class="merchant-dot" style="background:#D97706">F</div>Fropie</div>
+          <div class="merchant-chip"><div class="merchant-dot" style="background:#7C3AED">V</div>VOIDTR</div>
+          <div class="merchant-chip"><div class="merchant-dot" style="background:#E11D48">R</div>Rosece</div>
+          <div class="merchant-chip"><div class="merchant-dot" style="background:#2563EB">L</div>Limonian</div>
+          <div class="merchant-chip"><div class="merchant-dot" style="background:#0F172A">I</div>IAMNOTBASIC</div>
+          <div class="merchant-chip"><div class="merchant-dot" style="background:#059669">P</div>Proteinocean</div>
+          <div class="merchant-chip"><div class="merchant-dot" style="background:#D97706">F</div>Fropie</div>
+          <div class="merchant-chip"><div class="merchant-dot" style="background:#7C3AED">V</div>VOIDTR</div>
+          <div class="merchant-chip"><div class="merchant-dot" style="background:#E11D48">R</div>Rosece</div>
+          <div class="merchant-chip"><div class="merchant-dot" style="background:#2563EB">L</div>Limonian</div>
+        </div>
+        <div class="logos-row row-right">
+          <div class="merchant-chip"><div class="merchant-dot" style="background:#1565C0">A</div>Armonika</div>
+          <div class="merchant-chip"><div class="merchant-dot" style="background:#4CAF50">G</div>Green Black</div>
+          <div class="merchant-chip"><div class="merchant-dot" style="background:#FF9800">P</div>Petzzshop</div>
+          <div class="merchant-chip"><div class="merchant-dot" style="background:#F44336">A</div>Animal Joy</div>
+          <div class="merchant-chip"><div class="merchant-dot" style="background:#9C27B0">B</div>BELLORE</div>
+          <div class="merchant-chip"><div class="merchant-dot" style="background:#607D8B">P</div>Paen</div>
+          <div class="merchant-chip"><div class="merchant-dot" style="background:#1565C0">A</div>Armonika</div>
+          <div class="merchant-chip"><div class="merchant-dot" style="background:#4CAF50">G</div>Green Black</div>
+          <div class="merchant-chip"><div class="merchant-dot" style="background:#FF9800">P</div>Petzzshop</div>
+          <div class="merchant-chip"><div class="merchant-dot" style="background:#F44336">A</div>Animal Joy</div>
+          <div class="merchant-chip"><div class="merchant-dot" style="background:#9C27B0">B</div>BELLORE</div>
+          <div class="merchant-chip"><div class="merchant-dot" style="background:#607D8B">P</div>Paen</div>
+        </div>
+      </div>
+      <a href="#" class="card-cta">Yayıncı olarak başvur <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<div class="anno">
+  <div class="anno-card">
+    <div class="anno-label">Design Notes — SCRUM-109 (v2)</div>
+    <div class="anno-text">
+      <strong>Updated per PM feedback:</strong><br>
+      • Left card (Brands): Platform logos (İkas, Shopify, Ticimax, Adjust, Appsflyer) moved HERE as static chips<br>
+      • Right card (Publishers): Merchant logos from İş Ortaklarımız (IAMNOTBASIC, Proteinocean, Fropie, VOIDTR, etc.) as two sliding rows in opposite directions<br>
+      • Sliding pauses on hover<br>
+      • Fade edges on slider for smooth infinite scroll
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+---
+description: MDZN Partners project context -- tech stack, conventions, and shared knowledge for all agents
+alwaysApply: true
+---
+
+# MDZN Partners -- Project Context
+
+## Company
+
+MDZN Partners -- a product and design company building modern, mobile-friendly web experiences.
+
+## Tech Stack
+
+- **Framework**: Next.js (App Router)
+- **Language**: TypeScript (strict mode)
+- **Styling**: Tailwind CSS v4
+- **Deployment**: Vercel
+- **Design**: Pencil (.pen files) via MCP
+- **Testing**: Vitest (unit), Playwright (e2e)
+- **Package Manager**: pnpm
+
+## Design Philosophy
+
+- Mobile-first, responsive design
+- Accessible by default (WCAG 2.1 AA minimum)
+- Performance-conscious (Core Web Vitals targets)
+- Clean, modern aesthetic with intentional whitespace
+
+## Directory Conventions
+
+```
+src/
+  app/          # Next.js App Router pages and layouts
+  components/   # Reusable UI components
+    ui/         # Primitives (Button, Input, Card, etc.)
+    layout/     # Layout components (Header, Footer, Sidebar)
+    features/   # Feature-specific compound components
+  lib/          # Shared utilities, helpers, constants
+  hooks/        # Custom React hooks
+  types/        # Shared TypeScript types and interfaces
+  styles/       # Global styles and Tailwind config
+public/         # Static assets
+tests/
+  unit/         # Vitest unit tests
+  e2e/          # Playwright e2e tests
+```
+
+## Naming Conventions
+
+- Components: PascalCase (`UserProfile.tsx`)
+- Utilities/hooks: camelCase (`useMediaQuery.ts`, `formatDate.ts`)
+- Types: PascalCase with descriptive suffixes (`UserProfileProps`, `ApiResponse`)
+- CSS classes: Tailwind utilities; custom classes use kebab-case
+- Files: match their default export name
+
+## Git & Branching
+
+- `main` -- production, deployed to Vercel automatically
+- `dev` -- integration branch
+- Feature branches: `feat/<short-description>`
+- Bug fixes: `fix/<short-description>`
+- Commit messages: conventional commits (`feat:`, `fix:`, `docs:`, `chore:`, `test:`)

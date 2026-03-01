@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SCRUM-99 — Feature Tabs After Removal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Plus Jakarta Sans', -apple-system, sans-serif; background: #F8FAFC; }
+
+    .section { padding: 40px 0; }
+    .container { max-width: 1400px; margin: 0 auto; padding: 0 48px; }
+
+    .section-header { text-align: center; margin-bottom: 48px; }
+    .section-header h2 { font-size: 36px; font-weight: 800; letter-spacing: -1px; margin-bottom: 12px; }
+    .section-header p { color: #64748B; font-size: 18px; font-weight: 500; }
+
+    .grid { display: grid; grid-template-columns: 1fr 2fr; gap: 32px; }
+
+    .tabs { display: flex; flex-direction: column; gap: 8px; }
+    .tab {
+      width: 100%; text-align: left; padding: 20px; border-radius: 12px;
+      display: flex; align-items: center; gap: 16px;
+      background: #fff; border: 1px solid #E2E8F0; cursor: pointer;
+      font-size: 14px; font-weight: 600; color: #0F172A;
+      transition: all 0.2s;
+    }
+    .tab:hover { border-color: #D4AF37; background: #FFFACC; color: #BA9A2A; }
+    .tab.active {
+      background: #0F172A; color: #fff; border-color: #0F172A;
+      box-shadow: 0 8px 24px rgba(15,23,42,0.2);
+    }
+    .tab-icon {
+      width: 44px; height: 44px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      background: #F1F5F9; color: #64748B; font-size: 18px;
+    }
+    .tab.active .tab-icon { background: rgba(255,255,255,0.15); color: #fff; }
+
+    .content-panel {
+      background: #fff; border: 1px solid #E2E8F0; border-radius: 16px;
+      padding: 32px; box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      min-height: 580px;
+    }
+    .content-panel h3 { font-size: 24px; font-weight: 700; margin-bottom: 8px; }
+    .content-panel .subtitle { color: #BA9A2A; font-weight: 600; margin-bottom: 16px; }
+    .content-panel .desc { color: #64748B; margin-bottom: 24px; line-height: 1.6; }
+
+    .note {
+      max-width: 1400px; margin: 24px auto; padding: 24px 48px;
+      background: #D1FAE5; border-radius: 12px; font-size: 14px; color: #059669;
+    }
+    .note strong { display: block; margin-bottom: 8px; font-size: 16px; }
+
+    .removed {
+      max-width: 1400px; margin: 16px auto; padding: 16px 48px;
+      background: #FEE2E2; border-radius: 12px; font-size: 14px; color: #DC2626;
+    }
+
+    @media (max-width: 1023px) {
+      .container { padding: 0 24px; }
+      .grid { grid-template-columns: 1fr; }
+      .tabs { display: none; }
+      .pills { display: flex; gap: 8px; overflow-x: auto; margin-bottom: 24px; padding-bottom: 8px; }
+      .pill {
+        flex-shrink: 0; padding: 8px 16px; border-radius: 999px;
+        font-size: 13px; font-weight: 600; white-space: nowrap;
+        background: #fff; border: 1px solid #E2E8F0; color: #475569; cursor: pointer;
+      }
+      .pill.active { background: #0F172A; color: #fff; border-color: #0F172A; }
+    }
+    @media (min-width: 1024px) {
+      .pills { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="note">
+    <strong>SCRUM-99 — Design Mockup: Feature Tabs After Removal</strong>
+    The "Mobil Uygulama Takibi" tab has been removed. 5 tabs remain.<br>
+    This applies to both the Homepage (FeatureTabs) and Brands page (BrandsFeatures).
+  </div>
+
+  <div class="removed">
+    <strong>Removed:</strong> "Mobil Uygulama Takibi" tab (was the 6th tab) — including its content panel, Adjust/Appsflyer widget, and all related code.
+  </div>
+
+  <!-- FEATURE TABS SECTION — AFTER REMOVAL -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Neden MDZN Partners?</h2>
+        <p>Affiliate pazarlamanın geleceğini bugünden deneyimleyin</p>
+      </div>
+
+      <!-- Mobile Pills (5 tabs) -->
+      <div class="pills">
+        <span class="pill active">⏱ Gerçek Zamanlı Takip</span>
+        <span class="pill">🗄 Backend Veri Toplama</span>
+        <span class="pill">⚡ Anında Entegrasyon</span>
+        <span class="pill">💳 Otomatik Ödeme</span>
+        <span class="pill">🔄 İptal/İade Yönetimi</span>
+        <!-- REMOVED: 📱 Mobil Uygulama Takibi -->
+      </div>
+
+      <div class="grid">
+        <!-- Vertical Tabs (5 tabs) -->
+        <div class="tabs">
+          <button class="tab active">
+            <div class="tab-icon">⏱</div>
+            Gerçek Zamanlı Takip
+          </button>
+          <button class="tab">
+            <div class="tab-icon">🗄</div>
+            Backend Veri Toplama
+          </button>
+          <button class="tab">
+            <div class="tab-icon">⚡</div>
+            Anında Entegrasyon
+          </button>
+          <button class="tab">
+            <div class="tab-icon">💳</div>
+            Otomatik Ödeme
+          </button>
+          <button class="tab">
+            <div class="tab-icon">🔄</div>
+            İptal/İade Yönetimi
+          </button>
+          <!-- REMOVED: 📱 Mobil Uygulama Takibi -->
+        </div>
+
+        <!-- Content Panel (showing first tab as example) -->
+        <div class="content-panel">
+          <h3>Gerçek Zamanlı Takip</h3>
+          <p class="subtitle">Hızlı takip ile tüm satışlarınızı anlık görün</p>
+          <p class="desc">
+            Geleneksel affiliate platformlarının aksine, satışlarınız saniyeler
+            içinde dashboard'unuzda görünür. Ay sonu Excel raporları
+            beklemeden, anlık verilerle karar alın.
+          </p>
+          <div style="background:#F8FAFC;border-radius:12px;padding:24px;border:1px solid #F1F5F9;margin-bottom:24px;">
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+              <div style="background:#fff;border:1px solid #E2E8F0;padding:16px;border-radius:12px;text-align:center;">
+                <p style="font-size:28px;font-weight:800;color:#0F172A;">191K</p>
+                <p style="font-size:12px;color:#94A3B8;margin-top:4px;">Tıklama</p>
+              </div>
+              <div style="background:#fff;border:1px solid #E2E8F0;padding:16px;border-radius:12px;text-align:center;">
+                <p style="font-size:28px;font-weight:800;color:#059669;">235</p>
+                <p style="font-size:12px;color:#94A3B8;margin-top:4px;">Sipariş</p>
+              </div>
+              <div style="background:#fff;border:1px solid #E2E8F0;padding:16px;border-radius:12px;text-align:center;">
+                <p style="font-size:28px;font-weight:800;color:#D4AF37;">₺10,351</p>
+                <p style="font-size:12px;color:#94A3B8;margin-top:4px;">Kazanç</p>
+              </div>
+            </div>
+          </div>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:12px;">
+            <li style="display:flex;align-items:center;gap:12px;color:#475569;">
+              <span style="color:#059669;">✓</span> Satışlar saniyeler içinde dashboard'da
+            </li>
+            <li style="display:flex;align-items:center;gap:12px;color:#475569;">
+              <span style="color:#059669;">✓</span> Tarih, kampanya, kategori, influencer bazlı filtreleme
+            </li>
+            <li style="display:flex;align-items:center;gap:12px;color:#475569;">
+              <span style="color:#059669;">✓</span> Günlük/haftalık/aylık trend grafikleri
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

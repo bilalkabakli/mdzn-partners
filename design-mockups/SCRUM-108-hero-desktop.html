@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SCRUM-108 Hero Section Redesign — Desktop View</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: #FFFFFF; }
+
+  /* Minimal header placeholder */
+  header {
+    height: 72px;
+    background: #FFFFFF;
+    border-bottom: 1px solid #E2E8F0;
+    display: flex;
+    align-items: center;
+    padding: 0 48px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .logo { font-size: 14px; font-weight: 700; letter-spacing: 1px; color: #0F172A; }
+
+  /* Hero Section — tighter spacing */
+  .hero {
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg-1 {
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255,250,204,0.5), transparent);
+    border-radius: 50%;
+    filter: blur(60px);
+  }
+  .hero-bg-2 {
+    position: absolute;
+    bottom: 10%;
+    right: 15%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(241,245,249,0.5), transparent);
+    border-radius: 50%;
+    filter: blur(60px);
+  }
+  .hero-inner {
+    position: relative;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 32px 48px 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+
+  /* Badge */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: #D1FAE5;
+    border-radius: 9999px;
+    margin-bottom: 32px;
+  }
+  .badge-dot {
+    width: 8px;
+    height: 8px;
+    background: #059669;
+    border-radius: 50%;
+  }
+  .badge-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: #059669;
+  }
+
+  /* Title */
+  h1 {
+    font-size: 60px;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -2px;
+    color: #0F172A;
+    margin-bottom: 24px;
+  }
+  h1 .muted { color: #94A3B8; }
+
+  /* Description */
+  .description {
+    font-size: 18px;
+    color: #64748B;
+    font-weight: 500;
+    line-height: 1.6;
+    max-width: 512px;
+    margin-bottom: 40px;
+  }
+
+  /* Buttons */
+  .buttons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    height: 56px;
+    padding: 0 32px;
+    background: #0F172A;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 200ms ease;
+  }
+  .btn-primary:hover {
+    background: #1E293B;
+    box-shadow: 0 0 0 3px rgba(212,175,55,0.3);
+  }
+  .btn-secondary {
+    height: 56px;
+    padding: 0 32px;
+    background: #FFFFFF;
+    color: #0F172A;
+    font-size: 16px;
+    font-weight: 600;
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 200ms ease;
+  }
+  .btn-secondary:hover {
+    background: #FFFACC;
+    border-color: #D4AF37;
+    color: #BA9A2A;
+  }
+
+  /* Dashboard preview */
+  .dashboard {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+  }
+  .chrome {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot-r { background: #EF4444; }
+  .dot-y { background: #FBBF24; }
+  .dot-g { background: #22C55E; }
+  .chrome-label {
+    margin-left: 16px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #94A3B8;
+  }
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .stat-card {
+    background: #F8FAFC;
+    border: 1px solid #F1F5F9;
+    padding: 16px;
+    border-radius: 12px;
+  }
+  .stat-label { font-size: 12px; color: #94A3B8; margin-bottom: 4px; }
+  .stat-value { font-size: 20px; font-weight: 800; color: #0F172A; }
+  .stat-change { font-size: 12px; font-weight: 500; color: #059669; margin-top: 4px; }
+
+  .chart-area {
+    background: #F8FAFC;
+    border: 1px solid #F1F5F9;
+    border-radius: 12px;
+    padding: 20px;
+  }
+  .chart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+  .chart-label { font-size: 12px; color: #94A3B8; margin-bottom: 4px; }
+  .chart-value { font-size: 24px; font-weight: 800; }
+  .chart-badge {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 12px;
+    background: #D1FAE5;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #059669;
+  }
+  .chart-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+    height: 96px;
+  }
+  .bar { flex: 1; border-radius: 4px 4px 0 0; }
+
+  /* Annotations */
+  .annotations {
+    max-width: 1400px;
+    margin: 32px auto;
+    padding: 24px 48px;
+  }
+  .anno-card {
+    background: #0F172A;
+    color: #FFFFFF;
+    padding: 20px 24px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+  }
+  .anno-label {
+    color: #D4AF37;
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  .anno-text { font-size: 14px; line-height: 1.6; }
+  .anno-text .removed { color: #EF4444; text-decoration: line-through; }
+  .anno-text .added { color: #22C55E; font-weight: 600; }
+</style>
+</head>
+<body>
+
+<header>
+  <span class="logo">MDZN PARTNERS</span>
+</header>
+
+<section class="hero">
+  <div class="hero-bg-1"></div>
+  <div class="hero-bg-2"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="badge">
+        <span class="badge-dot"></span>
+        <span class="badge-text">Türkiye'nin Yeni Nesil Affiliate Platformu</span>
+      </div>
+
+      <h1>
+        Affiliate Pazarlamanın<br>
+        <span class="muted">Yeni Nesil Platformu</span>
+      </h1>
+
+      <p class="description">
+        Markalar, influencer'lar ve yayıncıları tek platformda buluşturun. Gerçek zamanlı raporlama, güvenli ödemeler, sıfır manuel iş.
+      </p>
+
+      <div class="buttons">
+        <button class="btn-primary" onclick="alert('Opens Aramıza Katıl modal → Satıcı tab')">
+          Satıcı Başvurusu
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+        <button class="btn-secondary" onclick="alert('Opens Aramıza Katıl modal → Yayıncı tab')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+          Yayıncı Başvurusu
+        </button>
+      </div>
+
+      <!-- NO trust indicators / "Her gün büyüyen marka ağı" — REMOVED -->
+    </div>
+
+    <div>
+      <div class="dashboard">
+        <div class="chrome">
+          <span class="dot dot-r"></span>
+          <span class="dot dot-y"></span>
+          <span class="dot dot-g"></span>
+          <span class="chrome-label">MDZN Dashboard</span>
+        </div>
+        <div class="stats">
+          <div class="stat-card">
+            <p class="stat-label">E-Commerce</p>
+            <p class="stat-value">₺12,450</p>
+            <p class="stat-change">↑ +12%</p>
+          </div>
+          <div class="stat-card">
+            <p class="stat-label">Bounty</p>
+            <p class="stat-value">₺3,280</p>
+            <p class="stat-change">↑ +8%</p>
+          </div>
+          <div class="stat-card">
+            <p class="stat-label">Mobile</p>
+            <p class="stat-value">₺890</p>
+            <p class="stat-change">↑ +24%</p>
+          </div>
+        </div>
+        <div class="chart-area">
+          <div class="chart-header">
+            <div>
+              <p class="chart-label">Affiliate Driven Revenue</p>
+              <p class="chart-value">₺128,450</p>
+            </div>
+            <div class="chart-badge">↑ +18.2%</div>
+          </div>
+          <div class="chart-bars">
+            <div class="bar" style="height:40%;background:#E2E8F0"></div>
+            <div class="bar" style="height:55%;background:#E2E8F0"></div>
+            <div class="bar" style="height:45%;background:#CBD5E1"></div>
+            <div class="bar" style="height:70%;background:#CBD5E1"></div>
+            <div class="bar" style="height:85%;background:#94A3B8"></div>
+            <div class="bar" style="height:60%;background:#94A3B8"></div>
+            <div class="bar" style="height:75%;background:#64748B"></div>
+            <div class="bar" style="height:90%;background:#64748B"></div>
+            <div class="bar" style="height:80%;background:#475569"></div>
+            <div class="bar" style="height:100%;background:#0F172A"></div>
+            <div class="bar" style="height:70%;background:#64748B"></div>
+            <div class="bar" style="height:85%;background:#CBD5E1"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="annotations">
+  <div class="anno-card">
+    <div class="anno-label">Changes Made</div>
+    <div class="anno-text">
+      1. <span class="removed">py-10 lg:py-16</span> → <span class="added">py-8 lg:py-8 (32px)</span> — tighter spacing between header and hero<br>
+      2. Badge: <span class="removed">"Türkiye'nin #1 Affiliate Platformu"</span> → <span class="added">"Türkiye'nin Yeni Nesil Affiliate Platformu"</span><br>
+      3. <span class="removed">"Demo Talep Et"</span> → <span class="added">"Satıcı Başvurusu"</span> (opens modal → Satıcı/brand tab)<br>
+      4. <span class="removed">"Platform Turu"</span> → <span class="added">"Yayıncı Başvurusu"</span> (opens modal → Yayıncı/influencer tab)<br>
+      5. <span class="removed">Trust indicators + "Her gün büyüyen marka ağı"</span> → <span class="added">Removed entirely</span><br>
+      6. <span class="removed">KVKK/GDPR/İkas/Shopify badges</span> → <span class="added">Removed (moving to integration section)</span>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

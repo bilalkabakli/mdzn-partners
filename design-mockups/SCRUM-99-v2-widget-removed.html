@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SCRUM-99 v2 — Mobil Uygulama Takibi: SDK Widget Removed</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Plus Jakarta Sans', -apple-system, sans-serif; background: #F8FAFC; }
+
+    .note {
+      max-width: 900px; margin: 24px auto; padding: 24px 32px;
+      background: #D1FAE5; border-radius: 12px; font-size: 14px; color: #059669;
+    }
+    .note strong { display: block; margin-bottom: 8px; font-size: 16px; }
+
+    .removed {
+      max-width: 900px; margin: 16px auto; padding: 16px 32px;
+      background: #FEE2E2; border-radius: 12px; font-size: 14px; color: #DC2626;
+    }
+    .removed strong { display: block; margin-bottom: 4px; }
+
+    .panel {
+      max-width: 900px; margin: 32px auto; padding: 32px;
+      background: #fff; border: 1px solid #E2E8F0; border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+
+    .header-row { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+    .icon-box {
+      width: 48px; height: 48px; background: #FFFACC; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center; font-size: 22px;
+    }
+    h3 { font-size: 24px; font-weight: 700; }
+    .subtitle { color: #BA9A2A; font-weight: 600; margin-bottom: 16px; }
+    .desc { color: #64748B; margin-bottom: 24px; line-height: 1.7; }
+
+    /* REMOVED: SDK widget was here */
+
+    .bullets { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .bullets li {
+      display: flex; align-items: center; gap: 12px;
+      color: #475569; font-size: 15px;
+    }
+    .check { color: #059669; font-weight: 700; }
+  </style>
+</head>
+<body>
+
+  <div class="note">
+    <strong>SCRUM-99 v2 — Corrected Design Mockup</strong>
+    The Adjust/Appsflyer SDK logos widget has been removed from the "Mobil Uygulama Takibi" tab content.<br>
+    The tab itself, title, subtitle, description, and bullet points remain unchanged.
+  </div>
+
+  <div class="removed">
+    <strong>Removed:</strong> The rounded widget showing Adjust (AD) and Appsflyer (AF) logos. Was located between the description and the bullet points.
+  </div>
+
+  <!-- TAB CONTENT — AFTER WIDGET REMOVAL -->
+  <div class="panel">
+    <div class="header-row">
+      <div class="icon-box">📱</div>
+      <h3>Mobil Uygulama Takibi</h3>
+    </div>
+    <p class="subtitle">iOS ve Android uygulamalarınız için affiliate kampanyaları</p>
+    <p class="desc">
+      Affiliate linklerinden uygulama yüklemelerini takip edin. Adjust &amp; Appsflyer
+      entegrasyonu. İlk kez alıcılar ve kayıtlar için bounty sistemi.
+    </p>
+
+    <!-- SDK WIDGET REMOVED — content flows directly to bullets -->
+
+    <ul class="bullets">
+      <li><span class="check">✓</span> Uygulama yüklemesi takibi</li>
+      <li><span class="check">✓</span> Adjust &amp; Appsflyer entegrasyonu</li>
+      <li><span class="check">✓</span> İlk alıcı/kayıt bounty sistemi</li>
+    </ul>
+  </div>
+
+</body>
+</html>

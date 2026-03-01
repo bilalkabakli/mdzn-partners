@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SCRUM-110 Neden MDZN Partners? — Desktop View</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: #F8FAFC; }
+
+  .section {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 80px 48px;
+  }
+  .section-header {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #D4AF37;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 16px;
+  }
+  .section-label::before, .section-label::after {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: #D4AF37;
+  }
+  .section-title {
+    font-size: 44px;
+    font-weight: 800;
+    color: #0F172A;
+    letter-spacing: -1.5px;
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+  .section-subtitle {
+    font-size: 18px;
+    color: #64748B;
+    font-weight: 500;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .card {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 16px;
+    padding: 32px;
+    transition: all 300ms ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .card:hover {
+    border-color: #D4AF37;
+    box-shadow: 0 8px 32px rgba(212,175,55,0.1);
+    transform: translateY(-2px);
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #D4AF37;
+    opacity: 0;
+    transition: opacity 300ms ease;
+  }
+  .card:hover::before { opacity: 1; }
+
+  .card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  .card-icon svg { width: 24px; height: 24px; }
+
+  .card-icon.gold { background: #FEF3C7; }
+  .card-icon.gold svg { color: #D97706; }
+  .card-icon.green { background: #D1FAE5; }
+  .card-icon.green svg { color: #059669; }
+  .card-icon.blue { background: #DBEAFE; }
+  .card-icon.blue svg { color: #2563EB; }
+  .card-icon.purple { background: #EDE9FE; }
+  .card-icon.purple svg { color: #7C3AED; }
+  .card-icon.rose { background: #FFE4E6; }
+  .card-icon.rose svg { color: #E11D48; }
+  .card-icon.cyan { background: #CFFAFE; }
+  .card-icon.cyan svg { color: #0891B2; }
+
+  .card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #0F172A;
+    margin-bottom: 8px;
+    letter-spacing: -0.3px;
+  }
+  .card-tagline {
+    font-size: 13px;
+    font-weight: 600;
+    color: #D4AF37;
+    margin-bottom: 12px;
+  }
+  .card-desc {
+    font-size: 14px;
+    color: #64748B;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  .card-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .card-bullets li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #475569;
+  }
+  .card-bullets li svg {
+    width: 16px;
+    height: 16px;
+    color: #059669;
+    flex-shrink: 0;
+  }
+
+  .stat-highlight {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    background: #F0FDF4;
+    border: 1px solid #BBF7D0;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #059669;
+    margin-bottom: 16px;
+  }
+
+  .anno {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 48px 40px;
+  }
+  .anno-card {
+    background: #0F172A;
+    color: #FFFFFF;
+    padding: 20px 24px;
+    border-radius: 12px;
+  }
+  .anno-label { color: #D4AF37; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+  .anno-text { font-size: 14px; line-height: 1.7; }
+</style>
+</head>
+<body>
+
+<section class="section">
+  <div class="section-header">
+    <div class="section-label">Platform Özellikleri</div>
+    <h2 class="section-title">Neden MDZN Partners?</h2>
+    <p class="section-subtitle">Affiliate pazarlamanın geleceğini bugünden deneyimleyin</p>
+  </div>
+
+  <div class="grid">
+    <!-- 1. Gerçek Zamanlı Takip -->
+    <div class="card">
+      <div class="card-icon gold">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <h3>Gerçek Zamanlı Takip</h3>
+      <div class="card-tagline">Tüm satışlarınızı anlık görün</div>
+      <div class="stat-highlight">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>
+        191K tıklama / 235 sipariş
+      </div>
+      <p class="card-desc">Satışlarınız saniyeler içinde dashboard'unuzda görünür. Anlık verilerle karar alın.</p>
+      <ul class="card-bullets">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Anlık dashboard</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Kampanya bazlı filtreleme</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Trend grafikleri</li>
+      </ul>
+    </div>
+
+    <!-- 2. Backend Veri Toplama -->
+    <div class="card">
+      <div class="card-icon green">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+      </div>
+      <h3>Backend Veri Toplama</h3>
+      <div class="card-tagline">%30'a varan takip kaybını önleyin</div>
+      <div class="stat-highlight">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        %95+ takip doğruluğu
+      </div>
+      <p class="card-desc">SDK tabanlı tracking ile server-side veri toplama. Verileriniz güvende ve eksiksiz.</p>
+      <ul class="card-bullets">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>SDK tabanlı tracking</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Server-side bağlantı</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Audit & log desteği</li>
+      </ul>
+    </div>
+
+    <!-- 3. Anında Entegrasyon -->
+    <div class="card">
+      <div class="card-icon blue">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      </div>
+      <h3>Anında Entegrasyon</h3>
+      <div class="card-tagline">Hazır ve özel entegrasyonlar</div>
+      <p class="card-desc">Popüler e-ticaret platformlarıyla hazır entegrasyonlar. Özel altyapı? Tüm kurulumu biz yapıyoruz.</p>
+      <ul class="card-bullets">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>İkas, Shopify, Ticimax</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Özel altyapı desteği</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Teknik kurulum bizden</li>
+      </ul>
+    </div>
+
+    <!-- 4. Otomatik Ödeme -->
+    <div class="card">
+      <div class="card-icon purple">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+      </div>
+      <h3>Otomatik Ödeme</h3>
+      <div class="card-tagline">Komisyonlar otomatik hesaplanır</div>
+      <p class="card-desc">Kategori bazlı komisyon oranları tanımlayın. Moda %8, Elektronik %5, Kozmetik %12. Şeffaf takip.</p>
+      <ul class="card-bullets">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Kategori bazlı oranlar</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Otomatik hesaplama</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Şeffaf kazanç paneli</li>
+      </ul>
+    </div>
+
+    <!-- 5. İptal/İade Yönetimi -->
+    <div class="card">
+      <div class="card-icon rose">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+      </div>
+      <h3>İptal/İade Yönetimi</h3>
+      <div class="card-tagline">Otomatik komisyon düzeltme</div>
+      <div class="stat-highlight">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        ₺8,120 kazanıldı / ₺2,450 beklemede
+      </div>
+      <p class="card-desc">İptal edilen siparişler otomatik algılanır, komisyonlardan düşülür.</p>
+      <ul class="card-bullets">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Otomatik iptal algılama</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>İade takibi</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Beklemede vs Kazanıldı</li>
+      </ul>
+    </div>
+
+    <!-- 6. Mobil Uygulama Takibi -->
+    <div class="card">
+      <div class="card-icon cyan">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+      </div>
+      <h3>Mobil Uygulama Takibi</h3>
+      <div class="card-tagline">iOS ve Android affiliate kampanyaları</div>
+      <p class="card-desc">Affiliate linklerinden uygulama yüklemelerini takip edin. Adjust & Appsflyer entegrasyonu.</p>
+      <ul class="card-bullets">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Uygulama yüklemesi takibi</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Adjust & Appsflyer</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Bounty sistemi</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="anno">
+  <div class="anno-card">
+    <div class="anno-label">Design Notes — SCRUM-110</div>
+    <div class="anno-text">
+      Replaces current tab/panel layout with a 3x2 card grid.<br>
+      • All 6 features preserved with same content, condensed into card format<br>
+      • Each card: colored icon, title, tagline, optional stat highlight, description, 3 bullet points<br>
+      • Hover effect: gold top border + shadow + slight lift<br>
+      • Each card has a unique icon color scheme for visual variety<br>
+      • Same section title and subtitle kept
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

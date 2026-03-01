@@ -1,0 +1,41 @@
+---
+description: MDZN Partners Design System -- all design and UI work must follow the design system defined in references/design-system.md
+alwaysApply: true
+---
+
+# Design System Reference
+
+The complete MDZN Partners UI Design System is located at `references/design-system.md`. This is the single source of truth for all visual decisions.
+
+## Before Any UI or Design Work
+
+You MUST read `references/design-system.md` in full before creating or modifying any UI element. Do NOT assume you know the system. Read it every time.
+
+## What the Design System Covers
+
+- **Color System** — Arctic Navy palette with gold accent. Primary scale (Slate), Secondary (Navy), Accent (Gold), Semantic colors, Surfaces.
+- **Typography** — Plus Jakarta Sans. Type scale from Display 1 (72px) to Overline (11px). Negative letter-spacing on headlines.
+- **Spacing & Grid** — 8px base unit. 12-column grid. Section spacing. Breakpoints.
+- **Components** — Buttons (Primary, Secondary, Accent, Ghost), Navigation, Border Radius, Shadows.
+- **Glass Effects** — Soft Glass style. Only on gradient/textured backgrounds.
+- **Icons** — Lucide icons in geometric containers echoing the MDZN logo.
+- **Illustrations** — Floating Window style, flat (0°) perspective, deep shadow.
+- **Motion** — Subtle animations. Fast (150ms), Base (200ms), Slow (300ms). Only transform + opacity.
+- **Interaction States** — Warm & Engaging. Gold accent on hover. Scale(0.98) on active. Gold glow ring on buttons.
+- **Do's & Don'ts** — Strict guidelines on what to follow and what to avoid.
+
+## Non-Negotiable Rules
+
+- Every color must come from the design system palette. No custom colors.
+- Every spacing value must be a multiple of 8px.
+- Every border radius must use the defined tokens (6/8/12/16/20px).
+- Typography must use Plus Jakarta Sans with the defined weights and sizes.
+- Interaction states must follow the Warm & Engaging pattern (gold accent on hover).
+- Glass effects are only used on gradient or textured backgrounds.
+- Gold accent is used sparingly -- emphasis only, never for large backgrounds or body text.
+- No pure black (#000) -- always use primary-900 (#0F172A).
+- No decorative elements without purpose.
+
+## Who Must Follow This
+
+All agents involved in UI work: **Designer**, **Head of Design**, **Developer**, **Head of Engineering**, **Tester** (for design fidelity checks). When in doubt, check the design system.

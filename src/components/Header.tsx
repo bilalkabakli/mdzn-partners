@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
 import { ChevronDown, Menu, X } from "lucide-react";
 
 export default function Header() {
@@ -12,17 +14,20 @@ export default function Header() {
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
         <div className="flex justify-between items-center h-[72px]">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-3 group">
-            <div className="w-9 h-9 border border-primary-900 rounded-md flex flex-col items-center justify-center group-hover:bg-primary-900 transition-colors">
-              <span className="text-[9px] font-extrabold leading-none group-hover:text-white transition-colors">
-                MD
-              </span>
-              <span className="text-[9px] font-extrabold leading-none group-hover:text-white transition-colors">
-                ZN
-              </span>
-            </div>
-            <span className="text-sm font-bold tracking-[1px]">PARTNERS</span>
-          </a>
+          <Link
+            href="/"
+            className="group flex items-center rounded-lg p-1 transition-all duration-200 hover:shadow-[0_0_0_3px_rgba(212,175,55,0.2)] active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-[#D4AF37] focus-visible:outline-offset-2"
+            aria-label="MDZN Partners ana sayfa"
+          >
+            <Image
+              src="/images/logo-mdzn-partners.png"
+              alt="MDZN Partners"
+              width={1563}
+              height={1563}
+              priority
+              className="h-9 w-auto group-hover:opacity-80 transition-opacity duration-200"
+            />
+          </Link>
 
           {/* Desktop Navigation */}
           <nav

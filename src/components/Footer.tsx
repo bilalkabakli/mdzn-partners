@@ -1,3 +1,5 @@
+import Image from "next/image";
+import Link from "next/link";
 import { Instagram, Linkedin, Twitter } from "lucide-react";
 
 const solutionLinks = [
@@ -35,47 +37,19 @@ export default function Footer() {
           <div className="grid lg:grid-cols-12 gap-12">
             {/* Logo & Description */}
             <div className="lg:col-span-4">
-              <div className="flex items-center mb-6">
-                <svg
-                  width="48"
-                  height="48"
-                  viewBox="0 0 100 100"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden="true"
-                >
-                  <rect
-                    x="2"
-                    y="2"
-                    width="96"
-                    height="96"
-                    stroke="white"
-                    strokeWidth="3"
-                    fill="none"
-                  />
-                  <text
-                    x="15"
-                    y="45"
-                    fontFamily="Plus Jakarta Sans, sans-serif"
-                    fontSize="28"
-                    fontWeight="700"
-                    fill="white"
-                  >
-                    MD
-                  </text>
-                  <text
-                    x="15"
-                    y="80"
-                    fontFamily="Plus Jakarta Sans, sans-serif"
-                    fontSize="28"
-                    fontWeight="700"
-                    fill="white"
-                  >
-                    ZN
-                  </text>
-                </svg>
-                <span className="ml-4 text-2xl font-bold">PARTNERS</span>
-              </div>
+              <Link
+                href="/"
+                className="inline-flex items-center mb-6 rounded-lg p-1 transition-all duration-200 hover:opacity-80 focus-visible:outline-2 focus-visible:outline-[#D4AF37] focus-visible:outline-offset-2"
+                aria-label="MDZN Partners ana sayfa"
+              >
+                <Image
+                  src="/images/logo-mdzn-partners.png"
+                  alt="MDZN Partners"
+                  width={1563}
+                  height={1563}
+                  className="h-12 w-auto brightness-0 invert"
+                />
+              </Link>
               <p className="text-primary-400 leading-relaxed mb-6 max-w-xs">
                 Türkiye&apos;nin yeni nesil affiliate pazarlama platformu.
                 Markalar, influencer&apos;lar ve yayıncılar için tek adres.

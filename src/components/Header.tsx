@@ -22,8 +22,8 @@ export default function Header() {
             <Image
               src="/images/logo-mdzn-partners.png"
               alt="MDZN Partners"
-              width={1563}
-              height={1563}
+              width={1446}
+              height={348}
               priority
               className="h-9 w-auto group-hover:opacity-80 transition-opacity duration-200"
             />

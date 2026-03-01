@@ -45,8 +45,8 @@ export default function Footer() {
                 <Image
                   src="/images/logo-mdzn-partners.png"
                   alt="MDZN Partners"
-                  width={1563}
-                  height={1563}
+                  width={1446}
+                  height={348}
                   className="h-12 w-auto brightness-0 invert"
                 />
               </Link>

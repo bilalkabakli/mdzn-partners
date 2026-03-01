@@ -1,6 +1,3 @@
-"use client";
-
-import { useState, useEffect, useRef } from "react";
 import {
   User,
   Zap,
@@ -116,37 +113,6 @@ export default function HowItWorksTimeline({
 }: HowItWorksTimelineProps) {
   const isBrands = variant === "brands";
   const steps = STEPS[variant];
-  const [activeIndex, setActiveIndex] = useState(0);
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
-
-  useEffect(() => {
-    const scrollContainer = scrollRef.current;
-    if (!scrollContainer) return;
-
-    const mq = window.matchMedia("(min-width: 768px)");
-    if (mq.matches) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const idx = cardRefs.current.indexOf(
-              entry.target as HTMLDivElement,
-            );
-            if (idx !== -1) setActiveIndex(idx);
-          }
-        });
-      },
-      { threshold: 0.5, root: scrollContainer },
-    );
-
-    cardRefs.current.forEach((card) => {
-      if (card) observer.observe(card);
-    });
-
-    return () => observer.disconnect();
-  }, []);
 
   return (
     <section className={`bg-primary-50 py-12 md:py-20 ${className ?? ""}`}>
@@ -210,7 +176,7 @@ export default function HowItWorksTimeline({
 
                 <div className="step-card flex-1 flex flex-col text-left">
                   <div
-                    className={`w-8 h-8 rounded-lg flex items-center justify-center mb-3 ${
+                    className={`w-8 h-8 rounded-md flex items-center justify-center mb-3 ${
                       isBrands ? "bg-warning-100" : ""
                     }`}
                     style={
@@ -236,7 +202,7 @@ export default function HowItWorksTimeline({
                     {step.tags.map((tag) => (
                       <span
                         key={tag.label}
-                        className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-[11px] font-semibold ${
+                        className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-sm text-[11px] font-semibold ${
                           TAG_STYLES[tag.colorClass] ?? ""
                         }`}
                       >
@@ -253,19 +219,16 @@ export default function HowItWorksTimeline({
         {/* Mobile: horizontal scroll */}
         <div className="md:hidden">
           <div
-            ref={scrollRef}
             className="flex gap-3 overflow-x-auto snap-x snap-mandatory hide-scrollbar mx-[-16px] px-4 pb-3"
             style={{ WebkitOverflowScrolling: "touch" }}
             role="region"
             aria-label={`${sectionLabel} adımları`}
           >
-            {steps.map((step, index) => (
+            {steps.map((step) => (
               <div
                 key={step.num}
-                ref={(el) => {
-                  cardRefs.current[index] = el;
-                }}
                 className="step-card flex-none w-[75%] snap-start"
+                style={{ borderRadius: 14, padding: 20 }}
               >
                 <div
                   className={`w-10 h-10 rounded-[10px] flex items-center justify-center text-lg font-extrabold mb-3.5 ${
@@ -289,7 +252,7 @@ export default function HowItWorksTimeline({
                   {step.tags.map((tag) => (
                     <span
                       key={tag.label}
-                      className={`inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-semibold ${
+                      className={`inline-flex items-center gap-1 px-2 py-[3px] rounded text-[10px] font-semibold ${
                         TAG_STYLES[tag.colorClass] ?? ""
                       }`}
                     >
@@ -305,13 +268,13 @@ export default function HowItWorksTimeline({
             {steps.map((step, i) => (
               <div
                 key={step.num}
-                className={`h-1.5 rounded-[3px] transition-all duration-200 ${
-                  i === activeIndex
-                    ? `w-4 ${isBrands ? "bg-accent-600" : ""}`
-                    : "w-1.5 bg-primary-300"
-                }`}
+                className={
+                  i === 0
+                    ? `w-4 h-1.5 rounded-[3px] ${isBrands ? "bg-accent-600" : ""}`
+                    : "w-1.5 h-1.5 rounded-full bg-primary-300"
+                }
                 style={
-                  i === activeIndex && !isBrands
+                  i === 0 && !isBrands
                     ? { backgroundColor: "#2563EB" }
                     : undefined
                 }

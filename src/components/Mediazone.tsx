@@ -36,13 +36,11 @@ export default function Mediazone() {
               aria-label={`Visit ${partner.name} website`}
               className="group flex items-center gap-2 py-3 px-3.5 bg-primary-50 border border-primary-200 rounded-[10px] transition-all duration-200 hover:border-accent-600 hover:bg-accent-100 hover:shadow-[0_4px_16px_rgba(212,175,55,0.12)] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-500 focus-visible:ring-offset-2 lg:gap-2.5 lg:py-3.5 lg:px-5 lg:rounded-xl"
             >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={`https://www.google.com/s2/favicons?domain=${partner.domain}&sz=64`}
                 alt={`${partner.name} logo`}
                 className="w-7 h-7 rounded-md lg:w-9 lg:h-9 lg:rounded-lg"
-                onError={(e) => {
-                  (e.currentTarget as HTMLImageElement).style.display = "none";
-                }}
               />
               <span className="text-xs font-semibold text-primary-900 group-hover:text-accent-700 lg:text-[15px]">
                 {partner.name}

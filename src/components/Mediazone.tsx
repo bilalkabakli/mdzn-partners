@@ -40,9 +40,6 @@ export default function Mediazone() {
                 src={`https://www.google.com/s2/favicons?domain=${partner.domain}&sz=64`}
                 alt={`${partner.name} logo`}
                 className="w-7 h-7 rounded-md lg:w-9 lg:h-9 lg:rounded-lg"
-                onError={(e) => {
-                  (e.currentTarget as HTMLImageElement).style.display = "none";
-                }}
               />
               <span className="text-xs font-semibold text-primary-900 group-hover:text-accent-700 lg:text-[15px]">
                 {partner.name}

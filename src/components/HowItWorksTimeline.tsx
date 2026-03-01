@@ -1,19 +1,102 @@
-import type { CSSProperties, ComponentType } from "react";
+"use client";
 
-export interface TimelineStep {
+import { useState, useEffect, useRef } from "react";
+import {
+  User,
+  Zap,
+  Sliders,
+  TrendingUp,
+  UserPlus,
+  ShieldCheck,
+  Search,
+  Wallet,
+} from "lucide-react";
+
+interface TimelineStep {
   num: number;
   title: string;
   desc: string;
-  icon: ComponentType<{ className?: string; style?: CSSProperties }>;
+  icon: typeof User;
   tags: { label: string; colorClass: string }[];
 }
+
+const STEPS: Record<"brands" | "publishers", TimelineStep[]> = {
+  brands: [
+    {
+      num: 1,
+      title: "Hesap Oluşturun",
+      desc: "Ücretsiz hesabınızı dakikalar içinde açın. Kredi kartı gerekmez.",
+      icon: User,
+      tags: [
+        { label: "Ücretsiz başlangıç", colorClass: "tag-green" },
+        { label: "2 dakika", colorClass: "tag-gray" },
+      ],
+    },
+    {
+      num: 2,
+      title: "Mağazanızı Bağlayın",
+      desc: "İkas, Shopify veya Ticimax ile tek tıkla entegrasyon. Farklı altyapı? Biz hallederiz.",
+      icon: Zap,
+      tags: [
+        { label: "Otomatik kurulum", colorClass: "tag-gold" },
+        { label: "5 dakika", colorClass: "tag-gray" },
+      ],
+    },
+    {
+      num: 3,
+      title: "Kampanya Oluşturun",
+      desc: "Komisyon oranlarınızı belirleyin, ürün kategorilerini seçin.",
+      icon: Sliders,
+      tags: [{ label: "Esnek komisyonlar", colorClass: "tag-purple" }],
+    },
+    {
+      num: 4,
+      title: "Büyümeye Başlayın",
+      desc: "Influencer\u2019lar ve yayıncılar kampanyalarınızı keşfeder. Gerçek zamanlı takip.",
+      icon: TrendingUp,
+      tags: [{ label: "Anlık raporlama", colorClass: "tag-green" }],
+    },
+  ],
+  publishers: [
+    {
+      num: 1,
+      title: "Başvurun",
+      desc: "Online başvuru formunu doldurun. Sosyal medya hesaplarınızı belirtin.",
+      icon: UserPlus,
+      tags: [
+        { label: "Herkese açık", colorClass: "tag-gold" },
+        { label: "3 dakika", colorClass: "tag-gray" },
+      ],
+    },
+    {
+      num: 2,
+      title: "Onay Alın",
+      desc: "Başvurunuz incelenir ve 24 saat içinde size dönüş yapılır.",
+      icon: ShieldCheck,
+      tags: [{ label: "Hızlı onay", colorClass: "tag-green" }],
+    },
+    {
+      num: 3,
+      title: "Markaları Keşfedin",
+      desc: "Sizin için uygun kampanyaları bulun. Kategori veya marka türüne göre filtreleyin.",
+      icon: Search,
+      tags: [{ label: "Gelişmiş filtreleme", colorClass: "tag-gold" }],
+    },
+    {
+      num: 4,
+      title: "Kazanmaya Başlayın",
+      desc: "Linklerinizi paylaşın, satış yapın, komisyon kazanın. Anlık takip edin.",
+      icon: Wallet,
+      tags: [{ label: "Güvenli ödeme", colorClass: "tag-green" }],
+    },
+  ],
+};
 
 export interface HowItWorksTimelineProps {
   variant: "brands" | "publishers";
   sectionLabel: string;
   title: string;
   subtitle: string;
-  steps: TimelineStep[];
   className?: string;
 }
 
@@ -29,15 +112,45 @@ export default function HowItWorksTimeline({
   sectionLabel,
   title,
   subtitle,
-  steps,
   className,
 }: HowItWorksTimelineProps) {
   const isBrands = variant === "brands";
+  const steps = STEPS[variant];
+  const [activeIndex, setActiveIndex] = useState(0);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const scrollContainer = scrollRef.current;
+    if (!scrollContainer) return;
+
+    const mq = window.matchMedia("(min-width: 768px)");
+    if (mq.matches) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const idx = cardRefs.current.indexOf(
+              entry.target as HTMLDivElement,
+            );
+            if (idx !== -1) setActiveIndex(idx);
+          }
+        });
+      },
+      { threshold: 0.5, root: scrollContainer },
+    );
+
+    cardRefs.current.forEach((card) => {
+      if (card) observer.observe(card);
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section className={`bg-primary-50 py-12 md:py-20 ${className ?? ""}`}>
       <div className="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-12">
-        {/* Section Header */}
         <div className="text-center mb-7 md:mb-14">
           <div className="flex items-center justify-center gap-2 mb-2.5 md:mb-4">
             <span
@@ -46,7 +159,7 @@ export default function HowItWorksTimeline({
               aria-hidden="true"
             />
             <span
-              className={`text-[11px] md:text-[13px] font-semibold uppercase tracking-[1.5px] ${
+              className={`text-[11px] md:text-[13px] font-bold uppercase tracking-[1.5px] ${
                 isBrands ? "text-accent-600" : ""
               }`}
               style={!isBrands ? { color: "#2563EB" } : undefined}
@@ -110,9 +223,7 @@ export default function HowItWorksTimeline({
                       className={`w-[18px] h-[18px] ${
                         isBrands ? "text-warning-600" : ""
                       }`}
-                      style={
-                        !isBrands ? { color: "#2563EB" } : undefined
-                      }
+                      style={!isBrands ? { color: "#2563EB" } : undefined}
                     />
                   </div>
 
@@ -142,14 +253,19 @@ export default function HowItWorksTimeline({
         {/* Mobile: horizontal scroll */}
         <div className="md:hidden">
           <div
+            ref={scrollRef}
             className="flex gap-3 overflow-x-auto snap-x snap-mandatory hide-scrollbar mx-[-16px] px-4 pb-3"
             style={{ WebkitOverflowScrolling: "touch" }}
+            role="region"
+            aria-label={`${sectionLabel} adımları`}
           >
-            {steps.map((step) => (
+            {steps.map((step, index) => (
               <div
                 key={step.num}
+                ref={(el) => {
+                  cardRefs.current[index] = el;
+                }}
                 className="step-card flex-none w-[75%] snap-start"
-                style={{ borderRadius: 14, padding: 20 }}
               >
                 <div
                   className={`w-10 h-10 rounded-[10px] flex items-center justify-center text-lg font-extrabold mb-3.5 ${
@@ -185,22 +301,20 @@ export default function HowItWorksTimeline({
             ))}
           </div>
 
-          {/* Static dot indicators — first dot always active */}
-          <div className="flex justify-center gap-1 mt-3">
+          <div className="flex justify-center gap-1 mt-3" aria-hidden="true">
             {steps.map((step, i) => (
               <div
                 key={step.num}
-                className={
-                  i === 0
-                    ? `w-4 h-1.5 rounded-[3px] ${isBrands ? "bg-accent-600" : ""}`
-                    : "w-1.5 h-1.5 rounded-full bg-primary-300"
-                }
+                className={`h-1.5 rounded-[3px] transition-all duration-200 ${
+                  i === activeIndex
+                    ? `w-4 ${isBrands ? "bg-accent-600" : ""}`
+                    : "w-1.5 bg-primary-300"
+                }`}
                 style={
-                  i === 0 && !isBrands
+                  i === activeIndex && !isBrands
                     ? { backgroundColor: "#2563EB" }
                     : undefined
                 }
-                aria-hidden="true"
               />
             ))}
           </div>

@@ -34,7 +34,7 @@ export default function Mediazone() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`Visit ${partner.name} website`}
-              className="group flex items-center gap-2 py-3 px-3.5 bg-primary-50 border border-primary-200 rounded-[10px] transition-all duration-200 hover:border-accent-600 hover:bg-accent-100 hover:shadow-[0_4px_16px_rgba(212,175,55,0.12)] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-500 focus-visible:ring-offset-2 lg:gap-2.5 lg:py-3.5 lg:px-5 lg:rounded-xl"
+              className="group flex items-center gap-2 py-3 px-3.5 bg-primary-50 border border-primary-200 rounded-xl transition-all duration-200 hover:border-accent-600 hover:bg-accent-100 hover:shadow-[0_4px_16px_rgba(212,175,55,0.12)] hover:-translate-y-0.5 active:translate-y-0 active:shadow-[0_2px_8px_rgba(212,175,55,0.2)] active:border-accent-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-500 focus-visible:ring-offset-2 lg:gap-2.5 lg:py-3.5 lg:px-5"
             >
               <img
                 src={`https://www.google.com/s2/favicons?domain=${partner.domain}&sz=64`}
